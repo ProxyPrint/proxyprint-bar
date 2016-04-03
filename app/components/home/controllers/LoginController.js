@@ -16,4 +16,5 @@ angular.module('Auth').controller('LoginController',
                 }
             });
         };
+        
     }]);

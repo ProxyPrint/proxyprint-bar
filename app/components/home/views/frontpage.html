@@ -232,3 +232,13 @@
       });
    });
 </script>
+
+<script>
+  CSSCtrl = function($scope) {
+    console.log("stylesheets for frontpage...\n");
+    $scope.stylesheets = [
+        {href: 'assets/css/bootstrap.min.css', type:'text/css'},
+        {href: 'assets/css/styles.css', type:'text/css'}
+      ];
+  };
+</script>
