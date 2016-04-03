@@ -23,9 +23,35 @@ angular.module("ProxyPrint").config(function ($stateProvider, $urlRouterProvider
          url: '/consumer',
          templateUrl: '/app/components/consumer/views/consumer_mainpage.html'
       })
-      .state('employee', {
+      .state('employee_home', {
          url: '/employee',
          templateUrl: '/app/components/printshop/employee/views/pending.html',
+         data: {
+           css: [
+            '/assets/adminlte/bootstrap/css/bootstrap.min.css',
+            'https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css',
+            'https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css',
+            '/assets/adminlte/dist/css/AdminLTE.min.css',
+            '/assets/adminlte/dist/css/skins/skin-blue.min.css'
+           ]
+         }
+      })
+      .state('employee_satisfied', {
+         url: '/employee/satisfied',
+         templateUrl: '/app/components/printshop/employee/views/satisfied.html',
+         data: {
+           css: [
+            '/assets/adminlte/bootstrap/css/bootstrap.min.css',
+            'https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css',
+            'https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css',
+            '/assets/adminlte/dist/css/AdminLTE.min.css',
+            '/assets/adminlte/dist/css/skins/skin-blue.min.css'
+           ]
+         }
+      })
+      .state('employee_history', {
+         url: '/employee/history',
+         templateUrl: '/app/components/printshop/employee/views/history.html',
          data: {
            css: [
             '/assets/adminlte/bootstrap/css/bootstrap.min.css',
