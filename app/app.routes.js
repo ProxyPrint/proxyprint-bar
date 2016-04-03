@@ -8,7 +8,7 @@ angular.module("ProxyPrint").config(['$routeProvider', function ($routeProvider 
          templateUrl: '/app/components/home/views/register.html'
       }).
       when('/:userID', {
-         templateUrl: '/app/components/customer/views/customer_mainpage.html'
+         templateUrl: '/app/components/consumer/views/customer_mainpage.html'
       }).
       otherwise({
          redirectTo: '/'
