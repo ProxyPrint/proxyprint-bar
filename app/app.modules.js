@@ -1,5 +1,5 @@
 /** Main App **/
-angular.module('ProxyPrint', ['Auth','ngRoute','ngCookies']).run(['$rootScope', '$location', '$cookieStore', '$http',
+angular.module('ProxyPrint', ['Auth','ui.router','ngCookies']).run(['$rootScope', '$location', '$cookieStore', '$http',
     function ($rootScope, $location, $cookieStore, $http) {
         // keep user logged in after page refresh
         $rootScope.globals = $cookieStore.get('globals') || {};
