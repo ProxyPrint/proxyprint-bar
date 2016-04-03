@@ -1,5 +1,60 @@
-<div ui-view="navbar"></div>
-<a ui-sref=".settings" type="button" class="btn btn-primary">Settings</a>
-<div ui-view>
-   Costumer Main Page!!!
+<div class="margin-top">
+   <nav class="navbar navbar-fixed-top navbar-inverse">
+      <div class="container-fluid">
+         <div class="navbar-header">
+            <a class="navbar-brand" href="#">ProxyPrint</a>
+         </div>
+         <ul class="nav navbar-nav navbar-right">
+            <li>
+               <a href="#">
+                  <span class="glyphicon glyphicon-bell"></span></a>
+            </li>
+            <li>
+               <a ui-sref=".settings">
+                  <span class="glyphicon glyphicon-cog"></span>
+               </a>
+            </li>
+            <li>
+               <a ui-sref=".asfas">
+                  <span class="glyphicon glyphicon-log-in"></span>
+                  Logout</a>
+            </li>
+         </ul>
+      </div>
+   </nav>
+
+   <div class="container-fluid">
+
+      <div class="row row-offcanvas row-offcanvas-left">
+
+         <div class="col-sm-3 col-md-2 sidebar-offcanvas" id="sidebar" role="navigation">
+
+            <ul class="nav nav-sidebar">
+               <li><a href="#">Home</a></li>
+               <li><a href="#">Print Shops</a><li>
+               <li><a href="#">History Request</a><li>
+            </ul>
+
+         </div>
+         <!--/span-->
+
+         <div class="col-sm-9 col-md-10 main">
+
+            <!--toggle sidebar button-->
+            <p class="visible-xs">
+               <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">
+                  <i class="glyphicon glyphicon-chevron-left"></i>
+               </button>
+            </p>
+
+            <br>
+            <div ui-view>
+               user main page
+            </div>
+
+         </div>
+         <!--/row-->
+      </div>
+   </div>
+   <!--/.container-->
 </div>

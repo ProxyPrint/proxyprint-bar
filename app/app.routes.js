@@ -16,9 +16,6 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
          views: {
             '': {
                templateUrl: '/app/components/customer/views/customer_mainpage.html'
-            },
-            'navbar@costumer' : {
-               templateUrl: '/app/components/customer/views/customer_navbar.html'
             }
          }
 
