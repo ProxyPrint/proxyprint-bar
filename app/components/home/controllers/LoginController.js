@@ -1,6 +1,6 @@
 angular.module('Auth').controller('LoginController',
-    ['$scope', '$rootScope', '$location', 'AuthenticationService',
-    function ($scope, $rootScope, $location, AuthenticationService) {
+    ['$scope', '$rootScope', '$location', 'AuthenticationService','$state',
+    function ($scope, $rootScope, $location, AuthenticationService, $state) {
         // reset login status
         AuthenticationService.ClearCredentials();
 
