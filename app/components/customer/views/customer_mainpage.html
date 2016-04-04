@@ -15,8 +15,8 @@
                </a>
             </li>
             <li>
-               <a ui-sref=".asfas">
-                  <span class="glyphicon glyphicon-log-in"></span>
+               <a ng-click="logout()">
+                  <span class="glyphicon glyphicon-log-in" ng-click="logout()"></span>
                   Logout</a>
             </li>
          </ul>
@@ -49,6 +49,8 @@
 
             <br>
             <div ui-view>
+               <a button type="button" class="btn btn-primary" ng-click="testSecured()">SECURED</a>
+               <a button type="button" class="btn btn-primary" ng-click="logout()">Log out</a>
                user main page
             </div>
 

@@ -9,13 +9,15 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
       })
       .state('register' , {
          url: '/register',
-         templateUrl: '/app/components/home/views/register.html'
+         templateUrl: '/app/components/home/views/register.html',
+         controller: 'RegisterController'
       })
       .state('costumer', {
          url: '/:costumerID',
          views: {
             '': {
-               templateUrl: '/app/components/customer/views/customer_mainpage.html'
+               templateUrl: '/app/components/customer/views/customer_mainpage.html',
+               controller: 'costumerController'
             }
          }
 
