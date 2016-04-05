@@ -4,11 +4,10 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
       '/assets/css/bootstrap.min.css',
       '/assets/css/styles.css',
       '//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css',
-      'http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic',
-      'https://npmcdn.com/angular-toastr/dist/angular-toastr.css'
+      'http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic'
    ];
 
-   var printShopCSS = [
+   var printshopCSS = [
     '/assets/adminlte/bootstrap/css/bootstrap.min.css',
     'https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css',
     'https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css',
@@ -28,15 +27,21 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
       .state('register' , {
          url: '/register',
          templateUrl: '/app/components/home/views/register.html',
-         controller: 'RegisterController'
+         controller: 'RegisterController',
+         data: {
+          css: mainCSS
+         }
       })
       .state('consumer', {
-         url: '/:consumerID',
+         url: '/consumerID',
          views: {
             '': {
                templateUrl: '/app/components/consumer/views/consumer_mainpage.html',
                controller: 'ConsumerController'
             }
+         },
+         data: {
+          css: mainCSS
          }
 
       })
@@ -59,15 +64,15 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
            css: printshopCSS
          }
       })
-      .state('employee.satisfied', {
-         url: '/satisfied',
+      .state('satisfied', {
+         url: '/employee/satisfied',
          templateUrl: '/app/components/printshop/employee/views/satisfied.html',
          data: {
            css: printshopCSS
          }
       })
-      .state('employee.history', {
-         url: '/history',
+      .state('history', {
+         url: '/employee/history',
          templateUrl: '/app/components/printshop/employee/views/history.html',
          data: {
            css: printshopCSS
@@ -75,4 +80,4 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
       });
 
 
-});
+}]);
