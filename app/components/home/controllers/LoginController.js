@@ -10,8 +10,6 @@ angular.module('Auth').controller('LoginController',
                console.log(response);
                 if (response.success) {
                     AuthenticationService.SetCredentials($scope.username, $scope.password);
-                    //$cookieStore.user = JSON.stringify(response.consumer);
-                    $rootScope.user = response.consumer;
                     $location.path('/:consumerID');
                 } else {
                     $scope.error = response.message;

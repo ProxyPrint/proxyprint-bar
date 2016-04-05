@@ -9,8 +9,6 @@ angular.module('Auth').controller('RegisterController',
             AuthenticationService.Register($scope.name, $scope.email, $scope.username, $scope.password, function (response) {
                 if (response.success) {
                     AuthenticationService.SetCredentials($scope.username, $scope.password);
-                    // $cookieStore.user = JSON.stringify(response.consumer);
-                    $rootScope.user = response.consumer;
                     $location.path('/:consumerID');
                     $state.go('consumer');
                 } else {
