@@ -1,18 +1,18 @@
-angular.module('Auth').controller('LoginController',
+angular.module('Auth').controller('RegisterController',
     ['$scope', '$rootScope', '$location', 'AuthenticationService','$state', '$cookieStore',
     function ($scope, $rootScope, $location, AuthenticationService, $state, $cookieStore) {
         // reset login status
         AuthenticationService.ClearCredentials();
 
-        $scope.login = function () {
+        $scope.register = function () {
             $scope.dataLoading = true;
-            AuthenticationService.Login($scope.username, $scope.password, function (response) {
-               console.log(response);
+            AuthenticationService.Register($scope.name, $scope.email, $scope.username, $scope.password, function (response) {
                 if (response.success) {
                     AuthenticationService.SetCredentials($scope.username, $scope.password);
-                    //$cookieStore.user = JSON.stringify(response.consumer);
+                    // $cookieStore.user = JSON.stringify(response.consumer);
                     $rootScope.user = response.consumer;
                     $location.path('/:consumerID');
+                    $state.go('consumer');
                 } else {
                     $scope.error = response.message;
                     $scope.dataLoading = false;

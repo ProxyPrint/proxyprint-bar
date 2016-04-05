@@ -12,19 +12,19 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
          templateUrl: '/app/components/home/views/register.html',
          controller: 'RegisterController'
       })
-      .state('costumer', {
-         url: '/:costumerID',
+      .state('consumer', {
+         url: '/:consumerID',
          views: {
             '': {
-               templateUrl: '/app/components/customer/views/customer_mainpage.html',
-               controller: 'costumerController'
+               templateUrl: '/app/components/consumer/views/consumer_mainpage.html',
+               controller: 'ConsumerController'
             }
          }
 
       })
-      .state('costumer.settings' ,{
+      .state('consumer.settings' ,{
          url: '/settings',
-         templateUrl: '/app/components/customer/views/customer_settings.html'
+         templateUrl: '/app/components/consumer/views/consumer_settings.html'
       });
 
 

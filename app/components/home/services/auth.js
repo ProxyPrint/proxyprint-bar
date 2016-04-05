@@ -11,7 +11,7 @@ angular.module('Auth').factory('AuthenticationService', ['Base64', '$http', '$co
 
          $http({
                method: 'POST',
-               url: 'http://localhost:8080/login',
+               url: 'http://localhost:8080/consumer/login',
                data: data,
                headers: {
                   'Content-Type': 'application/x-www-form-urlencoded'
@@ -23,14 +23,18 @@ angular.module('Auth').factory('AuthenticationService', ['Base64', '$http', '$co
 
       };
 
-      service.Register = function(username, password, callback) {
+      service.Register = function(name, email, username, password, callback) {
          var data = $.param({
-            user: username,
-            password: password
+            name: name,
+            email: email,
+            username: username,
+            password: password,
+            latitude: "0",
+            longitude: "0"
          })
          $http({
                method: 'POST',
-               url: 'http://localhost:8080/register',
+               url: 'http://localhost:8080/consumer/register',
                data: data,
                headers: {
                   'Content-Type': 'application/x-www-form-urlencoded'

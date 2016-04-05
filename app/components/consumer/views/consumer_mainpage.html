@@ -1,10 +1,13 @@
-<div class="margin-top">
+<div class="margin-top" ng-controller="ConsumerController as consumerCtrl">
    <nav class="navbar navbar-fixed-top navbar-inverse">
       <div class="container-fluid">
          <div class="navbar-header">
             <a class="navbar-brand" href="#">ProxyPrint</a>
          </div>
          <ul class="nav navbar-nav navbar-right">
+            <li class="navbar-brand">
+              {{consumerCtrl.consumer.name}}
+            </li>
             <li>
                <a href="#">
                   <span class="glyphicon glyphicon-bell"></span></a>
@@ -27,7 +30,7 @@
 
       <div class="row row-offcanvas row-offcanvas-left">
 
-         <div class="col-sm-3 col-md-2 sidebar-offcanvas" id="sidebar" role="navigation">
+         <div id="sidebar" class="col-sm-3 col-md-2 sidebar-offcanvas" role="navigation">
 
             <ul class="nav nav-sidebar">
                <li><a href="#">Home</a></li>
