@@ -11,33 +11,25 @@
 
       <title>ProxyPrint</title>
 
-      <!-- Bootstrap Core CSS -->
-      <link href="assets/css/bootstrap.min.css" rel="stylesheet">
-      <link href="assets/css/styles.css" rel="stylesheet">
-      <!-- Custom Fonts -->
-      <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-      <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
-      <link rel="stylesheet" href="https://npmcdn.com/angular-toastr/dist/angular-toastr.css" />
-
       <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
       <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
       <!--[if lt IE 9]> <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script> <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script> <![endif]-->
 
    </head>
 
-   <body ng-app="ProxyPrint">
+   <body ng-app="ProxyPrint" ui-router-styles>
 
 
       <div ui-view></div>
 
-
       <!-- 3rd Party -->
-      <script src="assets/js/jquery.js"></script>
-      <script src="assets/js/bootstrap.min.js"></script>
+      <script type="text/javascript" src="assets/js/jquery.js"></script>
+      <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
       <script type="text/javascript" src="node_modules/angular/angular.min.js"></script>
       <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.18/angular-ui-router.js"></script>
-      <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-cookies.js"></script>
-      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-resource.js"></script>
+      <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-cookies.js"></script>
+      <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-resource.js"></script>
+      <script type="text/javascript" src="assets/libs/ui-router-styles.js"></script>
       <!-- App code -->
       <script src="app/app.modules.js"></script>
       <script src="app/app.routes.js"></script>
@@ -46,6 +38,6 @@
       <script src="app/components/home/services/auth.js"></script>
       <script src="app/components/consumer/controllers/ConsumerController.js"></script>
 
-   </body>
+  </body>
 
 </html>

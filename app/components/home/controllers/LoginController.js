@@ -10,11 +10,12 @@ angular.module('Auth').controller('LoginController',
                console.log(response);
                 if (response.success) {
                     AuthenticationService.SetCredentials($scope.username, $scope.password);
-                    $location.path('/:consumerID');
+                    $location.path('/consumerID');
                 } else {
                     $scope.error = response.message;
                     $scope.dataLoading = false;
                 }
             });
         };
+
     }]);

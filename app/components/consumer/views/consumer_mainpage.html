@@ -1,6 +1,6 @@
-<div class="margin-top">
    <nav class="navbar navbar-fixed-top navbar-inverse">
       <div class="container-fluid">
+        <div class="margin-top">
          <div class="navbar-header">
             <a class="navbar-brand" href="#">ProxyPrint</a>
          </div>
@@ -27,14 +27,14 @@
       </div>
    </nav>
 
-   <div class="container-fluid">
+   <div class="container-fluid" style="margin-top: 90px;">
 
       <div class="row row-offcanvas row-offcanvas-left">
 
          <div id="sidebar" class="col-sm-3 col-md-2 sidebar-offcanvas" role="navigation">
 
             <ul class="nav nav-sidebar">
-               <li><a href="#">Home</a></li>
+               <li><a ui-sref=".mainpage">Home</a></li>
                <li><a href="#">Print Shops</a><li>
                <li><a href="#">History Request</a><li>
             </ul>
@@ -43,13 +43,6 @@
          <!--/span-->
 
          <div class="col-sm-9 col-md-10 main">
-
-            <!--toggle sidebar button-->
-            <p class="visible-xs">
-               <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">
-                  <i class="glyphicon glyphicon-chevron-left"></i>
-               </button>
-            </p>
 
             <br>
             <div ui-view>
