@@ -19,25 +19,24 @@
 
    <body ng-app="ProxyPrint" ui-router-styles>
 
+
       <div ui-view></div>
-      <a ui-sref="frontpage">Ir para homepage</a>
-      <a ui-sref="employee_home">Ir para página de empregado</a>
 
       <!-- 3rd Party -->
       <script type="text/javascript" src="assets/js/jquery.js"></script>
       <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
       <script type="text/javascript" src="node_modules/angular/angular.min.js"></script>
-      <script type="text/javascript" src="node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.18/angular-ui-router.js"></script>
       <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-cookies.js"></script>
       <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-resource.js"></script>
       <script type="text/javascript" src="assets/libs/ui-router-styles.js"></script>
-
       <!-- App code -->
       <script src="app/app.modules.js"></script>
       <script src="app/app.routes.js"></script>
       <script src="app/components/home/controllers/LoginController.js"></script>
       <script src="app/components/home/controllers/RegisterController.js"></script>
       <script src="app/components/home/services/auth.js"></script>
+      <script src="app/components/consumer/controllers/ConsumerController.js"></script>
 
   </body>
 
