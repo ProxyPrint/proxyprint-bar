@@ -66,8 +66,6 @@
         </div>
         <div class="pull-left info">
           <p>Administrador</p>
-          <!-- Status -->
-          <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
       </div>
 
@@ -113,9 +111,10 @@
                   <td>{{repro.admissionDate}}</td>
                   <td>{{repro.registerDate}}</td>
                   <td>{{repro.manager}}</td>
-                  <td><a href="#" class="btn btn-success"><i class="fa fa-level-up" style="margin-right: 0.2em;"></i>Consultar</a></td>
-                  <td><a href="#" class="btn btn-danger"><i class="fa fa-times" style="margin-right: 0.2em;"></i>Eliminar Reprografia</a></td>
+                  <td><a ng-click='consult()' class="btn btn-success"><i class="fa fa-level-up" style="margin-right: 0.2em;"></i>Consultar</a></td>
+                  <td><a ng-click='delete()' class="btn btn-danger"><i class="fa fa-times" style="margin-right: 0.2em;"></i>Eliminar</a></td>
                 </tr>
+                {{answer}}
               </tbody>
             </table>
             <div class="box-footer clearfix">

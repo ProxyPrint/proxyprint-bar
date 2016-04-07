@@ -48,7 +48,6 @@
               </li>
             </ul>
           </li>
-          <!-- Control Sidebar Toggle Button -->
         </ul>
       </div>
     </nav>
@@ -66,8 +65,6 @@
         </div>
         <div class="pull-left info">
           <p>Administrador</p>
-          <!-- Status -->
-          <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
       </div>
 
@@ -111,9 +108,11 @@
               <td>{{request.name}}</td>
               <td>{{request.registerDate}}</td>
               <td>{{request.manager}}</td>
-              <td><a href="#" class="btn btn-success"><i class="fa fa-level-up" style="margin-right: 0.2em;"></i>Aceitar</a></td>
-              <td><a href="#" class="btn btn-danger"><i class="fa fa-times" style="margin-right: 0.2em;"></i>Rejeitar pedido</a></td>
+              <td><a ng-click='accept()' class="btn btn-success"><i class="fa fa-level-up" style="margin-right: 0.2em;"></i>Aceitar</a>
+              </td>
+              <td><a ng-click='reject()'  class="btn btn-danger"><i class="fa fa-times" style="margin-right: 0.2em;"></i>Rejeitar</a></td>
             </tr>
+            {{answer}}
           </tbody>
         </table>
         <div class="box-footer clearfix">
@@ -143,11 +142,10 @@
 
 </div><!-- ./wrapper -->
 </div>
-
 <!-- AdminLTE -->
 <!-- jQuery 2.1.4 -->
-<script src="../../../../assets/adminlte/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+<script src="/assets/adminlte/plugins/jQuery/jQuery-2.1.4.min.js"></script>
 <!-- Bootstrap 3.3.5 -->
-<script src="../../../../assets/adminlte/bootstrap/js/bootstrap.min.js"></script>
+<script src="/assets/adminlte/bootstrap/js/bootstrap.min.js"></script>
 <!-- AdminLTE App -->
-<script src="../../../../assets/adminlte/dist/js/app.min.js"></script>
+<script src="/assets/adminlte/dist/js/app.min.js"></script>

@@ -1,13 +1,30 @@
 
 var app = angular.module('ProxyPrint');
 
-app.controller('RequestsController', function() {
+app.controller('RequestsController', ['$scope', function($scope) {
     this.pendingRequests = staticContent;
-});
 
-app.controller('ReproController', function() {
+    $scope.accept = function (){
+        $scope.answer = 'Reprografia adicionada!';
+    };
+
+    $scope.reject = function (){
+        $scope.answer = 'Reprografia removida!';
+    };
+
+}]);
+
+app.controller('ReproController', ['$scope', function($scope) {
     this.listRepro = staticContent;
-});
+
+    $scope.consult = function (){
+        $scope.answer = 'Consultar Reprografia!';
+    };
+
+    $scope.delete = function (){
+        $scope.answer = 'Reprografia Eliminada!';
+    };
+}]);
 
 var staticContent = [
     {
