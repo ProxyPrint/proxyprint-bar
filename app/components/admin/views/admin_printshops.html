@@ -1,94 +1,93 @@
 <div class="hold-transition skin-blue sidebar-mini">
-    <div class="wrapper">
+<div class="wrapper">
 
-      <!-- Main Header -->
-      <header class="main-header">
+  <!-- Main Header -->
+  <header class="main-header">
 
-        <!-- Logo -->
-        <a href="pending.html" class="logo">
-          <!-- mini logo for sidebar mini 50x50 pixels -->
-          <span class="logo-mini"><b>PP</b></span>
-          <!-- logo for regular state and mobile devices -->
-          <span class="logo-lg"><b>Proxy</b>Print</span>
-        </a>
+    <!-- Logo -->
+    <a href="#" class="logo">
+      <!-- mini logo for sidebar mini 50x50 pixels -->
+      <span class="logo-mini"><b>PP</b></span>
+      <!-- logo for regular state and mobile devices -->
+      <span class="logo-lg"><b>Proxy</b>Print</span>
+    </a>
 
-        <!-- Header Navbar -->
-        <nav class="navbar navbar-static-top" role="navigation">
-          <!-- Sidebar toggle button-->
-          <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
-            <span class="sr-only">Toggle navigation</span>
-          </a>
-          <!-- Navbar Right Menu -->
-          <div class="navbar-custom-menu">
-            <ul class="nav navbar-nav">
-              <!-- User Account Menu -->
-              <li class="dropdown user user-menu">
-                <!-- Menu Toggle Button -->
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <!-- The user image in the navbar-->
-                  <img src="../../../../assets/adminlte/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-                  <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                  <span class="hidden-xs">Brandão Machado</span>
-                </a>
-                <ul class="dropdown-menu">
-                  <!-- The user image in the menu -->
-                  <li class="user-header">
-                    <img src="../../../../assets/adminlte/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-                    <p>
-                      Brandão Machado - Funcionário
-                    </p>
-                  </li>
-                  <!-- Menu Footer-->
-                  <li class="user-footer">
-                    <center>
-                      <div>
-                        <a href="#" class="btn btn-default btn-flat">Sign out</a>
-                      </div>
-                    </center>
-                  </li>
-                </ul>
+    <!-- Header Navbar -->
+    <nav class="navbar navbar-static-top" role="navigation">
+      <!-- Sidebar toggle button-->
+      <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+        <span class="sr-only">Toggle navigation</span>
+      </a>
+      <!-- Navbar Right Menu -->
+      <div class="navbar-custom-menu">
+        <ul class="nav navbar-nav">
+          <!-- User Account Menu -->
+          <li class="dropdown user user-menu">
+            <!-- Menu Toggle Button -->
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <!-- The user image in the navbar-->
+              <img src="../../../../assets/adminlte/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+              <!-- hidden-xs hides the username on small devices so only the image appears. -->
+              <span class="hidden-xs">Administrador</span>
+            </a>
+            <ul class="dropdown-menu">
+              <!-- The user image in the menu -->
+              <li class="user-header">
+                <img src="../../../../assets/adminlte/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                <p>
+                  Administrador
+                </p>
               </li>
-              <!-- Control Sidebar Toggle Button -->
+              <!-- Menu Footer-->
+              <li class="user-footer">
+                <center>
+                  <div>
+                    <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                  </div>
+                </center>
+              </li>
             </ul>
-          </div>
-        </nav>
-      </header>
-      <!-- Left side column. contains the logo and sidebar -->
-      <aside class="main-sidebar">
+          </li>
+          <!-- Control Sidebar Toggle Button -->
+        </ul>
+      </div>
+    </nav>
+  </header>
+  <!-- Left side column. contains the logo and sidebar -->
+  <aside class="main-sidebar">
 
-        <!-- sidebar: style can be found in sidebar.less -->
-        <section class="sidebar">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
 
-          <!-- Sidebar user panel (optional) -->
-          <div class="user-panel">
-            <div class="pull-left image">
-              <img src="../../../../assets/adminlte/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-            </div>
-            <div class="pull-left info">
-              <p>Brandão Machado</p>
-              <!-- Status -->
-              <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
-            </div>
-          </div>
+      <!-- Sidebar user panel (optional) -->
+      <div class="user-panel">
+        <div class="pull-left image">
+          <img src="../../../../assets/adminlte/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+        </div>
+        <div class="pull-left info">
+          <p>Administrador</p>
+          <!-- Status -->
+          <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+        </div>
+      </div>
 
-          <!-- Sidebar Menu -->
-          <ul class="sidebar-menu">
-            <li class="header">Opções</li>
-            <!-- Optionally, you can add icons to the links -->
-            <li><a ui-sref="employee_home"><i class="fa fa-hourglass-half"></i> <span>Pedidos Pendentes</span></a></li>
-            <li class="active"><a href="#"><i class="fa fa-check"></i> <span>Pedidos Satisfeitos</span></a></li>
-            <li><a ui-sref="employee_history"><i class="fa fa-history"></i> <span>Histórico de Pedidos</span></a></li>
-          </ul><!-- /.sidebar-menu -->
-        </section>
-        <!-- /.sidebar -->
-      </aside>
+      <!-- Sidebar Menu -->
+      <ul class="sidebar-menu">
+        <li class="header">Opções</li>
+        <!-- Optionally, you can add icons to the links -->
+        <li><a ui-sref="admin_home"><i class="fa fa-hourglass-half"></i> <span>Reprografias Pendentes</span></a></li>
+        <li class="active"><a ui-sref="admin_printshops"><i class="fa fa-history"></i> <span>Consultar Reprografias </span></a></li>
+      </ul><!-- /.sidebar-menu -->
+    </section>
+    <!-- /.sidebar -->
+  </aside>
 
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-            Pedidos Satisfeitos
+            Lista de Reprografias
           </h1>
         </section>
 
@@ -96,36 +95,26 @@
         <section class="content">
 
           <!-- Your Page Content Here -->
-        <div class="box">
+        <div class="box"  ng-controller = "ReproController as ReproCtrl">
           <div class="box-body table-responsive no-padding">
             <table class="table table-striped">
               <tbody>
                 <tr>
-                  <th>ID Pedido</th>
-                  <th>Cliente</th>
-                  <th>Data de Entrada</th>
-                  <th>Data de Atendimento</th>
-                  <th>Atendido Por</th>
-                  <th>Preço</th>
+                  <th>ID</th>
+                  <th>Nome</th>
+                  <th>Data de Admissão</th>
+                  <th>Data de Registo</th>
+                  <th>Coordenador</th>
                   <th>Acções</th>
                 </tr>
-                <tr>
-                  <td><b>#100</b></td>
-                  <td>Ana Silva</td>
-                  <td>9/7/2014<br/>12:15</td>
-                  <td>9/7/2014<br/>12:25</td>
-                  <td>Joaquim Machado</td>
-                  <td>2,33 €</td>
-                  <td><a href="#" class="btn bg-purple"><i class="fa fa-rocket" style="margin-right: 0.2em;"></i>Levantar</a></td>
-                </tr>
-                <tr>
-                  <td><b>#123</b></td>
-                  <td>Carlos Simão</td>
-                  <td>8/7/2014<br/>22:12</td>
-                  <td>9/7/2014<br/>09:25</td>
-                  <td>Brandão Machado</td>
-                  <td>1,82 €</td>
-                  <td><a href="#" class="btn bg-purple"><i class="fa fa-rocket" style="margin-right: 0.2em;"></i>Levantar</a></td>
+                <tr ng-repeat="repro in ReproCtrl.listRepro">
+                  <td><b>{{repro.id}}</b></td>
+                  <td>{{repro.name}}</td>
+                  <td>{{repro.admissionDate}}</td>
+                  <td>{{repro.registerDate}}</td>
+                  <td>{{repro.manager}}</td>
+                  <td><a href="#" class="btn btn-success"><i class="fa fa-level-up" style="margin-right: 0.2em;"></i>Consultar</a></td>
+                  <td><a href="#" class="btn btn-danger"><i class="fa fa-times" style="margin-right: 0.2em;"></i>Eliminar Reprografia</a></td>
                 </tr>
               </tbody>
             </table>

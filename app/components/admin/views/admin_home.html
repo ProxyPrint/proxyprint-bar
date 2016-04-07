@@ -75,7 +75,7 @@
       <ul class="sidebar-menu">
         <li class="header">Opções</li>
         <!-- Optionally, you can add icons to the links -->
-        <li class="active"><a ui-sref="admin"><i class="fa fa-hourglass-half"></i> <span>Pedidos Pendentes</span></a></li>
+        <li class="active"><a ui-sref="admin_home"><i class="fa fa-hourglass-half"></i> <span>Reprografias Pendentes</span></a></li>
         <li><a ui-sref="admin_printshops"><i class="fa fa-history"></i> <span>Consultar Reprografias </span></a></li>
       </ul><!-- /.sidebar-menu -->
     </section>
@@ -87,15 +87,14 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Pedidos de Admissão Pendentes
+        Pedidos de admissão de Reprografias
       </h1>
     </section>
 
     <!-- Main content -->
-    <section class="content" ng-app = "adminController"  >
+    <section class="content" >
       <!-- Your Page Content Here -->
     <div class="box" ng-controller = "RequestsController as RequestsCtrl">
-        {{RequestsController.p}}
       <div class="box-body table-responsive no-padding">
         <table class="table table-striped">
           <tbody>
@@ -103,15 +102,17 @@
               <th>ID Pedido</th>
               <th>Cliente</th>
               <th>Data de Entrada</th>
+              <th>Coordenador</th>
               <th>Ações</th>
               <th></th>
             </tr>
             <tr ng-repeat="request in RequestsCtrl.pendingRequests">
               <td><b>{{request.id}}</b></td>
               <td>{{request.name}}</td>
-              <td>{{request.date | date:'dd/MM/yyyy \n h:mma'}}<br/>12:15</td>
-              <td><a href="#" class="btn btn-success"><i class="fa fa-level-up" style="margin-right: 0.2em;"></i>Atender</a></td>
-              <td><a href="#" class="btn btn-danger"><i class="fa fa-times" style="margin-right: 0.2em;"></i>Cancelar pedido</a></td>
+              <td>{{request.registerDate}}</td>
+              <td>{{request.manager}}</td>
+              <td><a href="#" class="btn btn-success"><i class="fa fa-level-up" style="margin-right: 0.2em;"></i>Aceitar</a></td>
+              <td><a href="#" class="btn btn-danger"><i class="fa fa-times" style="margin-right: 0.2em;"></i>Rejeitar pedido</a></td>
             </tr>
           </tbody>
         </table>
@@ -150,5 +151,3 @@
 <script src="../../../../assets/adminlte/bootstrap/js/bootstrap.min.js"></script>
 <!-- AdminLTE App -->
 <script src="../../../../assets/adminlte/dist/js/app.min.js"></script>
-
-<script src="../../../../app/components/admin/controllers/AdminController.js"></script>

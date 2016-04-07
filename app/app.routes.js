@@ -80,9 +80,10 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
       })
 
             /** Admin */
-      .state('admin', {
+      .state('admin_home', {
         url: '/admin',
         templateUrl: '/app/components/admin/views/admin_home.html',
+        controller: 'RequestsController',
         data: {
           css: printshopCSS
         }
@@ -90,6 +91,7 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
       .state('admin_printshops', {
         url: '/admin/printshops',
         templateUrl: '/app/components/admin/views/admin_printshops.html',
+        controller: 'ReproController',
         data: {
           css: printshopCSS
         }
