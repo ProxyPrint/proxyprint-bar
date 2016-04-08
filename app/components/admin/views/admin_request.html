@@ -80,54 +80,53 @@
   </aside>
 
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
+  <div class="content-wrapper" ng-controller="RequestController as RequestCtrl">
     <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        Pedidos de admissão de Reprografias
-      </h1>
-    </section>
-
-    <!-- Main content -->
-    <section class="content" >
-      <!-- Your Page Content Here -->
-    <div class="box" ng-controller = "RequestsController as RequestsCtrl">
-      <div class="box-body table-responsive no-padding">
-        <table class="table table-striped">
-          <tbody>
-            <tr>
-              <th>ID Pedido</th>
-              <th>Cliente</th>
-              <th>Data de Entrada</th>
-              <th>Coordenador</th>
-              <th>Ações</th>
-              <th></th>
-            </tr>
-            <tr ng-repeat="request in RequestsCtrl.pendingRequests">
-              <td><b>{{request.id}}</b></td>
-              <td>{{request.name}}</td>
-              <td>{{request.registerDate}}</td>
-              <td>{{request.manager}}</td>
-              <td><a ng-click="analisys(request.id)" class="btn btn-success"><i class="fa fa-level-up" style="margin-right: 0.2em;"></i>Analisar</a>
-              </td>
-            </tr>
-            {{answer}}
-          </tbody>
-        </table>
-        <div class="box-footer clearfix">
-          <ul class="pagination pagination-sm no-margin pull-right">
-            <li><a href="#">«</a></li>
-            <li><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">»</a></li>
-          </ul>
+    <section class="content">
+        <h1 class="content-header">
+            Coordenador
+        </h1>
+        <div class="box-body">
+            <div class="box-body">
+                <p>Nome: {{RequestCtrl.request.manager}}</p>
+                <p>Email: {{RequestCtrl.request.email}}</p>
+            </div>
         </div>
-      </div>
-    </div>
 
-    </section><!-- /.content -->
-  </div><!-- /.content-wrapper -->
+        <h1 class="content-header">
+            Reprografia
+        </h1>
+
+        <div class="box-info">
+            <table class="table table-responsive">
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="info-box-content">
+                                <img src="../../../../assets/adminlte/dist/img/user1-128x128.jpg" class="img-square" alt="User Image">
+                                <h3>{{RequestCtrl.request.name}}</h3>
+                                <p>{{RequestCtrl.request.address}}</p>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="info-box-content">
+                                MAPA
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div>
+            <center>
+                <a ng-click='accept()' class="btn btn-success"><i class="fa fa-level-up" style="margin-right: 0.2em;"></i>Aceitar</a>
+                <a ng-click='reject()' class="btn btn-danger"><i class="fa fa-times" style="margin-right: 0.2em;"></i>Rejeitar</a>
+            </center>
+        </div>
+        {{answer}}
+    </section>
+  </div>
 
   <!-- Main Footer -->
   <footer class="main-footer">
@@ -138,9 +137,9 @@
     <!-- Default to the left -->
     <strong>Copyright &copy; 2016 <a href="#">ProxyPrint</a>.</strong> All rights reserved.
   </footer>
-
 </div><!-- ./wrapper -->
 </div>
+
 <!-- AdminLTE -->
 <!-- jQuery 2.1.4 -->
 <script src="/assets/adminlte/plugins/jQuery/jQuery-2.1.4.min.js"></script>
