@@ -87,25 +87,21 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
 
   /*Employee*/
   .state('employee', {
-    url: '/employee/:username',
-    templateUrl: '/app/components/printshop/employee/views/pending.html',
+    url: '/employee/:username/',
+    views: {
+      '': {
+        templateUrl: '/app/components/printshop/employee/views/employee-base.html',
+        controller: 'EmployeeBaseCtrl'
+      }
+    },
     data: {
       css: printshopCSS
     }
   })
-  .state('satisfied', {
-    url: '/employee/satisfied',
-    templateUrl: '/app/components/printshop/employee/views/satisfied.html',
-    data: {
-      css: printshopCSS
-    }
-  })
-  .state('history', {
-    url: '/employee/history',
-    templateUrl: '/app/components/printshop/employee/views/history.html',
-    data: {
-      css: printshopCSS
-    }
+  .state('employee.pending', {
+    url: 'pending',
+    templateUrl: '/app/components/printshop/employee/views/employee-requests-pending.html',
+    controller: 'PendingRequestsCtrl'
   })
 
 

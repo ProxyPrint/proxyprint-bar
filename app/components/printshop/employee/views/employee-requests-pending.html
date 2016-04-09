@@ -1,0 +1,31 @@
+<div class="box">
+  <div class="box-body table-responsive no-padding">
+    <table class="table table-striped">
+      <tbody>
+        <tr>
+          <th>ID Pedido</th>
+          <th>Cliente</th>
+          <th>Data de Entrada</th>
+          <th>Ações</th>
+          <th></th>
+        </tr>
+        <tr ng-repeat="request in pendingRequests">
+          <td><b>{{request.id}}</b></td>
+          <td>{{request.consumer}}</td>
+          <td>{{request.arrivalTimestamp}}</td>
+          <td><a class="btn btn-success" ng-click="attendRequest()"><i class="fa fa-level-up" style="margin-right: 0.2em;"></i>Atender</a></td>
+          <td><a href="#" class="btn btn-danger"><i class="fa fa-times" style="margin-right: 0.2em;"></i>Cancelar pedido</a></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="box-footer clearfix">
+      <ul class="pagination pagination-sm no-margin pull-right">
+        <li><a href="#">«</a></li>
+        <li><a href="#">1</a></li>
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li><a href="#">»</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
