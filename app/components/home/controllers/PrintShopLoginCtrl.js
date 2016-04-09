@@ -6,12 +6,15 @@ angular.module('Auth').controller('PrintShopLoginCtrl',
 
         $scope.login = function () {
             $scope.dataLoading = true;
-            AuthenticationService.Login($scope.username, $scope.password, function (response) {
+            AuthenticationService.LoginEmployee($scope.username, $scope.password, function (response) {
                console.log(response);
                 if (response.success) {
-                    // Verify role! and the change state!
                     AuthenticationService.SetCredentials($scope.username, $scope.password);
-                    $location.path('/printshopID');
+                    if(response.employee.roles[0] == "ROLE_EMPLOYEE") {
+                      $state.go('employee', {"username": $scope.username});
+                    } else if(response.employee.roles[0] == "ROLE_EMPLOYEE") {
+                      console.log("Manager logged in...");
+                    }
                 } else {
                     $scope.error = response.message;
                     $scope.dataLoading = false;

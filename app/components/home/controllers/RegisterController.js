@@ -6,7 +6,7 @@ angular.module('Auth').controller('RegisterController',
 
         $scope.register = function () {
             $scope.dataLoading = true;
-            AuthenticationService.Register($scope.name, $scope.email, $scope.username, $scope.password, function (response) {
+            AuthenticationService.RegisterEmployee($scope.name, $scope.email, $scope.username, $scope.password, function (response) {
                 if (response.success) {
                     AuthenticationService.SetCredentials($scope.username, $scope.password);
                     $location.path('/consumerID');

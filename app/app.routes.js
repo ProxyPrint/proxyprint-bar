@@ -87,7 +87,7 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
 
   /*Employee*/
   .state('employee', {
-    url: '/employee',
+    url: '/employee/:username',
     templateUrl: '/app/components/printshop/employee/views/pending.html',
     data: {
       css: printshopCSS

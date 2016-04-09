@@ -45,6 +45,51 @@ angular.module('Auth').factory('AuthenticationService', ['Base64', '$http', '$co
             });
       };
 
+      /*Employee*/
+
+      service.LoginEmployee = function(username, password, callback) {
+
+         var data = $.param({
+            username: username,
+            password: password
+         });
+
+         $http({
+               method: 'POST',
+               url: 'http://localhost:8080/employee/login',
+               data: data,
+               headers: {
+                  'Content-Type': 'application/x-www-form-urlencoded'
+               }
+            })
+            .success(function(response) {
+               callback(response);
+            });
+
+      };
+
+      service.RegisterEmployee = function(name, email, username, password, callback) {
+         var data = $.param({
+            name: name,
+            email: email,
+            username: username,
+            password: password,
+            latitude: "0",
+            longitude: "0"
+         })
+         $http({
+               method: 'POST',
+               url: 'http://localhost:8080/employee/register',
+               data: data,
+               headers: {
+                  'Content-Type': 'application/x-www-form-urlencoded'
+               }
+            })
+            .success(function(response) {
+               callback(response);
+            });
+      };
+
       service.SetCredentials = function(username, password) {
          var authdata = Base64.encode(username + ':' + password);
 
