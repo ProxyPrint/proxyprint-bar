@@ -3,7 +3,6 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
    var frontpageCSS = [
       '/assets/css/bootstrap.min.css',
       '/assets/css/frontpage.css',
-      '/assets/css/styles.css',
       '//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css',
       'http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic'
    ];
@@ -55,11 +54,21 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
       })
       .state('consumer.settings' ,{
          url: '/settings',
-         templateUrl: '/app/components/consumer/views/consumer_settings.html'
+         templateUrl: '/app/components/consumer/views/consumer_settings.html',
       })
       .state('consumer.mainpage' ,{
          url: '/mainpage',
          templateUrl: '/app/components/consumer/views/consumer_maincontent.html'
+      })
+      .state('consumer.history' , {
+         url: '/history',
+         templateUrl: '/app/components/consumer/views/consumer_history.html',
+         controller: 'ConsumerHistoryController'
+      })
+      .state('consumer.printshoplist', {
+         url: '/printshops',
+         templateUrl: '/app/components/consumer/views/consumer_printshoplist.html',
+         controller: 'ConsumerPrintshopList'
       })
 
 
