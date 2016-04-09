@@ -1,11 +1,19 @@
 angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
    $urlRouterProvider.otherwise('/');
+   var frontpageCSS = [
+      '/assets/css/bootstrap.min.css',
+      '/assets/css/frontpage.css',
+      '/assets/css/styles.css',
+      '//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css',
+      'http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic'
+   ];
+
    var mainCSS = [
       '/assets/css/bootstrap.min.css',
       '/assets/css/styles.css',
       '//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css',
       'http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic'
-   ];
+   ]
 
    var printshopCSS = [
     '/assets/adminlte/bootstrap/css/bootstrap.min.css',
@@ -21,7 +29,7 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
          templateUrl: '/app/components/home/views/frontpage.html',
          controller: 'LoginController',
          data: {
-          css: mainCSS
+          css: frontpageCSS
          }
       })
       .state('register' , {
@@ -29,7 +37,7 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
          templateUrl: '/app/components/home/views/register.html',
          controller: 'RegisterController',
          data: {
-          css: mainCSS
+          css: frontpageCSS
          }
       })
       .state('consumer', {
