@@ -1,5 +1,5 @@
 angular.module('ProxyPrint')
-   .controller('ConsumerPrintshopList', ['$scope' , function ($scope) {
+   .controller('ConsumerPrintshopList', ['$scope','ngTableParams' , function ($scope, ngTableParams) {
 
       $scope.printshops = [{
             name: "Impressões Jerónimo",
@@ -15,5 +15,7 @@ angular.module('ProxyPrint')
             rating: 5
          }
       ];
+
+      $scope.tableParams = new ngTableParams({}, {dataset: $scope.printshops});
 
 }]);

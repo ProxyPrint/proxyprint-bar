@@ -19,36 +19,61 @@
 
 <div class="container-fluid">
 
-      <div class="row row-offcanvas row-offcanvas-left">
+    <div class="row row-offcanvas row-offcanvas-left">
 
-         <div class="col-sm-3 col-md-2 sidebar-offcanvas" id="sidebar" role="navigation">
+        <div class="col-sm-3 col-md-2 sidebar-offcanvas" id="sidebar" role="navigation">
 
             <ul class="nav nav-sidebar">
-              <li><a ui-sref=".mainpage"><i class="fa fa-home"></i> Início</a></li>
-              <li><a ui-sref=".printshoplist"><i class="fa fa-book"></i> Reprografias</a></li>
-              <li><a ui-sref=".history"><i class="fa fa-history"></i> Histórico</a></li>
+                <li><a ui-sref=".mainpage"><i class="fa fa-home"></i> Início</a></li>
+                <li><a ui-sref=".printshoplist"><i class="fa fa-book"></i> Reprografias</a></li>
+                <li><a ui-sref=".history"><i class="fa fa-history"></i> Histórico</a></li>
             </ul>
-        </div><!--/span-->
+        </div>
+        <!--/span-->
 
         <div class="col-sm-9 col-md-10 main">
-          <div class="container">
-             <div ui-view>
+            <div class="container">
+                <div ui-view>
 
-                <div id="left">
-                <div ngf-drop ngf-select ng-model="files" class="drop-box" ngf-drag-over-class="'dragover'" ngf-multiple="true" ngf-allow-dir="true"
-                accept="image/*,application/pdf"
-                ngf-pattern="'image/*,application/pdf'">
-                Arraste ficheiros/Clique<br><br>
-                <i class="fa fa-upload fa-4x"></i>
+                    <div class="container">
+                        <div class="dndbox">
+                            <div class="center">
+                                <h2> Novo pedido </h2>
+                            </div>
+                            <div ngf-drop ngf-select ng-model="files" class="drop-box" ngf-drag-over-class="'dragover'" ngf-multiple="true" ngf-allow-dir="true" accept="image/*,application/pdf" ngf-pattern="'image/*,application/pdf'">
+                                <h4>Arraste ficheiros/Clique</h4>
+                                <br>
+                                <br>
+                                <i class="fa fa-upload fa-4x"></i>
+                            </div>
+                        </div>
+                        <div class="pendingRequests">
+                            <div class="center">
+                                <h2> Pedidos pendentes </h2>
+                            </div>
+                            <div class="scrollableTable">
+                                <ul class="list-group">
+                                    <li class="list-group-item clearfix" ng-repeat="request in pendingRequests">
+                                        <div class="left">
+                                            <strong> Pedido #{{request.requestID}} </strong>
+                                        </div>
+                                        <div class="right">
+                                            {{request.day}} {{request.hour}}
+                                        </div>
+                                        <br>
+                                        <div class="center">
+                                            <button type="button" class="btn btn-default">Cancelar pedido</button>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
-
-                <div id="right">
-                   asdfasdfad
-                </div>
-
+            </div>
+        </div>
+        <!--/row-->
+    </div>
 </div>
-             </div>
-          </div>
-      </div><!--/row-->
-	</div>
-</div><!--/.container-->
+<!--/.container-->

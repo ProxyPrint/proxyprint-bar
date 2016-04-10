@@ -12,3 +12,11 @@
                         </div>
 	      </div>
 </div>
+
+<table ng-table="tableParams" class="table table-striped table-bordered table-hover table-condensed">
+        <tr ng-repeat="printshop in $data">
+            <td data-title="'name'">{{printshop.name}}</td>
+            <td data-title="'address'">{{printshop.address}}</td>
+            <td data-title="'rating'">{{printshop.rating}}</td>
+        </tr>
+</table>

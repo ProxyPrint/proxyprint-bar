@@ -1,17 +1,18 @@
 angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
    $urlRouterProvider.otherwise('/');
    var frontpageCSS = [
-      '/assets/css/bootstrap.min.css',
       '/assets/css/frontpage.css',
+      '/assets/css/bootstrap.min.css',
       '//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css',
       'http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic'
    ];
 
    var mainCSS = [
-      '/assets/css/bootstrap.min.css',
       '/assets/css/styles.css',
+      '/assets/css/bootstrap.min.css',
       '//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css',
-      'http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic'
+      'http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic',
+      'https://cdnjs.cloudflare.com/ajax/libs/ng-table/0.8.3/ng-table.min.css'
    ]
 
    var printshopCSS = [
