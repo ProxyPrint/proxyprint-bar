@@ -95,7 +95,7 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
 
   /*Employee*/
   .state('employee', {
-    url: '/employee/:username/',
+    url: '/employee/:username',
     views: {
       '': {
         templateUrl: '/app/components/printshop/employee/views/employee-base.html',
@@ -107,17 +107,17 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
     }
   })
   .state('employee.pending', {
-    url: 'pending',
+    url: '/pending',
     templateUrl: '/app/components/printshop/employee/views/employee-requests-pending.html',
     controller: 'PendingRequestsCtrl'
   })
   .state('employee.satisfied', {
-    url: 'satisfied',
+    url: '/satisfied',
     templateUrl: '/app/components/printshop/employee/views/employee-requests-satisfied.html',
     controller: 'SatisfiedRequestsCtrl'
   })
   .state('employee.history', {
-    url: 'history',
+    url: '/history',
     templateUrl: '/app/components/printshop/employee/views/employee-requests-history.html',
     controller: 'HistoryRequestsCtrl'
   })
@@ -125,10 +125,35 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
   /*Manager*/
   .state('manager', {
     url: '/manager',
-    templateUrl: '/app/components/printshop/manager/views/base_manager.html',
+    views: {
+      '': {
+        templateUrl: '/app/components/printshop/manager/views/manager-base.html',
+        controller: 'ManagerBaseCtrl'
+      }
+    },
     data: {
       css: adminlteCSS
     }
+  })
+  .state('manager.info', {
+    url: '/main',
+    templateUrl: '/app/components/printshop/manager/views/manager-base-info.html',
+    controller: 'ManagerInfoCtrl'
+  })
+  .state('manager.stats', {
+    url: '/stats',
+    templateUrl: '/app/components/printshop/manager/views/manager-stats.html',
+    controller: 'ManagerStatsCtrl'
+  })
+  .state('manager.employees', {
+    url: '/employees',
+    templateUrl: '/app/components/printshop/manager/views/manager-employees.html',
+    controller: 'ManagerEmployeesCtrl'
+  })
+  .state('manager.pricetable', {
+    url: '/pricetable',
+    templateUrl: '/app/components/printshop/manager/views/manager-pricetable.html',
+    controller: 'ManagerPriceTableCtrl'
   });
 
 }]);
