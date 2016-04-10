@@ -1,5 +1,6 @@
 angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
-  $urlRouterProvider.otherwise('/');
+  $urlRouterProvider.when('', '/');
+  $urlRouterProvider.otherwise('/404');
   var mainCSS = [
     '/assets/css/bootstrap.min.css',
     '/assets/css/styles.css',
@@ -24,6 +25,13 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
 
   /*Consumer*/
   $stateProvider
+  .state('notFound', {
+    url: '/404',
+    templateUrl: '/app/components/errors/404.html',
+    data: {
+      css: adminlteCSS
+    }
+  })
   .state('home', {
     url: '/',
     templateUrl: '/app/components/home/views/frontpage.html',
