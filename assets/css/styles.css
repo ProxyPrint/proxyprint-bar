@@ -101,7 +101,7 @@ body {
 }
 
 
-/*** Costumer Main Page**/
+/************************* Costumer Main Page******************************/
 
 .mainpage{
    width: 800px;
@@ -143,4 +143,13 @@ body {
 .scrollableTable {
    max-height: 300px;
    overflow-y: scroll;
+}
+
+/******************************* Settings *****************************/
+
+.settings-container {
+   margin-top: 50px;
+   width: 50%;
+   margin-left: 10%;
+   margin-right: 25%;
 }

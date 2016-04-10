@@ -55,7 +55,7 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
       })
       .state('consumer.settings' ,{
          url: '/settings',
-         templateUrl: '/app/components/consumer/views/consumer_settings.html',
+         templateUrl: '/app/components/consumer/views/consumer_settings.html'
       })
       .state('consumer.mainpage' ,{
          url: '/mainpage',
