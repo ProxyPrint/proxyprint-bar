@@ -9,8 +9,14 @@ angular.module('ProxyPrint').controller('PendingRequestsCtrl', ['$scope', '$http
      { id: "5", consumer: "Daniel Caldas", arrivalTimestamp: "11/7/2014 02:10"}
    ];
 
-   $scope.attendRequest = function() {
-     window.alert("Atender pedido ?...");
+   $scope.paginationOn = true;
+
+   $scope.attendRequest = function(requestID) {
+     window.alert("Atender pedido "+requestID);
+   };
+
+   $scope.cancelRequest = function(requestID) {
+     window.alert("Cancelar pedido "+requestID);
    };
 
 }]);

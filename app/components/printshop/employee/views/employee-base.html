@@ -42,7 +42,7 @@
                 <li class="user-footer">
                   <center>
                     <div>
-                      <a href="#" class="btn btn-default btn-flat">Log out</a>
+                      <button ng-click="logout()" class="btn btn-default btn-flat">Log out</button>
                     </div>
                   </center>
                 </li>
@@ -74,10 +74,9 @@
         <!-- Sidebar Menu -->
         <ul class="sidebar-menu">
           <li class="header">Opções</li>
-          <!-- Optionally, you can add icons to the links -->
           <li><a ui-sref=".pending"><i class="fa fa-hourglass-half"></i> <span>Pedidos Pendentes</span></a></li>
-          <li><a ui-sref="satisfied"><i class="fa fa-check"></i> <span>Pedidos Satisfeitos</span></a></li>
-          <li><a ui-sref="history"><i class="fa fa-history"></i> <span>Histórico de Pedidos</span></a></li>
+          <li><a ui-sref=".satisfied"><i class="fa fa-check"></i> <span>Pedidos Satisfeitos</span></a></li>
+          <li><a ui-sref=".history"><i class="fa fa-history"></i> <span>Histórico de Pedidos</span></a></li>
         </ul><!-- /.sidebar-menu -->
       </section>
       <!-- /.sidebar -->
@@ -98,7 +97,7 @@
         ProxyPrint
       </div>
       <!-- Default to the left -->
-      <strong>Copyright &copy; 2016 <a href="#">ProxyPrint</a>.</strong> All rights reserved.
+      <strong>Copyright &copy; 2016 ProxyPrint.</strong> All rights reserved.
     </footer>
 
   </div><!-- ./wrapper -->

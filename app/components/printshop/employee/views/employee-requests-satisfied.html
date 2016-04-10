@@ -6,19 +6,23 @@
           <th>ID Pedido</th>
           <th>Cliente</th>
           <th>Data de Entrada</th>
-          <th>Ações</th>
-          <th></th>
+          <th>Data de Atendimento</th>
+          <th>Atendido Por</th>
+          <th>Preço</th>
+          <th>Acções</th>
         </tr>
-        <tr ng-repeat="request in pendingRequests">
-          <td><b>{{request.id}}</b></td>
+        <tr ng-repeat="request in satisfiedRequests">
+          <td><b>#{{request.id}}</b></td>
           <td>{{request.consumer}}</td>
           <td>{{request.arrivalTimestamp}}</td>
-          <td><button class="btn btn-success" ng-click="attendRequest(request.id)"><i class="fa fa-level-up" style="margin-right: 0.2em;"></i>Atender</button></td>
-          <td><button class="btn btn-danger" ng-click="cancelRequest(request.id)"><i class="fa fa-times" style="margin-right: 0.2em;"></i>Cancelar pedido</button></td>
+          <td>{{request.finishedTimestamp}}</td>
+          <td>{{request.employeeAttended}}</td>
+          <td>{{request.cost}}</td>
+          <td><button class="btn bg-purple" ng-click="liftRequest(request.id)"><i class="fa fa-rocket" style="margin-right: 0.2em;"></i>Levantar</button></td>
         </tr>
       </tbody>
     </table>
-    <div ng-show="paginationOn" class="box-footer clearfix">
+    <div class="box-footer clearfix">
       <ul class="pagination pagination-sm no-margin pull-right">
         <li><a href="#">«</a></li>
         <li><a href="#">1</a></li>

@@ -14,7 +14,7 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
     'http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic'
   ];
 
-  var printshopCSS = [
+  var adminlteCSS = [
     '/assets/adminlte/bootstrap/css/bootstrap.min.css',
     'https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css',
     'https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css',
@@ -95,7 +95,7 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
       }
     },
     data: {
-      css: printshopCSS
+      css: adminlteCSS
     }
   })
   .state('employee.pending', {
@@ -103,16 +103,24 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
     templateUrl: '/app/components/printshop/employee/views/employee-requests-pending.html',
     controller: 'PendingRequestsCtrl'
   })
-
+  .state('employee.satisfied', {
+    url: 'satisfied',
+    templateUrl: '/app/components/printshop/employee/views/employee-requests-satisfied.html',
+    controller: 'SatisfiedRequestsCtrl'
+  })
+  .state('employee.history', {
+    url: 'history',
+    templateUrl: '/app/components/printshop/employee/views/employee-requests-history.html',
+    controller: 'HistoryRequestsCtrl'
+  })
 
   /*Manager*/
   .state('manager', {
     url: '/manager',
     templateUrl: '/app/components/printshop/manager/views/base_manager.html',
     data: {
-      css: printshopCSS
+      css: adminlteCSS
     }
   });
-
 
 }]);
