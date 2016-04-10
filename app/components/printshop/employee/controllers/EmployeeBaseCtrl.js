@@ -3,9 +3,10 @@ angular.module('ProxyPrint').controller('EmployeeBaseCtrl', ['$scope', '$http','
 
    $scope.employee = $cookieStore.get('globals').currentUser;
 
+   // nafunc
    $scope.logout = function(){
       AuthenticationService.ClearCredentials();
-      $location.path('/printshop');
+      $state.go('printshop');
    };
 
 }]);
