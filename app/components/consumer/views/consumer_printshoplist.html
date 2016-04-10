@@ -1,22 +1,30 @@
 <div class="container">
 	<div class="row">
-           <div id="custom-search-input">
-                            <div class="input-group col-md-12">
-                                <input type="text" class="  search-query form-control" placeholder="Pesquise uma reprografia"/>
-                                <span class="input-group-btn">
-                                    <button class="btn btn-primary" type="button">
-                                        <span class=" glyphicon glyphicon-search"></span>
-                                    </button>
-                                </span>
-                            </div>
-                        </div>
-	      </div>
+		<div class="col-md-4 col-md-offset-3">
+			<form action="" class="search-form">
+				<div class="form-group has-feedback">
+					<label for="search" class="sr-only">Search</label>
+					<input type="text" class="form-control" name="search" id="search" placeholder="Pesquise uma reprografia">
+					<span class="glyphicon glyphicon-search form-control-feedback"></span>
+				</div>
+			</form>
+		</div>
+	</div>
 </div>
-
-<table ng-table="tableParams" class="table table-striped table-bordered table-hover table-condensed">
-        <tr ng-repeat="printshop in $data">
-            <td data-title="'name'">{{printshop.name}}</td>
-            <td data-title="'address'">{{printshop.address}}</td>
-            <td data-title="'rating'">{{printshop.rating}}</td>
-        </tr>
-</table>
+<br>
+<div class="container">
+	<div class="printshops">
+		<h2>Reprografias</h2>
+	<ul class="list-group" >
+		 <li class="list-group-item clearfix" ng-repeat="printshop in printshops">
+			  <div class="left">
+					{{printshop.name}}<br>
+					{{printshop.address}}
+			  </div>
+			  <div class="right">
+				  <div star-rating rating="printshop.rating" read-only="true" max-rating="5" ></div>
+			  </div>
+		 </li>
+	</ul>
+</div>
+</div>
