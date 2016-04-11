@@ -1,11 +1,19 @@
 angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
    $urlRouterProvider.otherwise('/');
-   var mainCSS = [
+   var frontpageCSS = [
+      '/assets/css/frontpage.css',
       '/assets/css/bootstrap.min.css',
-      '/assets/css/styles.css',
       '//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css',
       'http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic'
    ];
+
+   var mainCSS = [
+      '/assets/css/styles.css',
+      '/assets/css/bootstrap.min.css',
+      '//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css',
+      '/assets/css/angular-notification-icons.css',
+      'http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic',
+   ]
 
    var printshopCSS = [
     '/assets/adminlte/bootstrap/css/bootstrap.min.css',
@@ -21,7 +29,7 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
          templateUrl: '/app/components/home/views/frontpage.html',
          controller: 'LoginController',
          data: {
-          css: mainCSS
+          css: frontpageCSS
          }
       })
       .state('register' , {
@@ -29,7 +37,7 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
          templateUrl: '/app/components/home/views/register.html',
          controller: 'RegisterController',
          data: {
-          css: mainCSS
+          css: frontpageCSS
          }
       })
       .state('consumer', {
@@ -52,6 +60,16 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
       .state('consumer.mainpage' ,{
          url: '/mainpage',
          templateUrl: '/app/components/consumer/views/consumer_maincontent.html'
+      })
+      .state('consumer.history' , {
+         url: '/history',
+         templateUrl: '/app/components/consumer/views/consumer_history.html',
+         controller: 'ConsumerHistoryController'
+      })
+      .state('consumer.printshoplist', {
+         url: '/printshops',
+         templateUrl: '/app/components/consumer/views/consumer_printshoplist.html',
+         controller: 'ConsumerPrintshopList'
       })
 
 

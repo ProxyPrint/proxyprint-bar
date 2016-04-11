@@ -1,0 +1,22 @@
+<div class="container">
+  <h2>Histórico de pedidos</h2>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Iniciado</th>
+        <th>Levantado</th>
+        <th>Reprografia</th>
+        <th>Custo</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat = "request in requests">
+         <td>{{request.reqID}}</td>
+         <td>{{request.ts_beggining}}</td>
+         <td>{{request.ts_processed}}</td>
+         <td>{{request.printshop}}</td>
+         <td>{{request.cost}}</td>
+    </tbody>
+  </table>
+</div>
