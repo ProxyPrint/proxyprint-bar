@@ -23,106 +23,61 @@
     </div>
 </div>
 
-<div class="container-fluid">
+    <div class="container-fluid">
 
-    <div class="row row-offcanvas row-offcanvas-left">
+        <div class="row row-offcanvas row-offcanvas-left">
 
-        <div class="col-sm-3 col-md-2 sidebar-offcanvas" id="sidebar" role="navigation">
+            <div class="col-sm-3 col-md-2 sidebar-offcanvas" id="sidebar" role="navigation">
 
-            <ul class="nav nav-sidebar">
-                <li><a ui-sref=".mainpage"><i class="fa fa-home"></i> Início</a></li>
-                <li><a ui-sref=".printshoplist"><i class="fa fa-book"></i> Reprografias</a></li>
-                <li><a ui-sref=".history"><i class="fa fa-history"></i> Histórico</a></li>
-            </ul>
-        </div>
-        <!--/span-->
+                <ul class="nav nav-sidebar">
+                    <li><a ui-sref=".mainpage"><i class="fa fa-home"></i> Início</a></li>
+                    <li><a ui-sref=".printshoplist"><i class="fa fa-book"></i> Reprografias</a></li>
+                    <li><a ui-sref=".history"><i class="fa fa-history"></i> Histórico</a></li>
+                </ul>
+            </div>
+            <!--/span-->
 
-        <div class="col-sm-9 col-md-10 main">
-            <div class="container">
-                <div ui-view>
-
-                    <div class="container">
-                        <div class="dndbox">
-                            <div class="center">
-                                <h2> Novo pedido </h2>
+            <div class="col-sm-9 col-md-10 main">
+                <div class="container">
+                    <div ui-view>
+                            <div class="dndbox">
+                                <div class="center">
+                                    <h2> Novo pedido </h2>
+                                </div>
+                                <div ngf-drop ngf-select ng-model="files" class="drop-box" ngf-drag-over-class="'dragover'" ngf-multiple="true" ngf-allow-dir="true" accept="image/*,application/pdf" ngf-pattern="'image/*,application/pdf'">
+                                    <h4>Arraste ficheiros/Clique</h4>
+                                    <br>
+                                    <br>
+                                    <i class="fa fa-upload fa-4x"></i>
+                                </div>
                             </div>
-                            <div ngf-drop ngf-select ng-model="files" class="drop-box" ngf-drag-over-class="'dragover'" ngf-multiple="true" ngf-allow-dir="true" accept="image/*,application/pdf" ngf-pattern="'image/*,application/pdf'">
-                                <h4>Arraste ficheiros/Clique</h4>
-                                <br>
-                                <br>
-                                <i class="fa fa-upload fa-4x"></i>
+                            <div class="pendingRequests">
+                                <div class="center">
+                                    <h2> Pedidos pendentes </h2>
+                                </div>
+                                <div class="scrollableTable">
+                                    <ul class="list-group">
+                                        <li class="list-group-item clearfix" ng-repeat="request in pendingRequests">
+                                            <div class="left">
+                                                <strong> Pedido #{{request.requestID}} </strong>
+                                            </div>
+                                            <div class="right">
+                                                {{request.day}} {{request.hour}}
+                                            </div>
+                                            <br>
+                                            <div class="center">
+                                                <button type="button" class="btn btn-default">Cancelar pedido</button>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
-                        </div>
-                        <div class="pendingRequests">
-                            <div class="center">
-                                <h2> Pedidos pendentes </h2>
-                            </div>
-                            <div class="scrollableTable">
-                                <ul class="list-group">
-                                    <li class="list-group-item clearfix" ng-repeat="request in pendingRequests">
-                                        <div class="left">
-                                            <strong> Pedido #{{request.requestID}} </strong>
-                                        </div>
-                                        <div class="right">
-                                            {{request.day}} {{request.hour}}
-                                        </div>
-                                        <br>
-                                        <div class="center">
-                                            <button type="button" class="btn btn-default">Cancelar pedido</button>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
                     </div>
-
                 </div>
             </div>
+            <!--/row-->
         </div>
-        <!--/row-->
     </div>
-</div>
-
-<footer>
-   <section id="us">
-      <div class="container">
-         <div class="row">
-            <div class="col-lg-10 col-lg-offset-1 text-center">
-               <h4>
-                  <strong>ProxyPrint</strong>
-               </h4>
-               <p>José Cortez<br>Daniel Caldas<br>José Francisco<br>Marcelo Gonçalves</p>
-               <ul class="list-unstyled">
-                  <li>
-                     <i class="fa fa-envelope-o fa-fw"></i>
-                     <a href="mailto:name@example.com">name@example.com</a>
-                  </li>
-               </ul>
-               <br>
-               <ul class="list-inline">
-                  <li>
-                     <a href="https://www.facebook.com/Professor-Chibanga-Maomam%C3%A9-Acrabunda-174703292553718">
-                        <i class="fa fa-facebook fa-fw fa-3x"></i>
-                     </a>
-                  </li>
-                  <li>
-                     <a href="https://twitter.com/TheTweetOfGod">
-                        <i class="fa fa-twitter fa-fw fa-3x"></i>
-                     </a>
-                  </li>
-                  <li>
-                     <a href="https://github.com/ProxyPrint">
-                        <i class="fa fa-github fa-fw fa-3x"></i>
-                     </a>
-                  </li>
-               </ul>
-               <hr class="small">
-               <p class="text-muted">Copyright &copy; ProxyPrint</p>
-            </div>
-         </div>
-      </div>
-   </section>
-</footer>
 <!--/.container-->
 
 <script type="text/javascript">
