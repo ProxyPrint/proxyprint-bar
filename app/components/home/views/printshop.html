@@ -1,0 +1,236 @@
+<!-- Navigation -->
+<a id="menu-toggle" href="#" class="btn btn-dark btn-lg toggle">
+  <i class="fa fa-bars"></i>
+</a>
+<nav id="sidebar-wrapper">
+  <ul class="sidebar-nav">
+    <a id="menu-close" href="#" class="btn btn-light btn-lg pull-right toggle">
+      <i class="fa fa-times"></i>
+    </a>
+    <li class="sidebar-brand">
+      <a href="#top" onclick=$("#menu-close").click();>ProxyPrint</a>
+    </li>
+    <li>
+      <a ui-sref="home">Voltar à home page</a>
+    </li>
+    <li>
+      <a href="#top" onclick=$("#menu-close").click();>Início</a>
+    </li>
+    <li>
+      <a href="#about" onclick=$("#menu-close").click();>Sobre</a>
+    </li>
+    <li>
+      <a href="#services" onclick=$("#menu-close").click();>Serviços</a>
+    </li>
+    <li>
+      <a href="#us" onclick=$("#menu-close").click();>Quem somos</a>
+    </li>
+  </ul>
+</nav>
+
+<!-- Header -->
+<header id="top" class="header">
+  <div class="text-vertical-center">
+    <h1>ProxyPrint</h1>
+    <br>
+    <a href="#login" class="btn btn-light btn-lg">Comece já!</a>
+  </div>
+</header>
+
+<!-- About -->
+<section id="about" class="about">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <h2>Quer dar aos seus clientes a melhor experiência de atendimento personalizado?</h2>
+        <h2>Quer aumentar a capacidade de atendimento da sua reprografia exponencialmente?</h2>
+        <p class="lead">Não perca mais tempo, o ProxyPrint é a peça que falta no mercado das gráficas. Ao aderir a esta plataforma irá colocar na cloud o seu estabelecimento, desta forma todos os seus clientes poderão submeter à distância pedidos de impressão para a sua reprografia. Só precisa de se registar! Está à espera de quê para para ser a reprografia mais acessível do mercado?</p>
+      </div>
+    </div>
+    <!-- /.row -->
+  </div>
+  <!-- /.container -->
+</section>
+
+<!-- Services -->
+<!-- The circle icons use Font Awesome's stacked icon classes. For more information, visit http://fontawesome.io/examples/ -->
+<section id="services" class="services bg-primary">
+  <div class="container">
+    <div class="row text-center">
+      <div class="col-lg-10 col-lg-offset-1">
+        <h2>O que oferecemos?</h2>
+        <hr class="small">
+        <div class="row">
+          <div class="col-md-3 col-sm-6">
+            <div class="service-item">
+              <span class="fa-stack fa-4x">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-clock-o fa-stack-1x text-primary"></i>
+              </span>
+              <h4>
+                <strong>Fique disponível 24h por dia!</strong>
+              </h4>
+              <p>Os seus clientes poderão submeter pedidos 24h por dia!.</p>
+              <a href="#" class="btn btn-light">Saiba mais</a>
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-6">
+            <div class="service-item">
+              <span class="fa-stack fa-4x">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-line-chart fa-stack-1x text-primary"></i>
+              </span>
+              <h4>
+                <strong>Controle de perto os seus rendimentos!</strong>
+              </h4>
+              <p>A plataforma disponibiliza uma série de estatísticas sobre os lucros obtidos!</p>
+              <a href="#" class="btn btn-light">Saiba mais</a>
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-6">
+            <div class="service-item">
+              <span class="fa-stack fa-4x">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-euro  fa-stack-1x text-primary"></i>
+              </span>
+              <h4>
+                <strong>Orçamentos e pagamentos automáticos!</strong>
+              </h4>
+              <p>Não se preocupe mais com trocos! Os pagamentos são feitos automaticamente no momento em que o seu cliente levanta o pedido na loja.</p>
+              <a href="#" class="btn btn-light">Saiba mais</a>
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-6">
+            <div class="service-item">
+              <span class="fa-stack fa-4x">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-star-half-o fa-stack-1x text-primary"></i>
+              </span>
+              <h4>
+                <strong>Receba feedback dos seus clientes!</strong>
+              </h4>
+              <p>Saiba se os seus clientes estão satisfeitos com o serviço! Aproveite novas ideias e sugestões para melhorar o seu negócio!.</p>
+              <a href="#" class="btn btn-light">Saiba mais</a>
+            </div>
+          </div>
+        </div>
+        <!-- /.row (nested) -->
+      </div>
+      <!-- /.col-lg-10 -->
+    </div>
+    <!-- /.row -->
+  </div>
+  <!-- /.container -->
+</section>
+
+<!-- Callout -->
+
+<section id="login">
+  <aside class="callout">
+    <div class="form-container">
+      <div ng-show="error" class="alert alert-danger">{{error}}</div>
+      <form name="form" ng-submit="login()" role="form">
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" name="username" id="username" class="form-control" ng-model="username" required/>
+          <span ng-show="form.username.$dirty && form.username.$error.required" class="help-block">Username is required</span>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <i class="fa fa-lock"></i>
+          <input type="password" name="password" id="password" class="form-control" ng-model="password" required/>
+          <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Password is required</span>
+        </div>
+        <div class="form-actions">
+          <div class="login-button">
+            <button type="submit" ng-disabled="form.$invalid || dataLoading" class="btn btn-primary">Login</button>
+            <img
+            ng-if="dataLoading"
+            src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="/>
+            <br>
+            <small style="color: black;"> Not registered yet? <a ui-sref="psregister">Sign up!</a></small>
+          </div>
+        </div>
+      </form>
+    </div>
+
+
+  </aside>
+
+</section>
+
+<!-- Footer -->
+<footer>
+  <section id="us">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-10 col-lg-offset-1 text-center">
+          <h4>
+            <strong>ProxyPrint</strong>
+          </h4>
+          <p>José Cortez<br>Daniel Caldas<br>José Francisco<br>Marcelo Gonçalves</p>
+          <ul class="list-unstyled">
+            <li>
+              <i class="fa fa-envelope-o fa-fw"></i>
+              <a href="mailto:name@example.com">name@example.com</a>
+            </li>
+          </ul>
+          <br>
+          <ul class="list-inline">
+            <li>
+              <a href="https://www.facebook.com/Professor-Chibanga-Maomam%C3%A9-Acrabunda-174703292553718">
+                <i class="fa fa-facebook fa-fw fa-3x"></i>
+              </a>
+            </li>
+            <li>
+              <a href="https://twitter.com/TheTweetOfGod">
+                <i class="fa fa-twitter fa-fw fa-3x"></i>
+              </a>
+            </li>
+            <li>
+              <a href="https://github.com/ProxyPrint">
+                <i class="fa fa-github fa-fw fa-3x"></i>
+              </a>
+            </li>
+          </ul>
+          <hr class="small">
+          <p class="text-muted">Copyright &copy; ProxyPrint</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</footer>
+
+<!-- Custom Theme JavaScript -->
+<script>
+  // Closes the sidebar menu
+  $("#menu-close").click(function (e) {
+    e.preventDefault();
+    $("#sidebar-wrapper").toggleClass("active");
+  });
+
+  // Opens the sidebar menu
+  $("#menu-toggle").click(function (e) {
+    e.preventDefault();
+    $("#sidebar-wrapper").toggleClass("active");
+  });
+
+  // Scrolls to the selected menu item on the page
+  $(function () {
+    $('a[href*=#]:not([href=#])').click(function () {
+      if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') || location.hostname == this.hostname) {
+
+        var target = $(this.hash);
+        target = target.length
+        ? target
+        : $('[name=' + this.hash.slice(1) + ']');
+        if (target.length) {
+          $('html,body').animate({
+            scrollTop: target.offset().top
+          }, 1000);
+          return false;
+        }
+      }
+    });
+  });
+</script>
