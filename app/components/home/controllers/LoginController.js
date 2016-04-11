@@ -13,7 +13,7 @@ angular.module('Auth').controller('LoginController',
                     $state.transitionTo('consumer');
                     $location.path('/consumerID');
                 } else {
-                    $scope.error = "Login data is invalid!";
+                    $scope.error = "Dados de login inválidos!";
                     $scope.dataLoading = false;
                 }
             });
