@@ -12,7 +12,7 @@ angular.module('Auth').controller('LoginController',
                     AuthenticationService.SetCredentials($scope.username, $scope.password);
                     $location.path('/consumerID');
                 } else {
-                    $scope.error = response.message;
+                    $scope.error = "Login data is invalid!";
                     $scope.dataLoading = false;
                 }
             });
