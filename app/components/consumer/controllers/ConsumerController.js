@@ -37,4 +37,6 @@ angular.module('ProxyPrint').controller('ConsumerController', ['$scope', '$http'
       hour: "19:32"
    }];
 
+   $scope.notifications = 5;
+
 }]);

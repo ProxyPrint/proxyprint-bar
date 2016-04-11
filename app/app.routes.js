@@ -11,6 +11,7 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
       '/assets/css/styles.css',
       '/assets/css/bootstrap.min.css',
       '//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css',
+      '/assets/css/angular-notification-icons.css',
       'http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic',
    ]
 
