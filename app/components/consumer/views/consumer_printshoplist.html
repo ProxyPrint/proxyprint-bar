@@ -1,0 +1,30 @@
+<div class="container">
+	<div class="row">
+		<div class="col-md-4 col-md-offset-3">
+			<form action="" class="search-form">
+				<div class="form-group has-feedback">
+					<label for="search" class="sr-only">Search</label>
+					<input type="text" class="form-control" ng-model="psName" name="search" id="search" placeholder="Pesquise uma reprografia">
+					<span class="glyphicon glyphicon-search form-control-feedback"></span>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<br>
+<div class="container">
+	<div class="printshops">
+		<h2>Reprografias</h2>
+	<ul class="list-group" >
+		 <li class="list-group-item clearfix" ng-repeat="printshop in printshops | filter : psName">
+			  <div class="left">
+					{{printshop.name}}<br>
+					{{printshop.address}}
+			  </div>
+			  <div class="right">
+				  <div star-rating rating="printshop.rating" read-only="true" max-rating="5" ></div>
+			  </div>
+		 </li>
+	</ul>
+</div>
+</div>

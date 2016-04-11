@@ -10,6 +10,7 @@ angular.module('Auth').controller('LoginController',
                console.log(response);
                 if (response.success) {
                     AuthenticationService.SetCredentials($scope.username, $scope.password);
+                    $state.transitionTo('consumer');
                     $location.path('/consumerID');
                 } else {
                     $scope.error = "Login data is invalid!";

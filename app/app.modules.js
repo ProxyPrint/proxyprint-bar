@@ -1,4 +1,5 @@
-angular.module('ProxyPrint', ['Auth','ui.router','ngCookies', 'uiRouterStyles']).run(['$rootScope', '$location', '$cookieStore', '$http',
+angular.module('ProxyPrint', ['Auth','ui.router','ngCookies', 'uiRouterStyles','ngFileUpload','angular-notification-icons'])
+   .run(['$rootScope', '$location', '$cookieStore', '$http',
 
     function ($rootScope, $location, $cookieStore, $http) {
         // keep user logged in after page refresh
