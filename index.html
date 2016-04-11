@@ -1,49 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
 
-   <head>
+  <title>ProxyPrint</title>
 
-      <meta charset="utf-8">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <meta name="description" content="">
-      <meta name="author" content="">
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]> <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script> <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script> <![endif]-->
+</head>
 
-      <title>ProxyPrint</title>
+<body ng-app="ProxyPrint" ui-router-styles>
 
-      <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-      <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-      <!--[if lt IE 9]> <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script> <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script> <![endif]-->
+  <div ui-view></div>
 
-   </head>
+  <!-- 3rd Party -->
+  <script type="text/javascript" src="assets/js/jquery.js"></script>
+  <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="node_modules/angular/angular.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.18/angular-ui-router.js"></script>
+  <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-cookies.js"></script>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-resource.js"></script>
+  <script type="text/javascript" src="assets/libs/ui-router-styles.js"></script>
+  <script type="text/javascript" src="assets/libs/angular-notification-icons.min.js"></script>
+  <script type="text/javascript" src="node_modules/ng-file-upload/dist/ng-file-upload.min.js"></script>
+  <script type="text/javascript" src="node_modules/ng-file-upload/dist/ng-file-upload-shim.min.js"></script>
+  <!-- App code -->
+  <script src="app/app.modules.js"></script>
+  <script src="app/app.routes.js"></script>
+  <!-- Home -->
+  <script src="app/components/home/controllers/LoginController.js"></script>
+  <script src="app/components/home/controllers/RegisterController.js"></script>
+  <script src="app/components/home/controllers/PrintShopLoginCtrl.js"></script>
+  <script src="app/components/home/controllers/PrintShopRegisterCtrl.js"></script>
+  <script src="app/components/home/services/auth.js"></script>
+  <!-- Consumer -->
+  <script src="app/components/consumer/controllers/ConsumerController.js"></script>
+  <script src="app/components/consumer/controllers/ConsumerHistoryController.js"></script>
+  <script src="app/components/consumer/controllers/ConsumerPrintshopList.js"></script>
+  <script src="app/components/consumer/directives/StarRating.js"></script>
+  <!-- Print Shop - Employee -->
+  <script src="app/components/printshop/employee/controllers/EmployeeBaseCtrl.js"></script>
+  <script src="app/components/printshop/employee/controllers/PendingRequestsCtrl.js"></script>
+  <script src="app/components/printshop/employee/controllers/SatisfiedRequestsCtrl.js"></script>
+  <script src="app/components/printshop/employee/controllers/HistoryRequestsCtrl.js"></script>
+  <!-- Print Shop - Manager -->
+  <script src="app/components/printshop/manager/controllers/ManagerBaseCtrl.js"></script>
+  <script src="app/components/printshop/manager/controllers/ManagerEmployeesCtrl.js"></script>
+  <script src="app/components/printshop/manager/controllers/ManagerInfoCtrl.js"></script>
+  <script src="app/components/printshop/manager/controllers/ManagerPriceTableCtrl.js"></script>
+  <script src="app/components/printshop/manager/controllers/ManagerStatsCtrl.js"></script>
 
-   <body ng-app="ProxyPrint" ui-router-styles>
-
-
-      <div ui-view></div>
-
-      <!-- 3rd Party -->
-      <script type="text/javascript" src="assets/js/jquery.js"></script>
-      <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
-      <script type="text/javascript" src="node_modules/angular/angular.min.js"></script>
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.18/angular-ui-router.js"></script>
-      <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-cookies.js"></script>
-      <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-resource.js"></script>
-      <script type="text/javascript" src="assets/libs/ui-router-styles.js"></script>
-      <script type="text/javascript" src="assets/libs/angular-notification-icons.min.js"></script>
-      <script type="text/javascript" src="node_modules/ng-file-upload/dist/ng-file-upload.min.js"></script>
-      <script type="text/javascript" src="node_modules/ng-file-upload/dist/ng-file-upload-shim.min.js"></script>
-      <!-- App code -->
-      <script src="app/app.modules.js"></script>
-      <script src="app/app.routes.js"></script>
-      <script src="app/components/home/controllers/LoginController.js"></script>
-      <script src="app/components/home/controllers/RegisterController.js"></script>
-      <script src="app/components/home/services/auth.js"></script>
-      <script src="app/components/consumer/controllers/ConsumerController.js"></script>
-      <script src="app/components/consumer/controllers/ConsumerHistoryController.js"></script>
-      <script src="app/components/consumer/controllers/ConsumerPrintshopList.js"></script>
-      <script src="app/components/consumer/directives/StarRating.js"></script>
-
-  </body>
+</body>
 
 </html>

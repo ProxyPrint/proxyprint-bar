@@ -10,7 +10,8 @@ angular.module('ProxyPrint').controller('ConsumerController', ['$scope', '$http'
          });
    };
 
-   $scope.logout = function (){
+   // Not working yet
+   $scope.logout = function() {
       AuthenticationService.ClearCredentials();
       $location.path('/');
    };
