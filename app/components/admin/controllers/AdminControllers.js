@@ -1,11 +1,11 @@
 
 var app = angular.module('ProxyPrint');
 
-app.controller('RequestsController', ['$scope', '$location', function($scope, $location) {
+app.controller('RequestsController', ['$scope', '$state', function($scope, $state) {
     this.pendingRequests = staticContent;
 
     $scope.analisys = function (id){
-         $location.path('/admin/RequestID');
+        $state.go('.request',{"requestid":id});
     };
 }]);
 
