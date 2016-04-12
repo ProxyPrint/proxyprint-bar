@@ -171,6 +171,30 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
     url: '/pricetable',
     templateUrl: '/app/components/printshop/manager/views/manager-pricetable.html',
     controller: 'ManagerPriceTableCtrl'
+  })
+
+  /*Admin*/
+  .state('admin', {
+      url: '/admin',
+      views: {
+          '': {
+              templateUrl: '/app/components/admin/views/admin-base.html',
+              controller: 'RequestsController'
+          }
+      },
+      data: {
+          css: adminlteCSS
+      }
+  })
+  .state('admin.printshops', {
+      url: '/printshops',
+      templateUrl: '/app/components/admin/views/admin-printshops.html',
+      controller: 'ReproController'
+  })
+  .state('admin.request', {
+      url: '/:requestid',
+      templateUrl: '/app/components/admin/views/admin-request.html',
+      controller: 'RequestController'
   });
 
 }]);
