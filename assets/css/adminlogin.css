@@ -1,0 +1,14 @@
+body {
+  min-height: 100%;
+  padding: 0;
+  margin: 0;
+  font-family: 'Source Sans Pro', "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background: rgba(73,165,191,1);
+  background: -moz-linear-gradient(45deg, rgba(73,165,191,1) 0%, rgba(63,147,189,1) 31%, rgba(60,141,188,1) 41%, rgba(147,206,222,1) 100%);
+  background: -webkit-gradient(left bottom, right top, color-stop(0%, rgba(73,165,191,1)), color-stop(31%, rgba(63,147,189,1)), color-stop(41%, rgba(60,141,188,1)), color-stop(100%, rgba(147,206,222,1)));
+  background: -webkit-linear-gradient(45deg, rgba(73,165,191,1) 0%, rgba(63,147,189,1) 31%, rgba(60,141,188,1) 41%, rgba(147,206,222,1) 100%);
+  background: -o-linear-gradient(45deg, rgba(73,165,191,1) 0%, rgba(63,147,189,1) 31%, rgba(60,141,188,1) 41%, rgba(147,206,222,1) 100%);
+  background: -ms-linear-gradient(45deg, rgba(73,165,191,1) 0%, rgba(63,147,189,1) 31%, rgba(60,141,188,1) 41%, rgba(147,206,222,1) 100%);
+  background: linear-gradient(45deg, rgba(73,165,191,1) 0%, rgba(63,147,189,1) 31%, rgba(60,141,188,1) 41%, rgba(147,206,222,1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#49a5bf', endColorstr='#93cede', GradientType=1 );
+}

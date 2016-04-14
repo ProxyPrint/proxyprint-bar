@@ -1,5 +1,5 @@
-angular.module('ProxyPrint').controller('SatisfiedRequestsCtrl', ['$scope', '$http','$cookieStore', 'AuthenticationService', '$rootScope', '$location',
-      function($scope, $http, $cookieStore, AuthenticationService, $rootScope, $location) {
+angular.module('ProxyPrint').controller('SatisfiedRequestsCtrl', ['$scope',
+      function($scope) {
 
    $scope.satisfiedRequests = [
      { id: "1", consumer: "Carlos Santana", arrivalTimestamp: "11/7/2014 12:15", finishedTimestamp: "11/7/2014 12:22", employeeAttended: "Joaquim Machado", cost: "2,32 €"},

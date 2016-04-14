@@ -1,5 +1,6 @@
-angular.module('ProxyPrint').controller('ManagerPriceTableCtrl', ['$scope', '$http','$cookieStore', '$state', 'AuthenticationService', '$rootScope', '$location',
-      function($scope, $http, $cookieStore, AuthenticationService, $rootScope, $state, $location) {
+angular.module('ProxyPrint').controller('ManagerPriceTableCtrl', ['$scope',
+      function($scope) {
 
+// Code
 
 }]);

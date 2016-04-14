@@ -5,7 +5,7 @@ app.controller('RequestsController', ['$scope', '$state', function($scope, $stat
     this.pendingRequests = staticContent;
 
     $scope.analisys = function (id){
-        $state.go('.request',{"requestid":id});
+        $state.go('admin.request',{"requestid":id});
     };
 }]);
 
