@@ -1,0 +1,45 @@
+<div class="hold-transition lockscreen">
+  <!-- Automatic element centering -->
+  <div style="max-width: 400px;margin: 0 auto;margin-top: 10%;">
+    <div class="lockscreen-logo" style="color: white;">
+      <b>Proxy</b>Admin
+    </div>
+    <div class="lockscreen-name" style="color: white;">Admin</div>
+
+    <!-- start lock screen item -->
+    <div class="lockscreen-item">
+      <!-- lockscreen image -->
+      <div class="lockscreen-image">
+        <img src="/assets/img/adminavatar.png" alt="Admin Image">
+      </div>
+      <!-- /.lockscreen-image -->
+
+      <!-- lockscreen credentials (contains the form) -->
+      <form name="form" ng-submit="login()" role="form" class="lockscreen-credentials">
+        <div class="input-group">
+          <input type="text" name="username" id="username" class="form-control" ng-model="username" placeholder="username" required/>
+          <input type="password" name="password" id="password" class="form-control" ng-model="password" placeholder="password" required/>
+          <div class="input-group-btn">
+            <button type="submit" ng-disabled="form.$invalid || dataLoading" class="btn"><i class="fa fa-arrow-right text-muted"></i></button>
+          </div>
+        </div>
+      </form>
+      <!-- /.lockscreen credentials -->
+    </div>
+    <!-- /.lockscreen-item -->
+    <div ng-show="error" class="alert alert-danger alert-dismissible">
+      <i class="icon fa fa-ban"></i>
+      {{error}}
+    </div>
+
+    <div class="help-block text-center">
+      <span ng-show="form.username.$dirty && form.username.$error.required" class="help-block" style="color: red;">Insira o username</span>
+      <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block" style="color: red;">Insira a password</span>
+    </div>
+
+    <div class="lockscreen-footer text-center" style="color: white;">
+      Copyright © 2016 <b><a ui-sref="home" style="color: white;">Proxy Print</a></b><br>
+      Todos os direitos reservados.
+    </div>
+  </div>
+</div>

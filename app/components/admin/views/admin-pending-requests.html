@@ -1,0 +1,41 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+  <h1>
+    Pedidos de admissão de Reprografias
+  </h1>
+</section>
+
+<!-- Your Page Content Here -->
+<div class="box" ng-controller = "RequestsController as RequestsCtrl">
+  <div class="box-body table-responsive no-padding">
+    <table class="table table-striped">
+      <tbody>
+        <tr>
+          <th>ID Pedido</th>
+          <th>Cliente</th>
+          <th>Data de Entrada</th>
+          <th>Coordenador</th>
+          <th>Ações</th>
+          <th></th>
+        </tr>
+        <tr ng-repeat="request in RequestsCtrl.pendingRequests">
+          <td><b>{{request.id}}</b></td>
+          <td>{{request.name}}</td>
+          <td>{{request.registerDate}}</td>
+          <td>{{request.manager}}</td>
+          <td><a ng-click="analisys(request.id)" class="btn btn-success"><i class="fa fa-level-up" style="margin-right: 0.2em;"></i>Analisar</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="box-footer clearfix">
+      <ul class="pagination pagination-sm no-margin pull-right">
+        <li><a href="">«</a></li>
+        <li><a href="">1</a></li>
+        <li><a href="">2</a></li>
+        <li><a href="">3</a></li>
+        <li><a href="">»</a></li>
+      </ul>
+    </div>
+  </div>
+</div>

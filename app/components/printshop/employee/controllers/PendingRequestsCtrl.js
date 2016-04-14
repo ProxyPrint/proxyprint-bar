@@ -1,5 +1,5 @@
-angular.module('ProxyPrint').controller('PendingRequestsCtrl', ['$scope', '$http','$cookieStore', 'AuthenticationService', '$rootScope', '$location',
-      function($scope, $http, $cookieStore, AuthenticationService, $rootScope, $location) {
+angular.module('ProxyPrint').controller('PendingRequestsCtrl', ['$scope',
+      function($scope) {
 
    $scope.pendingRequests = [
      { id: "1", consumer: "João Matias", arrivalTimestamp: "11/7/2014 12:15"},
