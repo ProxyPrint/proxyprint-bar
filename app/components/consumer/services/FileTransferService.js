@@ -6,7 +6,7 @@ angular.module('ProxyPrint').factory('FileTransferService',['Upload','$timeout',
         var file = files[i];
         if (!file.$error) {
           Upload.upload({
-              url: 'https://angular-file-upload-cors-srv.appspot.com/upload',
+              url: 'http://localhost:8080/consumer/upload',
               data: {file: file}
           }).then(function (resp) {
               $timeout(function() {
