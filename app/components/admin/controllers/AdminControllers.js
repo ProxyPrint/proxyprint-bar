@@ -9,19 +9,22 @@ app.controller('RequestsController', ['$scope', '$state', function($scope, $stat
     };
 }]);
 
-app.controller('RequestController', ['$scope', '$uibModal', function($scope, $uibModal) {
+app.controller('RequestController', ['$scope', '$uibModal','$state', function($scope, $uibModal, $state) {
     this.request = staticContent[1];
 
-    $scope.openModal = function (text) {
-      console.log(text);
+    $scope.openModal = function (reply) {
        var modalInstance = $uibModal.open({
          animation: true,
-         template: '<div class="modal-header"><h3 class="modal-title"></h3></div>' +
-                   '<div class="modal-body"><h4>'+text+'</h4>  </div>' +
-                   '<div class="modal-footer"><a class="btn btn-default">Ok</a></div>',
+         controller: 'RequestController',
+         templateUrl: 'app/components/admin/views/rejectRequestModal.html',
          size: 'sm'
       });
     }
+
+    $scope.rejectRequest = function () {
+      console.log("Closing modal!");
+      $state.go('admin.requests');
+   }
 
 
     $scope.accept = function (){
