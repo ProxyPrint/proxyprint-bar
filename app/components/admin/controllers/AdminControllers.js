@@ -2,7 +2,7 @@
 var app = angular.module('ProxyPrint');
 
 
-app.controller('AdminRequestsController', ['$scope', '$uibModal','$state', function($scope, $uibModal, $state) {
+app.controller('AdminRequestsController', ['$scope', '$uibModal','$state','requestID', function($scope, $uibModal, $state, requestID) {
 
 
    $scope.pendingRegisterRequests = [
@@ -35,11 +35,12 @@ app.controller('AdminRequestsController', ['$scope', '$uibModal','$state', funct
        }
    ];
 
+   $scope.index = requestID;
+   $scope.selectedRequest = $scope.pendingRegisterRequests[requestID];
+
 
 
   $scope.lookAtRequest = function (id){
-     $scope.index = id;
-     $scope.selectedRequest = $scope.pendingRegisterRequests[$scope.index];
      $state.go('admin.request',{"requestid":id});
   };
 
@@ -60,8 +61,8 @@ app.controller('AdminRequestsController', ['$scope', '$uibModal','$state', funct
          }
       });
 
-      modalInstance.result.then(function (selectedItem) {
-        console.log('GOTTA REJECT THIS REQUEST!!: '+selectedItem);
+      modalInstance.result.then(function (index) {
+        console.log('GOTTA REJECT THIS REQUEST!!: '+index);
         $state.go('admin.requests');
      });
     }
