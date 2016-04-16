@@ -6,7 +6,7 @@
 </section>
 
 <!-- Your Page Content Here -->
-<div class="box" ng-controller = "RequestsController as RequestsCtrl">
+<div class="box">
   <div class="box-body table-responsive no-padding">
     <table class="table table-striped">
       <tbody>
@@ -18,12 +18,12 @@
           <th>Ações</th>
           <th></th>
         </tr>
-        <tr ng-repeat="request in RequestsCtrl.pendingRequests">
+        <tr ng-repeat="request in pendingRegisterRequests">
           <td><b>{{request.id}}</b></td>
           <td>{{request.name}}</td>
           <td>{{request.registerDate}}</td>
           <td>{{request.manager}}</td>
-          <td><a ng-click="analisys(request.id)" class="btn btn-success"><i class="fa fa-level-up" style="margin-right: 0.2em;"></i>Analisar</a>
+          <td><a ng-click="lookAtRequest($index)" class="btn btn-success"><i class="fa fa-level-up" style="margin-right: 0.2em;"></i>Analisar</a>
           </td>
         </tr>
       </tbody>
