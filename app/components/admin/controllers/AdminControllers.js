@@ -9,8 +9,20 @@ app.controller('RequestsController', ['$scope', '$state', function($scope, $stat
     };
 }]);
 
-app.controller('RequestController', ['$scope', function($scope) {
+app.controller('RequestController', ['$scope', '$uibModal', function($scope, $uibModal) {
     this.request = staticContent[1];
+
+    $scope.openModal = function (text) {
+      console.log(text);
+       var modalInstance = $uibModal.open({
+         animation: true,
+         template: '<div class="modal-header"><h3 class="modal-title"></h3></div>' +
+                   '<div class="modal-body"><h4>'+text+'</h4>  </div>' +
+                   '<div class="modal-footer"><a class="btn btn-default">Ok</a></div>',
+         size: 'sm'
+      });
+    }
+
 
     $scope.accept = function (){
         $scope.answer = 'Reprografia adicionada!';
