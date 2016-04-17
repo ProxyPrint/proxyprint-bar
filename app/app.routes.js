@@ -212,7 +212,7 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
   .state('admin.request', {
       url: '/requests/:requestid',
       templateUrl: '/app/components/admin/views/admin-request.html',
-      controller: 'RequestController'
+      controller: 'AdminPendRequestDetailCtrl'
   })
   .state('admin.printshops', {
     url: '/printshops',
