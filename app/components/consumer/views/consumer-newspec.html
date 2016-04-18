@@ -1,0 +1,30 @@
+<body ng-app="app" ng-controller="ctrl" class="ng-scope">
+  	  <ul class="nav nav-tabs">
+		<li ng-class="{'active' : activeTab == 1}" class="active"><a href="" ng-click="setActiveTab(1)">One</a></li>
+		<li ng-class="{'active' : activeTab == 2}"><a href="" ng-click="setActiveTab(2)">Two</a></li>
+		<li ng-class="{'active' : activeTab == 3}"><a href="" ng-click="setActiveTab(3)">Three</a></li>
+	  </ul>
+
+	  <div class="tab-content">
+		<div ng-class="{'tab-pane active': activeTab === 1, 'tab-pane' : activeTab !== 1}" class="tab-pane active">Panel 1 Content</div>
+		<div ng-class="{'tab-pane active': activeTab === 2, 'tab-pane' : activeTab !== 2}" class="tab-pane">Panel 2 Content</div>
+		<div ng-class="{'tab-pane active': activeTab === 3, 'tab-pane' : activeTab !== 3}" class="tab-pane">Panel 3 Content</div>
+	  </div>
+	  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+	  <script>
+	  	angular.module("app", [])
+			.controller("ctrl", ['$scope', function($scope) {
+				$scope.activeTab = 1;
+
+				$scope.setActiveTab = function(tabToSet) {
+					$scope.activeTab = tabToSet;
+				}
+			}]);
+	  </script>
+
+</body>
+<div class="col-sm-9 col-md-10 main">
+    <div class="right margin">
+        <button type="button" class="btn btn-success">Guardar <i class="fa fa-floppy-o"></i></button>
+    </div>
+</div>

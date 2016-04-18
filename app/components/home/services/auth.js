@@ -34,7 +34,7 @@ angular.module('Auth').factory('AuthenticationService', ['Base64', '$http', '$co
          })
          $http({
                method: 'POST',
-               url: 'http://localhost:8080/register',
+               url: 'http://localhost:8080/consumer/register',
                data: data,
                headers: {
                   'Content-Type': 'application/x-www-form-urlencoded'
