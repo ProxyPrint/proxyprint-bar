@@ -20,7 +20,6 @@ app.controller('AdminPendingRequestsCtrl', ['$rootScope', '$scope', '$state', '$
 // Consult detail of pending request
 app.controller('AdminPendRequestDetailCtrl', ['$rootScope', '$scope', '$state', '$http', function($rootScope, $scope, $state, $http){
   $scope.request = $rootScope.currentRequest;
-  $scope.hideBand = false;
 
   $scope.accept = function() {
     console.log("Send accept to server...");
@@ -28,7 +27,11 @@ app.controller('AdminPendRequestDetailCtrl', ['$rootScope', '$scope', '$state', 
     // WORKS OK! JUST SAYING PARSER ERROR
     var url = "http://localhost:8080/request/accept/"+$scope.request.id;
     $http.post(url).success(function(data){
-      $scope.hideBand = true;
+      if(data.success) {
+        $rootScope.showSuccess = true;
+        $rootScope.request = $scope.request;
+        $state.go("admin.printshops");
+      }
     });
 
   };

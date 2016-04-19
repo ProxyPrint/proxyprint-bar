@@ -1,29 +1,17 @@
-
 var app = angular.module('ProxyPrint');
 
-app.controller('RequestsController', ['$scope', '$state', function($scope, $state) {
-    this.pendingRequests = staticContent;
+app.controller('AdminPrintShopsCtrl', ['$scope', '$http', '$rootScope', function($scope, $http, $rootScope) {
 
-    $scope.analisys = function (id){
-        $state.go('admin.request',{"requestid":id});
-    };
-}]);
+    /*$http.get('http://localhost:8080/printshops').success(function(data){
+      console.log(data);
+      $scope.listRepro = data;
+    });*/
+    $scope.listRepro = staticContent;
 
-app.controller('RequestController', ['$scope', function($scope) {
-    this.request = staticContent[1];
-
-    $scope.accept = function (){
-        $scope.answer = 'Reprografia adicionada!';
-    };
-
-    $scope.reject = function (){
-        $scope.answer = 'Reprografia rejeitada!';
-    };
-
-}]);
-
-app.controller('ReproController', ['$scope', function($scope) {
-    this.listRepro = staticContent;
+    // This show success message if admin has
+    // just accepted a pshop request
+    $scope.showSuccess = $rootScope.showSuccess;
+    $scope.request = $rootScope.request;
 
     $scope.consult = function (){
         $scope.answer = 'Consultar Reprografia!';
