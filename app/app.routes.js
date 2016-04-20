@@ -206,26 +206,39 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
   })
   .state('admin.requests', {
       url: '/requests',
+      resolve: {
+        pendingRequests: ['PendingRequestsService', function(PendingRequestsService){
+          return PendingRequestsService.getPendingRequests();
+        }]
+      },
       templateUrl: '/app/components/admin/views/admin-pending-requests.html',
+<<<<<<< HEAD
       controller: 'AdminRequestsController',
       resolve: {
          requestID: function () { return {};}
       }
+=======
+      controller: 'AdminPendingRequestsCtrl'
+>>>>>>> origin/admin-pshopmanager
   })
   .state('admin.request', {
       url: '/requests/:requestid',
       templateUrl: '/app/components/admin/views/admin-request.html',
+<<<<<<< HEAD
       controller: 'AdminRequestsController',
       resolve: {
          requestID: ['$stateParams', function ($stateParams) {
                return $stateParams.requestid;
          }]
       }
+=======
+      controller: 'AdminPendRequestDetailCtrl'
+>>>>>>> origin/admin-pshopmanager
   })
   .state('admin.printshops', {
     url: '/printshops',
     templateUrl: '/app/components/admin/views/admin-printshops.html',
-    controller: 'ReproController'
+    controller: 'AdminPrintShopsCtrl'
   });
 
 }]);

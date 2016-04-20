@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!-- Content Wrapper. Contains page content -->
 <div>
 
@@ -10,10 +11,40 @@
         <div class="widget-user-header bg-aqua-active">
             <h3 class="widget-user-username">{{selectedRequest.name}}</h3>
             <h5 class="widget-user-desc">{{selectedRequest.address}}</h5>
+=======
+<div>
+  <h1 class="header">
+    Pedido de Registo
+  </h1>
+
+  <div class="box box-widget widget-user" ng-class="{ 'hidden': showSuccess }">
+    <!-- Add the bg color to the header using any of the bg-* classes -->
+    <div class="widget-user-header bg-aqua-active">
+      <h3 class="widget-user-username">{{request.pShopName}}</h3>
+      <h5 class="widget-user-desc">{{request.pShopAddress}}</h5>
+    </div>
+    <div class="widget-user-image">
+      <img class="img-circle" src="/assets/adminlte/dist/img/user1-128x128.jpg" alt="User Avatar">
+    </div>
+    <div class="box-footer">
+      <div class="row">
+        <div class="col-sm-4 border-right">
+          <div class="description-block">
+            <span class="description-text">Manager</span>
+            <h5 class="description-header">{{request.managerName}}</h5>
+          </div>
+          <!-- /.description-block -->
+>>>>>>> origin/admin-pshopmanager
         </div>
-        <div class="widget-user-image">
-            <img class="img-circle" src="../../../../assets/adminlte/dist/img/user1-128x128.jpg" alt="User Avatar">
+        <!-- /.col -->
+        <div class="col-sm-4 border-right">
+          <div class="description-block">
+            <span class="description-text">Email</span>
+            <h5 class="description-header">{{request.managerEmail}}</h5>
+          </div>
+          <!-- /.description-block -->
         </div>
+<<<<<<< HEAD
         <div class="box-footer">
             <div class="row">
                 <div class="col-sm-4 border-right">
@@ -42,9 +73,23 @@
                 <!-- /.col -->
             </div>
             <!-- /.row -->
+=======
+        <!-- /.col -->
+        <div class="col-sm-4">
+          <div class="description-block">
+            <span class="description-text">Data de pedido</span>
+            <h5 class="description-header">{{request.pShopDateRequest}}</h5>
+          </div>
+          <!-- /.description-block -->
+>>>>>>> origin/admin-pshopmanager
         </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
     </div>
+  </div>
 
+<<<<<<< HEAD
     <div>
         <center>
             <a ng-click='accept()' class="btn btn-success"><i class="fa fa-check" style="margin-right: 0.2em;"></i>Aceitar</a>
@@ -53,3 +98,14 @@
     </div>
     {{answer}}
 </div>
+=======
+  <div ng-class="{ 'hidden': showSuccess }">
+    <center>
+      <a ng-click="accept(); showSuccess = !showSuccess" class="btn btn-success"><i class="fa fa-check" style="margin-right: 0.2em;"></i>Aceitar</a>
+      <a ng-click="reject()" class="btn btn-danger"><i class="fa fa-times" style="margin-right: 0.2em;"></i>Rejeitar</a>
+    </center>
+  </div>
+
+
+  </div>
+>>>>>>> origin/admin-pshopmanager
