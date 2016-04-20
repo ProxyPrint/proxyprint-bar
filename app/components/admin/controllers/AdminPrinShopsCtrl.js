@@ -1,7 +1,7 @@
 var app = angular.module('ProxyPrint');
 
 
-app.controller('AdminPrintShopsController', ['$scope', '$uibModal','$state','requestID', function($scope, $uibModal, $state, requestID) {
+app.controller('AdminPrintShopsCtrl', ['$scope', function($scope) {
 
    $scope.printshops = [
        {

@@ -89,10 +89,9 @@ $scope.openRejectModal = function(reply) {
   });
 
   modalInstance.result.then(function(index) {
-    console.log('GOTTA REJECT THIS REQUEST!!: ' + index);
-    $state.go('admin.requests');
+    $scope.showReject = true;
+    // PendingRequestsService.rejectRequest($scope.request.id);
   });
 }
-
 
 }]);

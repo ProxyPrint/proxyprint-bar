@@ -18,6 +18,14 @@ app.factory('PendingRequestsService', ['$http', function($http) {
     });
   };
 
+  service.rejectRequest = function(id) {
+    var url = "http://localhost:8080/request/reject/"+id;
+    console.log("POST");
+    return $http.post(url).success(function(data){
+      return data;
+    });
+  };
+
   service.setCurrentRequest = function(request) {
     service.currentRequest = request;
   };

@@ -1,4 +1,3 @@
-
 <section class="content-header">
   <h1>
     Lista de Reprografias
@@ -22,14 +21,14 @@
           <th>Coordenador</th>
           <th>Acções</th>
         </tr>
-        <tr ng-repeat="repro in ReproCtrl.listRepro">
-          <td><b>{{repro.id}}</b></td>
-          <td>{{repro.name}}</td>
-          <td>{{repro.admissionDate}}</td>
-          <td>{{repro.registerDate}}</td>
-          <td>{{repro.manager}}</td>
-          <td><a ng-click='consult()' class="btn btn-success"><i class="fa fa-search" style="margin-right: 0.2em;"></i>Consultar</a></td>
-          <td><a ng-click='delete()' class="btn btn-danger"><i class="fa fa-times" style="margin-right: 0.2em;"></i>Eliminar</a></td>
+        <tr ng-repeat="pshop in printshops">
+          <td><b>{{pshop.id}}</b></td>
+          <td>{{pshop.name}}</td>
+          <td>{{pshop.admissionDate}}</td>
+          <td>{{pshop.registerDate}}</td>
+          <td>{{pshop.manager}}</td>
+          <td><a ng-click='consult()' class="btn btn-success"><i class="fa fa-search" style="margin-right: 0.2em;"></i>Consultar</a>
+          <a ng-click='delete()' class="btn btn-danger"><i class="fa fa-times" style="margin-right: 0.2em;"></i>Eliminar</a></td>
         </tr>
         {{answer}}
       </tbody>
@@ -44,11 +43,4 @@
       </ul>
     </div>
   </div>
-</div>
-
-
-<div class="alert alert-success alert-dismissible" ng-show="showSuccess" style="margin-top:20px; transition: 1s;">
-  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-  <h4><i class="icon fa fa-check"></i>Reprografia <b>{{request.pShopName}}</b> aceite com sucesso!</h4>
-  Um email de confirmação de registo foi enviado automaticamente para <b>{{request.managerEmail}}</b>, <br/>após a confirmação do mesmo, <b>{{request.pShopName}}</b> integrará oficialmente a ProxyPrint.
 </div>
