@@ -10,16 +10,17 @@ angular.module('Auth').controller('PrintShopRegisterCtrl', ['$scope', '$rootScop
         "managerEmail": $scope.managerEmail,
         "managerPassword": $scope.managerPassword,
         "pShopAddress": $scope.pShopAddress,
-        "pShopLatitude": 69,
-        "pShopLongitude": 69,
         "pShopNIF": $scope.pShopNIF,
         "pShopName": $scope.pShopName
       }
 
-      console.log(data);
-      $http.post("http://localhost:8080/request/register", data).success(function(response) {
-        $location.path('/printshop');
-        alert("Pedido registado! Será notificado via email em breve!");
+      getLatitudeLongitude($scope.pShopAddress, function(result) {
+        data.pShopLatitude = result.geometry.location.lat();
+        data.pShopLongitude = result.geometry.location.lng();
+        $http.post("http://localhost:8080/request/register", data).success(function(response) {
+          $location.path('/printshop');
+          alert("Pedido registado! Será notificado via email em breve!");
+        });
       });
 
     };
