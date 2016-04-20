@@ -206,6 +206,11 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
   })
   .state('admin.requests', {
       url: '/requests',
+      resolve: {
+        pendingRequests: ['PendingRequestsService', function(PendingRequestsService){
+          return PendingRequestsService.getPendingRequests();
+        }]
+      },
       templateUrl: '/app/components/admin/views/admin-pending-requests.html',
       controller: 'AdminPendingRequestsCtrl'
   })
