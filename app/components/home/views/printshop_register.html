@@ -1,5 +1,46 @@
-Link to task #35 on Taiga.io.
-<br/>
-Meanwhile...
-<br/>
-<a ui-sref="manager">Ir para página de coordenador de reprografia</a>
+<div class="container">
+  <div class="form-container">
+    <div ng-show="error" class="alert alert-danger">{{error}}</div>
+    <form name="form" ng-submit="register()" role="form">
+      <div class="form-group">
+        <label for="managerName">Nome</label>
+        <input name="managerName" type="text" class="form-control" ng-model="managerName" required/>
+        <span ng-show="form.managerName.$dirty && form.managerName.$error.required" class="help-block">Necessário colocar o nome</span>
+      </div>
+      <div class="form-group">
+        <label for="managerEmail">Email</label>
+        <input name="managerEmail" type="email" class="form-control" ng-model="managerEmail" required/>
+        <span ng-show="form.managerEmail.$dirty && form.managerEmail.$error.required" class="help-block">Necessário colocar o email</span>
+      </div>
+      <div class="form-group">
+        <label for="managerPassword">Password</label>
+        <i class="fa fa-lock"></i>
+        <input name="managerPassword" type="password" class="form-control" ng-model="managerPassword" required/>
+        <span ng-show="form.managerPassword.$dirty && form.managerPassword.$error.required" class="help-block">Necessário colocar a password</span>
+      </div>
+      <div class="form-group">
+        <label for="pShopAddress">Morada Reprografia</label>
+        <input name="pShopAddress" type="text" class="form-control" ng-model="pShopAddress" required/>
+        <span ng-show="form.pShopAddress.$dirty && form.pShopAddress.$error.required" class="help-block">Necessário colocar a morada</span>
+      </div>
+      <div class="form-group">
+        <label for="pShopName">Nome Reprografia</label>
+        <input name="pShopName" type="text" class="form-control" ng-model="pShopName" required/>
+        <span ng-show="form.pShopName.$dirty && form.pShopName.$error.required" class="help-block">Necessário colocar o nome da reprografia</span>
+      </div>
+      <div class="form-group">
+        <label for="pShopNIF">NIF</label>
+        <input name="pShopNIF" type="text" class="form-control" ng-model="pShopNIF" required/>
+        <span ng-show="form.pShopNIF.$dirty && form.pShopNIF.$error.required" class="help-block">Necessário colocar o NIF</span>
+      </div>
+      <div class="form-actions">
+        <div class="login-button">
+          <button type="submit" ng-disabled="form.$invalid || dataLoading" class="btn btn-primary">Register</button>
+          <img ng-if="dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+          />
+          <br>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
