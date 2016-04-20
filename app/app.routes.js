@@ -219,7 +219,7 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
       templateUrl: '/app/components/admin/views/admin-request.html',
       controller: 'AdminPendingRequestDetailCtrl',
       resolve: {
-         requestID: ['PendingRequestsService', function ($PendingRequestsService) {
+         pendingRequest: ['PendingRequestsService', function (PendingRequestsService) {
                return PendingRequestsService.getCurrentRequest();
          }]
       }

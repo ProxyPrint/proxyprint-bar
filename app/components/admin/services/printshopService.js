@@ -18,12 +18,12 @@ app.factory('PendingRequestsService', ['$http', function($http) {
   };
 
   service.setCurrentRequest = function(request) {
-   service.currentRequest = request;
- };
+    service.currentRequest = request;
+  };
 
- service.getCurrentRequest = function() {
-   return service.currentRequest;
- };
+  service.getCurrentRequest = function() {
+    return service.currentRequest;
+  };
 
   return service;
 }]);

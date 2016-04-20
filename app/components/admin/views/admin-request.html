@@ -21,7 +21,6 @@
             <h5 class="description-header">{{request.managerName}}</h5>
           </div>
           <!-- /.description-block -->
->>>>>>> origin/admin-pshopmanager
         </div>
         <!-- /.col -->
         <div class="col-sm-4 border-right">
@@ -45,16 +44,16 @@
     </div>
   </div>
 
-    <div ng-class="{ 'hidden': showSucesss}">
-        <center>
-            <a ng-click="openAcceptModal('Tem a certeza que quer aceitar o pedido?'); showSuccess = !showSuccess" class="btn btn-success"><i class="fa fa-check" style="margin-right: 0.2em;"></i>Aceitar</a>
-            <a ng-click="openRejectModal('Tem a certeza que quer rejeitar o pedido?')" class="btn btn-danger"><i class="fa fa-times" style="margin-right: 0.2em;"></i>Rejeitar</a>
-        </center>
-    </div>
+  <div ng-class="{ 'hidden': showSucesss}">
+    <center>
+      <a ng-click="openAcceptModal('Tem a certeza que quer aceitar o pedido?'); showSuccess = !showSuccess" class="btn btn-success"><i class="fa fa-check" style="margin-right: 0.2em;"></i>Aceitar</a>
+      <a ng-click="openRejectModal('Tem a certeza que quer rejeitar o pedido?')" class="btn btn-danger"><i class="fa fa-times" style="margin-right: 0.2em;"></i>Rejeitar</a>
+    </center>
+  </div>
 
-    <div class="alert alert-success alert-dismissible" ng-show="showSuccess" style="margin-top:20px; transition: 1s;">
-      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-      <h4><i class="icon fa fa-check"></i>Reprografia <b>{{request.pShopName}}</b> aceite com sucesso!</h4>
-      Um email de confirmação de registo foi enviado automaticamente para <b>{{request.managerEmail}}</b>, <br/>após a confirmação do mesmo, <b>{{request.pShopName}}</b> integrará oficialmente a ProxyPrint.
-    </div>
+  <div class="alert alert-success alert-dismissible" ng-show="showSuccess" style="margin-top:20px; transition: 1s;">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+    <h4><i class="icon fa fa-check"></i>Reprografia <b>{{request.pShopName}}</b> aceite com sucesso!</h4>
+    Um email de confirmação de registo foi enviado automaticamente para <b>{{request.managerEmail}}</b>, <br/>após a confirmação do mesmo, <b>{{request.pShopName}}</b> integrará oficialmente a ProxyPrint.
+  </div>
 </div>

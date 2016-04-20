@@ -9,7 +9,7 @@ angular.module('Auth').controller('AdminLoginController',
             AuthenticationService.Login($scope.username, $scope.password, function (response) {
                console.log(response);
                 if (response.success) {
-                    if(!response.user.roles[0] == "ROLE_ADMIN") {
+                    if(response.user.roles[0] == "ROLE_ADMIN") {
                       AuthenticationService.SetCredentials($scope.username, $scope.password);
                       $state.go('admin.requests', {"username": $scope.username});
                       return;
