@@ -2,6 +2,7 @@ var app = angular.module('ProxyPrint');
 
 app.factory('PendingRequestsService', ['$http', function($http) {
   var service = {};
+  service.currentRequest = {};
 
   service.getPendingRequests = function() {
     return $http.get('http://localhost:8080/requests/pending').success(function(data){
@@ -15,6 +16,14 @@ app.factory('PendingRequestsService', ['$http', function($http) {
       return data;
     });
   };
+
+  service.setCurrentRequest = function(request) {
+   service.currentRequest = request;
+ };
+
+ service.getCurrentRequest = function() {
+   return service.currentRequest;
+ };
 
   return service;
 }]);

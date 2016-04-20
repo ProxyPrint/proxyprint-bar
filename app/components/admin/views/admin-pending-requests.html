@@ -9,12 +9,8 @@
   <span class="glyphicon glyphicon-search form-control-feedback"></span>
 </div>
 
-<!-- Your Page Content Here -->
-<<<<<<< HEAD
-<div class="box">
-=======
+
 <div class="box" style="margin-top: 12px;">
->>>>>>> origin/admin-pshopmanager
   <div class="box-body table-responsive no-padding">
     <table class="table table-striped">
       <tbody>
@@ -25,21 +21,12 @@
           <th>Coordenador</th>
           <th>Ações</th>
         </tr>
-<<<<<<< HEAD
-        <tr ng-repeat="request in pendingRegisterRequests">
-          <td><b>{{request.id}}</b></td>
-          <td>{{request.name}}</td>
-          <td>{{request.registerDate}}</td>
-          <td>{{request.manager}}</td>
-          <td><a ng-click="lookAtRequest($index)" class="btn btn-success"><i class="fa fa-level-up" style="margin-right: 0.2em;"></i>Analisar</a>
-=======
         <tr ng-repeat="request in pendingRequests | filter:request.pShopName">
           <td><b>#{{request.id}}</b></td>
           <td>{{request.pShopName}}</td>
           <td>{{request.pShopDateRequest}}</td>
           <td>{{request.managerName}}</td>
-          <td><a ng-click="consult(request.id)" class="btn btn-success"><i class="fa fa-search" style="margin-right: 0.2em;"></i>Analisar</a>
->>>>>>> origin/admin-pshopmanager
+          <td><a ng-click="lookAtRequest($index)" class="btn btn-success"><i class="fa fa-search" style="margin-right: 0.2em;"></i>Analisar</a>
           </td>
         </tr>
       </tbody>

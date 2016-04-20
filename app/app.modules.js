@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 angular.module('ProxyPrint', ['Auth','ui.router','ngCookies', 'uiRouterStyles','ngFileUpload','angular-notification-icons','ui.bootstrap'])
-=======
-angular.module('ProxyPrint', ['Auth', 'ui.router','ngCookies', 'uiRouterStyles','ngFileUpload','angular-notification-icons'])
->>>>>>> origin/admin-pshopmanager
    .run(['$rootScope', '$location', '$cookieStore', '$http',
 
     function ($rootScope, $location, $cookieStore, $http) {
