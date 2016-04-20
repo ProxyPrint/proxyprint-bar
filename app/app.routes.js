@@ -31,6 +31,15 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
     '/assets/adminlte/dist/css/skins/skin-blue.min.css'
   ];
 
+  var adminLoginCSS = [
+    '/assets/adminlte/bootstrap/css/bootstrap.min.css',
+    'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css',
+    'https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css',
+    '/assets/adminlte/dist/css/AdminLTE.min.css',
+    '/assets/css/adminlogin.css'
+
+  ];
+
   /*Consumer*/
   $stateProvider
   .state('notFound', {
@@ -71,6 +80,14 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
     controller: 'PrintShopRegisterCtrl',
     data: {
       css: mainPrintShopCSS
+    }
+  })
+  .state('adminlogin', {
+    url: '/adminlogin',
+    templateUrl: '/app/components/admin/views/admin-login.html',
+    controller: 'AdminLoginController',
+    data: {
+        css: adminLoginCSS
     }
   })
 
@@ -175,26 +192,42 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
 
   /*Admin*/
   .state('admin', {
-      url: '/admin',
+      abstract: true,
+      url: '/admin/:username',
       views: {
           '': {
               templateUrl: '/app/components/admin/views/admin-base.html',
-              controller: 'RequestsController'
+              controller: 'AdminBaseCtrl'
           }
       },
       data: {
           css: adminlteCSS
       }
   })
-  .state('admin.printshops', {
-      url: '/printshops',
-      templateUrl: '/app/components/admin/views/admin-printshops.html',
-      controller: 'ReproController'
+  .state('admin.requests', {
+      url: '/requests',
+      templateUrl: '/app/components/admin/views/admin-pending-requests.html',
+      controller: 'AdminPendingRequestsCtrl',
+      resolve: {
+        pendingRequests: ['PendingRequestsService', function(PendingRequestsService){
+          return PendingRequestsService.getPendingRequests();
+        }]
+      }
   })
   .state('admin.request', {
-      url: '/:requestid',
+      url: '/requests/:requestid',
       templateUrl: '/app/components/admin/views/admin-request.html',
-      controller: 'RequestController'
+      controller: 'AdminPendingRequestDetailCtrl',
+      resolve: {
+         pendingRequest: ['PendingRequestsService', function (PendingRequestsService) {
+               return PendingRequestsService.getCurrentRequest();
+         }]
+      }
+  })
+  .state('admin.printshops', {
+    url: '/printshops',
+    templateUrl: '/app/components/admin/views/admin-printshops.html',
+    controller: 'AdminPrintShopsCtrl'
   });
 
 }]);

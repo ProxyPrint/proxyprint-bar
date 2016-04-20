@@ -1,5 +1,5 @@
-angular.module('ProxyPrint').controller('ManagerStatsCtrl', ['$scope', '$http','$cookieStore', '$state', 'AuthenticationService', '$rootScope', '$location',
-function($scope, $http, $cookieStore, AuthenticationService, $rootScope, $state, $location) {
+angular.module('ProxyPrint').controller('ManagerStatsCtrl', ['$scope',
+function($scope) {
 
   $scope.stats = {
     likes: "442",

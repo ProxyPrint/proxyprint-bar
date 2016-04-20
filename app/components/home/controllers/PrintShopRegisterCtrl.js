@@ -10,8 +10,6 @@ angular.module('Auth').controller('PrintShopRegisterCtrl', ['$scope', '$rootScop
         "managerEmail": $scope.managerEmail,
         "managerPassword": $scope.managerPassword,
         "pShopAddress": $scope.pShopAddress,
-        "pShopLatitude": 69,
-        "pShopLongitude": 69,
         "pShopNIF": $scope.pShopNIF,
         "pShopName": $scope.pShopName
       }

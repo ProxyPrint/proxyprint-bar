@@ -1,6 +1,6 @@
 angular.module('Auth').controller('PrintShopLoginCtrl',
-    ['$scope', '$rootScope', '$location', 'AuthenticationService','$state', '$cookieStore',
-    function ($scope, $rootScope, $location, AuthenticationService, $state, $cookieStore) {
+    ['$scope', 'AuthenticationService','$state',
+    function ($scope, AuthenticationService, $state) {
         // reset login status
         AuthenticationService.ClearCredentials();
 
@@ -12,7 +12,7 @@ angular.module('Auth').controller('PrintShopLoginCtrl',
                     AuthenticationService.SetCredentials($scope.username, $scope.password);
                     if(response.employee.roles[0] == "ROLE_EMPLOYEE") {
                       $state.go('employee', {"username": $scope.username});
-                    } else if(response.employee.roles[0] == "ROLE_EMPLOYEE") {
+                    } else if(response.employee.roles[0] == "ROLE_MANAGER") {
                       console.log("Manager logged in...");
                     }
                 } else {

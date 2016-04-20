@@ -1,5 +1,5 @@
-angular.module('ProxyPrint').controller('ManagerBaseCtrl', ['$scope', '$http','$cookieStore', '$state', 'AuthenticationService', '$rootScope', '$location',
-function($scope, $http, $cookieStore, AuthenticationService, $rootScope, $state, $location) {
+angular.module('ProxyPrint').controller('ManagerBaseCtrl', ['$scope',
+function($scope) {
 
   $scope.manager = { name: "Joaquim Silva" };
 

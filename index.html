@@ -23,6 +23,7 @@
   <script type="text/javascript" src="assets/js/jquery.js"></script>
   <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="node_modules/angular/angular.min.js"></script>
+  <script type="text/javascript" src="assets/libs/ui-bootstrap-tpls-1.3.2.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.18/angular-ui-router.js"></script>
   <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-cookies.js"></script>
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-resource.js"></script>
@@ -31,6 +32,7 @@
   <script type="text/javascript" src="node_modules/ng-file-upload/dist/ng-file-upload.min.js"></script>
   <script type="text/javascript" src="node_modules/ng-file-upload/dist/ng-file-upload-shim.min.js"></script>
   <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBB6T-XTA7tapjVSg3FneNE5k53Obod0lA"></script>
+
   <!-- App code -->
   <script src="app/app.modules.js"></script>
   <script src="app/app.routes.js"></script>
@@ -40,11 +42,13 @@
   <script src="app/components/home/controllers/PrintShopLoginCtrl.js"></script>
   <script src="app/components/home/controllers/PrintShopRegisterCtrl.js"></script>
   <script src="app/components/home/services/auth.js"></script>
+  <script src="app/components/home/controllers/AdminLoginController.js"></script>
   <!-- Consumer -->
   <script src="app/components/consumer/controllers/ConsumerController.js"></script>
   <script src="app/components/consumer/controllers/ConsumerHistoryController.js"></script>
   <script src="app/components/consumer/controllers/ConsumerPrintshopList.js"></script>
   <script src="app/components/consumer/directives/StarRating.js"></script>
+  <script src="app/components/consumer/services/FileTransferService.js"></script>
   <!-- Print Shop - Employee -->
   <script src="app/components/printshop/employee/controllers/EmployeeBaseCtrl.js"></script>
   <script src="app/components/printshop/employee/controllers/PendingRequestsCtrl.js"></script>
@@ -56,7 +60,11 @@
   <script src="app/components/printshop/manager/controllers/ManagerInfoCtrl.js"></script>
   <script src="app/components/printshop/manager/controllers/ManagerPriceTableCtrl.js"></script>
   <script src="app/components/printshop/manager/controllers/ManagerStatsCtrl.js"></script>
-  <script src="app/components/admin/controllers/AdminControllers.js"></script>
+  <!-- Admin -->
+  <script src="app/components/admin/controllers/AdminBaseCtrl.js"></script>
+  <script src="app/components/admin/controllers/AdminPendingRequestsCtrl.js"></script>
+  <script src="app/components/admin/controllers/AdminPrinShopsCtrl.js"></script>
+  <script src="app/components/admin/services/printshopService.js"></script>
 
 </body>
 

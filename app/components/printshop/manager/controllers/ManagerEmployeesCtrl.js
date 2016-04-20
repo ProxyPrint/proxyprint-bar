@@ -1,5 +1,6 @@
-angular.module('ProxyPrint').controller('ManagerEmployeesCtrl', ['$scope', '$http','$cookieStore', '$state', 'AuthenticationService', '$rootScope', '$location',
-function($scope, $http, $cookieStore, AuthenticationService, $rootScope, $state, $location) {
+angular.module('ProxyPrint').controller('ManagerEmployeesCtrl', ['$scope',
+function($scope) {
 
+// Code
 
 }]);
