@@ -90,7 +90,7 @@ $scope.openRejectModal = function(reply) {
 
   modalInstance.result.then(function(index) {
     $scope.showReject = true;
-    // PendingRequestsService.rejectRequest($scope.request.id);
+    PendingRequestsService.rejectRequest($scope.request.id);
   });
 }
 
