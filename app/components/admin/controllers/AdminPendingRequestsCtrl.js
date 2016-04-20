@@ -28,10 +28,11 @@ app.controller('RequestModalController', function ($scope, $uibModalInstance,$st
 });
 
 // Consult detail of pending request
-app.controller('AdminPendingRequestDetailCtrl', ['$scope', '$state', '$http', 'pendingRequest'
-, function($scope, $state, $http, pendingRequest){
+app.controller('AdminPendingRequestDetailCtrl', ['$scope', '$state', '$http', 'pendingRequest', '$uibModal', 'PendingRequestsService'
+, function($scope, $state, $http, pendingRequest, $uibModal, PendingRequestsService){
 
   $scope.request = pendingRequest;
+  $scope.showSuccess = false;
 
   $scope.accept = function() {
     console.log("Send accept to server...");
@@ -51,7 +52,7 @@ $scope.openAcceptModal = function(reply) {
 
   var modalInstance = $uibModal.open({
     animation: true,
-    templateUrl: 'app/components/admin/views/acceptRequestModal.html',
+    templateUrl: 'app/components/admin/views/request-modal.html',
     controller: 'RequestModalController',
     size: 'sm',
     resolve: {
@@ -65,9 +66,8 @@ $scope.openAcceptModal = function(reply) {
   });
 
   modalInstance.result.then(function(index) {
-    $scope.showSucess = true;
-    $scope.acceptRequest(index);
-    $state.go('admin.requests');
+    $scope.showSuccess = true;
+    PendingRequestsService.acceptRequest($scope.request.id);
   });
 }
 
@@ -75,7 +75,7 @@ $scope.openRejectModal = function(reply) {
 
   var modalInstance = $uibModal.open({
     animation: true,
-    templateUrl: 'app/components/admin/views/acceptRequestModal.html',
+    templateUrl: 'app/components/admin/views/request-modal.html',
     controller: 'RequestModalController',
     size: 'sm',
     resolve: {

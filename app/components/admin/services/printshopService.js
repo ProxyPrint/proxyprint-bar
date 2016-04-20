@@ -12,6 +12,7 @@ app.factory('PendingRequestsService', ['$http', function($http) {
 
   service.acceptRequest = function(id) {
     var url = "http://localhost:8080/request/accept/"+id;
+    console.log("POST");
     return $http.post(url).success(function(data){
       return data;
     });

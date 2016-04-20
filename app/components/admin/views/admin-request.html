@@ -4,7 +4,7 @@
     Pedido de Registo
   </h1>
 
-  <div class="box box-widget widget-user" ng-class="{ 'hidden': showSuccess }">
+  <div class="box box-widget widget-user">
     <!-- Add the bg color to the header using any of the bg-* classes -->
     <div class="widget-user-header bg-aqua-active">
       <h3 class="widget-user-username">{{request.pShopName}}</h3>
@@ -44,9 +44,9 @@
     </div>
   </div>
 
-  <div ng-class="{ 'hidden': showSucesss}">
+  <div ng-class="{'hidden': showSuccess}">
     <center>
-      <a ng-click="openAcceptModal('Tem a certeza que quer aceitar o pedido?'); showSuccess = !showSuccess" class="btn btn-success"><i class="fa fa-check" style="margin-right: 0.2em;"></i>Aceitar</a>
+      <a ng-click="openAcceptModal('Tem a certeza que quer aceitar o pedido?')" class="btn btn-success"><i class="fa fa-check" style="margin-right: 0.2em;"></i>Aceitar</a>
       <a ng-click="openRejectModal('Tem a certeza que quer rejeitar o pedido?')" class="btn btn-danger"><i class="fa fa-times" style="margin-right: 0.2em;"></i>Rejeitar</a>
     </center>
   </div>
