@@ -124,16 +124,12 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
         templateUrl: '/app/components/consumer/views/consumer_printshoplist.html',
         controller: 'ConsumerPrintshopList'
     })
-    .state('consumer.specification', {
-        url: '/specification',
-        templateUrl: '/app/components/consumer/views/consumer-spec.html',
+    .state('consumer.requestbudget', {
+        url: '/requestbudget',
+        templateUrl: '/app/components/consumer/views/consumer_requestBudget.html',
         controller: 'ConsumerSpecsController'
     })
-    .state('consumer.newspecification', {
-        url: '/newspecification',
-        templateUrl: '/app/components/consumer/views/consumer-newspec.html',
-        controller: 'ConsumerSpecsController'
-    })
+
     /*PrintShop*/
 
     /*Employee*/

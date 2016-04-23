@@ -45,7 +45,10 @@
             <div class="center">
               <h2> Novo pedido </h2>
             </div>
-            <div ngf-drop ngf-select ng-model="files" class="drop-box" ngf-drag-over-class="'dragover'" ngf-multiple="true" ngf-allow-dir="true" accept="image/*,application/pdf" ngf-pattern="'image/*,application/pdf'">
+            <div ngf-drop="uploadFiles($files)" ngf-select ng-model="files" class="drop-box"
+          ngf-drag-over-class="'dragover'" ngf-multiple="true" ngf-allow-dir="true"
+          accept="image/*,application/pdf"
+          ngf-pattern="'image/*,application/pdf'">
               <h4>Arraste ficheiros/Clique</h4>
               <br>
               <br>
@@ -67,7 +70,7 @@
                   </div>
                   <br>
                   <div class="center">
-                    <button ui-sref=".specification" type="button" class="btn btn-default">Cancelar pedido</button>
+                    <button type="button" class="btn btn-default">Cancelar pedido</button>
                   </div>
                 </li>
               </ul>

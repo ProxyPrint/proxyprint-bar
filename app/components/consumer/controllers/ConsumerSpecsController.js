@@ -1,43 +1,78 @@
 angular.module('ProxyPrint')
 
-.controller('ConsumerSpecsController', ['$scope' , function($scope, myModal) {
+.controller('ConsumerSpecsController', ['$scope' , '$uibModal', '$log', 'FileTransferService', function($scope, $uibModal, $log, FileTransferService) {
 
-    // Model to JSON for demo purpose
-    $scope.$watch('files', function(model) {
-        $scope.modelAsJson = angular.toJson(model, true);
-    }, true);
+    /** Page range logic */
+    $scope.showModal = false;
+    $scope.lastItem = null;
+    $scope.lastFile = null;
 
-    $scope.files = {
-        lists: {"Ficheiros": [
-            {
-                name: "Slides 1-10",
-                specs: []
-            }, {
-                name: "Slides 10-20",
-                specs: []
-            },{
-                name: "Slides 20-30",
-                specs: []
-            },{
-                name: "Slides 30-40",
-                specs: []
-            },{
-                name: "Slides 40-50",
-                specs: []
-            },{
-                name: "Slides 50-60",
-                specs: []
+    $scope.toggleModal = function(file, item){
+        $scope.lastItem = item;
+        $scope.lastFile = file;
+        $scope.showModal = !$scope.showModal;
+        return item;
+    };
+
+    /** Remove file from queue */
+    $scope.remove = function (item, spec){
+        var files = $scope.files();
+        var i = files.indexOf(item);
+        var index = files[i].specs.indexOf(spec);
+        if (index > -1) {
+            files[i].specs.splice(index, 1);
+        }
+    };
+
+    /** Cancel request to add the file to queue */
+    $scope.cancel = function (){
+        $scope.remove($scope.lastFile, $scope.lastItem);
+        $scope.showModal = false;
+    };
+
+    /** Add file to queue */
+    $scope.submit = function(init, end, check){
+        if(!check){var interval = init + ' - ' + end;}
+        else{var interval = "Completo"}
+
+        var files = $scope.files();
+        var i = files.indexOf($scope.lastFile);
+        var index = files[i].specs.indexOf($scope.lastItem);
+        if (index > -1) {
+            files[i].specs[index].pages = interval;
+        }
+        $scope.showModal = false;
+    };
+
+    /** Request modal logic */
+    $scope.showRequest = false;
+
+    $scope.toggleRequest = function(){
+        $scope.showRequest = !$scope.showRequest;
+    };
+
+    $scope.back = function (){
+        $scope.showRequest = false;
+    };
+
+    $scope.request = function(){
+        /** Send Request */
+    };
+
+    $scope.queueFiles = function (){
+        var i = 0;
+        angular.forEach($scope.files(), function(file){
+            if(file.specs.length != 0){
+                i++;
             }
-        ]}
-    };
+        });
+        return i;
+    }
 
-    $scope.files2Print = {
-        files: []
-    };
+    $scope.files = FileTransferService.getFiles;
 
     $scope.specs = {
-        selected: null,
-        lists: {"Especificações": [
+        list: [
             {
                 id: 1,
                 format: "A4",
@@ -69,6 +104,6 @@ angular.module('ProxyPrint')
                     rings: "Espiral"
                 }
             }
-        ]}
+        ]
     };
 }]);

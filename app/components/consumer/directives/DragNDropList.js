@@ -230,7 +230,7 @@ function($parse,   $timeout,   dndDropEffectWorkaround,   dndDragTypeWorkaround)
 * - dndDragover          Will be added to the list while an element is dragged over the list.
 */
 .directive('dndList', ['$parse', '$timeout', 'dndDropEffectWorkaround', 'dndDragTypeWorkaround',
-function($parse,   $timeout,   dndDropEffectWorkaround,   dndDragTypeWorkaround, ModalService) {
+function($parse,   $timeout,   dndDropEffectWorkaround,   dndDragTypeWorkaround) {
     return function(scope, element, attr) {
         // While an element is dragged over the list, this placeholder element is inserted
         // at the location where the element would be inserted after dropping
@@ -339,6 +339,7 @@ function($parse,   $timeout,   dndDropEffectWorkaround,   dndDragTypeWorkaround,
                         // Unserialize the data that was serialized in dragstart. According to the HTML5 specs,
                         // the "Text" drag type will be converted to text/plain, but IE does not do that.
                         var data = event.dataTransfer.getData("Text") || event.dataTransfer.getData("text/plain");
+
                         var transferredObject;
                         try {
                             transferredObject = JSON.parse(data);
