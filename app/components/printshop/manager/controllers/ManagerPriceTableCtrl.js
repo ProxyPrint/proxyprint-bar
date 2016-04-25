@@ -14,6 +14,12 @@ function($scope) {
     ]
   };
 
-  $scope.isStaplingFree = false;
+  $scope.isStaplingFree = true;
+
+  $scope.deleteRow = function(table, index) {
+    if(index != -1) {
+      $scope.priceTable[table].splice(index, 1);
+    }
+  }
 
 }]);

@@ -43,7 +43,7 @@
                 <td style="text-align: center;">{{item.priceA4DUPLEX}} €</td>
                 <td style="text-align: center;">{{item.priceA4SIMPLEX}} €</td>
                 <td style="text-align: center;">{{item.priceA3DUPLEX}} €</td>
-                <td style="text-align: center;"><a href=""><i class="fa fa-fw fa-pencil"></i>Editar linha</a> <a href=""><i class="fa fa-fw fa-trash"></i> Apagar linha</a></td>
+                <td style="text-align: center;"><a href=""><i class="fa fa-fw fa-pencil"></i>Editar linha</a> <a href="" ng-click="deleteRow('BW', $index)"><i class="fa fa-fw fa-trash"></i> Apagar linha</a></td>
               </tr>
             </tbody>
           </table>
@@ -156,21 +156,33 @@
   <hr/>
 
   <!-- ./stappling -->
-  <div class="box-body" style="width: 12%;">
+  <div class="box-body" style="width: 25%;">
     <h5 class="box-title"><b>Agrafar</b></h5>
     <div class="checkbox">
       <label style="margin-right: 4%;">
-        <input type="checkbox" ng-model="isStaplingFree" ng-true-value="{{isStaplingFree}}" ng-false-value="{{!isStaplingFree}}">
+        <input type="checkbox" class="minimal" ng-model="isStaplingFree">
         Grátis
       </label>
       <label>
-        <input type="checkbox" ng-model="isStaplingFree" ng-true-value="{{!isStaplingFree}}" ng-false-value="{{isStaplingFree}}">
+        <input type="checkbox" class="minimal" ng-model="isStaplingFree" ng-true-value="{{!isStaplingFree}}" ng-false-value="{{isStaplingFree}}">
         Pago
       </label>
     </div>
-    <div class="input-group" ng-show="{{!isStaplingFree}}">
-      <span class="input-group-addon"><i class="fa fa-euro"></i></span>
-      <input type="text" class="form-control">
+    <div ng-show="!isStaplingFree" style="border-style: dotted; border-width: 1px; padding: 4%; border-color: #B6B6B6;">
+      <div><b>Preço</b></div>
+      <table>
+        <tr>
+          <td>
+            <div class="input-group">
+              <span class="input-group-addon"><i class="fa fa-euro"></i></span>
+              <input type="text" class="form-control" style="width: 95%;">
+            </div>
+          </td>
+          <td>
+            <button type="button" class="btn btn-success">OK</button>
+          </td>
+        </tr>
+      </table>
     </div>
   </div>
   <!-- ./stappling -->
