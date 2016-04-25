@@ -85,7 +85,7 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
   .state('adminlogin', {
     url: '/adminlogin',
     templateUrl: '/app/components/admin/views/admin-login.html',
-    controller: 'AdminLoginController',
+    controller: 'LoginController',
     data: {
         css: adminLoginCSS
     }
