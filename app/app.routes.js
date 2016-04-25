@@ -69,7 +69,7 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
   .state('printshop', {
     url: '/printshop',
     templateUrl: '/app/components/home/views/printshop.html',
-    controller: 'PrintShopLoginCtrl',
+    controller: 'LoginController',
     data: {
       css: mainPrintShopCSS
     }
@@ -158,7 +158,7 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
 
   /*Manager*/
   .state('manager', {
-    url: '/manager',
+    url: '/manager/:username',
     views: {
       '': {
         templateUrl: '/app/components/printshop/manager/views/manager-base.html',
@@ -168,21 +168,6 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
     data: {
       css: adminlteCSS
     }
-  })
-  .state('manager.info', {
-    url: '/main',
-    templateUrl: '/app/components/printshop/manager/views/manager-base-info.html',
-    controller: 'ManagerInfoCtrl'
-  })
-  .state('manager.stats', {
-    url: '/stats',
-    templateUrl: '/app/components/printshop/manager/views/manager-stats.html',
-    controller: 'ManagerStatsCtrl'
-  })
-  .state('manager.employees', {
-    url: '/employees',
-    templateUrl: '/app/components/printshop/manager/views/manager-employees.html',
-    controller: 'ManagerEmployeesCtrl'
   })
   .state('manager.pricetable', {
     url: '/pricetable',

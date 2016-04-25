@@ -5,19 +5,30 @@ angular.module('Auth').controller('LoginController', ['$scope', '$rootScope', '$
 
         $scope.login = function() {
             $scope.dataLoading = true;
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(function(position) {
-                    $rootScope.position = position;
-                    console.log($rootScope.position.coords.latitude);
-                    console.log($rootScope.position.coords.longitude);
-                });
-            }
             AuthenticationService.Login($scope.username, $scope.password, function(response) {
-                console.log(response);
+
                 if (response.success) {
-                    AuthenticationService.SetCredentials($scope.username, $scope.password);
-                    $state.transitionTo('consumer');
-                    $location.path('/consumerID');
+                    if(response.user.roles[0] == "ROLE_MANAGER") {
+                      AuthenticationService.SetCredentials($scope.username, $scope.password);
+                      $state.go('manager', {"username": $scope.username});
+                    }
+                    else if (response.user.roles[0] == "ROLE_EMPLOYEE") {
+                      AuthenticationService.SetCredentials($scope.username, $scope.password);
+                      $state.go('employee', {"username": $scope.username});
+                    }
+                    else if(response.user.roles[0] == "ROLE_USER") {
+                      if (navigator.geolocation) {
+                          navigator.geolocation.getCurrentPosition(function(position) {
+                              $rootScope.position = position;
+                              console.log($rootScope.position.coords.latitude);
+                              console.log($rootScope.position.coords.longitude);
+                          });
+                      }
+
+                      AuthenticationService.SetCredentials($scope.username, $scope.password);
+                      $state.transitionTo('consumer');
+                      $location.path('/consumerID');
+                    }
                 } else {
                     $scope.error = "Dados de login inválidos!";
                     $scope.dataLoading = false;
