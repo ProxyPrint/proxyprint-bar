@@ -37,13 +37,13 @@
               </tr>
             </thead>
             <tbody>
-              <tr role="row" class="odd">
-                <td>1-20</td>
-                <td style="text-align: center;">0,10 €</td>
-                <td style="text-align: center;">0,19 €</td>
-                <td style="text-align: center;">0,18 €</td>
-                <td style="text-align: center;">0,35 €</td>
-                <td style="text-align: center;"><a href="#"><i class="fa fa-fw fa-pencil"></i>Editar linha</a> <a href=""><i class="fa fa-fw fa-trash"></i> Apagar linha</a></td>
+              <tr role="row" class="odd" ng-repeat="item in priceTable['BW']">
+                <td>{{item.infLim}}-{{item.supLim}}</td>
+                <td style="text-align: center;">{{item.priceA4SIMPLEX}} €</td>
+                <td style="text-align: center;">{{item.priceA4DUPLEX}} €</td>
+                <td style="text-align: center;">{{item.priceA4SIMPLEX}} €</td>
+                <td style="text-align: center;">{{item.priceA3DUPLEX}} €</td>
+                <td style="text-align: center;"><a href=""><i class="fa fa-fw fa-pencil"></i>Editar linha</a> <a href=""><i class="fa fa-fw fa-trash"></i> Apagar linha</a></td>
               </tr>
             </tbody>
           </table>
@@ -84,13 +84,13 @@
               </tr>
             </thead>
             <tbody>
-              <tr role="row" class="odd">
-                <td>1-20</td>
-                <td style="text-align: center;">0,10 €</td>
-                <td style="text-align: center;">0,19 €</td>
-                <td style="text-align: center;">0,18 €</td>
-                <td style="text-align: center;">0,35 €</td>
-                <td style="text-align: center;"><a href="#"><i class="fa fa-fw fa-pencil"></i>Editar linha</a> <a href=""><i class="fa fa-fw fa-trash"></i> Apagar linha</a></td>
+              <tr role="row" class="odd" ng-repeat="item in priceTable['COLOR']">
+                <td>{{item.infLim}}-{{item.supLim}}</td>
+                <td style="text-align: center;">{{item.priceA4SIMPLEX}} €</td>
+                <td style="text-align: center;">{{item.priceA4DUPLEX}} €</td>
+                <td style="text-align: center;">{{item.priceA4SIMPLEX}} €</td>
+                <td style="text-align: center;">{{item.priceA3DUPLEX}} €</td>
+                <td style="text-align: center;"><a href=""><i class="fa fa-fw fa-pencil"></i>Editar linha</a> <a href=""><i class="fa fa-fw fa-trash"></i> Apagar linha</a></td>
               </tr>
             </tbody>
           </table>
@@ -142,7 +142,7 @@
                 <td style="text-align: center;">1,15 €</td>
                 <td style="text-align: center;">6mm-10mm</td>
                 <td style="text-align: center;">1,15 €</td>
-                <td style="text-align: center;"><a href="#"><i class="fa fa-fw fa-pencil"></i>Editar linha</a> <a href=""><i class="fa fa-fw fa-trash"></i> Apagar linha</a></td>
+                <td style="text-align: center;"><a href=""><i class="fa fa-fw fa-pencil"></i>Editar linha</a> <a href=""><i class="fa fa-fw fa-trash"></i> Apagar linha</a></td>
               </tr>
             </tbody>
           </table>
@@ -160,15 +160,15 @@
     <h5 class="box-title"><b>Agrafar</b></h5>
     <div class="checkbox">
       <label style="margin-right: 4%;">
-        <input type="checkbox">
+        <input type="checkbox" ng-model="isStaplingFree" ng-true-value="{{isStaplingFree}}" ng-false-value="{{!isStaplingFree}}">
         Grátis
       </label>
       <label>
-        <input type="checkbox">
+        <input type="checkbox" ng-model="isStaplingFree" ng-true-value="{{!isStaplingFree}}" ng-false-value="{{isStaplingFree}}">
         Pago
       </label>
     </div>
-    <div class="input-group">
+    <div class="input-group" ng-show="{{!isStaplingFree}}">
       <span class="input-group-addon"><i class="fa fa-euro"></i></span>
       <input type="text" class="form-control">
     </div>
