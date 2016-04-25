@@ -1,25 +1,51 @@
-angular.module('ProxyPrint').controller('ManagerPriceTableCtrl', ['$scope',
-function($scope) {
+var app = angular.module('ProxyPrint');
 
-  $scope.priceTable = {
-    "BW": [
-      {infLim: "1", supLim: "20", priceA4SIMPLEX: 0.10, priceA4DUPLEX: 0.12, priceA3SIMPLEX: 0.22, priceA3DUPLEX: 0.20},
-      {infLim: "21", supLim: "30", priceA4SIMPLEX: 0.10, priceA4DUPLEX: 0.12, priceA3SIMPLEX: 0.22, priceA3DUPLEX: 0.20},
-      {infLim: "31", supLim: "100", priceA4SIMPLEX: 0.10, priceA4DUPLEX: 0.12, priceA3SIMPLEX: 0.22, priceA3DUPLEX: 0.20}
-    ],
-    "COLOR": [
-      {infLim: "1", supLim: "20", priceA4SIMPLEX: 0.10, priceA4DUPLEX: 0.12, priceA3SIMPLEX: 0.22, priceA3DUPLEX: 0.20},
-      {infLim: "21", supLim: "30", priceA4SIMPLEX: 0.10, priceA4DUPLEX: 0.12, priceA3SIMPLEX: 0.22, priceA3DUPLEX: 0.20},
-      {infLim: "31", supLim: "100", priceA4SIMPLEX: 0.10, priceA4DUPLEX: 0.12, priceA3SIMPLEX: 0.22, priceA3DUPLEX: 0.20}
-    ]
-  };
+app.controller('ManagerPriceTableCtrl', ['$scope', '$uibModal', 'PriceTableService', function($scope, $uibModal, PriceTableService) {
+
+  $scope.priceTable = PriceTableService.getPriceTable();
 
   $scope.isStaplingFree = true;
 
-  $scope.deleteRow = function(table, index) {
-    if(index != -1) {
-      $scope.priceTable[table].splice(index, 1);
-    }
-  }
+  $scope.confirmDelete = function(table,index) {
+    PriceTableService.setCurrentTable(table);
+    console.log("CUR "+PriceTableService.getCurrentTable());
+    $scope.openConfirmModal("Tem a certeza que pertende apagar esta linha do preçário?");
+  };
+
+  $scope.openConfirmModal = function(reply) {
+    var modalInstance = $uibModal.open({
+      animation: true,
+      templateUrl: 'app/components/printshop/manager/views/delete-row-modal.html',
+      controller: 'ConfirmDeleteModalCtrl',
+      size: 'sm',
+      resolve: {
+        index: function() {
+          return $scope.index;
+        },
+        text: function() {
+          return reply;
+        }
+      }
+    });
+    modalInstance.result.then(function(index) {
+      PriceTableService.deleteRow(index);
+    });
+  };
 
 }]);
+
+// Modal for deleting a row of certain table from price table
+app.controller('ConfirmDeleteModalCtrl', function($scope, $uibModalInstance, index, text) {
+
+  $scope.index = index;
+  $scope.text = text;
+
+  $scope.confirmDeleteRow = function () {
+    $uibModalInstance.close($scope.index);
+  };
+
+  $scope.closeModal = function () {
+    $uibModalInstance.dismiss('cancel');
+  };
+
+});
