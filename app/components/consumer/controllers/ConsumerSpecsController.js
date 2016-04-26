@@ -1,6 +1,4 @@
-angular.module('ProxyPrint')
-
-.controller('ConsumerSpecsController', ['$scope' , '$uibModal', '$log', 'FileTransferService', function($scope, $uibModal, $log, FileTransferService) {
+angular.module('ProxyPrint').controller('ConsumerSpecsController', ['$scope' , '$uibModal', '$log', 'FileTransferService', function($scope, $uibModal, $log, FileTransferService) {
 
     /** Page range logic */
     $scope.showModal = false;
@@ -72,6 +70,20 @@ angular.module('ProxyPrint')
 
     $scope.files = FileTransferService.getFiles;
 
+    $scope.addSpecModal = function() {
+
+      var modalInstance = $uibModal.open({
+        animation: true,
+        templateUrl: 'app/components/consumer/views/spec-modal.html',
+        controller: 'AddSpecificationController',
+        size: 'md'
+      });
+
+      modalInstance.result.then(function(index) {
+        $scope.showSuccess = true;
+        PendingRequestsService.acceptRequest($scope.request.id);
+      });
+    }
     $scope.specs = {
         list: [
             {
@@ -108,3 +120,14 @@ angular.module('ProxyPrint')
         ]
     };
 }]);
+
+angular.module('ProxyPrint').controller('AddSpecificationController', function ($scope, $uibModalInstance) {
+
+  $scope.performAction = function () {
+    $uibModalInstance.close($scope.index);
+  };
+
+  $scope.closeModal = function () {
+    $uibModalInstance.dismiss('cancel');
+  };
+});
