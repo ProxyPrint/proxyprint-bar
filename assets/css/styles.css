@@ -277,7 +277,6 @@ body {
   content: '✖'; /* UTF-8 symbol */
   color: red;
 }
-
 /* Dialog */
 .dialog {
   background: #ddd;
@@ -308,3 +307,12 @@ body {
 
 .dialogdemoBasicUsage div#status {
   color: #c60008; }
+
+
+
+/**Add spec modal **/
+.finishingOptions {
+  margin-left: 15%;
+  margin-right: 15%;
+  margin-top: 3%;
+}

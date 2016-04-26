@@ -195,6 +195,7 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
         controller: 'ManagerPriceTableCtrl'
     })
 
+
   /*Admin*/
   .state('admin', {
       abstract: true,
