@@ -27,6 +27,7 @@ app.controller('ManagerPriceTableCtrl', ['$scope', '$uibModal', 'PriceTableServi
       }
     });
     modalInstance.result.then(function(index) {
+      $scope.priceTable[PriceTableService.getCurrentTable()].splice(index, 1);
       PriceTableService.deleteRow(index);
     });
   };

@@ -7,9 +7,9 @@ function($scope, $rootScope, $location, AuthenticationService, $state, $cookieSt
     $scope.dataLoading = true;
     AuthenticationService.Login($scope.username, $scope.password, function(response) {
       if (response.success) {
+        console.log(response.user);
         // PrintShop - Manager
         if(response.user.roles[0] == "ROLE_MANAGER") {
-          console.log(response.user);
           AuthenticationService.SetCredentials($scope.username, $scope.password);
           $state.go('manager.stats', {"username": $scope.username});
         }
