@@ -1,8 +1,8 @@
 var app = angular.module('ProxyPrint');
 
-app.controller('ManagerPriceTableCtrl', ['$scope', '$uibModal', 'PriceTableService', function($scope, $uibModal, PriceTableService) {
+app.controller('ManagerPriceTableCtrl', ['$scope', '$uibModal', 'PriceTableService', 'priceTable', function($scope, $uibModal, PriceTableService, priceTable) {
 
-  $scope.priceTable = PriceTableService.getPriceTable();
+  $scope.priceTable = priceTable.data;
 
   $scope.isStaplingFree = true;
 

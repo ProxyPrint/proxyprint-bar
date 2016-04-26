@@ -172,7 +172,12 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
   .state('manager.pricetable', {
     url: '/pricetable',
     templateUrl: '/app/components/printshop/manager/views/manager-pricetable.html',
-    controller: 'ManagerPriceTableCtrl'
+    controller: 'ManagerPriceTableCtrl',
+    resolve: {
+      priceTable: ['PriceTableService', function(PriceTableService) {
+        return PriceTableService.getPriceTable();
+      }]
+    }
   })
 
   /*Admin*/
@@ -194,7 +199,7 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
       templateUrl: '/app/components/admin/views/admin-pending-requests.html',
       controller: 'AdminPendingRequestsCtrl',
       resolve: {
-        pendingRequests: ['PendingRequestsService', function(PendingRequestsService){
+        pendingRequests: ['PendingRequestsService', function(PendingRequestsService) {
           return PendingRequestsService.getPendingRequests();
         }]
       }
@@ -205,7 +210,7 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
       controller: 'AdminPendingRequestDetailCtrl',
       resolve: {
          pendingRequest: ['PendingRequestsService', function (PendingRequestsService) {
-               return PendingRequestsService.getCurrentRequest();
+            return PendingRequestsService.getCurrentRequest();
          }]
       }
   })
