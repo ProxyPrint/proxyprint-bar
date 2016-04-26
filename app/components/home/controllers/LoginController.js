@@ -7,14 +7,18 @@ function($scope, $rootScope, $location, AuthenticationService, $state, $cookieSt
     $scope.dataLoading = true;
     AuthenticationService.Login($scope.username, $scope.password, function(response) {
       if (response.success) {
+        // PrintShop - Manager
         if(response.user.roles[0] == "ROLE_MANAGER") {
+          console.log(response.user);
           AuthenticationService.SetCredentials($scope.username, $scope.password);
-          $state.go('manager', {"username": $scope.username});
+          $state.go('manager.stats', {"username": $scope.username});
         }
+        // PrintShop - Employee
         else if (response.user.roles[0] == "ROLE_EMPLOYEE") {
           AuthenticationService.SetCredentials($scope.username, $scope.password);
           $state.go('employee', {"username": $scope.username});
         }
+        // Consumer
         else if(response.user.roles[0] == "ROLE_USER") {
           if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function(position) {
@@ -28,12 +32,14 @@ function($scope, $rootScope, $location, AuthenticationService, $state, $cookieSt
           $state.transitionTo('consumer');
           $location.path('/consumerID');
         }
+        // Admin
         else if(response.user.roles[0] == "ROLE_ADMIN") {
           AuthenticationService.SetCredentials($scope.username, $scope.password);
           $state.go('admin.requests', {"username": $scope.username});
           return;
         }
-      } else {
+      }
+      else {
         $scope.error = "Dados de login inválidos!";
         $scope.dataLoading = false;
       }

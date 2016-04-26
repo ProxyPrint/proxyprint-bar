@@ -18,8 +18,8 @@ angular.module('Auth').controller('PrintShopRegisterCtrl', ['$scope', '$rootScop
         data.pShopLatitude = result.geometry.location.lat();
         data.pShopLongitude = result.geometry.location.lng();
         $http.post("http://localhost:8080/request/register", data).success(function(response) {
-          $location.path('/printshop');
           alert("Pedido registado! Será notificado via email em breve!");
+          $location.path('/printshop');
         });
       });
 

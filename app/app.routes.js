@@ -158,6 +158,7 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
 
   /*Manager*/
   .state('manager', {
+    abstract: true,
     url: '/manager/:username',
     views: {
       '': {
@@ -169,15 +170,23 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
       css: adminlteCSS
     }
   })
+  .state('manager.stats', {
+    url: '/stats',
+    templateUrl: '/app/components/printshop/manager/views/manager-stats.html'
+  })
   .state('manager.pricetable', {
     url: '/pricetable',
-    templateUrl: '/app/components/printshop/manager/views/manager-pricetable.html',
+    templateUrl: '/app/components/printshop/manager/views/pricetable/manager-pricetable.html',
     controller: 'ManagerPriceTableCtrl',
     resolve: {
       priceTable: ['PriceTableService', function(PriceTableService) {
         return PriceTableService.getPriceTable();
       }]
     }
+  })
+  .state('manager.employees', {
+    url: '/employees',
+    templateUrl: '/app/components/printshop/manager/views/manager-employees.html'
   })
 
   /*Admin*/

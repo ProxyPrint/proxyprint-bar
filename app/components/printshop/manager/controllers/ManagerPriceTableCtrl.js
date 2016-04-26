@@ -14,7 +14,7 @@ app.controller('ManagerPriceTableCtrl', ['$scope', '$uibModal', 'PriceTableServi
   $scope.openConfirmModal = function(reply) {
     var modalInstance = $uibModal.open({
       animation: true,
-      templateUrl: 'app/components/printshop/manager/views/delete-row-modal.html',
+      templateUrl: 'app/components/printshop/manager/views/pricetable/delete-row-modal.html',
       controller: 'ConfirmDeleteModalCtrl',
       size: 'sm',
       resolve: {
@@ -39,7 +39,7 @@ app.controller('ManagerPriceTableCtrl', ['$scope', '$uibModal', 'PriceTableServi
   $scope.openNewEntryPrintCopyModal = function(reply) {
     var modalInstance = $uibModal.open({
       animation: true,
-      templateUrl: 'app/components/printshop/manager/views/new-printcopy-row-modal.html',
+      templateUrl: 'app/components/printshop/manager/views/pricetable/new-printcopy-row-modal.html',
       controller: 'NewPrintCopyEntryCtrl',
       size: 'md',
       resolve: {

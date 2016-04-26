@@ -16,7 +16,7 @@ app.factory('PriceTableService', ['$http', function($http) {
     };*/
 
   service.getPriceTable = function() {
-    return $http.get("http://localhost:8080/printshops/1/pricetable").success(function(data){
+    return $http.get("http://localhost:8080/printshops/100/pricetable").success(function(data){
       return data;
     });
   };
