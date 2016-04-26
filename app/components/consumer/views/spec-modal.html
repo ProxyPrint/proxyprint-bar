@@ -2,11 +2,10 @@
 </div>
 <div class="modal-body" style="text-align:center">
     <div class="row">
-
         <div class="col-sm-4">
             <div class="form-group">
                 <label for="spec-format">Formato</label>
-                <select class="form-control" ng-model="format" id="spec-format">
+                <select required class="form-control" ng-model="format" id="spec-format">
                     <option>A1</option>
                     <option>A2</option>
                     <option>A3</option>
@@ -17,7 +16,7 @@
         <div class="col-sm-4">
             <div class="form-group">
                 <label for="spec-sides">Lados</label>
-                <select class="form-control" ng-model="sides" id="spec-sides">
+                <select required class="form-control" ng-model="sides" id="spec-sides">
                     <option>Frente</option>
                     <option>Frente e verso</option>
                 </select>
@@ -26,7 +25,7 @@
         <div class="col-sm-4">
             <div class="form-group">
                 <label for="spec-colors">Cores</label>
-                <select class="form-control" ng-model="colors" id="spec-colors">
+                <select required class="form-control" ng-model="colors" id="spec-colors">
                     <option>Preto e branco</option>
                     <option>Tons de cinza</option>
                     <option>A cores</option>
@@ -44,14 +43,14 @@
     <label class="radio-inline">
         <input type="radio" name="content" ng-model="content" value="enc">Encadernar</label>
     <label class="radio-inline">
-        <input type="radio" name="content" ng-model="content" value="agr">Agrafar</label>
+        <input type="radio" name="content" ng-model="content" value="stapled">Agrafar</label>
     <div ng-show="content == 'enc'">
         <div class="finishingOptions">
             <div class="row">
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label for="spec-cover">Capa</label>
-                        <select class="form-control" ng-model="cover" id="spec-cover">
+                        <select required class="form-control" ng-model="cover" id="spec-cover">
                             <option>Acetato em cristal</option>
                             <option>PVC transparente fosco</option>
                             <option>PVC opaco</option>
@@ -61,7 +60,7 @@
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label for="spec-args">Tipo de argolas</label>
-                        <select class="form-control" ng-model="args" id="spec-args">
+                        <select required class="form-control" ng-model="args" id="spec-args">
                             <option>Argolas de plástico</option>
                             <option>Argolas em espiral</option>
                             <option>Argolas de arame</option>
@@ -73,6 +72,8 @@
     </div>
 </div>
 <div class="modal-footer" style="text-align:center">
-    <button class="btn btn-primary btn-flat" type="button" ng-click="performAction()">Adicionar especificação</button>
+    <button class="btn btn-primary btn-flat" type="button"
+        ng-disabled="!((format&&sides&&colors&&(content=='stapled'))||(format&&sides&&colors&&cover&&args))"
+        ng-click="performAction()">Adicionar especificação</button>
     <button class="btn btn-default btn-flat" type="button" ng-click="closeModal()">Cancelar</button>
 </div>

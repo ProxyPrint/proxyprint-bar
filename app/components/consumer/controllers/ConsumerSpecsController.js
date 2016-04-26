@@ -79,9 +79,25 @@ angular.module('ProxyPrint').controller('ConsumerSpecsController', ['$scope' , '
         size: 'md'
       });
 
-      modalInstance.result.then(function(index) {
-        $scope.showSuccess = true;
-        PendingRequestsService.acceptRequest($scope.request.id);
+      modalInstance.result.then(function(spec) {
+        var format, sides, colors;
+
+        format = spec[0];
+        sides = spec[1];
+        colors = spec[2];
+
+        if (spec[3]==null && spec[4]==null){
+          console.log("Agrafar");
+          console.log(format+", "+sides+", "+colors);
+        }
+        else {
+          var cover, args;
+          cover = spec[3];
+          args = spec[4];
+          console.log("Encadernar...");
+          console.log(format+", "+sides+", "+colors);
+          console.log(cover+", "+args);
+        }
       });
     }
     $scope.specs = {
@@ -124,7 +140,13 @@ angular.module('ProxyPrint').controller('ConsumerSpecsController', ['$scope' , '
 angular.module('ProxyPrint').controller('AddSpecificationController', function ($scope, $uibModalInstance) {
 
   $scope.performAction = function () {
-    $uibModalInstance.close($scope.index);
+    var spec = new Array();
+    spec.push($scope.format);
+    spec.push($scope.sides);
+    spec.push($scope.colors);
+    spec.push($scope.cover);
+    spec.push($scope.args);
+    $uibModalInstance.close(spec);
   };
 
   $scope.closeModal = function () {
