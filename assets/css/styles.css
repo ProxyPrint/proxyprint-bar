@@ -1,8 +1,8 @@
 /*!
- * Start Bootstrap - Stylish Portfolio Bootstrap Theme (http://startbootstrap.com)
- * Code licensed under the Apache License v2.0.
- * For details, see http://www.apache.org/licenses/LICENSE-2.0.
- */
+* Start Bootstrap - Stylish Portfolio Bootstrap Theme (http://startbootstrap.com)
+* Code licensed under the Apache License v2.0.
+* For details, see http://www.apache.org/licenses/LICENSE-2.0.
+*/
 
 
 /* Global Styles */
@@ -25,6 +25,10 @@ body {
 }
 .right {
     float: right;
+}
+
+.margin {
+    margin: 20px
 }
 
 /***************************** CONSUMER GLOBAL ELEMENTS ********************************/
@@ -127,7 +131,6 @@ body {
 
 /******************************** Print Shop List ***********************/
 
-
 /*Search bar*/
 
 .search-form .form-group {
@@ -186,3 +189,122 @@ body {
     width: 60%;
     margin-left: 10%;
 }
+
+/**
+* For the correct positioning of the placeholder element, the dnd-list and
+* it's children must have position: relative
+*/
+.simpleDemo ul[dnd-list],
+.simpleDemo ul[dnd-list] > li {
+    position: relative;
+}
+
+/**
+* The dnd-list should always have a min-height,
+* otherwise you can't drop to it once it's empty
+*/
+.simpleDemo ul[dnd-list] {
+    min-height: 42px;
+    padding-left: 0px;
+}
+
+/**
+* An element with .dndPlaceholder class will be
+* added to the dnd-list while the user is dragging
+* over it.
+*/
+.simpleDemo ul[dnd-list] .dndPlaceholder {
+    display: block;
+    background-color: #33CC33;
+    min-height: 42px;
+}
+
+.file-type-icon{
+    clear:both;
+    margin:10px auto;
+    width:35px;
+}
+/*end of not important*/
+.file-type-icon{
+    display:block;
+    width:30px;
+    height:40px;
+    background:#F9F9F9;
+    position:relative;
+    border:1px solid #E6E6E6;
+    border-radius:2px;
+    box-shadow:inset 1px 1px 0 0 #ffffff, inset -1px -1px 0 0 #ffffff, inset 0 10px 20px -10px rgba(0,0,0,.05);
+}
+.file-type-icon .corner{
+    display:block;
+    position:absolute;
+    top:-1px; right:-1px;
+    width: 0; height: 0;
+    border-left: 12px solid #eeeeee;
+    border-top: 12px solid #ddd; /*change this color if you want to use it on custom background*/
+    box-shadow:-1px 1px 0px 0 #E6E6E6;
+}
+.file-type-icon .type{
+    background:#777;
+    text-align:center;
+    display:block;
+    position:absolute;
+    bottom:6px; left:-2px;
+    height:15px;
+    line-height:15px;
+    font-size:10px;
+    color:#fff;
+    border-radius:1px;
+    width:25px;
+}
+.file-type-icon .type.txt{background:#F9B142;}
+.file-type-icon .type.doc{background:#0088CC;}
+.file-type-icon .type.xls{background:#85A91A;}
+.file-type-icon .type.pdf{background:#C80000;}
+
+/* Close Button */
+[class*='close-'] {
+  color: #777;
+  font: 20px/100% arial, sans-serif;
+  position: absolute;
+  right: 5px;
+  text-decoration: none;
+  text-shadow: 0 1px 0 #fff;
+  top: 5px;
+}
+
+.close-thik:after {
+  content: '✖'; /* UTF-8 symbol */
+  color: red;
+}
+
+/* Dialog */
+.dialog {
+  background: #ddd;
+  border: 1px solid #ccc;
+  border-radius: 7px;
+  float: left;
+  height: 120px;
+  width: 120px;
+  margin: 1px;
+  position: relative;
+}
+
+
+.dialogdemoBasicUsage #popupContainer {
+  position: relative; }
+
+.dialogdemoBasicUsage .footer {
+  width: 100%;
+  text-align: center;
+  margin-left: 20px; }
+
+.dialogdemoBasicUsage .footer, .dialogdemoBasicUsage .footer > code {
+  font-size: 0.8em;
+  margin-top: 50px; }
+
+.dialogdemoBasicUsage button {
+  width: 200px; }
+
+.dialogdemoBasicUsage div#status {
+  color: #c60008; }
