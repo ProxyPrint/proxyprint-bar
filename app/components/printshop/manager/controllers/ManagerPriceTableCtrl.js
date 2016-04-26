@@ -41,7 +41,7 @@ app.controller('ManagerPriceTableCtrl', ['$scope', '$uibModal', 'PriceTableServi
       animation: true,
       templateUrl: 'app/components/printshop/manager/views/new-printcopy-row-modal.html',
       controller: 'NewPrintCopyEntryCtrl',
-      size: 'sm',
+      size: 'md',
       resolve: {
         text: function() {
           return reply;

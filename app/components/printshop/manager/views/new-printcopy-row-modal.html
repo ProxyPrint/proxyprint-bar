@@ -1,7 +1,7 @@
 <div class="modal-header">
   {{text}}
   <br/>
-  <small>Caso não pretenda preencher algum dos campos simplesmente o deixe em branco.</small>
+  <small>Caso não pretenda preencher algum dos <br/>campos simplesmente o deixe em branco.</small>
 </div>
 <div class="modal-body" style="text-align:center;">
   <!-- Quantity -->
@@ -28,41 +28,37 @@
     </div>
   </div>
   <div class="row">
-    <div class="col col-sm-4">1 Lado</div>
-    <div class="col col-sm-6">
+    <div class="col col-sm-2">1 Lado</div>
+    <div class="col col-sm-3">
       <input type="text" class="form-control input-sm" placeholder="€" ng-model="priceA4SIMPLEX">
     </div>
-  </div>
-  <div class="row" style="margin-top: 1%;">
-    <div class="col col-sm-4">2 Lados</div>
-    <div class="col col-sm-6">
+    <div class="col col-sm-2">2 Lados</div>
+    <div class="col col-sm-3">
       <input type="text" class="form-control input-sm" placeholder="€" ng-model="priceA4DUPLEX">
     </div>
   </div>
   <!-- ./A4 -->
   <!-- A3 -->
-  <div class="row">
+  <div class="row" style="margin-top: 2%;">
     <div class="col col-sm-10">
       <label style="float: left;">A3</label>
     </div>
   </div>
   <div class="row">
-    <div class="col col-sm-4">1 Lado</div>
-    <div class="col col-sm-6">
+    <div class="col col-sm-2">1 Lado</div>
+    <div class="col col-sm-3">
       <input type="text" class="form-control input-sm" placeholder="€" ng-model="priceA3SIMPLEX">
     </div>
-  </div>
-  <div class="row" style="margin-top: 1%; margin-bottom: 4%;">
-    <div class="col col-sm-4">2 Lados</div>
-    <div class="col col-sm-6">
+    <div class="col col-sm-2">2 Lados</div>
+    <div class="col col-sm-3">
       <input type="text" class="form-control input-sm" placeholder="€" ng-model="priceA3DUPLEX">
     </div>
   </div>
   <!-- ./A3 -->
-  <!-- footer -->
-  <div class="modal-footer" style="text-align:center">
-      <button class="btn btn-success btn-sm btn-flat" type="button" ng-click="addNewEntry()"><i class="fa fa-check" style="margin-right: 2%;"/>Adicionar</button>
-      <button class="btn btn-danger btn-sm btn-flat" type="button" ng-click="closeModal()"><i class="fa fa-times" style="margin-right: 2%;"/>Cancelar</button>
-  </div>
-  <!-- ./footer -->
 </div>
+<!-- footer -->
+<div class="modal-footer" style="text-align:center; margin-top: 4%;">
+    <button class="btn btn-success btn-sm btn-flat" type="button" ng-click="addNewEntry()"><i class="fa fa-check" style="margin-right: 2%;"/>Adicionar</button>
+    <button class="btn btn-danger btn-sm btn-flat" type="button" ng-click="closeModal()"><i class="fa fa-times" style="margin-right: 2%;"/>Cancelar</button>
+</div>
+<!-- ./footer -->
