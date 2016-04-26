@@ -8,7 +8,6 @@ app.controller('ManagerPriceTableCtrl', ['$scope', '$uibModal', 'PriceTableServi
 
   $scope.confirmDelete = function(table,index) {
     PriceTableService.setCurrentTable(table);
-    console.log("CUR "+PriceTableService.getCurrentTable());
     $scope.openConfirmModal("Tem a certeza que pertende apagar esta linha do preçário?");
   };
 
@@ -32,6 +31,11 @@ app.controller('ManagerPriceTableCtrl', ['$scope', '$uibModal', 'PriceTableServi
     });
   };
 
+  $scope.newEntryPrintCopyModal = function(table) {
+    PriceTableService.setCurrentTable(table);
+    $scope.openNewEntryPrintCopyModal("Nova entrada em impressões e cópias a preto e branco.");
+  };
+
   $scope.openNewEntryPrintCopyModal = function(reply) {
     var modalInstance = $uibModal.open({
       animation: true,
@@ -39,16 +43,13 @@ app.controller('ManagerPriceTableCtrl', ['$scope', '$uibModal', 'PriceTableServi
       controller: 'NewPrintCopyEntryCtrl',
       size: 'sm',
       resolve: {
-        index: function() {
-          return $scope.index;
-        },
         text: function() {
           return reply;
         }
       }
     });
     modalInstance.result.then(function(index) {
-      // do stuff
+      alert("Nova linha adicionada com sucesso!");
     });
   };
 
@@ -71,13 +72,16 @@ app.controller('ConfirmDeleteModalCtrl', function($scope, $uibModalInstance, ind
 });
 
 // Modal for adding new print and copy related rows to some table in the price table
-app.controller('NewPrintCopyEntryCtrl', function($scope, $uibModalInstance, index, text) {
+app.controller('NewPrintCopyEntryCtrl', function($scope, $uibModalInstance, text, PriceTableService) {
 
-  $scope.index = index;
   $scope.text = text;
 
-  $scope.confirmDeleteRow = function () {
-    $uibModalInstance.close($scope.index);
+  $scope.addNewEntry = function () {
+    var newEntry = {infLim: $scope.infLim, supLim: $scope.supLim, priceA4SIMPLEX: $scope.priceA4SIMPLEX, priceA4DUPLEX: $scope.priceA4DUPLEX, priceA3SIMPLEX: $scope.priceA3SIMPLEX, priceA3DUPLEX: $scope.priceA3DUPLEX};
+
+    PriceTableService.addNewRow(newEntry);
+
+    $uibModalInstance.close();
   };
 
   $scope.closeModal = function () {

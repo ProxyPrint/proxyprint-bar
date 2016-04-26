@@ -20,6 +20,10 @@ app.factory('PriceTableService', ['$http', function($http) {
     service.priceTable[service.currentTable].splice(index, 1);
   };
 
+  service.addNewRow = function(row) {
+    service.priceTable[service.currentTable].push(row);
+  }
+
   service.setPriceTable = function(priceTable) {
     service.priceTable = priceTable;
   };
