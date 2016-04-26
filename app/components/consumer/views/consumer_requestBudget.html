@@ -67,7 +67,7 @@
         <button ui-sref="consumer" style="margin:20px 0;"type="button" class="btn btn-default"><i class="fa fa-arrow-left"></i> Anterior</button>
     </div>
     <div class="right">
-        <button style="margin:20px 0;" type="button" class="btn btn-default" ng-click="toggleRequest()" ng-disabled="queueFiles()==0" >Seguinte <i class="fa fa-arrow-right"></i></button>
+        <button style="margin:20px 0;" type="button" class="btn btn-default" ng-click="toggleRequest()" ng-disabled="queueNumber()==0" >Seguinte <i class="fa fa-arrow-right"></i></button>
     </div>
 </div>
 
@@ -107,6 +107,6 @@
                 </div>
             </div>
         </div>
-        <button type="submit" class="btn btn-default" ng-click="request()" ng-disabled="queueFiles()==0"> Efetuar Pedido </button>
+        <button type="submit" class="btn btn-default" ng-click="request()" ng-disabled="queueNumber()==0"> Efetuar Pedido </button>
         <button type="cancel" class="btn btn-default" ng-click="back()"> Voltar </button>
 </modal>

@@ -57,9 +57,10 @@ angular.module('ProxyPrint')
 
     $scope.request = function(){
         /** Send Request */
+        FileTransferService.TransferFiles($scope.files());
     };
 
-    $scope.queueFiles = function (){
+    $scope.queueNumber = function (){
         var i = 0;
         angular.forEach($scope.files(), function(file){
             if(file.specs.length != 0){

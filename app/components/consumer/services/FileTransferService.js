@@ -7,7 +7,10 @@ angular.module('ProxyPrint').factory('FileTransferService',['Upload','$timeout',
             if (!file.$error) {
                 Upload.upload({
                     url: 'http://localhost:8080/consumer/upload',
-                    data: {file: file}
+                    data: {
+                        file: file,
+                        spec: files[i].specs
+                    }
                 }).then(function (resp) {
                     $timeout(function() {
                         console.log('file: '+resp.config.data.file.name);
