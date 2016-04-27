@@ -3,17 +3,15 @@ var app = angular.module('ProxyPrint');
 app.controller('ManagerPriceTableCtrl', ['$scope', '$uibModal', 'PriceTableService', 'priceTable', function($scope, $uibModal, PriceTableService, priceTable) {
 
   $scope.priceTable = priceTable.data;
-
-  console.log($scope.priceTable);
-
   $scope.isStaplingFree = true;
 
   $scope.confirmDelete = function(table,index) {
     PriceTableService.setCurrentTable(table);
-    $scope.openConfirmModal("Tem a certeza que pertende apagar esta linha do preçário?");
+    PriceTableService.setCurrentRowIndex(index);
+    $scope.openConfirmDeleteModal("Tem a certeza que pertende apagar esta linha do preçário?");
   };
 
-  $scope.openConfirmModal = function(reply) {
+  $scope.openConfirmDeleteModal = function(reply) {
     var modalInstance = $uibModal.open({
       animation: true,
       templateUrl: 'app/components/printshop/manager/views/pricetable/delete-row-modal.html',
@@ -29,7 +27,7 @@ app.controller('ManagerPriceTableCtrl', ['$scope', '$uibModal', 'PriceTableServi
       }
     });
     modalInstance.result.then(function(index) {
-      var data = PriceTableService.deleteRow($scope.priceTable[PriceTableService.getCurrentTable()]);
+      var data = PriceTableService.deleteRow($scope.priceTable[PriceTableService.getCurrentTable()][PriceTableService.getCurrentRowIndex()]);
       if(data.success) $scope.priceTable[PriceTableService.getCurrentTable()].splice(index, 1);
       else alert("Foi impossível remover o item desejado. Por favor tente mais tarde.");
     });
