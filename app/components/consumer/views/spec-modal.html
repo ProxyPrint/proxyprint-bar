@@ -70,6 +70,7 @@
                             <option>Argolas de plástico</option>
                             <option>Argolas em espiral</option>
                             <option>Argolas de arame</option>
+                            <option>Encadernação térmica</option>
                         </select>
                     </div>
                 </div>
@@ -78,6 +79,6 @@
     </div>
 </div>
 <div class="modal-footer" style="text-align:center">
-    <button class="btn btn-primary btn-flat" type="button" ng-disabled="!((name&&format&&sides&&colors)&&((content=='stapled')||(cover&&bindings)||(content==null)))" ng-click="performAction()">Adicionar especificação</button>
+    <button class="btn btn-primary btn-flat" type="button" ng-disabled="!((name&&format&&sides&&colors)&&((content=='stapled')||(cover&&bindings)||(content==null)||(bindings)))" ng-click="performAction()">Adicionar especificação</button>
     <button class="btn btn-default btn-flat" type="button" ng-click="closeModal()">Cancelar</button>
 </div>

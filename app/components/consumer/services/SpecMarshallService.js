@@ -60,7 +60,7 @@ angular.module('ProxyPrint').factory('SpecMarshallService',[function () {
         case 'PVC opaco':
           return 'PVC_OPAQUE';
         default:
-          return 'ERRO';
+          return '';
       }
     }
 
@@ -72,8 +72,10 @@ angular.module('ProxyPrint').factory('SpecMarshallService',[function () {
           return 'SPIRAL';
         case 'Argolas de arame':
           return 'WIRE';
+        case 'Encadernação térmica':
+          return 'STEELMAT';
         default:
-          return 'ERRO';
+          return '';
       }
     }
 
