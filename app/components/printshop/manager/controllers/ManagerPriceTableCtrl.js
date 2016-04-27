@@ -4,6 +4,7 @@ app.controller('ManagerPriceTableCtrl', ['$scope', '$uibModal', 'PriceTableServi
 
   $scope.priceTable = priceTable.data;
   $scope.isStaplingFree = true;
+  $scope.isEditModeOn = false;
 
   $scope.confirmDelete = function(table,index) {
     PriceTableService.setCurrentTable(table);
@@ -54,6 +55,10 @@ app.controller('ManagerPriceTableCtrl', ['$scope', '$uibModal', 'PriceTableServi
       $scope.priceTable[PriceTableService.getCurrentTable()].push(PriceTableService.getNewEntry());
       alert("Nova linha adicionada com sucesso!");
     });
+  };
+
+  $scope.editRow = function(table,index) {
+    alert(Edit+" "+table+" "+index);
   };
 
 }]);
