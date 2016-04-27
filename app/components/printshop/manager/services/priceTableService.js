@@ -14,7 +14,6 @@ app.factory('PriceTableService', ['$http', '$cookieStore', function($http, $cook
   };
 
   service.deleteRow = function(row) {
-    // Not ok
     console.log(row);
     var url = "http://localhost:8080/printshops/"+$cookieStore.get("printShopID")+"/pricetable/deletepaperitem";
     return $http.post(url,row).success(function(data){

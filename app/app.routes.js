@@ -161,40 +161,6 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
         controller: 'HistoryRequestsCtrl'
     })
 
-    /*Manager*/
-    .state('manager', {
-        url: '/manager',
-        views: {
-            '': {
-                templateUrl: '/app/components/printshop/manager/views/manager-base.html',
-                controller: 'ManagerBaseCtrl'
-            }
-        },
-        data: {
-            css: adminlteCSS
-        }
-    })
-    .state('manager.info', {
-        url: '/main',
-        templateUrl: '/app/components/printshop/manager/views/manager-base-info.html',
-        controller: 'ManagerInfoCtrl'
-    })
-    .state('manager.stats', {
-        url: '/stats',
-        templateUrl: '/app/components/printshop/manager/views/manager-stats.html',
-        controller: 'ManagerStatsCtrl'
-    })
-    .state('manager.employees', {
-        url: '/employees',
-        templateUrl: '/app/components/printshop/manager/views/manager-employees.html',
-        controller: 'ManagerEmployeesCtrl'
-    })
-    .state('manager.pricetable', {
-        url: '/pricetable',
-        templateUrl: '/app/components/printshop/manager/views/manager-pricetable.html',
-        controller: 'ManagerPriceTableCtrl'
-    })
-
   /*Manager*/
   .state('manager', {
     abstract: true,
