@@ -98,8 +98,8 @@ angular.module('ProxyPrint').controller('ConsumerSpecsController', ['$scope' , '
           }
           else {
             var cover, args;
-            cover = spec[3];
-            args = spec[4];
+            cover = spec[4];
+            args = spec[5];
             console.log("Encadernar...");
             console.log(format+", "+sides+", "+colors);
             console.log(cover+", "+args);

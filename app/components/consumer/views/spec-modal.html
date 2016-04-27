@@ -73,7 +73,7 @@
 </div>
 <div class="modal-footer" style="text-align:center">
     <button class="btn btn-primary btn-flat" type="button"
-        ng-disabled="!((format&&sides&&colors&&(content=='stapled'))||(format&&sides&&colors&&cover&&args)||(format&&sides&&colors))"
+        ng-disabled="!((format&&sides&&colors&&(content=='stapled'))||(format&&sides&&colors&&cover&&args)||(format&&sides&&colors&&(content==null)))"
         ng-click="performAction()">Adicionar especificação</button>
     <button class="btn btn-default btn-flat" type="button" ng-click="closeModal()">Cancelar</button>
 </div>
