@@ -80,69 +80,70 @@ angular.module('ProxyPrint').controller('ConsumerSpecsController', ['$scope' , '
       });
 
       modalInstance.result.then(function(spec) {
-        var format, sides, colors,name;
+        var specification = new Object();
 
-        name = spec[0];
-        format = spec[1];
-        sides = spec[2];
-        colors = spec[3];
+        specification.name = spec[0];
+        specification.format = spec[1];
+        specification.sides = spec[2];
+        specification.colors = spec[3];
+        var opts = new Object();
 
         if (spec[4]==null){
-          console.log(name+": Solto..");
-          console.log(format+", "+sides+", "+colors);
+          console.log("Solto..");
         }
 
         else {
           if (spec[5]==null && spec[6]==null){
-            console.log(name+": Agrafar");
-            console.log(format+", "+sides+", "+colors);
+            console.log("Agrafar");
+            specification.finishing = "Agrafar";
           }
           else {
-            var cover, args;
-            cover = spec[5];
-            args = spec[6];
-            console.log(name+": Encadernar...");
-            console.log(format+", "+sides+", "+colors);
-            console.log(cover+", "+args);
+            opts.cover = spec[5];
+            opts.binding = spec[6];
+            specification.opt = opts;
+            console.log("Encadernar...");
           }
         }
+        specification.id = $scope.specs.length+1;
+        $scope.specs.push(specification);
       });
     }
-    $scope.specs = {
-        list: [
+    $scope.specs = [
             {
                 id: 1,
+                name: "A4 - Preto e branco (frente e verso)",
                 format: "A4",
                 sides: "Frente e Verso",
                 colors: "Preto e Branco",
-                finishes: "Agrafar",
+                finishing: "Agrafar",
                 opt: {
                     cover: null,
                     rings: null,
                 }
             }, {
                 id: 2,
+                name: "Cores encadernado (A5)",
                 format: "A5",
                 sides: "Frente e Verso",
                 colors: "Cores",
-                finishes: "Encadernar",
+                finishing: "Encadernar",
                 opt: {
                     cover: "PVC Opaco",
                     rings: "Espiral"
                 }
             }, {
                 id: 3,
+                name: "Frente e verso A3",
                 format: "A3",
                 sides: "Frente e Verso",
                 colors: "Cores",
-                finishes: "Encadernar",
+                finishing: "Encadernar",
                 opt: {
                     cover: "PVC Opaco",
                     rings: "Espiral"
                 }
             }
-        ]
-    };
+        ];
 }]);
 
 angular.module('ProxyPrint').controller('AddSpecificationController', function ($scope, $uibModalInstance) {
@@ -155,7 +156,7 @@ angular.module('ProxyPrint').controller('AddSpecificationController', function (
     spec.push($scope.colors);
     spec.push($scope.content);
     spec.push($scope.cover);
-    spec.push($scope.args);
+    spec.push($scope.bindings);
     $uibModalInstance.close(spec);
   };
 

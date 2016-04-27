@@ -65,8 +65,8 @@
                 </div>
                 <div class="col-sm-6">
                     <div class="form-group">
-                        <label for="spec-args">Tipo de argolas</label>
-                        <select required class="form-control" ng-model="args" id="spec-args">
+                        <label for="spec-bindings">Tipo de argolas</label>
+                        <select required class="form-control" ng-model="bindings" id="spec-bindings">
                             <option>Argolas de plástico</option>
                             <option>Argolas em espiral</option>
                             <option>Argolas de arame</option>
@@ -78,6 +78,6 @@
     </div>
 </div>
 <div class="modal-footer" style="text-align:center">
-    <button class="btn btn-primary btn-flat" type="button" ng-disabled="!((name&&format&&sides&&colors&&(content=='stapled'))||(name&&format&&sides&&colors&&cover&&args)||(name&&format&&sides&&colors&&(content==null)))" ng-click="performAction()">Adicionar especificação</button>
+    <button class="btn btn-primary btn-flat" type="button" ng-disabled="!((name&&format&&sides&&colors&&(content=='stapled'))||(name&&format&&sides&&colors&&cover&&bindings)||(name&&format&&sides&&colors&&(content==null)))" ng-click="performAction()">Adicionar especificação</button>
     <button class="btn btn-default btn-flat" type="button" ng-click="closeModal()">Cancelar</button>
 </div>

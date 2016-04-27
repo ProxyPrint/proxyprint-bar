@@ -7,10 +7,10 @@
                 <h2 class="panel-title"> <b>Especificações</b> </h2>
             </div>
             <div class="panel-body" style="max-height: 300px; overflow-y: scroll">
-                <li ng-repeat="item in specs.list" dnd-draggable="item"
+                <li ng-repeat="item in specs" dnd-draggable="item"
                 dnd-effect-allowed="copy" dnd-selected="models.selected = item"
                 ng-class="{'selected': models.selected === item}" class="list-group-item clearfix">
-                {{item.id}}: {{item.format}} + {{item.sides}} + {{item.colors}} + {{item.finishes}}
+                {{item.id}}: {{item.name}}
             </li>
         </div>
 
