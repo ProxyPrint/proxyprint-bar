@@ -80,27 +80,28 @@ angular.module('ProxyPrint').controller('ConsumerSpecsController', ['$scope' , '
       });
 
       modalInstance.result.then(function(spec) {
-        var format, sides, colors;
+        var format, sides, colors,name;
 
-        format = spec[0];
-        sides = spec[1];
-        colors = spec[2];
+        name = spec[0];
+        format = spec[1];
+        sides = spec[2];
+        colors = spec[3];
 
-        if (spec[3]==null){
-          console.log("Solto..");
+        if (spec[4]==null){
+          console.log(name+": Solto..");
           console.log(format+", "+sides+", "+colors);
         }
 
         else {
-          if (spec[4]==null && spec[5]==null){
-            console.log("Agrafar");
+          if (spec[5]==null && spec[6]==null){
+            console.log(name+": Agrafar");
             console.log(format+", "+sides+", "+colors);
           }
           else {
             var cover, args;
-            cover = spec[4];
-            args = spec[5];
-            console.log("Encadernar...");
+            cover = spec[5];
+            args = spec[6];
+            console.log(name+": Encadernar...");
             console.log(format+", "+sides+", "+colors);
             console.log(cover+", "+args);
           }
@@ -148,6 +149,7 @@ angular.module('ProxyPrint').controller('AddSpecificationController', function (
 
   $scope.performAction = function () {
     var spec = new Array();
+    spec.push($scope.name)
     spec.push($scope.format);
     spec.push($scope.sides);
     spec.push($scope.colors);

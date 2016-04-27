@@ -1,6 +1,12 @@
 <div class="modal-header">
 </div>
 <div class="modal-body" style="text-align:center">
+    <div class="input-group" style="margin: 0 auto"><strong>Nome</strong>
+        <input type="text" class="form-control" ng-model="name" id="name">
+    </div>
+    <div style="margin-left:25%; margin-right:25%">
+        <hr />
+    </div>
     <div class="row">
         <div class="col-sm-4">
             <div class="form-group">
@@ -72,8 +78,6 @@
     </div>
 </div>
 <div class="modal-footer" style="text-align:center">
-    <button class="btn btn-primary btn-flat" type="button"
-        ng-disabled="!((format&&sides&&colors&&(content=='stapled'))||(format&&sides&&colors&&cover&&args)||(format&&sides&&colors&&(content==null)))"
-        ng-click="performAction()">Adicionar especificação</button>
+    <button class="btn btn-primary btn-flat" type="button" ng-disabled="!((name&&format&&sides&&colors&&(content=='stapled'))||(name&&format&&sides&&colors&&cover&&args)||(name&&format&&sides&&colors&&(content==null)))" ng-click="performAction()">Adicionar especificação</button>
     <button class="btn btn-default btn-flat" type="button" ng-click="closeModal()">Cancelar</button>
 </div>
