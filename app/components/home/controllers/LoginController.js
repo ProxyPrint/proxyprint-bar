@@ -11,6 +11,7 @@ function($scope, $rootScope, $location, AuthenticationService, $state, $cookieSt
         // PrintShop - Manager
         if(response.user.roles[0] == "ROLE_MANAGER") {
           AuthenticationService.SetCredentials($scope.username, $scope.password);
+          $cookieStore.put("printShopID", response.user.printShop['id']);
           $state.go('manager.stats', {"username": $scope.username});
         }
         // PrintShop - Employee

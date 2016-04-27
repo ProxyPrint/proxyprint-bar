@@ -4,6 +4,8 @@ app.controller('ManagerPriceTableCtrl', ['$scope', '$uibModal', 'PriceTableServi
 
   $scope.priceTable = priceTable.data;
 
+  console.log($scope.priceTable);
+
   $scope.isStaplingFree = true;
 
   $scope.confirmDelete = function(table,index) {
@@ -27,8 +29,9 @@ app.controller('ManagerPriceTableCtrl', ['$scope', '$uibModal', 'PriceTableServi
       }
     });
     modalInstance.result.then(function(index) {
-      $scope.priceTable[PriceTableService.getCurrentTable()].splice(index, 1);
-      PriceTableService.deleteRow(index);
+      var data = PriceTableService.deleteRow($scope.priceTable[PriceTableService.getCurrentTable()]);
+      if(data.success) $scope.priceTable[PriceTableService.getCurrentTable()].splice(index, 1);
+      else alert("Foi impossível remover o item desejado. Por favor tente mais tarde.");
     });
   };
 
@@ -50,6 +53,7 @@ app.controller('ManagerPriceTableCtrl', ['$scope', '$uibModal', 'PriceTableServi
       }
     });
     modalInstance.result.then(function(index) {
+      $scope.priceTable[PriceTableService.getCurrentTable()].push(PriceTableService.getNewEntry());
       alert("Nova linha adicionada com sucesso!");
     });
   };
@@ -78,7 +82,7 @@ app.controller('NewPrintCopyEntryCtrl', function($scope, $uibModalInstance, text
   $scope.text = text;
 
   $scope.addNewEntry = function () {
-    var newEntry = {infLim: $scope.infLim, supLim: $scope.supLim, priceA4SIMPLEX: $scope.priceA4SIMPLEX, priceA4DUPLEX: $scope.priceA4DUPLEX, priceA3SIMPLEX: $scope.priceA3SIMPLEX, priceA3DUPLEX: $scope.priceA3DUPLEX};
+    var newEntry = {infLim: $scope.infLim, supLim: $scope.supLim, priceA4SIMPLEX: $scope.priceA4SIMPLEX, priceA4DUPLEX: $scope.priceA4DUPLEX, priceA3SIMPLEX: $scope.priceA3SIMPLEX, priceA3DUPLEX: $scope.priceA3DUPLEX, colors: PriceTableService.getCurrentTable()};
 
     PriceTableService.addNewRow(newEntry);
 

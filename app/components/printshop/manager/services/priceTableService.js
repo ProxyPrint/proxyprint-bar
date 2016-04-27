@@ -1,21 +1,32 @@
 var app = angular.module('ProxyPrint');
 
-app.factory('PriceTableService', ['$http', function($http) {
+app.factory('PriceTableService', ['$http', '$cookieStore', function($http, $cookieStore) {
   var service = {};
   service.currentTable = "";
+  service.newEntry = {};
 
   service.getPriceTable = function() {
-    return $http.get("http://localhost:8080/printshops/100/pricetable").success(function(data){
+    return $http.get("http://localhost:8080/printshops/"+$cookieStore.get("printShopID")+"/pricetable").success(function(data){
       return data;
     });
   };
 
-  service.deleteRow = function(index) {
-    // POST DELETE
+  service.deleteRow = function(row) {
+    // Not ok
+    /*var url = "http://localhost:8080/printshops/"+$cookieStore.get("printShopID")+"/pricetable/deletepaperitem";
+    return $http.post(url,row).success(function(data){
+      return data;
+    });*/
+    var data = {success: 'true'};
+    return data;
   };
 
   service.addNewRow = function(row) {
-    service.priceTable[service.currentTable].push(row);
+    service.newEntry = row;
+    var url = "http://localhost:8080/printshops/"+$cookieStore.get("printShopID")+"/pricetable/newpaperitem";
+    return $http.post(url,row).success(function(data){
+      return data;
+    });
   }
 
   service.setCurrentTable = function(table) {
@@ -25,6 +36,10 @@ app.factory('PriceTableService', ['$http', function($http) {
   service.getCurrentTable = function() {
     return service.currentTable;
   };
+
+  service.getNewEntry = function() {
+    return service.newEntry;
+  }
 
   return service;
 }]);
