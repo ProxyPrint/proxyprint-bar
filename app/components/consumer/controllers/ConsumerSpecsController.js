@@ -83,6 +83,8 @@ angular.module('ProxyPrint').controller('ConsumerSpecsController',
 
       modalInstance.result.then(function(spec) {
         var specification = SpecMarshallService.marshallSpecification(spec);
+        specification.fakeId = $scope.specs.length+1;
+        $scope.specs.push(specification);
         console.log(specification);
       });
     }
