@@ -1,0 +1,194 @@
+<h1>
+  Preçário
+  <small>Crie e atualize o seu preçário</small>
+</h1>
+
+<div clas="wrapper" style="margin-top: 1%; overflow-y: scroll; height:600px; overflow-x: hidden;">
+  <!-- copy and printing -->
+  <div class="box">
+    <div class="box-header">
+      <h3 class="box-title">Impressão e Cópia</h3>
+    </div>
+
+    <!-- table-paper-bw -->
+    <div class="box-body">
+      <div class="dataTables_wrapper form-inline dt-bootstrap">
+        <div class="row">
+          <div class="col-sm-6"></div>
+          <div class="col-sm-6"></div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <table class="table table-bordered table-striped" role="grid">
+              <thead>
+                <tr role="row">
+                  <th>Preto e Branco</th>
+                  <th colspan="2" style="text-align: center;">A4</th>
+                  <th colspan="2" style="text-align: center;">A3</th>
+                </tr>
+              </thead>
+              <thead>
+                <tr role="row">
+                  <th>Quantidade</th>
+                  <th style="text-align: center;">1 Lado</th>
+                  <th style="text-align: center;">2 Lados</th>
+                  <th style="text-align: center;">1 Lado</th>
+                  <th style="text-align: center;">2 Lados</th>
+                  <th colspan="2" style="text-align: center;">Acções</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr role="row" class="odd" ng-repeat="item in priceTable['BW']">
+                  <td>{{item.infLim}}-{{item.supLim}}</td>
+                  <td style="text-align: center;">{{item.priceA4SIMPLEX}}<span ng-if="item.priceA4SIMPLEX!='-'"> €</span></td>
+                  <td style="text-align: center;">{{item.priceA4DUPLEX}}<span ng-if="item.priceA4DUPLEX!='-'"> €</span></td>
+                  <td style="text-align: center;">{{item.priceA3SIMPLEX}}<span ng-if="item.priceA3SIMPLEX!='-'"> €</span></td>
+                  <td style="text-align: center;">{{item.priceA3DUPLEX}}<span ng-if="item.priceA3DUPLEX!='-'"> €</span></td>
+                  <td style="text-align: center;"><button ng-click="editRow('BW',$index)" type="button" class="btn bg-olive btn-flat btn-sm margin"><i class="fa fa-fw fa-pencil"></i>Editar linha</button><button type="button" class="btn bg-red btn-flat btn-sm margin" ng-click="confirmDelete('BW',$index)"><i class="fa fa-fw fa-trash"></i> Apagar linha</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <button type="button" class="btn btn-flat btn-sm bg-blue" style="float: left;" ng-click="newEntryPrintCopyModal('BW')"><i class="fa fa-fw fa-plus" style="padding-right: 2%;"></i>Adicionar entrada</button>
+      <button ng-show="isEditModeOn" ng-click="saveChanges()" type="button" class="btn btn-flat btn-sm btn-success" style="float: left; margin-left: 2%;" ng-click="newEntryPrintCopyModal('BW')"><i class="fa fa-fw fa-save" style="padding-right: 2%;"></i>Guardar alterações</button>
+    </div>
+    <!-- ./table-paper-bw -->
+
+    <hr/>
+
+    <!-- table-paper-colors -->
+    <div class="box-body">
+      <div class="dataTables_wrapper form-inline dt-bootstrap">
+        <div class="row">
+          <div class="col-sm-6"></div>
+          <div class="col-sm-6"></div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <table class="table table-bordered table-striped" role="grid">
+              <thead>
+                <tr role="row">
+                  <th>Cores</th>
+                  <th colspan="2" style="text-align: center;">A4</th>
+                  <th colspan="2" style="text-align: center;">A3</th>
+                </tr>
+              </thead>
+              <thead>
+                <tr role="row">
+                  <th>Quantidade</th>
+                  <th style="text-align: center;">1 Lado</th>
+                  <th style="text-align: center;">2 Lados</th>
+                  <th style="text-align: center;">1 Lado</th>
+                  <th style="text-align: center;">2 Lados</th>
+                  <th colspan="2" style="text-align: center;">Acções</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr role="row" class="odd" ng-repeat="item in priceTable['COLOR']">
+                  <td>{{item.infLim}}-{{item.supLim}}</td>
+                  <td style="text-align: center;">{{item.priceA4SIMPLEX}}<span ng-if="item.priceA4SIMPLEX!='-'"> €</span></td>
+                  <td style="text-align: center;">{{item.priceA4DUPLEX}}<span ng-if="item.priceA4DUPLEX!='-'"> €</span></td>
+                  <td style="text-align: center;">{{item.priceA3SIMPLEX}}<span ng-if="item.priceA3SIMPLEX!='-'"> €</span></td>
+                  <td style="text-align: center;">{{item.priceA3DUPLEX}}<span ng-if="item.priceA3DUPLEX!='-'"> €</span></td>
+                  <td style="text-align: center;"><button type="button" class="btn bg-olive btn-flat btn-sm margin"><i class="fa fa-fw fa-pencil"></i>Editar linha</button> <button type="button" class="btn bg-red btn-flat btn-sm margin" ng-click="confirmDelete('COLOR',$index)"><i class="fa fa-fw fa-trash"></i> Apagar linha</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <button type="button" class="btn btn-flat btn-sm bg-blue" style="float: left;" ng-click="newEntryPrintCopyModal('COLOR')"><i class="fa fa-fw fa-plus" style="padding-right: 2%;"></i>Adicionar entrada</button>
+    </div>
+    <!-- ./table-paper-colors -->
+
+  </div>
+  <!-- ./copy and printing -->
+
+  <!-- binding -->
+  <div class="box" style="margin-top: 2%;">
+    <div class="box-header">
+      <h3 class="box-title">Acabamentos</h3>
+    </div>
+
+    <!-- table-paper-bw -->
+    <div class="box-body">
+      <div class="dataTables_wrapper form-inline dt-bootstrap">
+        <div class="row">
+          <div class="col-sm-6"></div>
+          <div class="col-sm-6"></div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <table class="table table-bordered table-striped" role="grid">
+              <thead>
+                <th colspan="9">Encadernar</th>
+              </thead>
+              <thead>
+                <tr role="row">
+                  <th colspan="2" style="text-align: center;">Argolas de Plástico</th>
+                  <th colspan="2" style="text-align: center;">Argolas de Espiral</th>
+                  <th colspan="2" style="text-align: center;">Argolas de Arame</th>
+                  <th colspan="2" style="text-align: center;">Térmicas de Steelmat</th>
+                  <th colspan="2" style="text-align: center;">Acções</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr role="row">
+                  <td style="text-align: center;">6mm-10mm</td>
+                  <td style="text-align: center;">1,15 €</td>
+                  <td style="text-align: center;">12mm-20mm</td>
+                  <td style="text-align: center;">1,15 €</td>
+                  <td style="text-align: center;">6mm-10mm</td>
+                  <td style="text-align: center;">1,15 €</td>
+                  <td style="text-align: center;">6mm-10mm</td>
+                  <td style="text-align: center;">1,15 €</td>
+                  <td style="text-align: center;"><button type="button" class="btn bg-olive btn-flat btn-sm margin"><i class="fa fa-fw fa-pencil"></i>Editar linha</button> <button button type="button" class="btn bg-red btn-flat btn-sm margin"><i class="fa fa-fw fa-trash"></i> Apagar linha</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <button type="button" class="btn btn-flat btn-sm bg-blue" style="float: left;"><i class="fa fa-fw fa-plus" style="padding-right: 2%;"></i>Adicionar entrada</button>
+    </div>
+    <!-- ./table-paper-bw -->
+
+    <hr/>
+
+    <!-- ./stappling -->
+    <div class="box-body" style="width: 25%;">
+      <h5 class="box-title"><b>Agrafar</b></h5>
+      <div class="checkbox">
+        <label style="margin-right: 4%;">
+          <input type="checkbox" class="minimal" ng-model="isStaplingFree">
+          Grátis
+        </label>
+        <label>
+          <input type="checkbox" class="minimal" ng-model="isStaplingFree" ng-true-value="{{!isStaplingFree}}" ng-false-value="{{isStaplingFree}}">
+          Pago
+        </label>
+      </div>
+      <div ng-show="!isStaplingFree" style="border-style: dotted; border-width: 1px; padding: 4%; border-color: #B6B6B6;">
+        <div><b>Preço</b></div>
+        <table>
+          <tr>
+            <td>
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-euro"></i></span>
+                <input type="text" class="form-control" style="width: 95%;">
+              </div>
+            </td>
+            <td>
+              <button type="button" class="btn btn-flat btn-sm btn-success">OK</button>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <!-- ./stappling -->
+
+  </div>
+  <!-- ./finishing -->
+</div>
