@@ -1,0 +1,17 @@
+<div class="container">
+	<div class="printshops">
+		<h2>Reprografias</h2>
+		<ul class="list-group">
+			<li class="list-group-item clearfix" ng-repeat="printshop in selectedPrintShops">
+					{{printshop.name}}</br>
+					{{printshop.address}}
+			</li>
+		</ul>
+	</div>
+</div>
+<div class="container">
+	<div class="printshops">
+		<h2></h2>
+		<select class="form-control" ng-Model="selectedPrintShop" ng-options="printshop.name for printshop in printshops" ng-change="addPrintShop()"></select>
+	</div>
+</div>

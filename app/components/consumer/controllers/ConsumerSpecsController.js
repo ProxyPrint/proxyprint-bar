@@ -1,4 +1,4 @@
-angular.module('ProxyPrint').controller('ConsumerSpecsController', ['$scope' , '$uibModal', '$log', 'FileTransferService', function($scope, $uibModal, $log, FileTransferService) {
+angular.module('ProxyPrint').controller('ConsumerSpecsController', ['$scope' , '$uibModal', '$log', 'FileTransferService', '$state', function($scope, $uibModal, $log, FileTransferService, $state) {
 
     /** Page range logic */
     $scope.showModal = false;
@@ -55,7 +55,10 @@ angular.module('ProxyPrint').controller('ConsumerSpecsController', ['$scope' , '
 
     $scope.request = function(){
         /** Send Request */
-        FileTransferService.TransferFiles($scope.files());
+        FileTransferService.TransferFiles($scope.files(), function(){
+          $scope.showRequest = false;
+          $state.go('consumer.requestprintshopsbudget');
+        });
     };
 
     $scope.queueNumber = function (){
