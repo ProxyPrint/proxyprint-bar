@@ -1,4 +1,6 @@
-angular.module('ProxyPrint').controller('ConsumerSpecsController', ['$scope' , '$uibModal', '$log', 'FileTransferService', function($scope, $uibModal, $log, FileTransferService) {
+angular.module('ProxyPrint').controller('ConsumerSpecsController',
+  ['$scope' , '$uibModal', '$log', 'FileTransferService', 'SpecMarshallService',
+    function($scope, $uibModal, $log, FileTransferService, SpecMarshallService) {
 
     /** Page range logic */
     $scope.showModal = false;
@@ -80,68 +82,34 @@ angular.module('ProxyPrint').controller('ConsumerSpecsController', ['$scope' , '
       });
 
       modalInstance.result.then(function(spec) {
-        var specification = new Object();
-
-        specification.name = spec[0];
-        specification.format = spec[1];
-        specification.sides = spec[2];
-        specification.colors = spec[3];
-        var opts = new Object();
-
-        if (spec[4]==null){
-          console.log("Solto..");
-        }
-
-        else {
-          if (spec[5]==null && spec[6]==null){
-            console.log("Agrafar");
-            specification.finishing = "Agrafar";
-          }
-          else {
-            opts.cover = spec[5];
-            opts.binding = spec[6];
-            specification.opt = opts;
-            console.log("Encadernar...");
-          }
-        }
-        specification.id = $scope.specs.length+1;
-        $scope.specs.push(specification);
+        var specification = SpecMarshallService.marshallSpecification(spec);
+        console.log(specification);
       });
     }
+
     $scope.specs = [
             {
-                id: 1,
-                name: "A4 - Preto e branco (frente e verso)",
-                format: "A4",
-                sides: "Frente e Verso",
-                colors: "Preto e Branco",
-                finishing: "Agrafar",
-                opt: {
-                    cover: null,
-                    rings: null,
-                }
+                id: 101,
+                fakeId: 1,
+                name: "Esquema1",
+                paperSpecs: "COLOR,A4,SIMPLEX",
+                bindingSpecs: "PLASTIC",
+                coverSpecs: "CRISTAL_ACETATE",
+
             }, {
-                id: 2,
-                name: "Cores encadernado (A5)",
-                format: "A5",
-                sides: "Frente e Verso",
-                colors: "Cores",
-                finishing: "Encadernar",
-                opt: {
-                    cover: "PVC Opaco",
-                    rings: "Espiral"
-                }
+                id: 102,
+                fakeId: 2,
+                name: "Esquema xpto",
+                paperSpecs: "COLOR,A4,SIMPLEX",
+                bindingSpecs: "",
+                coverSpecs: ""
             }, {
-                id: 3,
-                name: "Frente e verso A3",
-                format: "A3",
-                sides: "Frente e Verso",
-                colors: "Cores",
-                finishing: "Encadernar",
-                opt: {
-                    cover: "PVC Opaco",
-                    rings: "Espiral"
-                }
+                id: 100,
+                fakeId: 3,
+                name: "Esquema 2",
+                paperSpecs: "COLOR,A4,SIMPLEX",
+                bindingSpecs:"STAPLING",
+                coverSpecs:""
             }
         ];
 }]);
