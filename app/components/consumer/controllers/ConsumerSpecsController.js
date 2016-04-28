@@ -42,22 +42,11 @@ angular.module('ProxyPrint').controller('ConsumerSpecsController', ['$scope' , '
         $scope.showModal = false;
     };
 
-    /** Request modal logic */
-    $scope.showRequest = false;
-
-    $scope.toggleRequest = function(){
-        $scope.showRequest = !$scope.showRequest;
-    };
-
-    $scope.back = function (){
-        $scope.showRequest = false;
-    };
-
     $scope.request = function(){
         /** Send Request */
         FileTransferService.TransferFiles($scope.files(), function(){
-          $scope.showRequest = false;
-          $state.go('consumer.requestprintshopsbudget');
+            $scope.showRequest = false;
+            $state.go('consumer.requestprintshopsbudget');
         });
     };
 
@@ -73,43 +62,63 @@ angular.module('ProxyPrint').controller('ConsumerSpecsController', ['$scope' , '
 
     $scope.files = FileTransferService.getFiles;
 
+    $scope.addRequestModal = function() {
+
+        var modalInstance = $uibModal.open({
+            animation: true,
+            templateUrl: 'app/components/consumer/views/request-modal.html',
+            controller: 'SendRequestController',
+            size: 'md',
+            resolve: {
+                files: function () {
+                    return $scope.files();
+                }
+            }
+        });
+
+        modalInstance.result.then(function() {
+            FileTransferService.TransferFiles($scope.files());
+            $state.go('consumer.requestprintshopsbudget');
+        });
+    }
+
     $scope.addSpecModal = function() {
 
-      var modalInstance = $uibModal.open({
-        animation: true,
-        templateUrl: 'app/components/consumer/views/spec-modal.html',
-        controller: 'AddSpecificationController',
-        size: 'md'
-      });
+        var modalInstance = $uibModal.open({
+            animation: true,
+            templateUrl: 'app/components/consumer/views/spec-modal.html',
+            controller: 'AddSpecificationController',
+            size: 'md'
+        });
 
-      modalInstance.result.then(function(spec) {
-        var format, sides, colors,name;
+        modalInstance.result.then(function(spec) {
+            var format, sides, colors,name;
 
-        name = spec[0];
-        format = spec[1];
-        sides = spec[2];
-        colors = spec[3];
+            name = spec[0];
+            format = spec[1];
+            sides = spec[2];
+            colors = spec[3];
 
-        if (spec[4]==null){
-          console.log(name+": Solto..");
-          console.log(format+", "+sides+", "+colors);
-        }
+            if (spec[4]==null){
+                console.log(name+": Solto..");
+                console.log(format+", "+sides+", "+colors);
+            }
 
-        else {
-          if (spec[5]==null && spec[6]==null){
-            console.log(name+": Agrafar");
-            console.log(format+", "+sides+", "+colors);
-          }
-          else {
-            var cover, args;
-            cover = spec[5];
-            args = spec[6];
-            console.log(name+": Encadernar...");
-            console.log(format+", "+sides+", "+colors);
-            console.log(cover+", "+args);
-          }
-        }
-      });
+            else {
+                if (spec[5]==null && spec[6]==null){
+                    console.log(name+": Agrafar");
+                    console.log(format+", "+sides+", "+colors);
+                }
+                else {
+                    var cover, args;
+                    cover = spec[5];
+                    args = spec[6];
+                    console.log(name+": Encadernar...");
+                    console.log(format+", "+sides+", "+colors);
+                    console.log(cover+", "+args);
+                }
+            }
+        });
     }
     $scope.specs = {
         list: [
@@ -148,21 +157,34 @@ angular.module('ProxyPrint').controller('ConsumerSpecsController', ['$scope' , '
     };
 }]);
 
+angular.module('ProxyPrint').controller('SendRequestController', ['$scope', '$uibModalInstance', 'files', function ($scope, $uibModalInstance, files) {
+
+    $scope.files = files;
+
+    $scope.performAction = function () {
+        $uibModalInstance.close();
+    };
+
+    $scope.closeModal = function () {
+        $uibModalInstance.dismiss();
+    };
+}]);
+
 angular.module('ProxyPrint').controller('AddSpecificationController', function ($scope, $uibModalInstance) {
 
-  $scope.performAction = function () {
-    var spec = new Array();
-    spec.push($scope.name)
-    spec.push($scope.format);
-    spec.push($scope.sides);
-    spec.push($scope.colors);
-    spec.push($scope.content);
-    spec.push($scope.cover);
-    spec.push($scope.args);
-    $uibModalInstance.close(spec);
-  };
+    $scope.performAction = function () {
+        var spec = new Array();
+        spec.push($scope.name)
+        spec.push($scope.format);
+        spec.push($scope.sides);
+        spec.push($scope.colors);
+        spec.push($scope.content);
+        spec.push($scope.cover);
+        spec.push($scope.args);
+        $uibModalInstance.close(spec);
+    };
 
-  $scope.closeModal = function () {
-    $uibModalInstance.dismiss('cancel');
-  };
+    $scope.closeModal = function () {
+        $uibModalInstance.dismiss('cancel');
+    };
 });
