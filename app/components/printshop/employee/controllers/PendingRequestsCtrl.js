@@ -1,5 +1,5 @@
-angular.module('ProxyPrint').controller('PendingRequestsCtrl', ['$scope',
-      function($scope) {
+angular.module('ProxyPrint').controller('PendingRequestsCtrl', ['$scope', 'pendingPrintRequests', 'PendingPrintRequestsService',
+      function($scope, pendingPrintRequests, PendingPrintRequestsService) {
 
    $scope.pendingRequests = [
      { id: "1", consumer: "João Matias", arrivalTimestamp: "11/7/2014 12:15"},
@@ -8,7 +8,7 @@ angular.module('ProxyPrint').controller('PendingRequestsCtrl', ['$scope',
      { id: "4", consumer: "Joana Freitas", arrivalTimestamp: "11/7/2014 03:30"},
      { id: "5", consumer: "Daniel Caldas", arrivalTimestamp: "11/7/2014 02:10"}
    ];
-
+   // $scope.pendingRequests = pendingPrintRequests.data;
    $scope.paginationOn = true;
 
    $scope.attendRequest = function(requestID) {
