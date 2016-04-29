@@ -8,5 +8,9 @@ angular.module('ProxyPrint').factory('PrintingSchemaService',['$http', function 
       });
     };
 
+    service.addPrintingSchema = function (schema, consumerID){
+      return $http.post('http://localhost:8080/consumer/'+consumerID+'/printingschemas', schema);
+    }
+
     return service;
 }]);

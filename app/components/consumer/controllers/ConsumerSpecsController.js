@@ -1,11 +1,15 @@
 angular.module('ProxyPrint').controller('ConsumerSpecsController',
-  ['$scope' , '$uibModal', '$log', 'FileTransferService', 'SpecMarshallService', 'printingSchemas',
-    function($scope, $uibModal, $log, FileTransferService, SpecMarshallService, printingSchemas) {
+  ['$scope' , '$uibModal', '$log', 'FileTransferService', 'SpecMarshallService',
+    'printingSchemas', 'PrintingSchemaService', '$cookieStore',
+    function($scope, $uibModal, $log, FileTransferService, SpecMarshallService,
+        printingSchemas, PrintingSchemaService, $cookieStore) {
 
     /** Page range logic */
     $scope.showModal = false;
     $scope.lastItem = null;
     $scope.lastFile = null;
+
+    $scope.specs = printingSchemas.data;
 
     $scope.toggleModal = function(file, item){
         $scope.lastItem = item;
@@ -83,13 +87,19 @@ angular.module('ProxyPrint').controller('ConsumerSpecsController',
 
       modalInstance.result.then(function(spec) {
         var specification = SpecMarshallService.marshallSpecification(spec);
-        specification.fakeId = $scope.specs.length+1;
+        if ($scope.specs == null){
+          specification.fakeID = 1;
+          $scope.specs = new Array();
+        }
+        else specification.fakeId = $scope.specs.length+1;
+        PrintingSchemaService.addPrintingSchema(specification,$cookieStore.get('consumerID'));
         $scope.specs.push(specification);
-        console.log(specification);
+
+
       });
     }
 
-    $scope.specs = printingSchemas;
+
 }]);
 
 angular.module('ProxyPrint').controller('AddSpecificationController', function ($scope, $uibModalInstance) {
