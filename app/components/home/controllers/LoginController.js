@@ -21,6 +21,7 @@ function($scope, $rootScope, $location, AuthenticationService, $state, $cookieSt
         }
         // Consumer
         else if(response.user.roles[0] == "ROLE_USER") {
+          $cookieStore.put("consumerID", response.user.id);
           if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function(position) {
               $rootScope.position = position;
@@ -30,8 +31,7 @@ function($scope, $rootScope, $location, AuthenticationService, $state, $cookieSt
           }
 
           AuthenticationService.SetCredentials($scope.username, $scope.password);
-          $state.transitionTo('consumer');
-          $location.path('/consumerID');
+          $state.go('consumer', {"consumerID":$scope.username});
         }
         // Admin
         else if(response.user.roles[0] == "ROLE_ADMIN") {

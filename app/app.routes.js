@@ -94,7 +94,7 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
 
     /*Consumer*/
     .state('consumer', {
-        url: '/consumerID',
+        url: '/:consumerID',
         views: {
             '': {
                 templateUrl: '/app/components/consumer/views/consumer_mainpage.html',
@@ -127,7 +127,14 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
     .state('consumer.requestbudget', {
         url: '/requestbudget',
         templateUrl: '/app/components/consumer/views/consumer_requestBudget.html',
-        controller: 'ConsumerSpecsController'
+        controller: 'ConsumerSpecsController',
+        resolve: {
+          printingSchemas : ['PrintingSchemaService','$cookieStore',
+            function(PrintingSchemaService, $cookieStore) {
+              console.log($cookieStore.get('consumerID'));
+            //return PrintingSchemaService.getPrintingSchemas($stateParams.consumerID);
+          }]
+        }
     })
 
     /*PrintShop*/
