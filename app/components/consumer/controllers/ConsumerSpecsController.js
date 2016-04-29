@@ -91,7 +91,7 @@ angular.module('ProxyPrint').controller('ConsumerSpecsController',
           specification.fakeID = 1;
           $scope.specs = new Array();
         }
-        else specification.fakeId = $scope.specs.length+1;
+        else specification.fakeID = $scope.specs.length+1;
         PrintingSchemaService.addPrintingSchema(specification,$cookieStore.get('consumerID'));
         $scope.specs.push(specification);
 
