@@ -1,6 +1,6 @@
 angular.module('ProxyPrint').controller('ConsumerSpecsController',
-  ['$scope' , '$uibModal', '$log', 'FileTransferService', 'SpecMarshallService',
-    function($scope, $uibModal, $log, FileTransferService, SpecMarshallService) {
+  ['$scope' , '$uibModal', '$log', 'FileTransferService', 'SpecMarshallService', 'printingSchemas',
+    function($scope, $uibModal, $log, FileTransferService, SpecMarshallService, printingSchemas) {
 
     /** Page range logic */
     $scope.showModal = false;
@@ -89,31 +89,7 @@ angular.module('ProxyPrint').controller('ConsumerSpecsController',
       });
     }
 
-    $scope.specs = [
-            {
-                id: 101,
-                fakeId: 1,
-                name: "Esquema1",
-                paperSpecs: "COLOR,A4,SIMPLEX",
-                bindingSpecs: "PLASTIC",
-                coverSpecs: "CRISTAL_ACETATE",
-
-            }, {
-                id: 102,
-                fakeId: 2,
-                name: "Esquema xpto",
-                paperSpecs: "COLOR,A4,SIMPLEX",
-                bindingSpecs: "",
-                coverSpecs: ""
-            }, {
-                id: 100,
-                fakeId: 3,
-                name: "Esquema 2",
-                paperSpecs: "COLOR,A4,SIMPLEX",
-                bindingSpecs:"STAPLING",
-                coverSpecs:""
-            }
-        ];
+    $scope.specs = printingSchemas;
 }]);
 
 angular.module('ProxyPrint').controller('AddSpecificationController', function ($scope, $uibModalInstance) {

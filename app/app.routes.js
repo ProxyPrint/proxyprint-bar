@@ -131,8 +131,7 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
         resolve: {
           printingSchemas : ['PrintingSchemaService','$cookieStore',
             function(PrintingSchemaService, $cookieStore) {
-              console.log($cookieStore.get('consumerID'));
-            //return PrintingSchemaService.getPrintingSchemas($stateParams.consumerID);
+              var schemas = PrintingSchemaService.getPrintingSchemas($cookieStore.get('consumerID')).data;
           }]
         }
     })
