@@ -106,13 +106,13 @@
   </div>
   <!-- ./copy and printing -->
 
-  <!-- binding -->
+  <!-- finishing -->
   <div class="box" style="margin-top: 2%;">
     <div class="box-header">
       <h3 class="box-title">Acabamentos</h3>
     </div>
 
-    <!-- table-paper-bw -->
+    <!-- table-rings-->
     <div class="box-body">
       <div class="dataTables_wrapper form-inline dt-bootstrap">
         <div class="row">
@@ -123,7 +123,7 @@
           <div class="col-sm-12">
             <table class="table table-bordered table-striped" role="grid">
               <thead>
-                <th colspan="9">Encadernar</th>
+                <th colspan="9">Argolas</th>
               </thead>
               <thead>
                 <tr role="row">
@@ -153,7 +153,48 @@
       </div>
       <button type="button" class="btn btn-flat btn-sm bg-blue" style="float: left;"><i class="fa fa-fw fa-plus" style="padding-right: 2%;"></i>Adicionar entrada</button>
     </div>
-    <!-- ./table-paper-bw -->
+    <!-- ./table-rings -->
+
+    <hr/>
+
+    <!-- table-cover-->
+    <div class="box-body">
+      <div class="dataTables_wrapper form-inline dt-bootstrap">
+        <div class="row">
+          <div class="col-sm-6"></div>
+          <div class="col-sm-6"></div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <table class="table table-bordered table-striped" role="grid">
+              <thead>
+                <tr role="row">
+                  <th colspan="6">Capas para encadernar</th>
+                </tr>
+              </thead>
+              <thead>
+                <tr role="row">
+                  <th>Tipo</th>
+                  <th style="text-align: center;">A4</th>
+                  <th style="text-align: center;">A3</th>
+                  <th colspan="2" style="text-align: center;">Acções</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr role="row" class="odd">
+                  <td >Acetato Cristal</td>
+                  <td style="text-align: center;">0.10 €</td>
+                  <td style="text-align: center;">0.5 €</td>
+                  <td style="text-align: center; width: 20%;"><button type="button" class="btn bg-olive btn-flat btn-sm margin"><i class="fa fa-fw fa-pencil"></i>Editar linha</button> <button type="button" class="btn bg-red btn-flat btn-sm margin" ng-click="confirmDelete('COLOR',$index)"><i class="fa fa-fw fa-trash"></i> Apagar linha</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <button type="button" class="btn btn-flat btn-sm bg-blue" style="float: left;" ng-click="newEntryPrintCopyModal('COLOR')"><i class="fa fa-fw fa-plus" style="padding-right: 2%;"></i>Adicionar entrada</button>
+    </div>
+    <!-- ./table-cover -->
 
     <hr/>
 

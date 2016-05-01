@@ -23,7 +23,7 @@ app.factory('PriceTableService', ['$http', '$cookieStore', function($http, $cook
 
   service.addNewRow = function(row) {
     service.newEntry = row;
-    var url = "http://localhost:8080/printshops/"+$cookieStore.get("printShopID")+"/pricetable/newpaperitem";
+    var url = "http://localhost:8080/printshops/"+$cookieStore.get("printShopID")+"/pricetable";
     return $http.post(url,row).success(function(data){
       return data;
     });
