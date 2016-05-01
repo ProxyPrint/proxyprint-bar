@@ -1,6 +1,6 @@
 angular.module('ProxyPrint').controller('ConsumerSpecsController',
   ['$scope' , '$uibModal', '$log', 'FileTransferService', 'SpecMarshallService',
-    'printingSchemas', 'PrintingSchemaService', '$cookieStore',
+      'printingSchemas', 'PrintingSchemaService', '$cookieStore',
     function($scope, $uibModal, $log, FileTransferService, SpecMarshallService,
         printingSchemas, PrintingSchemaService, $cookieStore) {
 
@@ -98,6 +98,11 @@ angular.module('ProxyPrint').controller('ConsumerSpecsController',
 
       });
     }
+
+      $scope.removePrintingSchema = function (index) {
+        PrintingSchemaService.deletePrintingSchema($scope.specs[index].id, $cookieStore.get('consumerID'));
+        $scope.specs.splice(index,1);
+      }
 
 
 }]);
