@@ -9,6 +9,7 @@ function($scope, pendingPrintRequests, PendingPrintRequestsService) {
     //     { id: "5", consumer: "Daniel Caldas", arrivalTimestamp: "11/7/2014 02:10"}
     // ];
     $scope.pendingRequests = angular.fromJson(pendingPrintRequests.data.printrequest);
+    console.log($scope.pendingRequests);
     $scope.paginationOn = true;
 
     $scope.attendRequest = function(requestID) {
