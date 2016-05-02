@@ -3,7 +3,13 @@ var app = angular.module('ProxyPrint');
 app.controller('ManagerPriceTableCtrl', ['$scope', '$uibModal', 'PriceTableService', 'priceTable', function($scope, $uibModal, PriceTableService, priceTable) {
 
   $scope.priceTable = priceTable.data;
-  $scope.isStaplingFree = true;
+  
+  if($scope.priceTable["stapling"] > 0) {
+    $scope.isStaplingFree = false;
+  } else {
+    $scope.isStaplingFree = true;
+  }
+
   $scope.isEditModeOn = false;
 
   $scope.confirmDelete = function(table,index) {
