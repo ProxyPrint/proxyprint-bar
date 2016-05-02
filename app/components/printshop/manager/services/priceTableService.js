@@ -28,6 +28,13 @@ app.factory('PriceTableService', ['$http', '$cookieStore', function($http, $cook
     });
   }
 
+  service.editStaplingValue = function(newStaplingPrice) {
+    var url = "http://localhost:8080/printshops/"+$cookieStore.get("printShopID")+"/pricetable/editstapling";
+    return $http.put(url,newStaplingPrice.toString()).success(function(data){
+      return data;
+    });
+  };
+
   service.setCurrentTable = function(table) {
     service.currentTable = table;
   };
@@ -46,13 +53,6 @@ app.factory('PriceTableService', ['$http', '$cookieStore', function($http, $cook
 
   service.getCurrentRowIndex = function() {
     return service.currentRowIndex;
-  };
-
-  service.editStaplingValue = function(newStaplingPrice) {
-    var url = "http://localhost:8080/printshops/"+$cookieStore.get("printShopID")+"/pricetable/editstapling";
-    return $http.put(url,newStaplingPrice.toString()).success(function(data){
-      return data;
-    });
   };
 
   return service;

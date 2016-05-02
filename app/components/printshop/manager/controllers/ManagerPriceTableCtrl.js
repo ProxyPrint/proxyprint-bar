@@ -35,8 +35,10 @@ app.controller('ManagerPriceTableCtrl', ['$scope', '$uibModal', 'PriceTableServi
       }
     });
     modalInstance.result.then(function(index) {
-      var data = PriceTableService.deleteRow($scope.priceTable[PriceTableService.getCurrentTable()][PriceTableService.getCurrentRowIndex()]);
-      if(data.success) $scope.priceTable[PriceTableService.getCurrentTable()].splice(index, 1);
+      // Why is index undifined?
+      index = PriceTableService.getCurrentRowIndex();
+      var data = PriceTableService.deleteRow($scope.priceTable['printcopy'][PriceTableService.getCurrentTable()][index]);
+      if(data.success) $scope.priceTable['printcopy'][PriceTableService.getCurrentTable()].splice(index, 1);
       else alert("Foi impossível remover o item desejado. Por favor tente mais tarde.");
     });
   };
@@ -59,7 +61,7 @@ app.controller('ManagerPriceTableCtrl', ['$scope', '$uibModal', 'PriceTableServi
       }
     });
     modalInstance.result.then(function(index) {
-      $scope.priceTable[PriceTableService.getCurrentTable()].push(PriceTableService.getNewEntry());
+      $scope.priceTable['printcopy'][PriceTableService.getCurrentTable()].push(PriceTableService.getNewEntry());
       alert("Nova linha adicionada com sucesso!");
     });
   };
