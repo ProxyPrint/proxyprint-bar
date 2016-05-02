@@ -3,7 +3,7 @@ var app = angular.module('ProxyPrint');
 app.controller('ManagerPriceTableCtrl', ['$scope', '$uibModal', 'PriceTableService', 'priceTable', function($scope, $uibModal, PriceTableService, priceTable) {
 
   $scope.priceTable = priceTable.data;
-  
+
   if($scope.priceTable["stapling"] > 0) {
     $scope.isStaplingFree = false;
   } else {
@@ -65,6 +65,14 @@ app.controller('ManagerPriceTableCtrl', ['$scope', '$uibModal', 'PriceTableServi
 
   $scope.editRow = function(table,index) {
     alert(Edit+" "+table+" "+index);
+  };
+
+  $scope.editStaplingValue = function(newStaplingPrice) {
+    if(newStaplingPrice!=0) {
+      alert($scope.staplingPrice);
+    } else {
+      alert(newStaplingPrice);
+    }
   };
 
 }]);

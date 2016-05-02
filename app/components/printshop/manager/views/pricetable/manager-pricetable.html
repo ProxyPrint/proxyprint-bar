@@ -222,11 +222,11 @@
       <h5 class="box-title"><b>Agrafar</b></h5>
       <div class="checkbox">
         <label style="margin-right: 4%;">
-          <input type="checkbox" class="minimal" ng-model="isStaplingFree">
+          <input type="checkbox" class="minimal" ng-model="isStaplingFree" ng-true-value="{{!isStaplingFree}}" ng-false-value="{{isStaplingFree}}" ng-click="editStaplingValue(0)">
           Grátis
         </label>
         <label>
-          <input type="checkbox" class="minimal" ng-model="isStaplingFree" ng-true-value="{{!isStaplingFree}}" ng-false-value="{{isStaplingFree}}">
+          <input type="checkbox" class="minimal" ng-model="isStaplingFree" ng-true-value="{{isStaplingFree}}" ng-false-value="{{!isStaplingFree}}">
           Pago
         </label>
       </div>
@@ -237,11 +237,11 @@
             <td>
               <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-euro"></i></span>
-                <input type="text" value="0.0" class="form-control" style="width: 95%;">
+                <input type="text" value="{{priceTable['stapling']}}" class="form-control" style="width: 95%;" ng-model="staplingPrice">
               </div>
             </td>
             <td>
-              <button type="button" class="btn btn-flat btn-sm btn-success">OK</button>
+              <button type="button" class="btn btn-flat btn-sm btn-success" ng-click="editStaplingValue(1)">OK</button>
             </td>
           </tr>
         </table>
