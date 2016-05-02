@@ -4,6 +4,7 @@ app.controller('ManagerPriceTableCtrl', ['$scope', '$uibModal', 'PriceTableServi
 
   $scope.priceTable = priceTable.data;
 
+  $scope.staplingPrice = $scope.priceTable["stapling"];
   if($scope.priceTable["stapling"] > 0) {
     $scope.isStaplingFree = false;
   } else {
@@ -69,9 +70,11 @@ app.controller('ManagerPriceTableCtrl', ['$scope', '$uibModal', 'PriceTableServi
 
   $scope.editStaplingValue = function(newStaplingPrice) {
     if(newStaplingPrice!=0) {
-      alert($scope.staplingPrice);
+      PriceTableService.editStaplingValue($scope.staplingPrice);
+      alert("Agrafar tem agora um novo preço de "+$scope.staplingPrice+" €.");
     } else {
-      alert(newStaplingPrice);
+      PriceTableService.editStaplingValue(0);
+      alert("Agrafar passa agora a ser grátis.");
     }
   };
 
