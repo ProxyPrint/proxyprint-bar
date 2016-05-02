@@ -38,7 +38,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr role="row" class="odd" ng-repeat="item in priceTable['BW']">
+                <tr role="row" class="odd" ng-repeat="item in priceTable['printcopy']['BW']">
                   <td>{{item.infLim}}-{{item.supLim}}</td>
                   <td style="text-align: center;">{{item.priceA4SIMPLEX}}<span ng-if="item.priceA4SIMPLEX!='-'"> €</span></td>
                   <td style="text-align: center;">{{item.priceA4DUPLEX}}<span ng-if="item.priceA4DUPLEX!='-'"> €</span></td>
@@ -86,7 +86,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr role="row" class="odd" ng-repeat="item in priceTable['COLOR']">
+                <tr role="row" class="odd" ng-repeat="item in priceTable['printcopy']['COLOR']">
                   <td>{{item.infLim}}-{{item.supLim}}</td>
                   <td style="text-align: center;">{{item.priceA4SIMPLEX}}<span ng-if="item.priceA4SIMPLEX!='-'"> €</span></td>
                   <td style="text-align: center;">{{item.priceA4DUPLEX}}<span ng-if="item.priceA4DUPLEX!='-'"> €</span></td>
@@ -113,30 +113,64 @@
     </div>
 
     <!-- table-rings-->
-    <div class="box-body" style="width: 40%;">
-      <div class="dataTables_wrapper form-inline dt-bootstrap">
-        <div class="row">
-          <div class="col-sm-6"></div>
-          <div class="col-sm-6"></div>
-        </div>
-        <div class="row">
-          <div class="col-sm-12">
-            <table class="table table-bordered table-striped" role="grid">
-              <thead>
-                <th colspan="9">Argolas de Plástico</th>
-              </thead>
-              <tbody>
-                <tr role="row">
-                  <td style="text-align: center;">6mm-10mm</td>
-                  <td style="text-align: center;">1,15 €</td>
-                  <td style="text-align: center;"><button type="button" class="btn bg-olive btn-flat btn-sm margin"><i class="fa fa-fw fa-pencil"></i>Editar linha</button> <button button type="button" class="btn bg-red btn-flat btn-sm margin"><i class="fa fa-fw fa-trash"></i> Apagar linha</button></td>
-                </tr>
-              </tbody>
-            </table>
+    <div class="row">
+      <div class="col-md-5">
+        <!-- table-rings-PLASTIC -->
+        <div class="box-body">
+          <div class="dataTables_wrapper form-inline dt-bootstrap">
+            <div class="row">
+              <div class="col-sm-6"></div>
+              <div class="col-sm-6"></div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12">
+                <table class="table table-bordered table-striped" role="grid">
+                  <thead>
+                    <th colspan="9">Argolas de Plástico</th>
+                  </thead>
+                  <tbody>
+                    <tr role="row" ng-repeat="item in priceTable['rings']['PLASTIC']">
+                      <td style="text-align: center;">{{item.infLim}}mm-{{item.supLim}}mm</td>
+                      <td style="text-align: center;">{{item.price}} €</td>
+                      <td style="text-align: center;"><button type="button" class="btn bg-olive btn-flat btn-sm margin"><i class="fa fa-fw fa-pencil"></i>Editar linha</button> <button button type="button" class="btn bg-red btn-flat btn-sm margin"><i class="fa fa-fw fa-trash"></i> Apagar linha</button></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
           </div>
+          <button type="button" class="btn btn-flat btn-sm bg-blue" style="float: left;"><i class="fa fa-fw fa-plus" style="padding-right: 2%;"></i>Adicionar entrada</button>
         </div>
       </div>
-      <button type="button" class="btn btn-flat btn-sm bg-blue" style="float: left;"><i class="fa fa-fw fa-plus" style="padding-right: 2%;"></i>Adicionar entrada</button>
+      <div class="col-md-5">
+        <!-- table-rings-SPIRAL -->
+        <div class="box-body">
+          <div class="dataTables_wrapper form-inline dt-bootstrap">
+            <div class="row">
+              <div class="col-sm-6"></div>
+              <div class="col-sm-6"></div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12">
+                <table class="table table-bordered table-striped" role="grid">
+                  <thead>
+                    <th colspan="9">Argolas Espiral</th>
+                  </thead>
+                  <tbody>
+                    <tr role="row" ng-repeat="item in priceTable['rings']['SPIRAL']">
+                      <td style="text-align: center;">{{item.infLim}}mm-{{item.supLim}}mm</td>
+                      <td style="text-align: center;">{{item.price}} €</td>
+                      <td style="text-align: center;"><button type="button" class="btn bg-olive btn-flat btn-sm margin"><i class="fa fa-fw fa-pencil"></i>Editar linha</button> <button button type="button" class="btn bg-red btn-flat btn-sm margin"><i class="fa fa-fw fa-trash"></i> Apagar linha</button></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <button type="button" class="btn btn-flat btn-sm bg-blue" style="float: left;"><i class="fa fa-fw fa-plus" style="padding-right: 2%;"></i>Adicionar entrada</button>
+        </div>
+      </div>
+      <!-- ./table-rings-PLASTIC-->
     </div>
     <!-- ./table-rings -->
 
@@ -166,10 +200,10 @@
                 </tr>
               </thead>
               <tbody>
-                <tr role="row" class="odd">
-                  <td >Acetato Cristal</td>
-                  <td style="text-align: center;">0.10 €</td>
-                  <td style="text-align: center;">0.5 €</td>
+                <tr role="row" class="odd" ng-repeat="item in priceTable['covers']">
+                  <td >{{item.coverType}}</td>
+                  <td style="text-align: center;">{{item.priceA4}} €</td>
+                  <td style="text-align: center;">{{item.priceA3}} €</td>
                   <td style="text-align: center; width: 20%;"><button type="button" class="btn bg-olive btn-flat btn-sm margin"><i class="fa fa-fw fa-pencil"></i>Editar linha</button> <button type="button" class="btn bg-red btn-flat btn-sm margin" ng-click="confirmDelete('COLOR',$index)"><i class="fa fa-fw fa-trash"></i> Apagar linha</button></td>
                 </tr>
               </tbody>
