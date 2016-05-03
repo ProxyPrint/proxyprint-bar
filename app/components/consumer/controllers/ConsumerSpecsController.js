@@ -92,10 +92,7 @@ angular.module('ProxyPrint').controller('ConsumerSpecsController',
           $scope.specs = new Array();
         }
         else specification.fakeID = $scope.specs.length+1;
-        PrintingSchemaService.addPrintingSchema(specification,$cookieStore.get('consumerID'));
-        $scope.specs.push(specification);
-
-
+        $scope.addPrintingSchema(specification);
       });
     }
 
@@ -104,10 +101,16 @@ angular.module('ProxyPrint').controller('ConsumerSpecsController',
         $scope.specs.splice(index,1);
       }
 
+      $scope.addPrintingSchema = function (schema) {
+        PrintingSchemaService.addPrintingSchema(schema, $cookieStore.get('consumerID'));
+        $scope.specs.push(schema);
+      }
+
 
 }]);
 
-angular.module('ProxyPrint').controller('AddSpecificationController', function ($scope, $uibModalInstance) {
+angular.module('ProxyPrint').controller('AddSpecificationController', ['$scope', '$uibModalInstance',
+  function ($scope, $uibModalInstance) {
 
   $scope.performAction = function () {
     var spec = new Array();
@@ -124,4 +127,4 @@ angular.module('ProxyPrint').controller('AddSpecificationController', function (
   $scope.closeModal = function () {
     $uibModalInstance.dismiss('cancel');
   };
-});
+}]);
