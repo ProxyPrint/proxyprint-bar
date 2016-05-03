@@ -204,7 +204,7 @@
                   <td >{{item.coverType}}</td>
                   <td style="text-align: center;">{{item.priceA4}} <span ng-if="item.priceA4!='-'"> €</span></td>
                   <td style="text-align: center;">{{item.priceA3}} <span ng-if="item.priceA3!='-'"> €</span></td>
-                  <td style="text-align: center; width: 20%;"><button type="button" class="btn bg-olive btn-flat btn-sm margin"><i class="fa fa-fw fa-pencil"></i>Editar linha</button> <button type="button" class="btn bg-red btn-flat btn-sm margin" ng-click="confirmDelete('COLOR',$index)"><i class="fa fa-fw fa-trash"></i> Apagar linha</button></td>
+                  <td style="text-align: center; width: 20%;"><button type="button" class="btn bg-olive btn-flat btn-sm margin disabled"><i class="fa fa-fw fa-pencil"></i>Editar linha</button> <button type="button" class="btn bg-red btn-flat btn-sm margin disabled" ng-click="confirmDelete('COLOR',$index)"><i class="fa fa-fw fa-trash"></i> Apagar linha</button></td>
                 </tr>
               </tbody>
             </table>
@@ -222,15 +222,15 @@
       <h5 class="box-title"><b>Agrafar</b></h5>
       <div class="checkbox">
         <label style="margin-right: 4%;">
-          <input type="checkbox" class="minimal" ng-model="isStaplingFree" ng-true-value="{{!isStaplingFree}}" ng-false-value="{{isStaplingFree}}" ng-click="editStaplingValue(0)">
+          <input type="checkbox" class="minimal" ng-model="isStaplingFree" ng-click="editStaplingValue(0)" ng-checked="isStaplingFree==true">
           Grátis
         </label>
         <label>
-          <input type="checkbox" class="minimal" ng-model="isStaplingFree" ng-true-value="{{isStaplingFree}}" ng-false-value="{{!isStaplingFree}}">
+          <input type="checkbox" class="minimal" ng-model="isStaplingFree" ng-click="editStaplingValue(-1)" ng-checked="isStaplingFree==false">
           Pago
         </label>
       </div>
-      <div ng-show="!isStaplingFree" style="border-style: dotted; border-width: 1px; padding: 4%; border-color: #B6B6B6;">
+      <div ng-show="isStaplingFree==false" style="border-style: dotted; border-width: 1px; padding: 4%; border-color: #B6B6B6;">
         <div><b>Preço</b></div>
         <table>
           <tr>

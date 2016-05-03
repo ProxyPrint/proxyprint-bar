@@ -10,6 +10,7 @@ app.controller('ManagerPriceTableCtrl', ['$scope', '$uibModal', 'PriceTableServi
   } else {
     $scope.isStaplingFree = true;
   }
+  console.log($scope.isStaplingFree);
 
   $scope.isEditModeOn = false;
 
@@ -22,7 +23,7 @@ app.controller('ManagerPriceTableCtrl', ['$scope', '$uibModal', 'PriceTableServi
   $scope.openConfirmDeleteModal = function(reply) {
     var modalInstance = $uibModal.open({
       animation: true,
-      templateUrl: 'app/components/printshop/manager/views/pricetable/delete-row-modal.html',
+      templateUrl: 'app/components/printshop/manager/views/pricetable/modals/delete-row-modal.html',
       controller: 'ConfirmDeleteModalCtrl',
       size: 'sm',
       resolve: {
@@ -51,7 +52,7 @@ app.controller('ManagerPriceTableCtrl', ['$scope', '$uibModal', 'PriceTableServi
   $scope.openNewEntryPrintCopyModal = function(reply) {
     var modalInstance = $uibModal.open({
       animation: true,
-      templateUrl: 'app/components/printshop/manager/views/pricetable/new-printcopy-row-modal.html',
+      templateUrl: 'app/components/printshop/manager/views/pricetable/modals/new-printcopy-row-modal.html',
       controller: 'NewPrintCopyEntryCtrl',
       size: 'md',
       resolve: {
@@ -71,7 +72,7 @@ app.controller('ManagerPriceTableCtrl', ['$scope', '$uibModal', 'PriceTableServi
   };
 
   /*---------------------------------------
-    Rings Table
+  Rings Table
   ----------------------------------------*/
 
   // Add
@@ -84,7 +85,7 @@ app.controller('ManagerPriceTableCtrl', ['$scope', '$uibModal', 'PriceTableServi
   $scope.openNewRingsEntryModal = function(reply) {
     var modalInstance = $uibModal.open({
       animation: true,
-      templateUrl: 'app/components/printshop/manager/views/pricetable/new-rings-row-modal.html',
+      templateUrl: 'app/components/printshop/manager/views/pricetable/modals/new-rings-row-modal.html',
       controller: 'NewRingsEntryCtrl',
       size: 'md',
       resolve: {
@@ -109,7 +110,7 @@ app.controller('ManagerPriceTableCtrl', ['$scope', '$uibModal', 'PriceTableServi
   $scope.openConfirmRingDeleteModal = function(reply) {
     var modalInstance = $uibModal.open({
       animation: true,
-      templateUrl: 'app/components/printshop/manager/views/pricetable/delete-row-modal.html',
+      templateUrl: 'app/components/printshop/manager/views/pricetable/modals/delete-row-modal.html',
       controller: 'ConfirmDeleteModalCtrl',
       size: 'sm',
       resolve: {
@@ -131,15 +132,22 @@ app.controller('ManagerPriceTableCtrl', ['$scope', '$uibModal', 'PriceTableServi
   };
 
   /*---------------------------------------
-    Stapling
+  Stapling
   ----------------------------------------*/
   $scope.editStaplingValue = function(newStaplingPrice) {
-    if(newStaplingPrice!=0) {
+    if(newStaplingPrice==0) {
+      $scope.isStaplingFree = true;
+      PriceTableService.editStaplingValue(0);
+      $scope.priceTable["stapling"] = 0;
+      alert("Agrafar passa agora a ser grátis.");
+    }
+    else if(newStaplingPrice==-1) {
+      $scope.isStaplingFree = false;
+    }
+    else {
+      $scope.isStaplingFree = false;
       PriceTableService.editStaplingValue($scope.staplingPrice);
       alert("Agrafar tem agora um novo preço de "+$scope.staplingPrice+" €.");
-    } else {
-      PriceTableService.editStaplingValue(0);
-      alert("Agrafar passa agora a ser grátis.");
     }
   };
 
