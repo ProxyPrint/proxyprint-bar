@@ -1,4 +1,3 @@
-
 <div class="col-sm-9 col-md-10 main">
     <div ui-view>
 
@@ -7,36 +6,46 @@
                 <h2 class="panel-title"> <b>Especificações</b> </h2>
             </div>
             <div class="panel-body" style="max-height: 300px; overflow-y: scroll">
-                <li ng-repeat="item in specs.list" dnd-draggable="item"
-                dnd-effect-allowed="copy" dnd-selected="models.selected = item"
-                ng-class="{'selected': models.selected === item}" class="list-group-item clearfix">
-                {{item.id}}: {{item.format}} + {{item.sides}} + {{item.colors}} + {{item.finishes}}
-            </li>
-        </div>
+                <li ng-repeat="item in specs" dnd-draggable="item" dnd-effect-allowed="copy" dnd-selected="models.selected = item" ng-class="{'selected': models.selected === item}" class="list-group-item clearfix">
+                    {{item.fakeID}}: {{item.name}}
+                    <div class="right">
+                        <div class="row">
+                            <div class="col-sm-4"></div>
+                            <div class="col-sm-4">
+                              <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                            </div>
+                            <div class="col-sm-4">
+                              <a ng-click="removePrintingSchema($index)">
+                                <i class="fa fa-times" aria-hidden="true" style="color:red"></i>
+                              </a>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </div>
 
-        <div class="panel-footer">
-            <button type="button" class="list-group-item clearfix" ng-click="addSpecModal()"><i class="fa fa-plus"></i> Nova Especificação</button>
+            <div class="panel-footer">
+                <button type="button" class="list-group-item clearfix" ng-click="addSpecModal()"><i class="fa fa-plus"></i> Nova Especificação</button>
+            </div>
         </div>
-    </div>
-    <div class="panel panel-default right" style="min-width: 45%; max-width: 45%; min-height: 240px;">
-        <div class="panel-heading">
-            <h2 class="panel-title"> <b>Ficheiros Selecionados </b></h2>
-        </div>
+        <div class="panel panel-default right" style="min-width: 45%; max-width: 45%; min-height: 240px;">
+            <div class="panel-heading">
+                <h2 class="panel-title"> <b>Ficheiros Selecionados </b></h2>
+            </div>
 
-        <div class="simpleDemo">
-            <div class="panel-body" style="max-height: 300px; overflow-y: scroll;">
-                <ul class="dialog" ng-repeat="file in files()"
-                dnd-list="file.specs" dnd-drop="toggleModal(file, item, index)">
-                <div class="file-type-icon">
-                    <span class="corner"></span>
-                    <span class="type pdf">pdf</span>
+            <div class="simpleDemo">
+                <div class="panel-body" style="max-height: 300px; overflow-y: scroll;">
+                    <ul class="dialog" ng-repeat="file in files()" dnd-list="file.specs" dnd-drop="toggleModal(file, item, index)">
+                        <div class="file-type-icon">
+                            <span class="corner"></span>
+                            <span class="type pdf">pdf</span>
+                        </div>
+                        <center>{{file.name}}</center>
+                    </ul>
                 </div>
-                <center>{{file.name}}</center>
-            </ul>
+            </div>
         </div>
     </div>
-</div>
-</div>
 </div>
 
 <div class="col-sm-9 col-md-10 main">
@@ -44,27 +53,25 @@
         <div class="panel-heading">
             <h2 class="panel-title"> <b>Fila de Impressão </b></h2>
         </div>
-        <div class="panel-body"
-        style="min-height: 150px; max-height: 260px; overflow-y: scroll;">
-        <div ng-repeat="item in files()">
-            <div class="dialog" ng-repeat="spec in item.specs">
-                <a ng-click="remove(item, spec)" class="close-thik"></a>
-                <div class="file-type-icon">
-                    <span class="corner"></span>
-                    <span class="type pdf">pdf</span>
+        <div class="panel-body" style="min-height: 150px; max-height: 260px; overflow-y: scroll;">
+            <div ng-repeat="item in files()">
+                <div class="dialog" ng-repeat="spec in item.specs">
+                    <a ng-click="remove(item, spec)" class="close-thik"></a>
+                    <div class="file-type-icon">
+                        <span class="corner"></span>
+                        <span class="type pdf">pdf</span>
+                    </div>
+                    <center>{{item.name}}</center>
+                    Especificação: {{spec.id}} Páginas: {{spec.pages}}
                 </div>
-                <center>{{item.name}}</center>
-                Especificação: {{spec.id}}
-                Páginas: {{spec.pages}}
             </div>
         </div>
     </div>
 </div>
-</div>
 
 <div class="col-sm-9 col-md-10 main">
     <div class="left">
-        <button ui-sref="consumer" style="margin:20px 0;"type="button" class="btn btn-default"><i class="fa fa-arrow-left"></i> Anterior</button>
+        <button ui-sref="consumer" style="margin:20px 0;" type="button" class="btn btn-default"><i class="fa fa-arrow-left"></i> Anterior</button>
     </div>
     <div class="right">
         <button style="margin:20px 0;" type="button" class="btn btn-default" ng-click="addRequestModal()" ng-disabled="queueNumber()==0" >Seguinte <i class="fa fa-arrow-right"></i></button>
@@ -74,11 +81,13 @@
 <modal title="Intervalo de páginas a imprimir." visible="showModal">
     <form name="myForm" role="form">
         <div class="form-group">
-            De: <input ng-disabled="check" type="number" name="init" ng-model="init" min="0" required>
-            Até: <input ng-disabled="check" type="number" name="end" ng-model="end" min="0" required>
+            De:
+            <input ng-disabled="check" type="number" name="init" ng-model="init" min="0" required> Até:
+            <input ng-disabled="check" type="number" name="end" ng-model="end" min="0" required>
         </div>
         <div class="form-group">
-            Todo o documento! <input type="checkbox" ng-model="check"/>
+            Todo o documento!
+            <input type="checkbox" ng-model="check" />
         </div>
 
         <button type="submit" class="btn btn-default" ng-click="submit(init, end, check)" ng-disabled="((myForm.init.$error.required) || (myForm.end.$error.required)

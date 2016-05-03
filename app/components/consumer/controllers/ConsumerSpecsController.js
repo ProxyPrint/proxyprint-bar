@@ -1,9 +1,15 @@
-angular.module('ProxyPrint').controller('ConsumerSpecsController', ['$scope' , '$uibModal', '$log', 'FileTransferService', '$state', function($scope, $uibModal, $log, FileTransferService, $state) {
+angular.module('ProxyPrint').controller('ConsumerSpecsController',
+  ['$scope' , '$uibModal', '$log', 'FileTransferService', 'SpecMarshallService',
+      'printingSchemas', 'PrintingSchemaService', '$cookieStore',
+    function($scope, $uibModal, $log, FileTransferService, SpecMarshallService,
+        printingSchemas, PrintingSchemaService, $cookieStore) {
 
     /** Page range logic */
     $scope.showModal = false;
     $scope.lastItem = null;
     $scope.lastFile = null;
+
+    $scope.specs = printingSchemas.data;
 
     $scope.toggleModal = function(file, item){
         $scope.lastItem = item;
@@ -91,100 +97,46 @@ angular.module('ProxyPrint').controller('ConsumerSpecsController', ['$scope' , '
             size: 'md'
         });
 
-        modalInstance.result.then(function(spec) {
-            var format, sides, colors,name;
-
-            name = spec[0];
-            format = spec[1];
-            sides = spec[2];
-            colors = spec[3];
-
-            if (spec[4]==null){
-                console.log(name+": Solto..");
-                console.log(format+", "+sides+", "+colors);
-            }
-
-            else {
-                if (spec[5]==null && spec[6]==null){
-                    console.log(name+": Agrafar");
-                    console.log(format+", "+sides+", "+colors);
-                }
-                else {
-                    var cover, args;
-                    cover = spec[5];
-                    args = spec[6];
-                    console.log(name+": Encadernar...");
-                    console.log(format+", "+sides+", "+colors);
-                    console.log(cover+", "+args);
-                }
-            }
-        });
+      modalInstance.result.then(function(spec) {
+        var specification = SpecMarshallService.marshallSpecification(spec);
+        if ($scope.specs == null){
+          specification.fakeID = 1;
+          $scope.specs = new Array();
+        }
+        else specification.fakeID = $scope.specs.length+1;
+        $scope.addPrintingSchema(specification);
+      });
     }
-    $scope.specs = {
-        list: [
-            {
-                id: 1,
-                format: "A4",
-                sides: "Frente e Verso",
-                colors: "Preto e Branco",
-                finishes: "Agrafar",
-                opt: {
-                    cover: null,
-                    rings: null,
-                }
-            }, {
-                id: 2,
-                format: "A5",
-                sides: "Frente e Verso",
-                colors: "Cores",
-                finishes: "Encadernar",
-                opt: {
-                    cover: "PVC Opaco",
-                    rings: "Espiral"
-                }
-            }, {
-                id: 3,
-                format: "A3",
-                sides: "Frente e Verso",
-                colors: "Cores",
-                finishes: "Encadernar",
-                opt: {
-                    cover: "PVC Opaco",
-                    rings: "Espiral"
-                }
-            }
-        ]
-    };
+
+      $scope.removePrintingSchema = function (index) {
+        PrintingSchemaService.deletePrintingSchema($scope.specs[index].id, $cookieStore.get('consumerID'));
+        $scope.specs.splice(index,1);
+      }
+
+      $scope.addPrintingSchema = function (schema) {
+        PrintingSchemaService.addPrintingSchema(schema, $cookieStore.get('consumerID'));
+        $scope.specs.push(schema);
+      }
+
+
 }]);
 
-angular.module('ProxyPrint').controller('SendRequestController', ['$scope', '$uibModalInstance', 'files', function ($scope, $uibModalInstance, files) {
+angular.module('ProxyPrint').controller('AddSpecificationController', ['$scope', '$uibModalInstance',
+  function ($scope, $uibModalInstance) {
 
-    $scope.files = files;
+  $scope.performAction = function () {
+    var spec = new Array();
+    spec.push($scope.name)
+    spec.push($scope.format);
+    spec.push($scope.sides);
+    spec.push($scope.colors);
+    spec.push($scope.content);
+    spec.push($scope.cover);
+    spec.push($scope.bindings);
+    $uibModalInstance.close(spec);
+  };
 
-    $scope.performAction = function () {
-        $uibModalInstance.close();
-    };
-
-    $scope.closeModal = function () {
-        $uibModalInstance.dismiss();
-    };
+  $scope.closeModal = function () {
+    $uibModalInstance.dismiss('cancel');
+  };
 }]);
-
-angular.module('ProxyPrint').controller('AddSpecificationController', function ($scope, $uibModalInstance) {
-
-    $scope.performAction = function () {
-        var spec = new Array();
-        spec.push($scope.name)
-        spec.push($scope.format);
-        spec.push($scope.sides);
-        spec.push($scope.colors);
-        spec.push($scope.content);
-        spec.push($scope.cover);
-        spec.push($scope.args);
-        $uibModalInstance.close(spec);
-    };
-
-    $scope.closeModal = function () {
-        $uibModalInstance.dismiss('cancel');
-    };
-});
