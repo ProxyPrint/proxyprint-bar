@@ -1,0 +1,29 @@
+<div class="modal-header">
+  {{text}}
+  <br/>
+  <small>Caso não pretenda preencher algum dos campos simplesmente o deixe em branco.</small>
+</div>
+<div class="modal-body" style="text-align:center;">
+  <div class="row">
+    <div class="col col-sm-1">De</div>
+    <div class="col col-sm-3">
+      <input type="text" class="form-control input-sm" placeholder="mm" ng-model="infLim">
+    </div>
+    <div class="col col-sm-1">até</div>
+    <div class="col col-sm-3">
+      <input type="text" class="form-control input-sm" placeholder="mm" ng-model="supLim">
+    </div>
+  </div>
+  <div class="row" style="margin-top: 2%;">
+    <div class="col col-sm-1">Preço</div>
+    <div class="col col-sm-3">
+      <input type="text" class="form-control input-sm" placeholder="€" ng-model="price">
+    </div>
+  </div>
+</div>
+<!-- footer -->
+<div class="modal-footer" style="text-align:center; margin-top: 4%;">
+  <button class="btn btn-success btn-sm btn-flat" type="button" ng-click="addNewEntry()"><i class="fa fa-check" style="margin-right: 2%;"/>Adicionar</button>
+  <button class="btn btn-danger btn-sm btn-flat" type="button" ng-click="closeModal()"><i class="fa fa-times" style="margin-right: 2%;"/>Cancelar</button>
+</div>
+<!-- ./footer -->

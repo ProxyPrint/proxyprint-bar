@@ -48,20 +48,12 @@ angular.module('ProxyPrint').controller('ConsumerSpecsController',
         $scope.showModal = false;
     };
 
-    /** Request modal logic */
-    $scope.showRequest = false;
-
-    $scope.toggleRequest = function(){
-        $scope.showRequest = !$scope.showRequest;
-    };
-
-    $scope.back = function (){
-        $scope.showRequest = false;
-    };
-
     $scope.request = function(){
         /** Send Request */
-        FileTransferService.TransferFiles($scope.files());
+        FileTransferService.TransferFiles($scope.files(), function(){
+            $scope.showRequest = false;
+            $state.go('consumer.requestprintshopsbudget');
+        });
     };
 
     $scope.queueNumber = function (){
@@ -76,14 +68,34 @@ angular.module('ProxyPrint').controller('ConsumerSpecsController',
 
     $scope.files = FileTransferService.getFiles;
 
+    $scope.addRequestModal = function() {
+
+        var modalInstance = $uibModal.open({
+            animation: true,
+            templateUrl: 'app/components/consumer/views/request-modal.html',
+            controller: 'SendRequestController',
+            size: 'md',
+            resolve: {
+                files: function () {
+                    return $scope.files();
+                }
+            }
+        });
+
+        modalInstance.result.then(function() {
+            FileTransferService.TransferFiles($scope.files());
+            $state.go('consumer.requestprintshopsbudget');
+        });
+    }
+
     $scope.addSpecModal = function() {
 
-      var modalInstance = $uibModal.open({
-        animation: true,
-        templateUrl: 'app/components/consumer/views/spec-modal.html',
-        controller: 'AddSpecificationController',
-        size: 'md'
-      });
+        var modalInstance = $uibModal.open({
+            animation: true,
+            templateUrl: 'app/components/consumer/views/spec-modal.html',
+            controller: 'AddSpecificationController',
+            size: 'md'
+        });
 
       modalInstance.result.then(function(spec) {
         var specification = SpecMarshallService.marshallSpecification(spec);

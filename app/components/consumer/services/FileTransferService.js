@@ -1,7 +1,7 @@
 angular.module('ProxyPrint').factory('FileTransferService',['Upload','$timeout', function (Upload, $timeout) {
 
     var service = {};
-    service.TransferFiles = function (files) {
+    service.TransferFiles = function (files, callback) {
         for (var i = 0; i < files.length; i++) {
             var file = files[i];
             if (!file.$error) {
@@ -15,6 +15,7 @@ angular.module('ProxyPrint').factory('FileTransferService',['Upload','$timeout',
                     $timeout(function() {
                         console.log('file: '+resp.config.data.file.name);
                         console.log('Response: ' + JSON.stringify(resp.data));
+                        callback(JSON.stringify(resp.data));
                     });
                 }, null, function (evt) {
                     var progressPercentage = parseInt(100.0 *

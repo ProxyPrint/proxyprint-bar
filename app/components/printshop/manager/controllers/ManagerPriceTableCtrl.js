@@ -3,7 +3,14 @@ var app = angular.module('ProxyPrint');
 app.controller('ManagerPriceTableCtrl', ['$scope', '$uibModal', 'PriceTableService', 'priceTable', function($scope, $uibModal, PriceTableService, priceTable) {
 
   $scope.priceTable = priceTable.data;
-  $scope.isStaplingFree = true;
+
+  $scope.staplingPrice = $scope.priceTable["stapling"];
+  if($scope.priceTable["stapling"] > 0) {
+    $scope.isStaplingFree = false;
+  } else {
+    $scope.isStaplingFree = true;
+  }
+  console.log($scope.priceTable);
   $scope.isEditModeOn = false;
 
   $scope.confirmDelete = function(table,index) {
@@ -15,7 +22,7 @@ app.controller('ManagerPriceTableCtrl', ['$scope', '$uibModal', 'PriceTableServi
   $scope.openConfirmDeleteModal = function(reply) {
     var modalInstance = $uibModal.open({
       animation: true,
-      templateUrl: 'app/components/printshop/manager/views/pricetable/delete-row-modal.html',
+      templateUrl: 'app/components/printshop/manager/views/pricetable/modals/delete-row-modal.html',
       controller: 'ConfirmDeleteModalCtrl',
       size: 'sm',
       resolve: {
@@ -28,21 +35,26 @@ app.controller('ManagerPriceTableCtrl', ['$scope', '$uibModal', 'PriceTableServi
       }
     });
     modalInstance.result.then(function(index) {
-      var data = PriceTableService.deleteRow($scope.priceTable[PriceTableService.getCurrentTable()][PriceTableService.getCurrentRowIndex()]);
-      if(data.success) $scope.priceTable[PriceTableService.getCurrentTable()].splice(index, 1);
+      // Why is index undifined?
+      index = PriceTableService.getCurrentRowIndex();
+      var data = PriceTableService.deletePaperRow($scope.priceTable['printcopy'][PriceTableService.getCurrentTable()][index]);
+      if(data.success) $scope.priceTable['printcopy'][PriceTableService.getCurrentTable()].splice(index, 1);
       else alert("Foi impossível remover o item desejado. Por favor tente mais tarde.");
     });
   };
 
   $scope.newEntryPrintCopyModal = function(table) {
     PriceTableService.setCurrentTable(table);
+    if(!$scope.priceTable['printcopy'][PriceTableService.getCurrentTable()]) {
+      $scope.priceTable['printcopy'][PriceTableService.getCurrentTable()] = [];
+    }
     $scope.openNewEntryPrintCopyModal("Nova entrada em impressões e cópias a preto e branco.");
   };
 
   $scope.openNewEntryPrintCopyModal = function(reply) {
     var modalInstance = $uibModal.open({
       animation: true,
-      templateUrl: 'app/components/printshop/manager/views/pricetable/new-printcopy-row-modal.html',
+      templateUrl: 'app/components/printshop/manager/views/pricetable/modals/new-printcopy-row-modal.html',
       controller: 'NewPrintCopyEntryCtrl',
       size: 'md',
       resolve: {
@@ -52,13 +64,96 @@ app.controller('ManagerPriceTableCtrl', ['$scope', '$uibModal', 'PriceTableServi
       }
     });
     modalInstance.result.then(function(index) {
-      $scope.priceTable[PriceTableService.getCurrentTable()].push(PriceTableService.getNewEntry());
+      $scope.priceTable['printcopy'][PriceTableService.getCurrentTable()].push(PriceTableService.getNewEntry());
       alert("Nova linha adicionada com sucesso!");
     });
   };
 
   $scope.editRow = function(table,index) {
     alert(Edit+" "+table+" "+index);
+  };
+
+  /*---------------------------------------
+  Rings Table
+  ----------------------------------------*/
+
+  // Add
+  $scope.newEntryRingsModal = function(table) {
+    PriceTableService.setCurrentTable(table);
+    PriceTableService.setCurrentRingType(table);
+    if(!$scope.priceTable['rings'][PriceTableService.getCurrentTable()]) {
+      $scope.priceTable['rings'][PriceTableService.getCurrentTable()] = [];
+    }
+    $scope.openNewRingsEntryModal("Nova entrada em encadernações, tabela de "+PriceTableService.getPresentationStringForRings(table)+".");
+  };
+
+  $scope.openNewRingsEntryModal = function(reply) {
+    var modalInstance = $uibModal.open({
+      animation: true,
+      templateUrl: 'app/components/printshop/manager/views/pricetable/modals/new-rings-row-modal.html',
+      controller: 'NewRingsEntryCtrl',
+      size: 'md',
+      resolve: {
+        text: function() {
+          return reply;
+        }
+      }
+    });
+    modalInstance.result.then(function(index) {
+      $scope.priceTable['rings'][PriceTableService.getCurrentTable()].push(PriceTableService.getNewEntry());
+      alert("Nova linha adicionada com sucesso!");
+    });
+  };
+
+  // Delete
+  $scope.confirmRingDelete = function(table,index) {
+    PriceTableService.setCurrentTable(table);
+    PriceTableService.setCurrentRowIndex(index);
+    $scope.openConfirmRingDeleteModal("Tem a certeza que pertende apagar esta linha do preçário?");
+  };
+
+  $scope.openConfirmRingDeleteModal = function(reply) {
+    var modalInstance = $uibModal.open({
+      animation: true,
+      templateUrl: 'app/components/printshop/manager/views/pricetable/modals/delete-row-modal.html',
+      controller: 'ConfirmDeleteModalCtrl',
+      size: 'sm',
+      resolve: {
+        index: function() {
+          return $scope.index;
+        },
+        text: function() {
+          return reply;
+        }
+      }
+    });
+    modalInstance.result.then(function(index) {
+      // Why is index undifined?
+      index = PriceTableService.getCurrentRowIndex();
+      var data = PriceTableService.deleteRingRow($scope.priceTable['rings'][PriceTableService.getCurrentTable()][index]);
+      if(data.success) $scope.priceTable['rings'][PriceTableService.getCurrentTable()].splice(index, 1);
+      else alert("Foi impossível remover o item desejado. Por favor tente mais tarde.");
+    });
+  };
+
+  /*---------------------------------------
+  Stapling
+  ----------------------------------------*/
+  $scope.editStaplingValue = function(newStaplingPrice) {
+    if(newStaplingPrice==0) {
+      $scope.isStaplingFree = true;
+      PriceTableService.editStaplingValue(0);
+      $scope.priceTable["stapling"] = 0;
+      alert("Agrafar passa agora a ser grátis.");
+    }
+    else if(newStaplingPrice==-1) {
+      $scope.isStaplingFree = false;
+    }
+    else {
+      $scope.isStaplingFree = false;
+      PriceTableService.editStaplingValue($scope.staplingPrice);
+      alert("Agrafar tem agora um novo preço de "+$scope.staplingPrice+" €.");
+    }
   };
 
 }]);
@@ -87,7 +182,26 @@ app.controller('NewPrintCopyEntryCtrl', function($scope, $uibModalInstance, text
   $scope.addNewEntry = function () {
     var newEntry = {infLim: $scope.infLim, supLim: $scope.supLim, priceA4SIMPLEX: $scope.priceA4SIMPLEX, priceA4DUPLEX: $scope.priceA4DUPLEX, priceA3SIMPLEX: $scope.priceA3SIMPLEX, priceA3DUPLEX: $scope.priceA3DUPLEX, colors: PriceTableService.getCurrentTable()};
 
-    PriceTableService.addNewRow(newEntry);
+    PriceTableService.addNewPaperRow(newEntry);
+
+    $uibModalInstance.close();
+  };
+
+  $scope.closeModal = function () {
+    $uibModalInstance.dismiss('cancel');
+  };
+
+});
+
+// Modal for adding new rings related rows to some table in the price table
+app.controller('NewRingsEntryCtrl', function($scope, $uibModalInstance, text, PriceTableService) {
+
+  $scope.text = text;
+
+  $scope.addNewEntry = function () {
+    var newEntry = {ringType: PriceTableService.getCurrentRingType(),infLim: $scope.infLim, supLim: $scope.supLim, price: $scope.price};
+    console.log(newEntry);
+    PriceTableService.addNewRingsRow(newEntry);
 
     $uibModalInstance.close();
   };

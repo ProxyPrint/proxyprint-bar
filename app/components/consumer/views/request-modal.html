@@ -1,0 +1,24 @@
+<div class="modal-header">
+    <h3> Ficheiros a imprimir. </h3>
+</div>
+<div class="panel panel-default left" style="min-width: 100%;">
+    <div class="panel-body"
+    style="min-height: 150px; max-height: 260px; overflow-y: scroll;">
+    <div ng-repeat="item in files">
+        <div class="dialog" ng-repeat="spec in item.specs">
+            <div class="file-type-icon">
+                <span class="corner"></span>
+                <span class="type pdf">pdf</span>
+            </div>
+            <center>{{item.name}}</center>
+            Especificação: {{spec.id}}
+            Páginas: {{spec.pages}}
+        </div>
+    </div>
+</div>
+</div>
+
+<div class="modal-footer" style="text-align:center">
+    <button class="btn btn-primary btn-flat" type="button" ng-click="performAction()">Efetuar Pedido</button>
+    <button class="btn btn-default btn-flat" type="button" ng-click="closeModal()">Voltar</button>
+</div>

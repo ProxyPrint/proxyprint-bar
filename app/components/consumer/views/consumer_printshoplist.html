@@ -15,16 +15,16 @@
 <div class="container">
 	<div class="printshops">
 		<h2>Reprografias</h2>
-	<ul class="list-group" >
-		 <li class="list-group-item clearfix" ng-repeat="printshop in printshops | filter : psName">
-			  <div class="left">
-					{{printshop.name}}<br>
-					{{printshop.address}}
-			  </div>
-			  <div class="right">
-				  <div star-rating rating="printshop.rating" read-only="true" max-rating="5" ></div>
-			  </div>
-		 </li>
-	</ul>
-</div>
+		<ul class="list-group">
+			<li class="list-group-item clearfix" ng-repeat="printshop in printshops | filter : psName">
+				<div class="left">
+					{{printshop.name}}
+					<br> {{printshop.address}}
+				</div>
+				<div class="right">
+					<div star-rating rating="printshop.rating" read-only="true" max-rating="5"></div>
+				</div>
+			</li>
+		</ul>
+	</div>
 </div>
