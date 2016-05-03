@@ -37,7 +37,7 @@ app.controller('ManagerPriceTableCtrl', ['$scope', '$uibModal', 'PriceTableServi
     modalInstance.result.then(function(index) {
       // Why is index undifined?
       index = PriceTableService.getCurrentRowIndex();
-      var data = PriceTableService.deleteRow($scope.priceTable['printcopy'][PriceTableService.getCurrentTable()][index]);
+      var data = PriceTableService.deletePaperRow($scope.priceTable['printcopy'][PriceTableService.getCurrentTable()][index]);
       if(data.success) $scope.priceTable['printcopy'][PriceTableService.getCurrentTable()].splice(index, 1);
       else alert("Foi impossível remover o item desejado. Por favor tente mais tarde.");
     });
@@ -73,6 +73,8 @@ app.controller('ManagerPriceTableCtrl', ['$scope', '$uibModal', 'PriceTableServi
   /*---------------------------------------
     Rings Table
   ----------------------------------------*/
+
+  // Add
   $scope.newEntryRingsModal = function(table) {
     PriceTableService.setCurrentTable(table);
     PriceTableService.setCurrentRingType($scope.priceTable['rings'][table][0].ringType);
@@ -94,6 +96,37 @@ app.controller('ManagerPriceTableCtrl', ['$scope', '$uibModal', 'PriceTableServi
     modalInstance.result.then(function(index) {
       $scope.priceTable['rings'][PriceTableService.getCurrentTable()].push(PriceTableService.getNewEntry());
       alert("Nova linha adicionada com sucesso!");
+    });
+  };
+
+  // Delete
+  $scope.confirmRingDelete = function(table,index) {
+    PriceTableService.setCurrentTable(table);
+    PriceTableService.setCurrentRowIndex(index);
+    $scope.openConfirmRingDeleteModal("Tem a certeza que pertende apagar esta linha do preçário?");
+  };
+
+  $scope.openConfirmRingDeleteModal = function(reply) {
+    var modalInstance = $uibModal.open({
+      animation: true,
+      templateUrl: 'app/components/printshop/manager/views/pricetable/delete-row-modal.html',
+      controller: 'ConfirmDeleteModalCtrl',
+      size: 'sm',
+      resolve: {
+        index: function() {
+          return $scope.index;
+        },
+        text: function() {
+          return reply;
+        }
+      }
+    });
+    modalInstance.result.then(function(index) {
+      // Why is index undifined?
+      index = PriceTableService.getCurrentRowIndex();
+      var data = PriceTableService.deleteRingRow($scope.priceTable['rings'][PriceTableService.getCurrentTable()][index]);
+      if(data.success) $scope.priceTable['rings'][PriceTableService.getCurrentTable()].splice(index, 1);
+      else alert("Foi impossível remover o item desejado. Por favor tente mais tarde.");
     });
   };
 
@@ -136,7 +169,7 @@ app.controller('NewPrintCopyEntryCtrl', function($scope, $uibModalInstance, text
   $scope.addNewEntry = function () {
     var newEntry = {infLim: $scope.infLim, supLim: $scope.supLim, priceA4SIMPLEX: $scope.priceA4SIMPLEX, priceA4DUPLEX: $scope.priceA4DUPLEX, priceA3SIMPLEX: $scope.priceA3SIMPLEX, priceA3DUPLEX: $scope.priceA3DUPLEX, colors: PriceTableService.getCurrentTable()};
 
-    PriceTableService.addNewRow(newEntry);
+    PriceTableService.addNewPaperRow(newEntry);
 
     $uibModalInstance.close();
   };
@@ -147,7 +180,7 @@ app.controller('NewPrintCopyEntryCtrl', function($scope, $uibModalInstance, text
 
 });
 
-// Modal for adding new ringsrelated rows to some table in the price table
+// Modal for adding new rings related rows to some table in the price table
 app.controller('NewRingsEntryCtrl', function($scope, $uibModalInstance, text, PriceTableService) {
 
   $scope.text = text;

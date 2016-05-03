@@ -14,21 +14,23 @@ app.factory('PriceTableService', ['$http', '$cookieStore', function($http, $cook
     });
   };
 
-  service.deleteRow = function(row) {
+  // Print & Copy
+  service.addNewPaperRow = function(row) {
+    service.newEntry = row;
+    var url = "http://localhost:8080/printshops/"+$cookieStore.get("printShopID")+"/pricetable/papers";
+    return $http.post(url,row).success(function(data){
+      return data;
+    });
+  }
+
+  service.deletePaperRow = function(row) {
     var url = "http://localhost:8080/printshops/"+$cookieStore.get("printShopID")+"/pricetable/deletepaperitem";
     return $http.post(url,row).success(function(data){
       return data;
     });
   };
 
-  service.addNewRow = function(row) {
-    service.newEntry = row;
-    var url = "http://localhost:8080/printshops/"+$cookieStore.get("printShopID")+"/pricetable";
-    return $http.post(url,row).success(function(data){
-      return data;
-    });
-  }
-
+  // Binding - Rings
   service.addNewRingsRow = function(row) {
     service.newEntry = row;
     var url = "http://localhost:8080/printshops/"+$cookieStore.get("printShopID")+"/pricetable/rings";
@@ -37,6 +39,14 @@ app.factory('PriceTableService', ['$http', '$cookieStore', function($http, $cook
     });
   }
 
+  service.deleteRingRow = function(row) {
+    var url = "http://localhost:8080/printshops/"+$cookieStore.get("printShopID")+"/pricetable/deleteringitem";
+    return $http.post(url,row).success(function(data){
+      return data;
+    });
+  };
+
+  // Stapling
   service.editStaplingValue = function(newStaplingPrice) {
     var url = "http://localhost:8080/printshops/"+$cookieStore.get("printShopID")+"/pricetable/editstapling";
     return $http.put(url,newStaplingPrice.toString()).success(function(data){
@@ -44,6 +54,7 @@ app.factory('PriceTableService', ['$http', '$cookieStore', function($http, $cook
     });
   };
 
+  // Service variables
   service.setCurrentTable = function(table) {
     service.currentTable = table;
   };
