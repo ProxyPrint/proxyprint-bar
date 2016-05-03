@@ -40,56 +40,56 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
 
     ];
 
-  /*Consumer*/
-  $stateProvider
-  .state('notFound', {
-    url: '/404',
-    templateUrl: '/app/components/errors/404.html',
-    data: {
-      css: adminlteCSS
-    }
-  })
-  .state('home', {
-    url: '/',
-    templateUrl: '/app/components/home/views/frontpage.html',
-    controller: 'LoginController',
-    data: {
-      css: frontpageCSS
-    }
-  })
-  .state('register' , {
-    url: '/register',
-    templateUrl: '/app/components/home/views/register.html',
-    controller: 'RegisterController',
-    data: {
-      css: frontpageCSS
-    }
-  })
-  /*Print Shop landing page*/
-  .state('printshop', {
-    url: '/printshop',
-    templateUrl: '/app/components/home/views/printshop.html',
-    controller: 'LoginController',
-    data: {
-      css: mainPrintShopCSS
-    }
-  })
-  .state('psregister', {
-    url: '/psregister',
-    templateUrl: '/app/components/home/views/printshop_register.html',
-    controller: 'PrintShopRegisterCtrl',
-    data: {
-      css: mainPrintShopCSS
-    }
-  })
-  .state('adminlogin', {
-    url: '/adminlogin',
-    templateUrl: '/app/components/admin/views/admin-login.html',
-    controller: 'LoginController',
-    data: {
-        css: adminLoginCSS
-    }
-  })
+    /*Consumer*/
+    $stateProvider
+    .state('notFound', {
+        url: '/404',
+        templateUrl: '/app/components/errors/404.html',
+        data: {
+            css: adminlteCSS
+        }
+    })
+    .state('home', {
+        url: '/',
+        templateUrl: '/app/components/home/views/frontpage.html',
+        controller: 'LoginController',
+        data: {
+            css: frontpageCSS
+        }
+    })
+    .state('register' , {
+        url: '/register',
+        templateUrl: '/app/components/home/views/register.html',
+        controller: 'RegisterController',
+        data: {
+            css: frontpageCSS
+        }
+    })
+    /*Print Shop landing page*/
+    .state('printshop', {
+        url: '/printshop',
+        templateUrl: '/app/components/home/views/printshop.html',
+        controller: 'LoginController',
+        data: {
+            css: mainPrintShopCSS
+        }
+    })
+    .state('psregister', {
+        url: '/psregister',
+        templateUrl: '/app/components/home/views/printshop_register.html',
+        controller: 'PrintShopRegisterCtrl',
+        data: {
+            css: mainPrintShopCSS
+        }
+    })
+    .state('adminlogin', {
+        url: '/adminlogin',
+        templateUrl: '/app/components/admin/views/admin-login.html',
+        controller: 'LoginController',
+        data: {
+            css: adminLoginCSS
+        }
+    })
 
 
     /*Consumer*/
@@ -153,8 +153,14 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
     .state('employee.pending', {
         url: '/pending',
         templateUrl: '/app/components/printshop/employee/views/employee-requests-pending.html',
-        controller: 'PendingRequestsCtrl'
+        controller: 'PendingRequestsCtrl',
+        resolve: {
+            pendingPrintRequests: ['PendingPrintRequestsService', function(PendingPrintRequestsService) {
+                return PendingPrintRequestsService.getPendingRequests();
+            }]
+        }
     })
+
     .state('employee.satisfied', {
         url: '/satisfied',
         templateUrl: '/app/components/printshop/employee/views/employee-requests-satisfied.html',
@@ -166,77 +172,77 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
         controller: 'HistoryRequestsCtrl'
     })
 
-  /*Manager*/
-  .state('manager', {
-    abstract: true,
-    url: '/manager/:username',
-    views: {
-      '': {
-        templateUrl: '/app/components/printshop/manager/views/manager-base.html',
-        controller: 'ManagerBaseCtrl'
-      }
-    },
-    data: {
-      css: adminlteCSS
-    }
-  })
-  .state('manager.stats', {
-    url: '/stats',
-    templateUrl: '/app/components/printshop/manager/views/manager-stats.html'
-  })
-  .state('manager.pricetable', {
-    url: '/pricetable',
-    templateUrl: '/app/components/printshop/manager/views/pricetable/manager-pricetable.html',
-    controller: 'ManagerPriceTableCtrl',
-    resolve: {
-      priceTable: ['PriceTableService', function(PriceTableService) {
-        return PriceTableService.getPriceTable();
-      }]
-    }
-  })
-  .state('manager.employees', {
-    url: '/employees',
-    templateUrl: '/app/components/printshop/manager/views/manager-employees.html'
-  })
+    /*Manager*/
+    .state('manager', {
+        abstract: true,
+        url: '/manager/:username',
+        views: {
+            '': {
+                templateUrl: '/app/components/printshop/manager/views/manager-base.html',
+                controller: 'ManagerBaseCtrl'
+            }
+        },
+        data: {
+            css: adminlteCSS
+        }
+    })
+    .state('manager.stats', {
+        url: '/stats',
+        templateUrl: '/app/components/printshop/manager/views/manager-stats.html'
+    })
+    .state('manager.pricetable', {
+        url: '/pricetable',
+        templateUrl: '/app/components/printshop/manager/views/pricetable/manager-pricetable.html',
+        controller: 'ManagerPriceTableCtrl',
+        resolve: {
+            priceTable: ['PriceTableService', function(PriceTableService) {
+                return PriceTableService.getPriceTable();
+            }]
+        }
+    })
+    .state('manager.employees', {
+        url: '/employees',
+        templateUrl: '/app/components/printshop/manager/views/manager-employees.html'
+    })
 
-  /*Admin*/
-  .state('admin', {
-      abstract: true,
-      url: '/admin/:username',
-      views: {
-          '': {
-              templateUrl: '/app/components/admin/views/admin-base.html',
-              controller: 'AdminBaseCtrl'
-          }
-      },
-      data: {
-          css: adminlteCSS
-      }
-  })
-  .state('admin.requests', {
-      url: '/requests',
-      templateUrl: '/app/components/admin/views/admin-pending-requests.html',
-      controller: 'AdminPendingRequestsCtrl',
-      resolve: {
-        pendingRequests: ['PendingRequestsService', function(PendingRequestsService) {
-          return PendingRequestsService.getPendingRequests();
-        }]
-      }
-  })
-  .state('admin.request', {
-      url: '/requests/:requestid',
-      templateUrl: '/app/components/admin/views/admin-request.html',
-      controller: 'AdminPendingRequestDetailCtrl',
-      resolve: {
-         pendingRequest: ['PendingRequestsService', function (PendingRequestsService) {
-            return PendingRequestsService.getCurrentRequest();
-         }]
-      }
-  })
-  .state('admin.printshops', {
-    url: '/printshops',
-    templateUrl: '/app/components/admin/views/admin-printshops.html',
-    controller: 'AdminPrintShopsCtrl'
-  });
+    /*Admin*/
+    .state('admin', {
+        abstract: true,
+        url: '/admin/:username',
+        views: {
+            '': {
+                templateUrl: '/app/components/admin/views/admin-base.html',
+                controller: 'AdminBaseCtrl'
+            }
+        },
+        data: {
+            css: adminlteCSS
+        }
+    })
+    .state('admin.requests', {
+        url: '/requests',
+        templateUrl: '/app/components/admin/views/admin-pending-requests.html',
+        controller: 'AdminPendingRequestsCtrl',
+        resolve: {
+            pendingRequests: ['PendingRequestsService', function(PendingRequestsService) {
+                return PendingRequestsService.getPendingRequests();
+            }]
+        }
+    })
+    .state('admin.request', {
+        url: '/requests/:requestid',
+        templateUrl: '/app/components/admin/views/admin-request.html',
+        controller: 'AdminPendingRequestDetailCtrl',
+        resolve: {
+            pendingRequest: ['PendingRequestsService', function (PendingRequestsService) {
+                return PendingRequestsService.getCurrentRequest();
+            }]
+        }
+    })
+    .state('admin.printshops', {
+        url: '/printshops',
+        templateUrl: '/app/components/admin/views/admin-printshops.html',
+        controller: 'AdminPrintShopsCtrl'
+    });
 
 }]);

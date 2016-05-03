@@ -11,7 +11,7 @@
         </tr>
         <tr ng-repeat="request in pendingRequests">
           <td><b>{{request.id}}</b></td>
-          <td>{{request.consumer}}</td>
+          <td>{{request.consumer.name}}</td>
           <td>{{request.arrivalTimestamp}}</td>
           <td><button class="btn btn-success" ng-click="attendRequest(request.id)"><i class="fa fa-level-up" style="margin-right: 0.2em;"></i>Atender</button></td>
           <td><button class="btn btn-danger" ng-click="cancelRequest(request.id)"><i class="fa fa-times" style="margin-right: 0.2em;"></i>Cancelar pedido</button></td>
