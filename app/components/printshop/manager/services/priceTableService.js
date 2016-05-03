@@ -3,6 +3,7 @@ var app = angular.module('ProxyPrint');
 app.factory('PriceTableService', ['$http', '$cookieStore', function($http, $cookieStore) {
   var service = {};
   service.currentTable = "";
+  service.currentRingType = "";
   service.currentRowIndex = -1;
   service.newEntry = {};
 
@@ -23,6 +24,14 @@ app.factory('PriceTableService', ['$http', '$cookieStore', function($http, $cook
   service.addNewRow = function(row) {
     service.newEntry = row;
     var url = "http://localhost:8080/printshops/"+$cookieStore.get("printShopID")+"/pricetable";
+    return $http.post(url,row).success(function(data){
+      return data;
+    });
+  }
+
+  service.addNewRingsRow = function(row) {
+    service.newEntry = row;
+    var url = "http://localhost:8080/printshops/"+$cookieStore.get("printShopID")+"/pricetable/rings";
     return $http.post(url,row).success(function(data){
       return data;
     });
@@ -53,6 +62,14 @@ app.factory('PriceTableService', ['$http', '$cookieStore', function($http, $cook
 
   service.getCurrentRowIndex = function() {
     return service.currentRowIndex;
+  };
+
+  service.setCurrentRingType = function(index) {
+    service.currentRingType = index;
+  };
+
+  service.getCurrentRingType = function() {
+    return service.currentRingType;
   };
 
   return service;
