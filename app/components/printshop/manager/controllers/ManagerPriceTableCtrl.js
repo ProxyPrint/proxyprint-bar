@@ -10,8 +10,7 @@ app.controller('ManagerPriceTableCtrl', ['$scope', '$uibModal', 'PriceTableServi
   } else {
     $scope.isStaplingFree = true;
   }
-  console.log($scope.isStaplingFree);
-
+  console.log($scope.priceTable);
   $scope.isEditModeOn = false;
 
   $scope.confirmDelete = function(table,index) {
@@ -46,6 +45,9 @@ app.controller('ManagerPriceTableCtrl', ['$scope', '$uibModal', 'PriceTableServi
 
   $scope.newEntryPrintCopyModal = function(table) {
     PriceTableService.setCurrentTable(table);
+    if(!$scope.priceTable['printcopy'][PriceTableService.getCurrentTable()]) {
+      $scope.priceTable['printcopy'][PriceTableService.getCurrentTable()] = [];
+    }
     $scope.openNewEntryPrintCopyModal("Nova entrada em impressões e cópias a preto e branco.");
   };
 
@@ -78,8 +80,11 @@ app.controller('ManagerPriceTableCtrl', ['$scope', '$uibModal', 'PriceTableServi
   // Add
   $scope.newEntryRingsModal = function(table) {
     PriceTableService.setCurrentTable(table);
-    PriceTableService.setCurrentRingType($scope.priceTable['rings'][table][0].ringType);
-    $scope.openNewRingsEntryModal("Nova entrada em encadernações, tabela de "+$scope.priceTable['rings'][table][0].ringType+".");
+    PriceTableService.setCurrentRingType(table);
+    if(!$scope.priceTable['rings'][PriceTableService.getCurrentTable()]) {
+      $scope.priceTable['rings'][PriceTableService.getCurrentTable()] = [];
+    }
+    $scope.openNewRingsEntryModal("Nova entrada em encadernações, tabela de "+PriceTableService.getPresentationStringForRings(table)+".");
   };
 
   $scope.openNewRingsEntryModal = function(reply) {

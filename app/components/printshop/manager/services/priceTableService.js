@@ -83,5 +83,16 @@ app.factory('PriceTableService', ['$http', '$cookieStore', function($http, $cook
     return service.currentRingType;
   };
 
+  service.getPresentationStringForRings = function(rt) {
+    if(rt == "PLASTIC") {
+        return "Argolas de Plástico";
+    } else if(rt == "SPIRAL") {
+        return "Argolas Espiral";
+    } else if(rt == "WIRE") {
+        return "Argolas de Arame";
+    }
+    return "";
+  };
+
   return service;
 }]);
