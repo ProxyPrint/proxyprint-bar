@@ -3,7 +3,7 @@
 
 
 ##Angular naming conventions
-We're following 's naming convention for the Angular-related elements: 
+We're following [this guide](https://github.com/mgechev/angularjs-style-guide)'s naming convention for the Angular-related elements: 
 
 Element | Naming style | Example | usage
 ----|------|----|--------
