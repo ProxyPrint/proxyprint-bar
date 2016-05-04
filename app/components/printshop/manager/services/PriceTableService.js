@@ -1,6 +1,6 @@
 var app = angular.module('ProxyPrint');
 
-app.factory('PriceTableService', ['$http', '$cookieStore', function($http, $cookieStore) {
+app.factory('priceTableService', ['$http', '$cookieStore', function($http, $cookieStore) {
   var service = {};
   service.currentTable = "";
   service.currentRingType = "";

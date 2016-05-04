@@ -1,6 +1,6 @@
 var app = angular.module('ProxyPrint');
 
-app.factory('PendingPrintRequestsService', ['$http', function($http) {
+app.factory('pendingPrintRequestsService', ['$http', function($http) {
     var service = {};
     service.currentRequest = {};
 

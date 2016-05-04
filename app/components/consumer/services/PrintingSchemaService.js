@@ -1,4 +1,4 @@
-angular.module('ProxyPrint').factory('PrintingSchemaService',['$http', function ($http) {
+angular.module('ProxyPrint').factory('printingSchemaService',['$http', function ($http) {
 
     var service = {};
 

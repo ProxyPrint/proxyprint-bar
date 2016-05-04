@@ -1,4 +1,4 @@
-angular.module('Auth').factory('AuthenticationService', ['Base64', '$http', '$cookieStore', '$rootScope', '$timeout',
+angular.module('Auth').factory('authenticationService', ['Base64', '$http', '$cookieStore', '$rootScope', '$timeout',
    function(Base64, $http, $cookieStore, $rootScope, $timeout) {
       var service = {};
 

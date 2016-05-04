@@ -1,10 +1,10 @@
-angular.module('ProxyPrint').controller('AdminBaseCtrl', ['$scope', '$cookieStore', 'AuthenticationService', '$state',
-      function($scope, $cookieStore, AuthenticationService, $state) {
+angular.module('ProxyPrint').controller('AdminBaseCtrl', ['$scope', '$cookieStore', 'authenticationService', '$state',
+      function($scope, $cookieStore, authenticationService, $state) {
 
    $scope.admin = $cookieStore.get('globals').currentUser;
 
    $scope.logout = function(){
-      AuthenticationService.ClearCredentials();
+      authenticationService.ClearCredentials();
       $state.go('adminlogin');
    };
 

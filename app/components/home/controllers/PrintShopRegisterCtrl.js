@@ -1,7 +1,7 @@
-angular.module('Auth').controller('PrintShopRegisterCtrl', ['$scope', '$rootScope', '$http', '$location', 'AuthenticationService', '$state', '$cookieStore',
-  function($scope, $rootScope, $http, $location, AuthenticationService, $state, $cookieStore) {
+angular.module('Auth').controller('PrintShopRegisterCtrl', ['$scope', '$rootScope', '$http', '$location', 'authenticationService', '$state', '$cookieStore',
+  function($scope, $rootScope, $http, $location, authenticationService, $state, $cookieStore) {
     // reset login status
-    AuthenticationService.ClearCredentials();
+    authenticationService.ClearCredentials();
 
     $scope.register = function() {
       $scope.dataLoading = true;

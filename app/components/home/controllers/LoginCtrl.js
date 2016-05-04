@@ -1,16 +1,16 @@
-angular.module('Auth').controller('LoginController', ['$scope', '$rootScope', '$location', 'AuthenticationService', '$state', '$cookieStore',
-function($scope, $rootScope, $location, AuthenticationService, $state, $cookieStore) {
+angular.module('Auth').controller('LoginController', ['$scope', '$rootScope', '$location', 'authenticationService', '$state', '$cookieStore',
+function($scope, $rootScope, $location, authenticationService, $state, $cookieStore) {
   // reset login status
-  AuthenticationService.ClearCredentials();
+  authenticationService.ClearCredentials();
 
   $scope.login = function() {
     $scope.dataLoading = true;
-    AuthenticationService.Login($scope.username, $scope.password, function(response) {
+    authenticationService.Login($scope.username, $scope.password, function(response) {
       if (response.success) {
         console.log(response.user);
         // PrintShop - Manager
         if(response.user.roles[0] == "ROLE_MANAGER") {
-          AuthenticationService.SetCredentials($scope.username, $scope.password);
+          authenticationService.SetCredentials($scope.username, $scope.password);
           $cookieStore.put("printShopID", response.user.printShop['id']);
           $state.go('manager.stats', {"username": $scope.username});
         }
@@ -30,12 +30,12 @@ function($scope, $rootScope, $location, AuthenticationService, $state, $cookieSt
             });
           }
 
-          AuthenticationService.SetCredentials($scope.username, $scope.password);
+          authenticationService.SetCredentials($scope.username, $scope.password);
           $state.go('consumer', {"consumerID":$scope.username});
         }
         // Admin
         else if(response.user.roles[0] == "ROLE_ADMIN") {
-          AuthenticationService.SetCredentials($scope.username, $scope.password);
+          authenticationService.SetCredentials($scope.username, $scope.password);
           $state.go('admin.requests', {"username": $scope.username});
           return;
         }

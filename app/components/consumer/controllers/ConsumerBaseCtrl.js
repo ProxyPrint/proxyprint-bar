@@ -1,12 +1,12 @@
 angular.module('ProxyPrint').controller('ConsumerController', ['$scope','$http','$cookieStore',
-      'AuthenticationService', 'FileTransferService','$rootScope', '$location', '$timeout', '$state',
-      function($scope, $http, $cookieStore, AuthenticationService, FileTransferService, $rootScope, $location, $timeout, $state) {
+      'authenticationService', 'fileTransferService','$rootScope', '$location', '$timeout', '$state',
+      function($scope, $http, $cookieStore, authenticationService, fileTransferService, $rootScope, $location, $timeout, $state) {
 
    $scope.consumer = $cookieStore.get('globals').currentUser;
    console.log($scope.consumer);
 
    $scope.logout = function() {
-      AuthenticationService.ClearCredentials();
+      authenticationService.ClearCredentials();
       $location.path('/');
    };
 
@@ -37,14 +37,15 @@ angular.module('ProxyPrint').controller('ConsumerController', ['$scope','$http',
 
     $scope.uploadFiles = function (files) {
         if (files && files.length) {
-           FileTransferService.setFiles(files);
+          console.log(files.length);
+           fileTransferService.setFiles(files);
            $state.go('consumer.requestbudget');
         }
     };
 
     $scope.uploadFilesTest = function () {
-      var files = FileTransferService.getFiles;
-      FileTransferService.TransferFiles(files);
+      var files = fileTransferService.getFiles;
+      fileTransferService.TransferFiles(files);
    }
 
 }]);

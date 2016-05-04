@@ -1,13 +1,13 @@
 var app = angular.module('ProxyPrint');
 
 // Pending requests table
-app.controller('AdminPendingRequestsCtrl', ['$rootScope', '$scope', '$state', '$http', 'pendingRequests', 'PendingRequestsService',
-function($rootScope, $scope, $state, $http, pendingRequests, PendingRequestsService) {
+app.controller('AdminPendingRequestsCtrl', ['$rootScope', '$scope', '$state', '$http', 'pendingRequests', 'pendingRequestsService',
+function($rootScope, $scope, $state, $http, pendingRequests, pendingRequestsService) {
 
   $scope.pendingRequests = pendingRequests.data;
 
   $scope.lookAtRequest = function (index){
-    PendingRequestsService.setCurrentRequest($scope.pendingRequests[index]);
+    pendingRequestsService.setCurrentRequest($scope.pendingRequests[index]);
     $state.go('admin.request',{"requestid":index});
   };
 
@@ -28,8 +28,8 @@ app.controller('RequestModalController', function ($scope, $uibModalInstance,$st
 });
 
 // Consult detail of pending request
-app.controller('AdminPendingRequestDetailCtrl', ['$scope', '$state', '$http', 'pendingRequest', '$uibModal', 'PendingRequestsService'
-, function($scope, $state, $http, pendingRequest, $uibModal, PendingRequestsService){
+app.controller('AdminPendingRequestDetailCtrl', ['$scope', '$state', '$http', 'pendingRequest', '$uibModal', 'pendingRequestsService'
+, function($scope, $state, $http, pendingRequest, $uibModal, pendingRequestsService){
 
   $scope.request = pendingRequest;
   $scope.showSuccess = false;
@@ -37,7 +37,7 @@ app.controller('AdminPendingRequestDetailCtrl', ['$scope', '$state', '$http', 'p
   $scope.accept = function() {
     console.log("Send accept to server...");
 
-    var data = PendingRequestsService.acceptRequest($scope.request.id)
+    var data = pendingRequestsService.acceptRequest($scope.request.id)
     .then( function(data) {
       if(data.success) {
         $scope.showSuccess = true;
@@ -67,7 +67,7 @@ $scope.openAcceptModal = function(reply) {
 
   modalInstance.result.then(function(index) {
     $scope.showSuccess = true;
-    PendingRequestsService.acceptRequest($scope.request.id);
+    pendingRequestsService.acceptRequest($scope.request.id);
   });
 }
 
@@ -90,7 +90,7 @@ $scope.openRejectModal = function(reply) {
 
   modalInstance.result.then(function(index) {
     $scope.showReject = true;
-    PendingRequestsService.rejectRequest($scope.request.id);
+    pendingRequestsService.rejectRequest($scope.request.id);
   });
 }
 

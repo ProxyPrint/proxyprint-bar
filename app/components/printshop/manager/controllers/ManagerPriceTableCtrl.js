@@ -1,6 +1,6 @@
 var app = angular.module('ProxyPrint');
 
-app.controller('ManagerPriceTableCtrl', ['$scope', '$uibModal', 'PriceTableService', 'priceTable', function($scope, $uibModal, PriceTableService, priceTable) {
+app.controller('ManagerPriceTableCtrl', ['$scope', '$uibModal', 'priceTableService', 'priceTable', function($scope, $uibModal, priceTableService, priceTable) {
 
   $scope.priceTable = priceTable.data;
 
@@ -14,8 +14,8 @@ app.controller('ManagerPriceTableCtrl', ['$scope', '$uibModal', 'PriceTableServi
   $scope.isEditModeOn = false;
 
   $scope.confirmDelete = function(table,index) {
-    PriceTableService.setCurrentTable(table);
-    PriceTableService.setCurrentRowIndex(index);
+    priceTableService.setCurrentTable(table);
+    priceTableService.setCurrentRowIndex(index);
     $scope.openConfirmDeleteModal("Tem a certeza que pertende apagar esta linha do preçário?");
   };
 
@@ -36,17 +36,17 @@ app.controller('ManagerPriceTableCtrl', ['$scope', '$uibModal', 'PriceTableServi
     });
     modalInstance.result.then(function(index) {
       // Why is index undifined?
-      index = PriceTableService.getCurrentRowIndex();
-      var data = PriceTableService.deletePaperRow($scope.priceTable['printcopy'][PriceTableService.getCurrentTable()][index]);
-      if(data.success) $scope.priceTable['printcopy'][PriceTableService.getCurrentTable()].splice(index, 1);
+      index = priceTableService.getCurrentRowIndex();
+      var data = priceTableService.deletePaperRow($scope.priceTable['printcopy'][priceTableService.getCurrentTable()][index]);
+      if(data.success) $scope.priceTable['printcopy'][priceTableService.getCurrentTable()].splice(index, 1);
       else alert("Foi impossível remover o item desejado. Por favor tente mais tarde.");
     });
   };
 
   $scope.newEntryPrintCopyModal = function(table) {
-    PriceTableService.setCurrentTable(table);
-    if(!$scope.priceTable['printcopy'][PriceTableService.getCurrentTable()]) {
-      $scope.priceTable['printcopy'][PriceTableService.getCurrentTable()] = [];
+    priceTableService.setCurrentTable(table);
+    if(!$scope.priceTable['printcopy'][priceTableService.getCurrentTable()]) {
+      $scope.priceTable['printcopy'][priceTableService.getCurrentTable()] = [];
     }
     $scope.openNewEntryPrintCopyModal("Nova entrada em impressões e cópias a preto e branco.");
   };
@@ -64,7 +64,7 @@ app.controller('ManagerPriceTableCtrl', ['$scope', '$uibModal', 'PriceTableServi
       }
     });
     modalInstance.result.then(function(index) {
-      $scope.priceTable['printcopy'][PriceTableService.getCurrentTable()].push(PriceTableService.getNewEntry());
+      $scope.priceTable['printcopy'][priceTableService.getCurrentTable()].push(priceTableService.getNewEntry());
       alert("Nova linha adicionada com sucesso!");
     });
   };
@@ -79,12 +79,12 @@ app.controller('ManagerPriceTableCtrl', ['$scope', '$uibModal', 'PriceTableServi
 
   // Add
   $scope.newEntryRingsModal = function(table) {
-    PriceTableService.setCurrentTable(table);
-    PriceTableService.setCurrentRingType(table);
-    if(!$scope.priceTable['rings'][PriceTableService.getCurrentTable()]) {
-      $scope.priceTable['rings'][PriceTableService.getCurrentTable()] = [];
+    priceTableService.setCurrentTable(table);
+    priceTableService.setCurrentRingType(table);
+    if(!$scope.priceTable['rings'][priceTableService.getCurrentTable()]) {
+      $scope.priceTable['rings'][priceTableService.getCurrentTable()] = [];
     }
-    $scope.openNewRingsEntryModal("Nova entrada em encadernações, tabela de "+PriceTableService.getPresentationStringForRings(table)+".");
+    $scope.openNewRingsEntryModal("Nova entrada em encadernações, tabela de "+priceTableService.getPresentationStringForRings(table)+".");
   };
 
   $scope.openNewRingsEntryModal = function(reply) {
@@ -100,15 +100,15 @@ app.controller('ManagerPriceTableCtrl', ['$scope', '$uibModal', 'PriceTableServi
       }
     });
     modalInstance.result.then(function(index) {
-      $scope.priceTable['rings'][PriceTableService.getCurrentTable()].push(PriceTableService.getNewEntry());
+      $scope.priceTable['rings'][priceTableService.getCurrentTable()].push(priceTableService.getNewEntry());
       alert("Nova linha adicionada com sucesso!");
     });
   };
 
   // Delete
   $scope.confirmRingDelete = function(table,index) {
-    PriceTableService.setCurrentTable(table);
-    PriceTableService.setCurrentRowIndex(index);
+    priceTableService.setCurrentTable(table);
+    priceTableService.setCurrentRowIndex(index);
     $scope.openConfirmRingDeleteModal("Tem a certeza que pertende apagar esta linha do preçário?");
   };
 
@@ -129,9 +129,9 @@ app.controller('ManagerPriceTableCtrl', ['$scope', '$uibModal', 'PriceTableServi
     });
     modalInstance.result.then(function(index) {
       // Why is index undifined?
-      index = PriceTableService.getCurrentRowIndex();
-      var data = PriceTableService.deleteRingRow($scope.priceTable['rings'][PriceTableService.getCurrentTable()][index]);
-      if(data.success) $scope.priceTable['rings'][PriceTableService.getCurrentTable()].splice(index, 1);
+      index = priceTableService.getCurrentRowIndex();
+      var data = priceTableService.deleteRingRow($scope.priceTable['rings'][priceTableService.getCurrentTable()][index]);
+      if(data.success) $scope.priceTable['rings'][priceTableService.getCurrentTable()].splice(index, 1);
       else alert("Foi impossível remover o item desejado. Por favor tente mais tarde.");
     });
   };
@@ -142,7 +142,7 @@ app.controller('ManagerPriceTableCtrl', ['$scope', '$uibModal', 'PriceTableServi
   $scope.editStaplingValue = function(newStaplingPrice) {
     if(newStaplingPrice==0) {
       $scope.isStaplingFree = true;
-      PriceTableService.editStaplingValue(0);
+      priceTableService.editStaplingValue(0);
       $scope.priceTable["stapling"] = 0;
       alert("Agrafar passa agora a ser grátis.");
     }
@@ -151,7 +151,7 @@ app.controller('ManagerPriceTableCtrl', ['$scope', '$uibModal', 'PriceTableServi
     }
     else {
       $scope.isStaplingFree = false;
-      PriceTableService.editStaplingValue($scope.staplingPrice);
+      priceTableService.editStaplingValue($scope.staplingPrice);
       alert("Agrafar tem agora um novo preço de "+$scope.staplingPrice+" €.");
     }
   };
@@ -175,14 +175,14 @@ app.controller('ConfirmDeleteModalCtrl', function($scope, $uibModalInstance, ind
 });
 
 // Modal for adding new print and copy related rows to some table in the price table
-app.controller('NewPrintCopyEntryCtrl', function($scope, $uibModalInstance, text, PriceTableService) {
+app.controller('NewPrintCopyEntryCtrl', function($scope, $uibModalInstance, text, priceTableService) {
 
   $scope.text = text;
 
   $scope.addNewEntry = function () {
-    var newEntry = {infLim: $scope.infLim, supLim: $scope.supLim, priceA4SIMPLEX: $scope.priceA4SIMPLEX, priceA4DUPLEX: $scope.priceA4DUPLEX, priceA3SIMPLEX: $scope.priceA3SIMPLEX, priceA3DUPLEX: $scope.priceA3DUPLEX, colors: PriceTableService.getCurrentTable()};
+    var newEntry = {infLim: $scope.infLim, supLim: $scope.supLim, priceA4SIMPLEX: $scope.priceA4SIMPLEX, priceA4DUPLEX: $scope.priceA4DUPLEX, priceA3SIMPLEX: $scope.priceA3SIMPLEX, priceA3DUPLEX: $scope.priceA3DUPLEX, colors: priceTableService.getCurrentTable()};
 
-    PriceTableService.addNewPaperRow(newEntry);
+    priceTableService.addNewPaperRow(newEntry);
 
     $uibModalInstance.close();
   };
@@ -194,14 +194,14 @@ app.controller('NewPrintCopyEntryCtrl', function($scope, $uibModalInstance, text
 });
 
 // Modal for adding new rings related rows to some table in the price table
-app.controller('NewRingsEntryCtrl', function($scope, $uibModalInstance, text, PriceTableService) {
+app.controller('NewRingsEntryCtrl', function($scope, $uibModalInstance, text, priceTableService) {
 
   $scope.text = text;
 
   $scope.addNewEntry = function () {
-    var newEntry = {ringType: PriceTableService.getCurrentRingType(),infLim: $scope.infLim, supLim: $scope.supLim, price: $scope.price};
+    var newEntry = {ringType: priceTableService.getCurrentRingType(),infLim: $scope.infLim, supLim: $scope.supLim, price: $scope.price};
     console.log(newEntry);
-    PriceTableService.addNewRingsRow(newEntry);
+    priceTableService.addNewRingsRow(newEntry);
 
     $uibModalInstance.close();
   };

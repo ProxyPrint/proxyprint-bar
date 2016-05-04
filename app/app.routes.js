@@ -76,7 +76,7 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
     })
     .state('psregister', {
         url: '/psregister',
-        templateUrl: '/app/components/home/views/printshop_register.html',
+        templateUrl: '/app/components/home/views/printshop-register.html',
         controller: 'PrintShopRegisterCtrl',
         data: {
             css: mainPrintShopCSS
@@ -97,7 +97,7 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
         url: '/:consumerID',
         views: {
             '': {
-                templateUrl: '/app/components/consumer/views/consumer_mainpage.html',
+                templateUrl: '/app/components/consumer/views/consumer-mainpage.html',
                 controller: 'ConsumerController'
             }
         },
@@ -108,36 +108,36 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
     })
     .state('consumer.settings' ,{
         url: '/settings',
-        templateUrl: '/app/components/consumer/views/consumer_settings.html'
+        templateUrl: '/app/components/consumer/views/consumer-settings.html'
     })
     .state('consumer.mainpage' ,{
         url: '/mainpage',
-        templateUrl: '/app/components/consumer/views/consumer_maincontent.html'
+        templateUrl: '/app/components/consumer/views/consumer-maincontent.html'
     })
     .state('consumer.history' , {
         url: '/history',
-        templateUrl: '/app/components/consumer/views/consumer_history.html',
+        templateUrl: '/app/components/consumer/views/consumer-history.html',
         controller: 'ConsumerHistoryController'
     })
     .state('consumer.printshoplist', {
         url: '/printshops',
-        templateUrl: '/app/components/consumer/views/consumer_printshoplist.html',
+        templateUrl: '/app/components/consumer/views/consumer-printshoplist.html',
         controller: 'ConsumerPrintshopList'
     })
     .state('consumer.requestbudget', {
         url: '/requestbudget',
-        templateUrl: '/app/components/consumer/views/consumer_requestBudget.html',
+        templateUrl: '/app/components/consumer/views/consumer-requestBudget.html',
         controller: 'ConsumerSpecsController',
         resolve: {
-          printingSchemas : ['PrintingSchemaService','$cookieStore',
-            function(PrintingSchemaService, $cookieStore) {
-              return PrintingSchemaService.getPrintingSchemas($cookieStore.get('consumerID'));
+          printingSchemas : ['printingSchemaService','$cookieStore',
+            function(printingSchemaService, $cookieStore) {
+              return printingSchemaService.getPrintingSchemas($cookieStore.get('consumerID'));
           }]
         }
     })
     .state('consumer.requestprintshopsbudget', {
         url: '/printshopbudgets',
-        templateUrl: '/app/components/consumer/views/consumer_printShopsBudget.html',
+        templateUrl: '/app/components/consumer/views/consumer-printShopsBudget.html',
         controller: 'ConsumerBudgetController'
     })
 
@@ -162,8 +162,8 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
         templateUrl: '/app/components/printshop/employee/views/employee-requests-pending.html',
         controller: 'PendingRequestsCtrl',
         resolve: {
-            pendingPrintRequests: ['PendingPrintRequestsService', function(PendingPrintRequestsService) {
-                return PendingPrintRequestsService.getPendingRequests();
+            pendingPrintRequests: ['pendingPrintRequestsService', function(pendingPrintRequestsService) {
+                return pendingPrintRequestsService.getPendingRequests();
             }]
         }
     })
@@ -202,8 +202,8 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
         templateUrl: '/app/components/printshop/manager/views/pricetable/manager-pricetable.html',
         controller: 'ManagerPriceTableCtrl',
         resolve: {
-            priceTable: ['PriceTableService', function(PriceTableService) {
-                return PriceTableService.getPriceTable();
+            priceTable: ['priceTableService', function(priceTableService) {
+                return priceTableService.getPriceTable();
             }]
         }
     })

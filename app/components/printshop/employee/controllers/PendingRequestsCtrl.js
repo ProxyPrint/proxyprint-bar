@@ -1,5 +1,5 @@
-angular.module('ProxyPrint').controller('PendingRequestsCtrl', ['$scope', 'pendingPrintRequests', 'PendingPrintRequestsService',
-function($scope, pendingPrintRequests, PendingPrintRequestsService) {
+angular.module('ProxyPrint').controller('PendingRequestsCtrl', ['$scope', 'pendingPrintRequests', 'pendingPrintRequestsService',
+function($scope, pendingPrintRequests, pendingPrintRequestsService) {
 
     $scope.pendingRequests = pendingPrintRequests.data.printrequest;
 

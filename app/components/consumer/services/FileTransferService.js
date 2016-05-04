@@ -1,4 +1,4 @@
-angular.module('ProxyPrint').factory('FileTransferService',['Upload','$timeout', function (Upload, $timeout) {
+angular.module('ProxyPrint').factory('fileTransferService',['Upload','$timeout', function (Upload, $timeout) {
 
     var service = {};
     service.TransferFiles = function (files, callback) {
