@@ -1,6 +1,6 @@
-angular.module('ProxyPrint').controller('ConsumerController', ['$scope','$http','$cookieStore',
+angular.module('ProxyPrint').controller('ConsumerController', ['$scope','$cookieStore',
       'authenticationService', 'fileTransferService','$rootScope', '$location', '$timeout', '$state',
-      function($scope, $http, $cookieStore, authenticationService, fileTransferService, $rootScope, $location, $timeout, $state) {
+      function($scope, $cookieStore, authenticationService, fileTransferService, $rootScope, $location, $timeout, $state) {
 
    $scope.consumer = $cookieStore.get('globals').currentUser;
    console.log($scope.consumer);

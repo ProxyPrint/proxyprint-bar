@@ -1,24 +1,24 @@
-angular.module('ProxyPrint').factory('printingSchemaService',['$http', function ($http) {
+angular.module('ProxyPrint').factory('printingSchemaService',['$http', 'backendURLService', function ($http, backendURLService) {
 
     var service = {};
 
     service.getPrintingSchemas = function(consumerID) {
-      return $http.get('http://localhost:8080/consumer/'+consumerID+'/printingschemas')
+      return $http.get(backendURLService.getBaseURL()+'consumer/'+consumerID+'/printingschemas')
       .success(function(data){
         return setFakeIDs(data);
       });
     };
 
     service.addPrintingSchema = function (schema, consumerID){
-      return $http.post('http://localhost:8080/consumer/'+consumerID+'/printingschemas', schema);
+      return $http.post(backendURLService.getBaseURL()+'consumer/'+consumerID+'/printingschemas', schema);
     }
 
     service.deletePrintingSchema = function (schemaID, consumerID) {
-      return $http.delete('http://localhost:8080/consumer/'+consumerID+'/printingschemas/'+schemaID);
+      return $http.delete(backendURLService.getBaseURL()+'consumer/'+consumerID+'/printingschemas/'+schemaID);
     }
 
     service.editPrintingSchema = function (schema, consumerID) {
-      return $http.put('http://localhost:8080/consumer/'+consumerID+'/printingschemas/'+schema.id, schema);
+      return $http.put(backendURLService.getBaseURL()+'consumer/'+consumerID+'/printingschemas/'+schema.id, schema);
     }
 
     setFakeIDs = function (data) {
