@@ -1,4 +1,4 @@
-angular.module('ProxyPrint').factory('SpecMarshallService',[function () {
+angular.module('ProxyPrint').factory('specMarshallService',[function () {
 
     var service = {};
 

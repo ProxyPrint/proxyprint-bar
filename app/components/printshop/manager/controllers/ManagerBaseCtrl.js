@@ -1,5 +1,5 @@
-angular.module('ProxyPrint').controller('ManagerBaseCtrl', ['$scope', '$state', 'AuthenticationService',
-function($scope, $state, AuthenticationService) {
+angular.module('ProxyPrint').controller('ManagerBaseCtrl', ['$scope', '$state', 'authenticationService',
+function($scope, $state, authenticationService) {
 
   $scope.manager = { name: "Joaquim Silva" };
 
@@ -12,7 +12,7 @@ function($scope, $state, AuthenticationService) {
   };
 
   $scope.logout = function() {
-    AuthenticationService.ClearCredentials();
+    authenticationService.ClearCredentials();
     $state.go('printshop');
   };
 

@@ -1,8 +1,8 @@
 angular.module('ProxyPrint').controller('ConsumerSpecsController',
-  ['$scope' , '$uibModal', '$log', 'FileTransferService', 'SpecMarshallService',
-      'printingSchemas', 'PrintingSchemaService', '$cookieStore', '$state',
-    function($scope, $uibModal, $log, FileTransferService, SpecMarshallService,
-        printingSchemas, PrintingSchemaService, $cookieStore, $state) {
+  ['$scope' , '$uibModal', '$log', 'fileTransferService', 'specMarshallService',
+      'printingSchemas', 'printingSchemaService', '$cookieStore', '$state',
+    function($scope, $uibModal, $log, fileTransferService, specMarshallService,
+        printingSchemas, printingSchemaService, $cookieStore, $state) {
 
     /** Page range logic */
     $scope.showModal = false;
@@ -50,7 +50,7 @@ angular.module('ProxyPrint').controller('ConsumerSpecsController',
 
     $scope.request = function(){
         /** Send Request */
-        FileTransferService.TransferFiles($scope.files(), function(){
+        fileTransferService.TransferFiles($scope.files(), function(){
             $scope.showRequest = false;
             $state.go('consumer.requestprintshopsbudget');
         });
@@ -66,7 +66,7 @@ angular.module('ProxyPrint').controller('ConsumerSpecsController',
         return i;
     }
 
-    $scope.files = FileTransferService.getFiles;
+    $scope.files = fileTransferService.getFiles;
 
     $scope.addRequestModal = function() {
 
@@ -83,7 +83,7 @@ angular.module('ProxyPrint').controller('ConsumerSpecsController',
         });
 
         modalInstance.result.then(function() {
-            FileTransferService.TransferFiles($scope.files());
+            fileTransferService.TransferFiles($scope.files());
             $state.go('consumer.requestprintshopsbudget');
         });
     }
@@ -98,7 +98,7 @@ angular.module('ProxyPrint').controller('ConsumerSpecsController',
         });
 
       modalInstance.result.then(function(spec) {
-        var specification = SpecMarshallService.marshallSpecification(spec);
+        var specification = specMarshallService.marshallSpecification(spec);
         if ($scope.specs == null){
           specification.fakeID = 1;
           $scope.specs = new Array();
@@ -109,12 +109,12 @@ angular.module('ProxyPrint').controller('ConsumerSpecsController',
     }
 
       $scope.removePrintingSchema = function (index) {
-        PrintingSchemaService.deletePrintingSchema($scope.specs[index].id, $cookieStore.get('consumerID'));
+        printingSchemaService.deletePrintingSchema($scope.specs[index].id, $cookieStore.get('consumerID'));
         $scope.specs.splice(index,1);
       }
 
       $scope.addPrintingSchema = function (schema) {
-        PrintingSchemaService.addPrintingSchema(schema, $cookieStore.get('consumerID'));
+        printingSchemaService.addPrintingSchema(schema, $cookieStore.get('consumerID'));
         $scope.specs.push(schema);
       }
 
