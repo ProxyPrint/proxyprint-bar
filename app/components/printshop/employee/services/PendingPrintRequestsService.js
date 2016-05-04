@@ -6,7 +6,7 @@ app.factory('pendingPrintRequestsService', ['$http', 'backendURLService',
     service.currentRequest = {};
 
     service.getPendingRequests = function() {
-        return $http.get(BackendURLService.getBaseURL()+'printshops/requests').success(function(data){
+        return $http.get(backendURLService.getBaseURL()+'printshops/requests').success(function(data){
             return data;
         });
     };

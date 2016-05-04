@@ -17,7 +17,7 @@ angular.module('Auth').controller('PrintShopRegisterCtrl', ['$scope', '$rootScop
       getLatitudeLongitude($scope.pShopAddress, function(result) {
         data.pShopLatitude = result.geometry.location.lat();
         data.pShopLongitude = result.geometry.location.lng();
-        $http.post(BackendURLService.getBaseURL()+'request/register", data).success(function(response) {
+        $http.post(backendURLService.getBaseURL()+"request/register", data).success(function(response) {
           alert("Pedido registado! Será notificado via email em breve!");
           $location.path('/printshop');
         });

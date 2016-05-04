@@ -7,7 +7,7 @@ angular.module('ProxyPrint').factory('printShopListService', ['Upload', '$timeou
         position = position;
         $http({
           method: 'GET',
-          url: BackendURLService.getBaseURL()+'printshops/nearest',
+          url: backendURLService.getBaseURL()+'printshops/nearest',
           params: {
             latitude: position.coords.latitude,
             longitude: position.coords.longitude

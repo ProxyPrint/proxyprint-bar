@@ -4,7 +4,7 @@ angular.module('ProxyPrint').factory('backendURLService', [function() {
 
   service.getBaseURL = function () {
     return 'http://localhost:8080/';
-  }
+  };
 
   return service;
 }]);

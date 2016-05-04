@@ -1,5 +1,5 @@
-angular.module('Auth').factory('authenticationService', ['Base64', '$http', '$cookieStore', '$rootScope', '$timeout',
-   function(Base64, $http, $cookieStore, $rootScope, $timeout) {
+angular.module('Auth').factory('authenticationService', ['Base64', '$http', '$cookieStore', '$rootScope', '$timeout', 'backendURLService',
+   function(Base64, $http, $cookieStore, $rootScope, $timeout, backendURLService) {
       var service = {};
 
       service.Login = function(username, password, callback) {
@@ -11,7 +11,7 @@ angular.module('Auth').factory('authenticationService', ['Base64', '$http', '$co
 
          $http({
                method: 'POST',
-               url: BackendURLService.getBaseURL()+'login',
+               url: backendURLService.getBaseURL()+'login',
                data: data,
                headers: {
                   'Content-Type': 'application/x-www-form-urlencoded'
@@ -34,7 +34,7 @@ angular.module('Auth').factory('authenticationService', ['Base64', '$http', '$co
          })
          $http({
                method: 'POST',
-               url: BackendURLService.getBaseURL()+'consumer/register',
+               url: backendURLService.getBaseURL()+'consumer/register',
                data: data,
                headers: {
                   'Content-Type': 'application/x-www-form-urlencoded'
@@ -56,7 +56,7 @@ angular.module('Auth').factory('authenticationService', ['Base64', '$http', '$co
 
          $http({
                method: 'POST',
-               url: BackendURLService.getBaseURL()+'employee/login',
+               url: backendURLService.getBaseURL()+'employee/login',
                data: data,
                headers: {
                   'Content-Type': 'application/x-www-form-urlencoded'
@@ -79,7 +79,7 @@ angular.module('Auth').factory('authenticationService', ['Base64', '$http', '$co
          })
          $http({
                method: 'POST',
-               url: BackendURLService.getBaseURL()+'employee/register',
+               url: backendURLService.getBaseURL()+'employee/register',
                data: data,
                headers: {
                   'Content-Type': 'application/x-www-form-urlencoded'

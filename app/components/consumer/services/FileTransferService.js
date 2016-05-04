@@ -6,7 +6,7 @@ angular.module('ProxyPrint').factory('fileTransferService',['Upload','$timeout',
             var file = files[i];
             if (!file.$error) {
                 Upload.upload({
-                    url: BackendURLService.getBaseURL()+'consumer/upload',
+                    url: backendURLService.getBaseURL()+'consumer/upload',
                     data: {
                         file: file,
                         spec: files[i].specs

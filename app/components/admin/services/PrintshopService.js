@@ -5,7 +5,7 @@ app.factory('pendingRequestsService', ['$http', function($http) {
   service.currentRequest = {};
 
   service.getPendingRequests = function() {
-    return $http.get(BackendURLService.getBaseURL()+'requests/pending').success(function(data){
+    return $http.get(backendURLService.getBaseURL()+'requests/pending').success(function(data){
       return data;
     });
   };
