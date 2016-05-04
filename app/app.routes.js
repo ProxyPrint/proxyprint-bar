@@ -97,7 +97,7 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
         url: '/:consumerID',
         views: {
             '': {
-                templateUrl: '/app/components/consumer/views/consumer_mainpage.html',
+                templateUrl: '/app/components/consumer/views/consumer-mainpage.html',
                 controller: 'ConsumerController'
             }
         },
@@ -108,25 +108,25 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
     })
     .state('consumer.settings' ,{
         url: '/settings',
-        templateUrl: '/app/components/consumer/views/consumer_settings.html'
+        templateUrl: '/app/components/consumer/views/consumer-settings.html'
     })
     .state('consumer.mainpage' ,{
         url: '/mainpage',
-        templateUrl: '/app/components/consumer/views/consumer_maincontent.html'
+        templateUrl: '/app/components/consumer/views/consumer-maincontent.html'
     })
     .state('consumer.history' , {
         url: '/history',
-        templateUrl: '/app/components/consumer/views/consumer_history.html',
+        templateUrl: '/app/components/consumer/views/consumer-history.html',
         controller: 'ConsumerHistoryController'
     })
     .state('consumer.printshoplist', {
         url: '/printshops',
-        templateUrl: '/app/components/consumer/views/consumer_printshoplist.html',
+        templateUrl: '/app/components/consumer/views/consumer-printshoplist.html',
         controller: 'ConsumerPrintshopList'
     })
     .state('consumer.requestbudget', {
         url: '/requestbudget',
-        templateUrl: '/app/components/consumer/views/consumer_requestBudget.html',
+        templateUrl: '/app/components/consumer/views/consumer-requestBudget.html',
         controller: 'ConsumerSpecsController',
         resolve: {
           printingSchemas : ['PrintingSchemaService','$cookieStore',
@@ -137,7 +137,7 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
     })
     .state('consumer.requestprintshopsbudget', {
         url: '/printshopbudgets',
-        templateUrl: '/app/components/consumer/views/consumer_printShopsBudget.html',
+        templateUrl: '/app/components/consumer/views/consumer-printShopsBudget.html',
         controller: 'ConsumerBudgetController'
     })
 
