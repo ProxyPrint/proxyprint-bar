@@ -17,7 +17,7 @@ function($scope, $rootScope, $location, AuthenticationService, $state, $cookieSt
         // PrintShop - Employee
         else if (response.user.roles[0] == "ROLE_EMPLOYEE") {
           AuthenticationService.SetCredentials($scope.username, $scope.password);
-          $state.go('employee', {"username": $scope.username});
+          $state.go('employee.pending', {"username": $scope.username});
         }
         // Consumer
         else if(response.user.roles[0] == "ROLE_USER") {
