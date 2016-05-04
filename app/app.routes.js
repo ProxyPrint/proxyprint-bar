@@ -129,9 +129,9 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
         templateUrl: '/app/components/consumer/views/consumer-requestBudget.html',
         controller: 'ConsumerSpecsController',
         resolve: {
-          printingSchemas : ['PrintingSchemaService','$cookieStore',
-            function(PrintingSchemaService, $cookieStore) {
-              return PrintingSchemaService.getPrintingSchemas($cookieStore.get('consumerID'));
+          printingSchemas : ['printingSchemaService','$cookieStore',
+            function(printingSchemaService, $cookieStore) {
+              return printingSchemaService.getPrintingSchemas($cookieStore.get('consumerID'));
           }]
         }
     })
@@ -161,8 +161,8 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
         templateUrl: '/app/components/printshop/employee/views/employee-requests-pending.html',
         controller: 'PendingRequestsCtrl',
         resolve: {
-            pendingPrintRequests: ['PendingPrintRequestsService', function(PendingPrintRequestsService) {
-                return PendingPrintRequestsService.getPendingRequests();
+            pendingPrintRequests: ['pendingPrintRequestsService', function(pendingPrintRequestsService) {
+                return pendingPrintRequestsService.getPendingRequests();
             }]
         }
     })
@@ -201,8 +201,8 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
         templateUrl: '/app/components/printshop/manager/views/pricetable/manager-pricetable.html',
         controller: 'ManagerPriceTableCtrl',
         resolve: {
-            priceTable: ['PriceTableService', function(PriceTableService) {
-                return PriceTableService.getPriceTable();
+            priceTable: ['priceTableService', function(priceTableService) {
+                return priceTableService.getPriceTable();
             }]
         }
     })

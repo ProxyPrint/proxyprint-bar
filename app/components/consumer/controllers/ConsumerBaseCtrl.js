@@ -37,6 +37,7 @@ angular.module('ProxyPrint').controller('ConsumerController', ['$scope','$http',
 
     $scope.uploadFiles = function (files) {
         if (files && files.length) {
+          console.log(files.length);
            fileTransferService.setFiles(files);
            $state.go('consumer.requestbudget');
         }
