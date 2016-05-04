@@ -76,7 +76,7 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
     })
     .state('psregister', {
         url: '/psregister',
-        templateUrl: '/app/components/home/views/printshop_register.html',
+        templateUrl: '/app/components/home/views/printshop-register.html',
         controller: 'PrintShopRegisterCtrl',
         data: {
             css: mainPrintShopCSS
