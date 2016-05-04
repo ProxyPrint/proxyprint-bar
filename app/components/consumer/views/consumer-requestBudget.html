@@ -35,7 +35,7 @@
 
             <div class="simpleDemo">
                 <div class="panel-body" style="max-height: 300px; overflow-y: scroll;">
-                    <ul class="dialog" ng-repeat="file in files()" dnd-list="file.specs" dnd-drop="toggleModal(file, item, index)">
+                    <ul class="dialog" ng-repeat="file in files()" dnd-list="file.specs" dnd-drop="addPageModal(file, item, index)">
                         <div class="file-type-icon">
                             <span class="corner"></span>
                             <span class="type pdf">pdf</span>
@@ -77,23 +77,3 @@
         <button style="margin:20px 0;" type="button" class="btn btn-default" ng-click="addRequestModal()" ng-disabled="queueNumber()==0" >Seguinte <i class="fa fa-arrow-right"></i></button>
     </div>
 </div>
-
-<modal title="Intervalo de páginas a imprimir." visible="showModal">
-    <form name="myForm" role="form">
-        <div class="form-group">
-            De:
-            <input ng-disabled="check" type="number" name="init" ng-model="init" min="0" required> Até:
-            <input ng-disabled="check" type="number" name="end" ng-model="end" min="0" required>
-        </div>
-        <div class="form-group">
-            Todo o documento!
-            <input type="checkbox" ng-model="check" />
-        </div>
-
-        <button type="submit" class="btn btn-default" ng-click="submit(init, end, check)" ng-disabled="((myForm.init.$error.required) || (myForm.end.$error.required)
-                    || init > end || end == 0) && !check">
-            Ok!
-        </button>
-        <button type="cancel" class="btn btn-default" ng-click="cancel()">Cancelar</button>
-    </form>
-</modal>

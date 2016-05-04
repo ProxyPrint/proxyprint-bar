@@ -3,7 +3,6 @@ angular.module('ProxyPrint').controller('ConsumerController', ['$scope','$cookie
       function($scope, $cookieStore, authenticationService, fileTransferService, $rootScope, $location, $timeout, $state) {
 
    $scope.consumer = $cookieStore.get('globals').currentUser;
-   console.log($scope.consumer);
 
    $scope.logout = function() {
       authenticationService.ClearCredentials();
@@ -37,7 +36,6 @@ angular.module('ProxyPrint').controller('ConsumerController', ['$scope','$cookie
 
     $scope.uploadFiles = function (files) {
         if (files && files.length) {
-          console.log(files.length);
            fileTransferService.setFiles(files);
            $state.go('consumer.requestbudget');
         }
