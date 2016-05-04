@@ -11,7 +11,7 @@ angular.module('Auth').factory('authenticationService', ['Base64', '$http', '$co
 
          $http({
                method: 'POST',
-               url: 'http://localhost:8080/login',
+               url: BackendURLService.getBaseURL()+'login',
                data: data,
                headers: {
                   'Content-Type': 'application/x-www-form-urlencoded'
@@ -34,7 +34,7 @@ angular.module('Auth').factory('authenticationService', ['Base64', '$http', '$co
          })
          $http({
                method: 'POST',
-               url: 'http://localhost:8080/consumer/register',
+               url: BackendURLService.getBaseURL()+'consumer/register',
                data: data,
                headers: {
                   'Content-Type': 'application/x-www-form-urlencoded'
@@ -56,7 +56,7 @@ angular.module('Auth').factory('authenticationService', ['Base64', '$http', '$co
 
          $http({
                method: 'POST',
-               url: 'http://localhost:8080/employee/login',
+               url: BackendURLService.getBaseURL()+'employee/login',
                data: data,
                headers: {
                   'Content-Type': 'application/x-www-form-urlencoded'
@@ -79,7 +79,7 @@ angular.module('Auth').factory('authenticationService', ['Base64', '$http', '$co
          })
          $http({
                method: 'POST',
-               url: 'http://localhost:8080/employee/register',
+               url: BackendURLService.getBaseURL()+'employee/register',
                data: data,
                headers: {
                   'Content-Type': 'application/x-www-form-urlencoded'
