@@ -145,6 +145,7 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
 
     /*Employee*/
     .state('employee', {
+        abstract: true,
         url: '/employee/:username',
         views: {
             '': {
