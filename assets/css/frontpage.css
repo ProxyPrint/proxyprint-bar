@@ -146,7 +146,7 @@ hr.small {
     position: relative;
     width: 100%;
     height: 600px;
-    background: url(../img/bg.jpg) no-repeat center center scroll;
+    background: url(../img/homepage_bg_top.jpg) no-repeat center center scroll;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     background-size: cover;
@@ -176,7 +176,7 @@ hr.small {
     width: 100%;
     height: 400px;
     color: #fff;
-    background: url(../img/callout.jpg) no-repeat center center scroll;
+    background: url(../img/homepage_bg_bottom.jpg) no-repeat center center scroll;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     background-size: cover;
