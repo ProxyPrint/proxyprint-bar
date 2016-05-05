@@ -2,7 +2,9 @@ angular.module('ProxyPrint').controller('ConsumerController', ['$scope','$cookie
       'authenticationService', 'fileTransferService','$rootScope', '$location', '$timeout', '$state',
       function($scope, $cookieStore, authenticationService, fileTransferService, $rootScope, $location, $timeout, $state) {
 
-   $scope.consumer = $cookieStore.get('globals').currentUser;
+
+   //$scope.consumer = $cookieStore.get('globals').currentUser;
+   $scope.consumer = "joao";
    console.log($scope.consumer);
 
    $scope.logout = function() {

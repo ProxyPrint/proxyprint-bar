@@ -89,11 +89,10 @@ body {
 
 /** Drag N' Drop box**/
 
+
 .dndbox {
-    width: 600px;
     height: 400px;
     padding-top: 50px;
-    float: left;
 }
 .drop-box {
     background: #F8F8F8;
