@@ -44,7 +44,7 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
     $stateProvider
     .state('notFound', {
         url: '/404',
-        templateUrl: '/app/components/errors/404.html',
+        templateUrl: '/app/shared/views/404.html',
         data: {
             css: adminlteCSS
         }
@@ -231,8 +231,8 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
         templateUrl: '/app/components/admin/views/admin-pending-requests.html',
         controller: 'AdminPendingRequestsCtrl',
         resolve: {
-            pendingRequests: ['PendingRequestsService', function(PendingRequestsService) {
-                return PendingRequestsService.getPendingRequests();
+            pendingRequests: ['pendingRequestsService', function(pendingRequestsService) {
+                return pendingRequestsService.getPendingRequests();
             }]
         }
     })
@@ -241,8 +241,8 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
         templateUrl: '/app/components/admin/views/admin-request.html',
         controller: 'AdminPendingRequestDetailCtrl',
         resolve: {
-            pendingRequest: ['PendingRequestsService', function (PendingRequestsService) {
-                return PendingRequestsService.getCurrentRequest();
+            pendingRequest: ['pendingRequestsService', function (pendingRequestsService) {
+                return pendingRequestsService.getCurrentRequest();
             }]
         }
     })
