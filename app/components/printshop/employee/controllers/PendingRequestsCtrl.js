@@ -1,16 +1,13 @@
-angular.module('ProxyPrint').controller('PendingRequestsCtrl', ['$scope', 'pendingPrintRequests', 'pendingPrintRequestsService',
-function($scope, pendingPrintRequests, pendingPrintRequestsService) {
+angular.module('ProxyPrint').controller('PendingRequestsCtrl', ['$scope', 'pendingPrintRequests', 'pendingPrintRequestsService', '$state',
+function($scope, pendingPrintRequests, pendingPrintRequestsService, $state) {
 
     $scope.pendingRequests = pendingPrintRequests.data.printrequest;
 
     $scope.paginationOn = true;
 
-    $scope.attendRequest = function(requestID) {
-        window.alert("Atender pedido "+requestID);
-    };
-
-    $scope.cancelRequest = function(requestID) {
-        window.alert("Cancelar pedido "+requestID);
+    $scope.lookAtRequest = function (request){
+      pendingPrintRequestsService.setCurrentRequest(request);
+      $state.go('employee.consult',{"requestid":request.id});
     };
 
 }]);

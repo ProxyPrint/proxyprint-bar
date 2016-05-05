@@ -7,14 +7,15 @@
           <th>Cliente</th>
           <th>Data de Entrada</th>
           <th>Ações</th>
+          <th>Estado</th>
           <th></th>
         </tr>
-        <tr ng-repeat="request in pendingRequests">
+        <tr ng-repeat="request in pendingRequests | orderBy:'arrivalTimestamp' && 'id'">
           <td><b>{{request.id}}</b></td>
           <td>{{request.consumer.name}}</td>
           <td>{{request.arrivalTimestamp}}</td>
-          <td><button class="btn btn-success" ng-click="attendRequest(request.id)"><i class="fa fa-level-up" style="margin-right: 0.2em;"></i>Atender</button></td>
-          <td><button class="btn btn-danger" ng-click="cancelRequest(request.id)"><i class="fa fa-times" style="margin-right: 0.2em;"></i>Cancelar pedido</button></td>
+          <td>{{request.status}}</td>
+          <td><button class="btn btn-primary btn-flat" type="button" ng-click="lookAtRequest(request)"><i class="fa fa-level-up" style="margin-right: 0.2em;"></i>Consultar</button></td>
         </tr>
       </tbody>
     </table>

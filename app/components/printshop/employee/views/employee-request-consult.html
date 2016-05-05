@@ -1,0 +1,52 @@
+
+<div class="box-header">
+    <h1><center> Pedido #{{request.id}} </center></h1>
+
+    <div class="list-group-item clearfix">
+        <div class="left">
+            Cliente: {{request.consumer.name}}
+        </div>
+        <div class="left">
+            Email: {{request.consumer.email}}
+        </div>
+    </div>
+</div>
+
+<div class="box">
+    <div class="box-body table-responsive no-padding">
+        <table class="table table-striped">
+            <tbody>
+                <tr>
+                    <th>Ficheiro</th>
+                    <th>Especificação</th>
+                    <th>Download do ficheiro</th>
+                </tr>
+                <tr ng-repeat="file in files">
+                    <td><b>{{file.name}}</b></td>
+                    <td>{{file.specs.format}} + {{file.specs.sides}} + {{file.specs.colors}} + {{file.specs.cover}}</td>
+                    <td><button class="btn btn-primary btn-flat" type="button" ng-click="download(file)"><i class="fa fa-download " style="margin-right: 0.2em;"></i>Download</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="box-footer clearfix">
+        <div style="margin-left: 72%;"><b>Total:</b> {{request.cost}}</div>
+    </div>
+</div>
+
+<div class="box-footer clearfix">
+    <label> Estado do pedido: {{request.status}} </label>
+    <button class="btn btn-danger btn-flat" type="button" ng-click="openRejectModal('Tem a certeza que quer aceitar o pedido?')" style="margin-left: 50%;" ng-hide="request.status!='PENDING'">
+        <i class="fa fa-thumbs-o-down " style="margin-right: 0.2em;"></i>
+        Cancelar
+    </button>
+    <button class="btn btn-primary btn-flat" type="button" ng-click="openAcceptModal('Tem a certeza que quer atender o pedido?')" ng-hide="request.status!='PENDING'">
+        <i class="fa fa-thumbs-o-up " style="margin-right: 0.2em;"></i>
+        Atender
+    </button>
+    <button class="btn btn-success btn-flat" type="button"ng-click="openAcceptModal('Tem a certeza que o pedido está completo?')" style="margin-left: 45%;" ng-hide="request.status!='IN_PROGRESS'">
+        <i class="fa fa-check" style="margin-right: 0.2em;"></i>
+        Marcar como atendido
+    </button>
+</div>
+<!-- ng-hide="request.status!='PENDING'" -->
