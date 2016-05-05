@@ -33,6 +33,10 @@ body {
 
 /***************************** CONSUMER GLOBAL ELEMENTS ********************************/
 
+.navbar-logo {
+  margin-left:10%;
+}
+
 /*** NAV BAR ***/
 
 #custom-bootstrap-menu.navbar-default .navbar-brand {

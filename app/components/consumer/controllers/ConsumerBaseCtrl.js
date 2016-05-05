@@ -4,7 +4,9 @@ angular.module('ProxyPrint').controller('ConsumerController', ['$scope','$cookie
 
 
    //$scope.consumer = $cookieStore.get('globals').currentUser;
-   $scope.consumer = "joao";
+   $scope.consumer = {
+     username : "Xico da Estrebaria"
+   }
    console.log($scope.consumer);
 
    $scope.logout = function() {
