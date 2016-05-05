@@ -1,8 +1,9 @@
 var cluster = require('cluster');
 var compression = require('compression');
 var express = require('express');
+var minify = require('express-minify');
 var app = express();
-app.use(compression());
+var port = Number(process.env.PORT || 9000);
 
 if (cluster.isMaster) {
   var cpuCount = require('os').cpus().length;
@@ -12,8 +13,8 @@ if (cluster.isMaster) {
   }
 
 } else {
-  var port = Number(process.env.PORT || 9000);
-
+  app.use(compression());
+  app.use(minify());
   app.use(express.static(__dirname + '/'));
   var server = app.listen(port, function() {
     console.log('listening on port %d', server.address().port);
