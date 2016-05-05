@@ -31,9 +31,9 @@
             <div class="col-sm-3 col-md-2 sidebar-offcanvas" id="sidebar" role="navigation">
 
                 <ul class="nav nav-sidebar">
-                    <li><a ui-sref=".mainpage"><i class="fa fa-home"></i> Início</a></li>
-                    <li><a ui-sref=".printshoplist"><i class="fa fa-book"></i> Reprografias</a></li>
-                    <li><a ui-sref=".history"><i class="fa fa-history"></i> Histórico</a></li>
+                    <li><a ui-sref=".mainpage"><i class="fa fa-home fa-lg"></i> Início</a></li>
+                    <li><a ui-sref=".printshoplist"><i class="fa fa-book fa-lg"></i> Reprografias</a></li>
+                    <li><a ui-sref=".history"><i class="fa fa-history fa-lg"></i> Histórico</a></li>
                 </ul>
             </div>
             <!--/span-->
@@ -63,7 +63,9 @@
                                                 <strong> Pedido #{{request.requestID}} </strong><br />
                                                 {{request.day}} {{request.hour}}
                                               </div>
-                                              <div class="col-sm-6"></div>
+                                              <div class="col-sm-6">
+
+                                              </div>
                                               <div class="col-sm-6">
                                                 <button type="button" class="btn btn-default">Cancelar pedido</button>
                                               </div>
@@ -73,15 +75,44 @@
                                 </div>
                             </div>
                         </div>
+
                     </div>
+
             </div>
             <!--/row-->
         </div>
     </div>
 </div>
-<div class="footer">
+<footer class="footer-distributed">
 
-</div>
+  <div class="footer-right">
+
+    <span class="fa-stack fa-lg">
+  <i class="fa fa-square-o fa-stack-2x"></i>
+  <i class="fa fa-twitter fa-stack-1x"></i>
+</span>
+    <a href="#"><i class="fa fa-facebook icon-facebook"></i></a>
+    <a href="#"><i class="fa fa-twitter"></i></a>
+    <a href="#"><i class="fa fa-linkedin"></i></a>
+    <a href="#"><i class="fa fa-github"></i></a>
+
+  </div>
+
+  <div class="footer-left">
+
+    <p class="footer-links">
+      <a href="http://www.louisvuitton.com/">Home</a>
+      ·
+      <a href="https://pt.wikipedia.org/wiki/Tautologia_(l%C3%B3gica)">About</a>
+      ·
+      <a href="https://www.youtube.com/watch?v=7ZHa_ZOV6C8">Contact</a>
+    </p>
+
+    <p>ProxyPrint &copy; 2016</p>
+  </div>
+
+</footer>
+
 <!--/.container-->
 
 <script type="text/javascript">
