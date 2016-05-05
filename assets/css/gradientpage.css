@@ -12,3 +12,25 @@ body {
   background: linear-gradient(45deg, rgba(73,165,191,1) 0%, rgba(63,147,189,1) 31%, rgba(60,141,188,1) 41%, rgba(147,206,222,1) 100%);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#49a5bf', endColorstr='#93cede', GradientType=1 );
 }
+
+.title {
+  color: white;
+  font-weight: bold;
+}
+
+.text {
+  color: white;
+}
+
+.margintop {
+  margin-top: 20%;
+}
+
+hr.gradient {
+  border: 0;
+  height: 1px;
+  background-image: -webkit-linear-gradient(left, rgba(0,0,0,0), white, rgba(0,0,0,0));
+  background-image:    -moz-linear-gradient(left, rgba(0,0,0,0), white, rgba(0,0,0,0));
+  background-image:     -ms-linear-gradient(left, rgba(0,0,0,0), white, rgba(0,0,0,0));
+  background-image:      -o-linear-gradient(left, rgba(0,0,0,0), white, rgba(0,0,0,0));
+}
