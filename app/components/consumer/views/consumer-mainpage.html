@@ -40,16 +40,22 @@
         <div class="col-sm-9 col-md-10 main">
             <div ui-view>
                 <div class="row">
-                    <div class="col-sm-8 style=height:500px">
+                    <div class="col-sm-8">
 
 
                         <div class="dndbox">
                             <div ngf-drop="uploadFiles($files)" ngf-select ng-model="files" class="drop-box" ngf-drag-over-class="'dragover'" ngf-multiple="true" ngf-allow-dir="true" accept="image/*,application/pdf" ngf-pattern="'image/*,application/pdf'">
-                                <h4>Arraste ficheiros/Clique</h4>
+                              <br />
+                              <br />
+                                <h4>Arraste ficheiros ou clique para fazer upload</h4>
                                 <br>
                                 <br>
                                 <i class="fa fa-upload fa-4x"></i>
                             </div>
+                        </div>
+                        <br />
+                        <div style="text-align:center">
+                          <button class="btn btn-primary">Submeter pedido</button>
                         </div>
                     </div>
 
