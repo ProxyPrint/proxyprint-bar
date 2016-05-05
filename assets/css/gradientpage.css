@@ -26,6 +26,15 @@ body {
   margin-top: 20%;
 }
 
+.container-margintop {
+  margin-top: 5%;
+}
+
+.main-container {
+  margin-top:2%;
+  width: 50%;
+}
+
 hr.gradient {
   border: 0;
   height: 1px;
