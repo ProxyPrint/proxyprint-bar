@@ -18,7 +18,7 @@ angular.module('ProxyPrint').controller('ConsumerController', ['$scope','$cookie
                 message.day = d.getDate()+'/'+d.getMonth()+'/'+d.getFullYear();
                 message.hour = d.getHours()+':'+d.getMinutes();
                 message.read = false;
-                $scope.notifications.push(message);
+                $scope.notifications.unshift(message);
                 $scope.newNotifications += 1;
                 audio.play();
             });
