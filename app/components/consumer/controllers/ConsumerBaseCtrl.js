@@ -7,12 +7,13 @@ angular.module('ProxyPrint').controller('ConsumerController', ['$scope','$cookie
 
    var source = new EventSource(backendURLService.getBaseURL()+"consumer/subscribe?username="+$scope.consumer.username, {withCredentials: true});
 
-   $scope.notifications=0;
+   $scope.notifications= new Array();
 
    var increaseNotifications = function (msg) {
      $scope.$apply(function () {
-                $scope.msg = JSON.parse(msg.data);
-                $scope.notifications++;
+                var message = JSON.parse(msg.data);
+                console.log(message.message);
+                $scope.notifications.push(message);
                 audio.play();
 
             });

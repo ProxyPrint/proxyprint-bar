@@ -11,13 +11,18 @@
                     </li>
                     <li id="notification_li">
                         <a href="" id="notificationLink">
-                            <notification-icon count='notifications' animation='bounce'>
+                            <notification-icon count='notifications.length' animation='bounce'>
                                 <i class="fa fa-bell-o"></i>
                             </notification-icon>
                         </a>
                         <div id="notificationContainer">
                             <div id="notificationTitle">Notifications</div>
                             <div id="notificationsBody" class="notifications"></div>
+                            <ul class="list-group">
+                              <li class="list-group-item" ng-repeat="notification in notifications">
+                                  {{notification.message}}
+                              </li>
+                            </ul>
                             <div id="notificationFooter"><a href="#">See All</a></div>
                         </div>
 
