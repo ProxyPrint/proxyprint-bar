@@ -1,35 +1,102 @@
 <h2>Reprografias</h2>
-<div class="container">
-	<h4>Distância das reprografias</h4>
-	<rzslider rz-slider-model="distanceSlider.value"
-	rz-slider-high="distanceSlider.maxValue"
-	rz-slider-options="distanceSlider.options" style="width: 30%;"></rzslider>
-</div>
-<div class="container">
-	<div class="printshops">
-		<h2></h2>
-		<select class="form-control" ng-Model="selectedPrintShop" ng-options="printshop.name for printshop in printshops" ng-change="addPrintShop()"></select>
+
+<div class="row">
+	<!-- Prinshops selection -->
+	<div class="col-md-8">
+		<div class="table-responsive" style="height: 220px;">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Reprografia</th>
+						<th>Morada</th>
+						<th>Distância</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="printshop in selectedPrintShops">
+						<td style="width: 25%;">{{printshop.name}}</td>
+						<td style="width: 50%;">{{printshop.address}}</td>
+						<td style="width: 20%;">{{printshop.distance}} km</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<!-- Printshops counter -->
+		<div style="float: right;">
+			<strong>{{totalSelectedPShops}} de 5</strong>
+		</div>
+
+		<rzslider rz-slider-model="distanceSlider.value"
+		rz-slider-high="distanceSlider.maxValue"
+		rz-slider-options="distanceSlider.options"></rzslider>
+		<div>
+			<select class="form-control" ng-model="selectedPrintShop" ng-options="formatPrinShopForOption(printshop) for printshop in printshops" ng-change="addPrintShop()">
+				<option value="">Selecione uma reprografia...</option>
+			</select>
+		</div>
 	</div>
-</div>
 
-
-<div class="container">
-	<div class="printshops">
-		<ul class="list-group">
-			<li class="list-group-item clearfix" ng-repeat="printshop in selectedPrintShops">
-				{{printshop.name}}</br>
-				{{printshop.address}}
-			</li>
-		</ul>
+	<!-- List of submited files -->
+	<div class="col-md-3">
+		<h4>Ficheiro Submetidos</h4>
+		<div class="scrollableTable">
+			<ul class="list-group">
+				<li class="list-group-item clearfix">
+					<strong>file1.pdf</strong>
+				</li>
+				<li class="list-group-item clearfix">
+					<strong>file2.pdf</strong>
+				</li>
+				<li class="list-group-item clearfix">
+					<strong>file3.pdf</strong>
+				</li>
+				<li class="list-group-item clearfix">
+					<strong>file4.pdf</strong>
+				</li>
+				<li class="list-group-item clearfix">
+					<strong>file4.pdf</strong>
+				</li>
+				<li class="list-group-item clearfix">
+					<strong>file4.pdf</strong>
+				</li>
+				<li class="list-group-item clearfix">
+					<strong>file4.pdf</strong>
+				</li>
+				<li class="list-group-item clearfix">
+					<strong>file4.pdf</strong>
+				</li>
+				<li class="list-group-item clearfix">
+					<strong>file4.pdf</strong>
+				</li>
+				<li class="list-group-item clearfix">
+					<strong>file4.pdf</strong>
+				</li>
+				<li class="list-group-item clearfix">
+					<strong>file4.pdf</strong>
+				</li>
+				<li class="list-group-item clearfix">
+					<strong>file4.pdf</strong>
+				</li>
+				<li class="list-group-item clearfix">
+					<strong>file4.pdf</strong>
+				</li>
+				<li class="list-group-item clearfix">
+					<strong>file4.pdf</strong>
+				</li>
+				<li class="list-group-item clearfix">
+					<strong>file4.pdf</strong>
+				</li>
+			</ul>
+		</div>
 	</div>
-</div>
-
-
-<div class="col-sm-9 col-md-10 main" style="vertical-align: bottom; display: table-cell;">
-	<div class="left">
-		<button ui-sref="consumer" style="margin:20px 0;"type="button" class="btn btn-default"><i class="fa fa-arrow-left"></i> Anterior</button>
-	</div>
-	<div class="right">
-		<button style="margin:20px 0;" type="button" class="btn btn-default">Seguinte <i class="fa fa-arrow-right"></i></button>
+	<!-- Flow navigation buttons -->
+	<div class="col-sm-9 col-md-10 main">
+		<div class="left">
+			<button ui-sref="consumer" style="margin:20px;" type="button" class="btn btn-default"><i class="fa fa-arrow-left"></i> Anterior</button>
+		</div>
+		<div class="right">
+			<button style="margin:20px 0;" type="button" class="btn btn-default">Seguinte <i class="fa fa-arrow-right"></i></button>
+		</div>
 	</div>
 </div>
