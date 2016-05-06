@@ -9,6 +9,8 @@ angular.module('ProxyPrint').controller('ConsumerController', ['$scope','$cookie
    }
    console.log($scope.consumer);
 
+   $scope.pdfFiles = new Array();
+
    $scope.logout = function() {
       authenticationService.ClearCredentials();
       $location.path('/');
@@ -39,10 +41,20 @@ angular.module('ProxyPrint').controller('ConsumerController', ['$scope','$cookie
    $scope.notifications = 5;
 
 
-    $scope.uploadFiles = function (files) {
-        if (files && files.length) {
-          console.log(files.length);
-           fileTransferService.setFiles(files);
+
+   $scope.addFiles = function (files) {
+     if (files && files.length) {
+       var i;
+       for (i=0;i<files.length;i++)
+          $scope.pdfFiles.push(files[i]);
+     }
+   }
+
+    $scope.uploadFiles = function () {
+      console.log("Printing request");
+      console.log($scope.pdfFiles);
+        if ($scope.pdfFiles && $scope.pdfFiles.length) {
+           fileTransferService.setFiles($scope.pdfFiles);
            $state.go('consumer.requestbudget');
         }
     };

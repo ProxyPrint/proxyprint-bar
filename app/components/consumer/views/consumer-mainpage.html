@@ -46,8 +46,7 @@
 
 
                         <div class="dndbox">
-                            <div ngf-drop="uploadFiles($files)" ngf-select ng-model="files" class="drop-box" ngf-drag-over-class="'dragover'" ngf-multiple="true" ngf-allow-dir="true" accept="image/*,application/pdf" ngf-pattern="'image/*,application/pdf'">
-                              <br />
+                            <div ngf-drop="addFiles($files)" ngf-select ng-model="files" class="drop-box" ngf-drag-over-class="'dragover'" ngf-multiple="true" ngf-allow-dir="true" accept="application/pdf" ngf-pattern="'application/pdf'">                              <br />
                               <br />
                                 <h4>Arraste ficheiros ou clique para fazer upload</h4>
                                 <br>
@@ -57,7 +56,7 @@
                         </div>
                         <br />
                         <div style="text-align:center">
-                          <button class="btn btn-primary">Submeter pedido</button>
+                          <button class="btn btn-primary" ng-click="uploadFiles()">Submeter pedido</button>
                         </div>
                     </div>
 
