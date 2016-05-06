@@ -3,22 +3,31 @@ angular.module('ProxyPrint').controller('ConsumerController', ['$scope','$cookie
       function($scope, $cookieStore, authenticationService, fileTransferService, $rootScope, $location, $timeout, $state, backendURLService) {
 
    $scope.consumer = $cookieStore.get('globals').currentUser;
-   var audio = new Audio('assets/notif.mp3');
+   var audio = new Audio('assets/sound2.mp3');
 
    var source = new EventSource(backendURLService.getBaseURL()+"consumer/subscribe?username="+$scope.consumer.username, {withCredentials: true});
 
    $scope.notifications= new Array();
+   $scope.newNotifications = 0;
 
    var increaseNotifications = function (msg) {
      $scope.$apply(function () {
+                console.log($scope.newNotifications);
                 var message = JSON.parse(msg.data);
                 var d = new Date(message.timestamp);
                 message.day = d.getDate()+'/'+d.getMonth()+'/'+d.getFullYear();
                 message.hour = d.getHours()+':'+d.getMinutes();
+                message.read = false;
                 $scope.notifications.push(message);
+                $scope.newNotifications += 1;
                 audio.play();
             });
 
+   }
+
+   $scope.readNotification = function (index) {
+     $scope.notifications[index].read = true;
+     $scope.newNotifications -= 1;
    }
 
    source.addEventListener('message', increaseNotifications, false);

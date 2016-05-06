@@ -11,7 +11,7 @@
                     </li>
                     <li id="notification_li">
                         <a href="" id="notificationLink">
-                            <notification-icon count='notifications.length' animation='bounce'>
+                            <notification-icon count='newNotifications' animation='bounce'>
                                 <i class="fa fa-bell-o"></i>
                             </notification-icon>
                         </a>
@@ -19,12 +19,26 @@
                             <div id="notificationTitle">Notifications</div>
                             <div id="notificationsBody" class="notifications"></div>
                             <ul class="list-group">
-                              <li class="list-group-item" ng-repeat="notification in notifications">
-                                  {{notification.message}}
-                                  <br />
-                                  <small>{{notification.day}}, {{notification.hour}}</small>
+                                <li class="list-group-item" ng-repeat="notification in notifications">
+                                    <div row>
+                                      <div class="col-sm-8">
+                                        {{notification.message}}
+                                        </div>
+                                        <div class="col-sm-4">
+                                          <button class="btn btn-default" ng-click="readNotification($index)" ng-disabled="notification.read">
+                                            <div ng-show="!notification.read">
+                                              <small>Ler</small>
+                                            </div>
+                                            <div ng-show="notification.read">
+                                              <small>Lido</small>
+                                            </div>
+                                          </button>
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <small>{{notification.day}}, {{notification.hour}}</small>
 
-                              </li>
+                                </li>
                             </ul>
                             <div id="notificationFooter"><a href="#">See All</a></div>
                         </div>
@@ -105,7 +119,8 @@
 
         //Document Click hiding the popup
         $(document).click(function() {
-          $("#notificationContainer").hide();
+
+            $("#notificationContainer").hide();
         });
 
         //Popup on click
