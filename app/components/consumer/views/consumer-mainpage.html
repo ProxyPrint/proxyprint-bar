@@ -21,6 +21,9 @@
                             <ul class="list-group">
                               <li class="list-group-item" ng-repeat="notification in notifications">
                                   {{notification.message}}
+                                  <br />
+                                  <small>{{notification.day}}, {{notification.hour}}</small>
+
                               </li>
                             </ul>
                             <div id="notificationFooter"><a href="#">See All</a></div>
@@ -102,7 +105,7 @@
 
         //Document Click hiding the popup
         $(document).click(function() {
-            $("#notificationContainer").hide();
+          $("#notificationContainer").hide();
         });
 
         //Popup on click

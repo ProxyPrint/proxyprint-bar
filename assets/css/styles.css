@@ -123,14 +123,14 @@ font-weight: bold;
 padding: 8px;
 font-size: 13px;
 background-color: #ffffff;
-position: fixed;
+position: relative;
 z-index: 9999;
 width: 245px;
 border-bottom: 1px solid #dddddd;
 }
 #notificationsBody
 {
-padding: 33px 0px 0px 0px !important;
+padding: 0px 0px 0px 0px !important;
 max-height:300px;
 }
 #notificationFooter

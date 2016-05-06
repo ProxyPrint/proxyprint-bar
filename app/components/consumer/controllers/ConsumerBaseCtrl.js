@@ -12,16 +12,20 @@ angular.module('ProxyPrint').controller('ConsumerController', ['$scope','$cookie
    var increaseNotifications = function (msg) {
      $scope.$apply(function () {
                 var message = JSON.parse(msg.data);
-                console.log(message.message);
+                var d = new Date(message.timestamp);
+                message.day = d.getDate()+'/'+d.getMonth()+'/'+d.getFullYear();
+                message.hour = d.getHours()+':'+d.getMinutes();
                 $scope.notifications.push(message);
                 audio.play();
-
             });
 
    }
 
    source.addEventListener('message', increaseNotifications, false);
 
+   $scope.zeroNotifications = function () {
+     $scope.notifications = 0;
+   }
 
    $scope.logout = function() {
       authenticationService.ClearCredentials();
