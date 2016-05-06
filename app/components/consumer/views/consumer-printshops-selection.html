@@ -1,0 +1,35 @@
+<h2>Reprografias</h2>
+<div class="container">
+	<h4>Distância das reprografias</h4>
+	<rzslider rz-slider-model="distanceSlider.value"
+	rz-slider-high="distanceSlider.maxValue"
+	rz-slider-options="distanceSlider.options" style="width: 30%;"></rzslider>
+</div>
+<div class="container">
+	<div class="printshops">
+		<h2></h2>
+		<select class="form-control" ng-Model="selectedPrintShop" ng-options="printshop.name for printshop in printshops" ng-change="addPrintShop()"></select>
+	</div>
+</div>
+
+
+<div class="container">
+	<div class="printshops">
+		<ul class="list-group">
+			<li class="list-group-item clearfix" ng-repeat="printshop in selectedPrintShops">
+				{{printshop.name}}</br>
+				{{printshop.address}}
+			</li>
+		</ul>
+	</div>
+</div>
+
+
+<div class="col-sm-9 col-md-10 main" style="vertical-align: bottom; display: table-cell;">
+	<div class="left">
+		<button ui-sref="consumer" style="margin:20px 0;"type="button" class="btn btn-default"><i class="fa fa-arrow-left"></i> Anterior</button>
+	</div>
+	<div class="right">
+		<button style="margin:20px 0;" type="button" class="btn btn-default">Seguinte <i class="fa fa-arrow-right"></i></button>
+	</div>
+</div>

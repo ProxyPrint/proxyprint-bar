@@ -137,8 +137,8 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
     })
     .state('consumer.requestprintshopsbudget', {
         url: '/printshopbudgets',
-        templateUrl: '/app/components/consumer/views/consumer-printShopsBudget.html',
-        controller: 'ConsumerBudgetController'
+        templateUrl: '/app/components/consumer/views/consumer-printshops-selection.html',
+        controller: 'ConsumerPrintShopsSelectionController'
     })
 
     /*PrintShop*/
