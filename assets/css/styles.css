@@ -316,3 +316,20 @@ body {
   margin-right: 15%;
   margin-top: 3%;
 }
+
+/*Show & Hide*/
+.animate-show-slider {
+  line-height: 10px;
+  opacity: 1;
+  padding: 10px;
+}
+
+.animate-show-slider.ng-hide-add, .animate-show-slider.ng-hide-remove {
+  transition: all linear 0.5s;
+}
+
+.animate-show-slider.ng-hide {
+  line-height: 0;
+  opacity: 0;
+  padding: 0 10px;
+}

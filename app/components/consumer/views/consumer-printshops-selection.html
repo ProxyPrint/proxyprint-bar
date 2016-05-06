@@ -2,7 +2,7 @@
 <div class="row">
 	<!-- prinshops selection -->
 	<div class="col-md-8">
-		<div class="table-responsive" style="height: 220px;">
+		<div class="table-responsive" style="height: 250px;">
 			<table class="table">
 				<thead>
 					<tr>
@@ -12,10 +12,10 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr ng-repeat="printshop in selectedPrintShops">
+					<tr ng-repeat="printshop in selectedPrintShops" class="animate-row">
 						<td>{{printshop.name}}</td>
 						<td>{{printshop.address}}</td>
-						<td>{{printshop.distance}} km</td>
+						<td>{{printshop.distance}} km <span ng-click="removePrintShop($index)">X</span></td>
 					</tr>
 				</tbody>
 			</table>
@@ -24,10 +24,17 @@
 		<div style="float: right;">
 			<strong>{{totalSelectedPShops}} de 5</strong>
 		</div>
+		<!-- checbox -->
+		<label>
+			<input type="checkbox" id="distance" name="distance" ng-model="showDistance"/>
+			Filtrar por distância
+		</label>
 		<!-- slider -->
-		<rzslider rz-slider-model="distanceSlider.value"
-		rz-slider-high="distanceSlider.maxValue"
-		rz-slider-options="distanceSlider.options" style="margin-top: 6%;"></rzslider>
+		<div class="animate-show-slider" ng-show="showDistance">
+			<rzslider rz-slider-model="distanceSlider.value"
+			rz-slider-high="distanceSlider.maxValue"
+			rz-slider-options="distanceSlider.options" style="margin-top: 6%;"></rzslider>
+		</div>
 		<!-- selection -->
 		<div style="margin-top: 2%;">
 			<select class="form-control" ng-model="selectedPrintShop" ng-options="formatPrinShopForOption(printshop) for printshop in printshops" ng-change="addPrintShop()" ng-disabled="totalSelectedPShops==maxSelectionAllowed">

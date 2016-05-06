@@ -13,6 +13,7 @@ angular.module('ProxyPrint')
   $scope.printshops = printshopsList;
   $scope.totalSelectedPShops = 0;
   $scope.maxSelectionAllowed = 5;
+  $scope.showDistance = false;
 
   // Distance slider
   $scope.distanceSlider = {
@@ -39,6 +40,10 @@ angular.module('ProxyPrint')
 
   $scope.formatPrinShopForOption = function(pshop) {
     return pshop.name + '  (' + pshop.distance + 'km)';
+  };
+
+  $scope.removePrintShop = function(index) {
+    $scope.selectedPrintShops.splice(index, 1);
   };
 
   function remove(arr, item) {
