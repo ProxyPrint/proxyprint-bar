@@ -1,9 +1,20 @@
 angular.module('ProxyPrint').controller('ConsumerController', ['$scope','$cookieStore',
-      'authenticationService', 'fileTransferService','$rootScope', '$location', '$timeout', '$state',
-      function($scope, $cookieStore, authenticationService, fileTransferService, $rootScope, $location, $timeout, $state) {
+      'authenticationService', 'fileTransferService','$rootScope', '$location', '$timeout', '$state', 'backendURLService',
+      function($scope, $cookieStore, authenticationService, fileTransferService, $rootScope, $location, $timeout, $state, backendURLService) {
 
    $scope.consumer = $cookieStore.get('globals').currentUser;
-   console.log($scope.consumer);
+   var audio = new Audio('assets/notif.mp3');
+
+   var source = new EventSource(backendURLService.getBaseURL()+"consumer/subscribe?username="+$scope.consumer.username, {withCredentials: true});
+
+   $scope.notifications=0;
+
+   source.onmessage = function(event) {
+       console.log(event);
+
+       $scope.notifications++;
+       audio.play();
+   };
 
    $scope.logout = function() {
       authenticationService.ClearCredentials();
@@ -31,9 +42,6 @@ angular.module('ProxyPrint').controller('ConsumerController', ['$scope','$cookie
       day: "19/03/2016",
       hour: "19:32"
    }];
-
-   $scope.notifications = 5;
-
 
     $scope.uploadFiles = function (files) {
         if (files && files.length) {
