@@ -34,9 +34,9 @@
     </div>
 </div>
 
-<div class="box-footer clearfix">
-    <label> Estado do pedido: {{request.status}} </label>
-    <button class="btn btn-danger btn-flat" type="button" ng-click="openRejectModal('Tem a certeza que quer aceitar o pedido?')" style="margin-left: 50%;" ng-hide="request.status!='PENDING'">
+<b style="margin-left: 5%;"> Estado do pedido: {{request.status}} </b>
+<div class="pull-right" style="margin-right: 5%;">
+    <button class="btn btn-danger btn-flat" type="button" ng-click="openRejectModal('Tem a certeza que quer aceitar o pedido?')" ng-hide="request.status!='PENDING'">
         <i class="fa fa-thumbs-o-down " style="margin-right: 0.2em;"></i>
         Cancelar
     </button>
@@ -44,9 +44,8 @@
         <i class="fa fa-thumbs-o-up " style="margin-right: 0.2em;"></i>
         Atender
     </button>
-    <button class="btn btn-success btn-flat" type="button"ng-click="openAcceptModal('Tem a certeza que o pedido está completo?')" style="margin-left: 45%;" ng-hide="request.status!='IN_PROGRESS'">
+    <button class="btn btn-success btn-flat" type="button" ng-click="openAcceptModal('Tem a certeza que o pedido está completo?')" style="margin: 1%;" ng-hide="request.status!='IN_PROGRESS'">
         <i class="fa fa-check" style="margin-right: 0.2em;"></i>
         Marcar como atendido
     </button>
 </div>
-<!-- ng-hide="request.status!='PENDING'" -->
