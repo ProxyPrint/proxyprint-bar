@@ -1,6 +1,6 @@
 angular.module('ProxyPrint').controller('ConsumerController', ['$scope','$cookieStore',
-      'authenticationService', 'fileTransferService','$rootScope', '$location', '$timeout', '$state',
-      function($scope, $cookieStore, authenticationService, fileTransferService, $rootScope, $location, $timeout, $state) {
+      'authenticationService', 'fileTransferService', '$state',
+      function($scope, $cookieStore, authenticationService, fileTransferService, $state) {
 
 
    //$scope.consumer = $cookieStore.get('globals').currentUser;
@@ -9,7 +9,7 @@ angular.module('ProxyPrint').controller('ConsumerController', ['$scope','$cookie
    }
    console.log($scope.consumer);
 
-   $scope.pdfFiles = new Array();
+
 
    $scope.logout = function() {
       authenticationService.ClearCredentials();
@@ -40,6 +40,7 @@ angular.module('ProxyPrint').controller('ConsumerController', ['$scope','$cookie
 
    $scope.notifications = 5;
 
+   $scope.pdfFiles = new Array();
 
 
    $scope.addFiles = function (files) {
@@ -51,17 +52,10 @@ angular.module('ProxyPrint').controller('ConsumerController', ['$scope','$cookie
    }
 
     $scope.uploadFiles = function () {
-      console.log("Printing request");
-      console.log($scope.pdfFiles);
         if ($scope.pdfFiles && $scope.pdfFiles.length) {
            fileTransferService.setFiles($scope.pdfFiles);
            $state.go('consumer.requestbudget');
         }
     };
-
-    $scope.uploadFilesTest = function () {
-      var files = fileTransferService.getFiles;
-      fileTransferService.TransferFiles(files);
-   }
 
 }]);

@@ -110,6 +110,22 @@ body {
     border: 5px dashed blue;
 }
 
+.uploaded-files-box {
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-bottom: 5%;
+  margin-top:5%;
+  overflow-y: scroll;
+  border-radius: 10px 10px 10px 10px;
+  -moz-border-radius: 10px 10px 10px 10px;
+  -webkit-border-radius: 10px 10px 10px 10px;
+  border: 2px solid #000000;
+  border-color: #DDD;
+}
+
+
+
+
 /** Pending requests table**/
 
 .scrollableTable {
