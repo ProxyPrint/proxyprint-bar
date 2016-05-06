@@ -9,12 +9,18 @@ angular.module('ProxyPrint').controller('ConsumerController', ['$scope','$cookie
 
    $scope.notifications=0;
 
-   source.onmessage = function(event) {
-       console.log(event);
+   var increaseNotifications = function (msg) {
+     $scope.$apply(function () {
+                $scope.msg = JSON.parse(msg.data);
+                $scope.notifications++;
+                audio.play();
 
-       $scope.notifications++;
-       audio.play();
-   };
+            });
+
+   }
+
+   source.addEventListener('message', increaseNotifications, false);
+
 
    $scope.logout = function() {
       authenticationService.ClearCredentials();
