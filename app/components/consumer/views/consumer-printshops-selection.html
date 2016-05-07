@@ -27,6 +27,7 @@
 			<div style="float: right;">
 				<strong>{{totalSelectedPrintShops}} de 5</strong>
 			</div>
+			<hr/>
 			<!-- checbox -->
 			<label>
 				<input type="checkbox" id="distance" name="distance" ng-model="showDistance"/>
@@ -40,7 +41,7 @@
 			</div>
 			<!-- selection -->
 			<div style="margin-top: 2%;">
-				<select class="form-control" ng-model="selectedPrintShop" ng-options="formatPrinShopForOption(printshop) for printshop in printshops" ng-change="addPrintShop()" ng-disabled="totalSelectedPrintShops==5">
+				<select class="form-control" ng-model="selectedPrintShop" ng-options="formatPrinShopForOption(printshop) for printshop in printshops | filter: filterDistance" ng-change="addPrintShop()" ng-disabled="totalSelectedPrintShops==5">
 					<option value="">Selecione uma reprografia...</option>
 				</select>
 			</div>
