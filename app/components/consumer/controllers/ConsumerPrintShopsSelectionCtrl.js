@@ -11,6 +11,7 @@ angular.module('ProxyPrint')
 
   console.log(printshopsList);
   $scope.printshops = printshopsList;
+  $scope.printShopsOptions = printshopsList;
   $scope.totalSelectedPrintShops = 0;
   $scope.maxSelectionAllowed = 5;
   $scope.showDistance = false;
@@ -23,24 +24,27 @@ angular.module('ProxyPrint')
       ceil: 120,
       showSelectionBar: true,
       translate: function(value) {
+        // Filter options
+        if($scope.showDistance === true){
+          $scope.printShopsOptions = $scope.printshops.filter(function(pshop) { return pshop.distance <= value; });
+        }
         return value + 'km';
       }
     }
   };
 
-  $scope.addPrintShop = function() {
-    if ($scope.selectedPrintShop && $scope.totalSelectedPrintShops < 5) {
+  $scope.addPrintShop = function(pshop) {
+    if (pshop && $scope.totalSelectedPrintShops < 5) {
       console.log("Distância: "+$scope.distanceSlider.value);
       console.log("É para filtrar distância: "+$scope.showDistance);
-      $scope.selectedPrintShops.push($scope.selectedPrintShop);
-      remove($scope.printshops, $scope.selectedPrintShop);
-      console.log($scope.printshops.indexOf($scope.selectedPrintShop));
+      $scope.selectedPrintShops.push(pshop);
+      remove($scope.printshops, pshop);
       $scope.totalSelectedPrintShops++;
     }
   };
 
   $scope.formatPrinShopForOption = function(pshop) {
-    return pshop.name + '  (' + pshop.distance + 'km)';
+    if(pshop) return pshop.name + '  (' + pshop.distance + 'km)';
   };
 
   $scope.removePrintShop = function(index) {
@@ -48,11 +52,6 @@ angular.module('ProxyPrint')
     $scope.selectedPrintShops.splice(index, 1);
     $scope.totalSelectedPrintShops--;
     $scope.printshops.sort(comparePrintShopsByDistance);
-  };
-
-  $scope.filterDistance = function(pshop) {
-    if($scope.showDistance === true) return pshop.distance < $scope.distanceSlider.value;
-    else return true;
   };
 
   function remove(arr, item) {

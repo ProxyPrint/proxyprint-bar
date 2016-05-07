@@ -41,9 +41,14 @@
 			</div>
 			<!-- selection -->
 			<div style="margin-top: 2%;">
-				<select class="form-control" ng-model="selectedPrintShop" ng-options="formatPrinShopForOption(printshop) for printshop in printshops | filter: filterDistance" ng-change="addPrintShop()" ng-disabled="totalSelectedPrintShops==5">
-					<option value="" disabled selected>Selecione uma reprografia</option>
-				</select>
+				<ui-select ng-model="selected.value" on-select="addPrintShop($item)" ng-disabled="totalSelectedPrintShops==5">
+					<ui-select-match placeholder="Selecione ou procure uma reprografia" on-select="addPrintShop()">
+						<span ng-bind="formatPrinShopForOption($select.selected)"></span>
+					</ui-select-match>
+					<ui-select-choices repeat="printshop in (printShopsOptions | filter: $select.search) track by printshop.id" on-select="addPrintShop()">
+						<span ng-bind="formatPrinShopForOption(printshop)"></span>
+					</ui-select-choices>
+				</ui-select>
 			</div>
 		</div>
 		<!-- List of submited files -->
