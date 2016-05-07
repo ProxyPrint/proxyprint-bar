@@ -1,6 +1,6 @@
-angular.module('ProxyPrint').controller('ConsumerController', ['$scope', '$cookieStore',
-    'authenticationService', 'fileTransferService', '$rootScope', '$location', '$timeout', '$state', 'backendURLService', 'notifications',
-    function($scope, $cookieStore, authenticationService, fileTransferService, $rootScope, $location, $timeout, $state, backendURLService, notifications) {
+angular.module('ProxyPrint').controller('ConsumerController', ['$scope','$cookieStore',
+      'authenticationService', 'fileTransferService', '$state', 'notifications', 'backendURLService',
+      function($scope, $cookieStore, authenticationService, fileTransferService, $state, notifications,backendURLService) {
 
         $scope.consumer = $cookieStore.get('globals').currentUser;
         var audio = new Audio('assets/sound2.mp3');
@@ -65,18 +65,22 @@ angular.module('ProxyPrint').controller('ConsumerController', ['$scope', '$cooki
             hour: "19:32"
         }];
 
-        $scope.uploadFiles = function(files) {
-            if (files && files.length) {
-                console.log(files.length);
-                fileTransferService.setFiles(files);
-                $state.go('consumer.requestbudget');
-            }
-        };
+        $scope.pdfFiles = new Array();
 
-        $scope.uploadFilesTest = function() {
-            var files = fileTransferService.getFiles;
-            fileTransferService.TransferFiles(files);
+
+        $scope.addFiles = function (files) {
+          if (files && files.length) {
+            var i;
+            for (i=0;i<files.length;i++)
+               $scope.pdfFiles.push(files[i]);
+          }
         }
 
-    }
-]);
+         $scope.uploadFiles = function () {
+             if ($scope.pdfFiles && $scope.pdfFiles.length) {
+                fileTransferService.setFiles($scope.pdfFiles);
+                $state.go('consumer.requestbudget');
+              }
+          }
+
+  }]);

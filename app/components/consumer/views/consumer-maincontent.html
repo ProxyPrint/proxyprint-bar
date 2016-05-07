@@ -1,35 +1,55 @@
-    <div class="dndbox">
-        <div class="center">
-            <h2> Novo pedido </h2>
+<div class="row">
+    <div class="col-sm-8">
+
+
+        <div class="dndbox">
+            <div ngf-drop="addFiles($files)" ngf-select="addFiles($files)" ng-model="files" class="drop-box" ngf-drag-over-class="'dragover'" ngf-multiple="true" ngf-allow-dir="true" accept="application/pdf" ngf-pattern="'application/pdf'">
+                <br />
+                <h4>Arraste ficheiros ou clique para fazer upload</h4>
+                <i class="fa fa-upload fa-4x"></i>
+                <div class="uploaded-files-box">
+                    Ficheiros selecionados:
+                    <div class="row" ng-repeat="file in pdfFiles" ng-if="$index % 3 == 0">
+                        <div class="col-sm-4">
+                            {{$index+1}}. {{file.name}}
+                        </div>
+                        <div class="col-sm-4">
+                            <div ng-if="pdfFiles[$index + 1]!= null">{{$index+2}}.  {{pdfFiles[$index+1].name}}</div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div ng-if="pdfFiles[$index + 2]!= null">{{$index+3}}.  {{pdfFiles[$index+2].name}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div ngf-drop="uploadFiles($files)" ngf-select ng-model="files" class="drop-box"
-      ngf-drag-over-class="'dragover'" ngf-multiple="true" ngf-allow-dir="true"
-      accept="image/*,application/pdf"
-      ngf-pattern="'image/*,application/pdf'">
-          <h4>Arraste ficheiros/Clique</h4>
-          <br>
-          <br>
-          <i class="fa fa-upload fa-4x"></i>
+        <br />
+        <div style="text-align:center">
+            <button class="btn btn-primary" ng-click="uploadFiles()">Submeter pedido</button>
         </div>
     </div>
-    <div class="pendingRequests">
-      <div class="center">
-      <h2> Pedidos pendentes </h2>
-   </div>
+
+    <div class="col-sm-4">
+        <div class="center">
+            <h2> Pedidos pendentes </h2>
+        </div>
         <div class="scrollableTable">
-            <ul class="list-group" >
-                <li class="list-group-item clearfix" ng-repeat="request in pendingRequests">
-                    <div class="left">
-                        <strong> Pedido #{{request.requestID}} </strong>
-                    </div>
-                    <div class="right">
-                        {{request.day}} {{request.hour}}
-                    </div>
-                    <br>
-                    <div class="center">
-                        <button type="button" class="btn btn-default">Cancelar pedido</button>
+            <ul class="list-group">
+                <li class="list-group-item" ng-repeat="request in pendingRequests">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <strong> Pedido #{{request.requestID}} </strong>
+                            <br /> {{request.day}} {{request.hour}}
+                        </div>
+                        <div class="col-sm-6">
+
+                        </div>
+                        <div class="col-sm-6">
+                            <button type="button" class="btn btn-default">Cancelar pedido</button>
+                        </div>
                     </div>
                 </li>
             </ul>
         </div>
     </div>
+</div>
