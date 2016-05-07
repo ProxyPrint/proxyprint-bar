@@ -131,7 +131,6 @@ border-bottom: 1px solid #dddddd;
 #notificationsBody
 {
 padding: 0px 0px 0px 0px !important;
-max-height:300px;
 }
 #notificationFooter
 {
@@ -141,6 +140,11 @@ font-weight: bold;
 padding: 8px;
 font-size: 12px;
 border-top: 1px solid #dddddd;
+}
+
+.notifications-scrollable-box {
+  max-height: 300px;
+  overflow-y: scroll;
 }
 
 

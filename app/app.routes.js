@@ -103,6 +103,11 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
         },
         data: {
             css: mainCSS
+        },
+        resolve: {
+          notifications: ['notificationsService', function (notificationsService) {
+            return notificationsService.getNotifications();
+          }]
         }
 
     })

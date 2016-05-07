@@ -1,6 +1,6 @@
 angular.module('ProxyPrint').controller('ConsumerController', ['$scope', '$cookieStore',
-    'authenticationService', 'fileTransferService', '$rootScope', '$location', '$timeout', '$state', 'backendURLService', 'notificationsService',
-    function($scope, $cookieStore, authenticationService, fileTransferService, $rootScope, $location, $timeout, $state, backendURLService, notificationsService) {
+    'authenticationService', 'fileTransferService', '$rootScope', '$location', '$timeout', '$state', 'backendURLService', 'notifications',
+    function($scope, $cookieStore, authenticationService, fileTransferService, $rootScope, $location, $timeout, $state, backendURLService, notifications) {
 
         $scope.consumer = $cookieStore.get('globals').currentUser;
         var audio = new Audio('assets/sound2.mp3');
@@ -9,10 +9,7 @@ angular.module('ProxyPrint').controller('ConsumerController', ['$scope', '$cooki
             withCredentials: true
         });
 
-        notificationsService.getNotifications(function(data) {
-            console.log(data);
-            $scope.notifications = data;
-        });
+        $scope.notifications = notifications.data;
         $scope.newNotifications = 0;
 
         var increaseNotifications = function(msg) {
