@@ -37,10 +37,10 @@
 			<div class="animate-show-slider" ng-show="showDistance">
 				<rzslider rz-slider-model="distanceSlider.value"
 				rz-slider-high="distanceSlider.maxValue"
-				rz-slider-options="distanceSlider.options" style="margin-top: 6%;" ng-disabled="totalSelectedPrintShops==maxSelectionAllowed"></rzslider>
+				rz-slider-options="distanceSlider.options" style="margin-top: 2%;" ng-disabled="totalSelectedPrintShops==maxSelectionAllowed"></rzslider>
 			</div>
 			<!-- selection -->
-			<div style="margin-top: 2%;">
+			<div style="margin-top: 1%;">
 				<ui-select ng-model="selected.value" on-select="addPrintShop($item)" ng-disabled="totalSelectedPrintShops==maxSelectionAllowed">
 					<ui-select-match placeholder="Selecione ou procure uma reprografia" on-select="addPrintShop()">
 						<span ng-bind="formatPrinShopForOption($select.selected)"></span>
@@ -64,17 +64,17 @@
 			</div>
 		</div>
 	</div>
-</div>
-<!-- flow navigation buttons -->
-<div class="row" style="margin-top:2%;">
-	<div class="col-md-8">
-		<div class="left">
-			<button ui-sref="consumer" style="margin:20px;" type="button" class="btn btn-default"><i class="fa fa-arrow-left"></i> Anterior</button>
+	<!-- flow navigation buttons -->
+	<div class="row" style="margin-top:4%;">
+		<div class="col-md-8">
+			<div class="left">
+				<button ui-sref="consumer.requestbudget" type="button" class="btn btn-default"><i class="fa fa-arrow-left"></i> Anterior</button>
+			</div>
 		</div>
-	</div>
-	<div class="col-md-3">
-		<div class="right">
-			<button style="margin:20px 0;" type="button" class="btn btn-default">Seguinte <i class="fa fa-arrow-right"></i></button>
+		<div class="col-md-3">
+			<div class="right">
+				<button type="button" class="btn btn-default" ng-disabled="totalSelectedPrintShops < 1" onclick="alert('Continuar para orçamentos..')">Seguinte <i class="fa fa-arrow-right"></i></button>
+			</div>
 		</div>
 	</div>
 </div>

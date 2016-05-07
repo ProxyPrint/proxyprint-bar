@@ -52,7 +52,7 @@ angular.module('ProxyPrint').controller('ConsumerSpecsController',
         /** Send Request */
         fileTransferService.TransferFiles($scope.files(), function(){
             $scope.showRequest = false;
-            $state.go('consumer.requestprintshopsbudget');
+            $state.go('consumer.printshopselection');
         });
     };
 
@@ -84,7 +84,7 @@ angular.module('ProxyPrint').controller('ConsumerSpecsController',
 
         modalInstance.result.then(function() {
             fileTransferService.TransferFiles($scope.files());
-            $state.go('consumer.requestprintshopsbudget');
+            $state.go('consumer.printshopselection');
         });
     }
 
