@@ -1,5 +1,5 @@
 angular.module('ProxyPrint')
-.controller('ConsumerPrintShopsSelectionController', ['$scope', 'printShopListService', 'printshopsList', function($scope, printShopListService, printshopsList) {
+.controller('ConsumerPrintShopsSelectionController', ['$scope', 'printShopListService', 'printshopsList', 'fileTransferService', '$cookieStore', function($scope, printShopListService, printshopsList, fileTransferService, $cookieStore) {
 
   //FALTA DND INTEGRATION
   //FALTA COORDERNAR ISTO COM O FLOW DO PEDIDO
@@ -15,6 +15,15 @@ angular.module('ProxyPrint')
   $scope.totalSelectedPrintShops = 0;
   $scope.maxSelectionAllowed = 5;
   $scope.showDistance = false;
+
+  /*console.log(fileTransferService.getFiles());
+  $scope.uploadedFiles = fileTransferService.getFiles();
+  $scope.uploadedFilesNames = $scope.uploadedFiles.filter(function(file) { return file.name; });
+  console.log($scope.uploadedFilesNames);*/
+
+  $scope.files = $cookieStore.get('uploadedFilesNames');
+  console.log($scope.files);
+
 
   // Distance slider
   $scope.distanceSlider = {
@@ -35,8 +44,6 @@ angular.module('ProxyPrint')
 
   $scope.addPrintShop = function(pshop) {
     if (pshop && $scope.totalSelectedPrintShops < 5) {
-      console.log("Distância: "+$scope.distanceSlider.value);
-      console.log("É para filtrar distância: "+$scope.showDistance);
       $scope.selectedPrintShops.push(pshop);
       remove($scope.printshops, pshop);
       $scope.totalSelectedPrintShops++;
