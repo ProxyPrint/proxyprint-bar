@@ -18,12 +18,18 @@ function($http,backendURLService) {
         });
     };
 
-    service.setCurrentRequest = function(request) {
-        service.currentRequest = request;
+    service.rejectRequest = function(id) {
+        // var url = backendURLService.getBaseURL()+'printshops/requests/'+id;
+        // return $http.post(url).success(function(data){
+        //     return data;
+        // });
     };
 
-    service.getCurrentRequest = function() {
-        return service.currentRequest;
+    service.getRequest = function(id) {
+        var url = backendURLService.getBaseURL()+'printshops/requests/'+id;
+        return $http.get(url).success(function(data){
+            return data;
+        });
     };
 
     return service;

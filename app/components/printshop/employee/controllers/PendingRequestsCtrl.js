@@ -6,7 +6,6 @@ function($scope, pendingPrintRequests, pendingPrintRequestsService, $state) {
     $scope.paginationOn = true;
 
     $scope.lookAtRequest = function (request){
-      pendingPrintRequestsService.setCurrentRequest(request);
       $state.go('employee.consult',{"requestid":request.id});
     };
 

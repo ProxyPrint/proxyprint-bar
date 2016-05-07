@@ -173,8 +173,9 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
         templateUrl: '/app/components/printshop/employee/views/employee-request-consult.html',
         controller: 'ConsultRequestCtrl',
         resolve: {
-            pendingPrintRequest: ['pendingPrintRequestsService', function (pendingPrintRequestsService) {
-                return pendingPrintRequestsService.getCurrentRequest();
+            pendingPrintRequest: ['pendingPrintRequestsService', '$stateParams',
+                function (pendingPrintRequestsService, $stateParams) {
+                    return pendingPrintRequestsService.getRequest($stateParams.requestid);
             }]
         }
     })

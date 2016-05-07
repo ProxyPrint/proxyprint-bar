@@ -1,45 +1,58 @@
 var app = angular.module('ProxyPrint');
 
-app.controller('ConsultRequestCtrl', ['$scope', 'pendingPrintRequest', '$uibModal', 'pendingPrintRequestsService', function($scope, pendingPrintRequest, $uibModal, pendingPrintRequestsService) {
+app.controller('ConsultRequestCtrl', ['$scope', 'pendingPrintRequest', '$uibModal', 'pendingPrintRequestsService', '$state', '$http', function($scope, pendingPrintRequest, $uibModal, pendingPrintRequestsService, $state, $http) {
 
-    $scope.request = pendingPrintRequest;
+    $scope.request = pendingPrintRequest.data.printrequest;
+
+    $scope.$watch( '$scope.request.status', function(){
+        if ($scope.request.status == 'PENDING') {
+            $scope.message = "Pedido pendente.";
+        } else if ($scope.request.status == 'IN_PROGRESS') {
+            $scope.message = "A ser atendido.";
+        } else if ($scope.request.status == 'FINISHED') {
+            $scope.message = "Finalizado";
+        }
+    });
 
     $scope.openAcceptModal = function(reply) {
 
-      var modalInstance = $uibModal.open({
-        animation: true,
-        templateUrl: 'app/components/printshop/employee/views/request-modal.html',
-        controller: 'PrintRequestModalController',
-        size: 'sm',
-        resolve: {
-          text: function() {
-            return reply;
-          }
-        }
-      });
+        var modalInstance = $uibModal.open({
+            animation: true,
+            templateUrl: 'app/components/printshop/employee/views/request-modal.html',
+            controller: 'PrintRequestModalController',
+            size: 'sm',
+            resolve: {
+                text: function() {
+                    return reply;
+                }
+            }
+        });
 
-      modalInstance.result.then(function() {
-        pendingPrintRequestsService.acceptRequest($scope.request.id);
-      });
+        modalInstance.result.then(function() {
+            pendingPrintRequestsService.acceptRequest($scope.request.id);
+            //Falta fazer reload do estado.
+            $state.reload();
+        });
     }
 
     $scope.openRejectModal = function(reply) {
 
-      var modalInstance = $uibModal.open({
-        animation: true,
-        templateUrl: 'app/components/printshop/employee/views/request-modal.html',
-        controller: 'PrintRequestModalController',
-        size: 'sm',
-        resolve: {
-          text: function() {
-            return reply;
-          }
-        }
-      });
+        var modalInstance = $uibModal.open({
+            animation: true,
+            templateUrl: 'app/components/printshop/employee/views/request-modal.html',
+            controller: 'PrintRequestModalController',
+            size: 'sm',
+            resolve: {
+                text: function() {
+                    return reply;
+                }
+            }
+        });
 
-      modalInstance.result.then(function() {
-        pendingPrintRequestsService.rejectRequest($scope.request.id);
-      });
+        modalInstance.result.then(function() {
+            pendingPrintRequestsService.rejectRequest($scope.request.id);
+            $state.go('employee.pending');
+        });
     }
 
     $scope.files = [
@@ -72,15 +85,16 @@ app.controller('ConsultRequestCtrl', ['$scope', 'pendingPrintRequest', '$uibModa
 
 }]);
 
-app.controller('PrintRequestModalController', ['$scope', '$uibModalInstance', 'text', function($scope, $uibModalInstance, text){
+app.controller('PrintRequestModalController', ['$scope', '$uibModalInstance', 'text',
+function($scope, $uibModalInstance, text){
 
-  $scope.text = text;
+    $scope.text = text;
 
-  $scope.performAction = function () {
-    $uibModalInstance.close();
-  };
+    $scope.performAction = function () {
+        $uibModalInstance.close();
+    };
 
-  $scope.closeModal = function () {
-    $uibModalInstance.dismiss('cancel');
-  };
+    $scope.closeModal = function () {
+        $uibModalInstance.dismiss('cancel');
+    };
 }]);
