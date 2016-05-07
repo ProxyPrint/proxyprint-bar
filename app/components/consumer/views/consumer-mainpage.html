@@ -1,107 +1,172 @@
-<div style="overflow-x: hidden;">
 <div id="custom-bootstrap-menu" class="navbar navbar-default" role="navigation">
-  <div class="container-fluid">
-    <div class="navbar-header"><a class="navbar-brand" href="#">ProxyPrint</a>
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-menubuilder"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
-      </button>
+    <div class="container-fluid">
+        <div class="navbar-logo">
+            <div class="navbar-header"><a class="navbar-brand" href="#">ProxyPrint</a>
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-menubuilder"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+                </button>
+            </div>
+        </div>
+        <div class="collapse navbar-collapse navbar-menubuilder navbar-right">
+            <ul class="nav navbar-nav navbar-left">
+                <li><a href="/">{{consumer.username}}</a>
+                </li>
+                <li>
+                    <a href="#">
+                        <notification-icon count='notifications'>
+                            <i class="fa fa-bell-o fa-lg"></i>
+                        </notification-icon>
+                    </a>
+                </li>
+                <li><a ui-sref=".settings"><i class="fa fa-cog fa-lg"></i></a>
+                </li>
+                <li><a ui-sref="home"><i class="fa fa-sign-out fa-lg" ng-click"logout()"></i></a></li>
+            </ul>
+        </div>
     </div>
-    <div class="collapse navbar-collapse navbar-menubuilder navbar-right">
-      <ul class="nav navbar-nav navbar-left">
-        <li>{{consumer.username}}
-        </li>
-        <li>
-          <a href="#">
-            <notification-icon count='notifications'>
-              <i class="fa fa-bell-o"></i>
-            </notification-icon>
-          </a>
-        </li>
-        <li><a ui-sref=".settings"><i class="fa fa-cog"></i></a>
-        </li>
-        <li><a ui-sref="home"><i class="fa fa-sign-out" ng-click"logout()"></i></a></li>
-      </ul>
-    </div>
-  </div>
 </div>
 
 <div class="container-fluid">
 
-  <div class="row row-offcanvas row-offcanvas-left">
+    <div class="row row-offcanvas row-offcanvas-left">
 
-    <div class="col-sm-3 col-md-2 sidebar-offcanvas" id="sidebar" role="navigation">
+        <div class="col-sm-3 col-md-2 sidebar-offcanvas" id="sidebar" role="navigation">
 
-      <ul class="nav nav-sidebar">
-        <li><a ui-sref=".mainpage"><i class="fa fa-home"></i> Início</a></li>
-        <li><a ui-sref=".printshoplist"><i class="fa fa-book"></i> Reprografias</a></li>
-        <li><a ui-sref=".history"><i class="fa fa-history"></i> Histórico</a></li>
-      </ul>
-    </div>
-    <!--/span-->
-
-    <div class="col-sm-9 col-md-10 main">
-      <div class="container">
-        <div ui-view>
-          <div class="dndbox">
-            <div class="center">
-              <h2> Novo pedido </h2>
-            </div>
-            <div ngf-drop="uploadFiles($files)" ngf-select ng-model="files" class="drop-box"
-          ngf-drag-over-class="'dragover'" ngf-multiple="true" ngf-allow-dir="true"
-          accept="image/*,application/pdf"
-          ngf-pattern="'image/*,application/pdf'">
-              <h4>Arraste ficheiros/Clique</h4>
-              <br>
-              <br>
-              <i class="fa fa-upload fa-4x"></i>
-            </div>
-          </div>
-          <div class="pendingRequests">
-            <div class="center">
-              <h2> Pedidos pendentes </h2>
-            </div>
-            <div class="scrollableTable">
-              <ul class="list-group">
-                <li class="list-group-item clearfix" ng-repeat="request in pendingRequests">
-                  <div class="left">
-                    <strong> Pedido #{{request.requestID}} </strong>
-                  </div>
-                  <div class="right">
-                    {{request.day}} {{request.hour}}
-                  </div>
-                  <br>
-                  <div class="center">
-                    <button type="button" class="btn btn-default">Cancelar pedido</button>
-                  </div>
-                </li>
-              </ul>
-            </div>
-          </div>
+            <ul class="nav nav-sidebar">
+                <li><a ui-sref=".mainpage"><i class="fa fa-home fa-lg"></i> Início</a></li>
+                <li><a ui-sref=".printshoplist"><i class="fa fa-book fa-lg"></i> Reprografias</a></li>
+                <li><a ui-sref=".history"><i class="fa fa-history fa-lg"></i> Histórico</a></li>
+            </ul>
         </div>
-      </div>
+        <!--/span-->
+
+        <div class="col-sm-9 col-md-10 main">
+            <div ui-view>
+                <div class="row">
+                    <div class="col-sm-8">
+
+
+                        <div class="dndbox">
+                            <div ngf-drop="addFiles($files)" ngf-select="addFiles($files)" ng-model="files" class="drop-box" ngf-drag-over-class="'dragover'" ngf-multiple="true" ngf-allow-dir="true" accept="application/pdf" ngf-pattern="'application/pdf'">
+                                <br />
+                                <h4>Arraste ficheiros ou clique para fazer upload</h4>
+                                <i class="fa fa-upload fa-4x"></i>
+                                <div class="uploaded-files-box">
+                                    Ficheiros selecionados:
+                                    <div class="row" ng-repeat="file in pdfFiles" ng-if="$index % 3 == 0">
+                                        <div class="col-sm-4">
+                                            {{$index+1}}. {{file.name}}
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div ng-if="pdfFiles[$index + 1]!= null">{{$index+2}}.  {{pdfFiles[$index+1].name}}</div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div ng-if="pdfFiles[$index + 2]!= null">{{$index+3}}.  {{pdfFiles[$index+2].name}}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                        <div style="text-align:center">
+                            <button class="btn btn-primary" ng-click="uploadFiles()">Submeter pedido</button>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <div class="center">
+                            <h2> Pedidos pendentes </h2>
+                        </div>
+                        <div class="scrollableTable">
+                            <ul class="list-group">
+                                <li class="list-group-item" ng-repeat="request in pendingRequests">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <strong> Pedido #{{request.requestID}} </strong>
+                                            <br /> {{request.day}} {{request.hour}}
+                                        </div>
+                                        <div class="col-sm-6">
+
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <button type="button" class="btn btn-default">Cancelar pedido</button>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <!--/row-->
     </div>
-    <!--/row-->
-  </div>
 </div>
-</div>
+<footer class="footer-distributed">
+
+    <div class="footer-right">
+
+        <span class="fa-stack fa-lg fa-white-icon">
+          <i class="fa fa-square-o fa-stack-2x"></i>
+          <a href="https://www.facebook.com/jose.cortez.378">
+          <i class="fa fa-facebook fa-stack-1x"></i>
+          </a>
+        </span>
+
+        <span class="fa-stack fa-lg fa-white-icon">
+          <i class="fa fa-square-o fa-stack-2x"></i>
+          <a href="https://twitter.com/jospCortez">
+          <i class="fa fa-twitter fa-stack-1x"></i>
+        </a>
+        </span>
+        <span class="fa-stack fa-lg fa-white-icon">
+          <i class="fa fa-square-o fa-stack-2x"></i>
+          <a href="https://pt.linkedin.com/in/jospcortez">
+          <i class="fa fa-linkedin fa-stack-1x"></i>
+          </a>
+        </span>
+        <span class="fa-stack fa-lg fa-white-icon">
+          <i class="fa fa-square-o fa-stack-2x"></i>
+          <a href="https://github.com/ProxyPrint">
+          <i class="fa fa-github fa-stack-1x"></i>
+          </a>
+        </span>
+
+    </div>
+
+    <div class="footer-left">
+
+        <p class="footer-links">
+            <a href="http://www.louisvuitton.com/">Home</a> ·
+            <a href="https://pt.wikipedia.org/wiki/Tautologia_(l%C3%B3gica)">About</a> ·
+            <a href="https://www.youtube.com/watch?v=7ZHa_ZOV6C8">Contact</a>
+        </p>
+
+        <p>ProxyPrint &copy; 2016</p>
+    </div>
+
+</footer>
+
 <!--/.container-->
 
 <script type="text/javascript">
-  $(document).ready(function() {
-    $("#notificationLink").click(function() {
-      $("#notificationContainer").fadeToggle(300);
-      $("#notification_count").fadeOut("slow");
-      return false;
-    });
+    $(document).ready(function() {
+        $("#notificationLink").click(function() {
+            $("#notificationContainer").fadeToggle(300);
+            $("#notification_count").fadeOut("slow");
+            return false;
+        });
 
-    //Document Click hiding the popup
-    $(document).click(function() {
-      $("#notificationContainer").hide();
-    });
+        //Document Click hiding the popup
+        $(document).click(function() {
+            $("#notificationContainer").hide();
+        });
 
-    //Popup on click
-    $("#notificationContainer").click(function() {
-      return false;
-    });
+        //Popup on click
+        $("#notificationContainer").click(function() {
+            return false;
+        });
 
-  });
+    });
 </script>

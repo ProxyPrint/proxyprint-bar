@@ -1,9 +1,15 @@
 angular.module('ProxyPrint').controller('ConsumerController', ['$scope','$cookieStore',
-      'authenticationService', 'fileTransferService','$rootScope', '$location', '$timeout', '$state',
-      function($scope, $cookieStore, authenticationService, fileTransferService, $rootScope, $location, $timeout, $state) {
+      'authenticationService', 'fileTransferService', '$state',
+      function($scope, $cookieStore, authenticationService, fileTransferService, $state) {
 
-   $scope.consumer = $cookieStore.get('globals').currentUser;
+
+   //$scope.consumer = $cookieStore.get('globals').currentUser;
+   $scope.consumer = {
+     username : "Xico da Estrebaria"
+   }
    console.log($scope.consumer);
+
+
 
    $scope.logout = function() {
       authenticationService.ClearCredentials();
@@ -34,18 +40,22 @@ angular.module('ProxyPrint').controller('ConsumerController', ['$scope','$cookie
 
    $scope.notifications = 5;
 
+   $scope.pdfFiles = new Array();
 
-    $scope.uploadFiles = function (files) {
-        if (files && files.length) {
-          console.log(files.length);
-           fileTransferService.setFiles(files);
+
+   $scope.addFiles = function (files) {
+     if (files && files.length) {
+       var i;
+       for (i=0;i<files.length;i++)
+          $scope.pdfFiles.push(files[i]);
+     }
+   }
+
+    $scope.uploadFiles = function () {
+        if ($scope.pdfFiles && $scope.pdfFiles.length) {
+           fileTransferService.setFiles($scope.pdfFiles);
            $state.go('consumer.requestbudget');
         }
     };
-
-    $scope.uploadFilesTest = function () {
-      var files = fileTransferService.getFiles;
-      fileTransferService.TransferFiles(files);
-   }
 
 }]);
