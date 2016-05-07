@@ -2,8 +2,14 @@ angular.module('ProxyPrint').factory('fileTransferService',['Upload','$timeout',
 
   var service = {};
   service.TransferFiles = function (files, callback) {
+    var filesToStore = [];
     for (var i = 0; i < files.length; i++) {
+      var tmp;
       var file = files[i];
+
+      // Attention data is being lost here!
+      filesToStore.push(file.name);
+
       if (!file.$error) {
         Upload.upload({
           url: backendURLService.getBaseURL()+'consumer/upload',
@@ -23,8 +29,9 @@ angular.module('ProxyPrint').factory('fileTransferService',['Upload','$timeout',
           });
         }
       }
+
       // Persist files in cookies
-      $cookieStore.put("uploadedFilesNames", files);
+      $cookieStore.put("uploadedFilesNames", filesToStore);
     };
 
     service.setFiles = function (files){
@@ -33,11 +40,11 @@ angular.module('ProxyPrint').factory('fileTransferService',['Upload','$timeout',
       });
 
       service.files = files;
-    }
+    };
 
     service.getFiles = function () {
       return service.files;
-    }
+    };
 
     return service;
   }]);

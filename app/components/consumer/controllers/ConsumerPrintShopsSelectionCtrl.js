@@ -9,21 +9,13 @@ angular.module('ProxyPrint')
   // $scope.printshops = printShopListService.getPrintShops();
   // console.log(printShopListService.getPrintShops());
 
-  console.log(printshopsList);
   $scope.printshops = printshopsList;
   $scope.printShopsOptions = printshopsList;
+  $scope.submitedFiles = $cookieStore.get("uploadedFilesNames");
+  console.log($scope.submitedFiles);
   $scope.totalSelectedPrintShops = 0;
   $scope.maxSelectionAllowed = 5;
   $scope.showDistance = false;
-
-  /*console.log(fileTransferService.getFiles());
-  $scope.uploadedFiles = fileTransferService.getFiles();
-  $scope.uploadedFilesNames = $scope.uploadedFiles.filter(function(file) { return file.name; });
-  console.log($scope.uploadedFilesNames);*/
-
-  $scope.files = $cookieStore.get('uploadedFilesNames');
-  console.log($scope.files);
-
 
   // Distance slider
   $scope.distanceSlider = {
