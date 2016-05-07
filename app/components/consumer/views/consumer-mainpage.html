@@ -10,13 +10,46 @@
             <ul class="nav navbar-nav navbar-left">
                 <li><a href="/">{{consumer.username}}</a>
                 </li>
-                <li>
-                    <a href="#">
-                        <notification-icon count='notifications'>
-                            <i class="fa fa-bell-o fa-lg"></i>
-                        </notification-icon>
-                    </a>
-                </li>
+                <li id="notification_li">
+                        <a href="" id="notificationLink">
+                            <notification-icon count='newNotifications' animation='bounce'>
+                                <i class="fa fa-bell-o"></i>
+                            </notification-icon>
+                        </a>
+                        <div id="notificationContainer">
+                            <div id="notificationTitle">Notifications</div>
+                            <div id="notificationsBody" class="notifications">
+                            </div>
+
+                            <div class="notifications-scrollable-box">
+
+                            <ul class="list-group">
+                                <li class="list-group-item" ng-repeat="notification in notifications">
+                                    <div row>
+                                      <div class="col-sm-8">
+                                        {{notification.message}}
+                                        </div>
+                                        <div class="col-sm-4">
+                                          <button class="btn btn-default" ng-click="readNotification($index)" ng-disabled="notification.read">
+                                            <div ng-show="!notification.read">
+                                              <small>Ler</small>
+                                            </div>
+                                            <div ng-show="notification.read">
+                                              <small>Lido</small>
+                                            </div>
+                                          </button>
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <small>{{notification.day}}, {{notification.hour}}</small>
+
+                                </li>
+                            </ul>
+                          </div>
+                            <div id="notificationFooter"><a href="#">See All</a></div>
+                        </div>
+
+                    </li>
                 <li><a ui-sref=".settings"><i class="fa fa-cog fa-lg"></i></a>
                 </li>
                 <li><a ui-sref="home"><i class="fa fa-sign-out fa-lg" ng-click"logout()"></i></a></li>

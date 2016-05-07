@@ -64,6 +64,8 @@ body {
     border-color: #428bca;
 }
 
+
+
 /* Header */
 
 .header {
@@ -88,7 +90,72 @@ body {
     background-color: #428bca;
 }
 
+/*Notifications*/
+
+#notification_li
+{
+position:relative
+}
+#notificationContainer
+{
+background-color: #fff;
+border: 1px solid rgba(100, 100, 100, .4);
+-webkit-box-shadow: 0 3px 8px rgba(0, 0, 0, .25);
+overflow: visible;
+position: absolute;
+margin-left: -170px;
+width: 250px;
+z-index: 9999;
+display: none; // Enable this after jquery implementation
+}
+#notificationContainer:before {
+content: '';
+display: block;
+position: absolute;
+width: 0;
+height: 0;
+color: transparent;
+border: 10px solid black;
+border-color: transparent transparent white;
+margin-top: -20px;
+margin-left: 188px;
+}
+
+#notificationTitle
+{
+font-weight: bold;
+padding: 8px;
+font-size: 13px;
+background-color: #ffffff;
+position: relative;
+z-index: 9999;
+width: 245px;
+border-bottom: 1px solid #dddddd;
+}
+#notificationsBody
+{
+padding: 0px 0px 0px 0px !important;
+}
+#notificationFooter
+{
+background-color: #e9eaed;
+text-align: center;
+font-weight: bold;
+padding: 8px;
+font-size: 12px;
+border-top: 1px solid #dddddd;
+}
+
+.notifications-scrollable-box {
+  max-height: 300px;
+  overflow-y: scroll;
+}
+
+
+
 /************************* Costumer Main Page******************************/
+
+
 
 
 /** Drag N' Drop box**/
