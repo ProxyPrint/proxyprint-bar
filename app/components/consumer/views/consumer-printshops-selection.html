@@ -1,105 +1,109 @@
-<h2>Reprografias</h2>
-<div class="row">
-	<!-- prinshops selection -->
-	<div class="col-md-8">
-		<div class="table-responsive" style="height: 250px;">
-			<table class="table">
-				<thead>
-					<tr>
-						<th style="width: 25%;">Reprografia</th>
-						<th style="width: 50%;">Morada</th>
-						<th style="width: 20%;">Distância</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr ng-repeat="printshop in selectedPrintShops" class="animate-row">
-						<td>{{printshop.name}}</td>
-						<td>{{printshop.address}}</td>
-						<td>{{printshop.distance}} km <span ng-click="removePrintShop($index)">X</span></td>
-					</tr>
-				</tbody>
-			</table>
+<div class="container">
+	<h2>Reprografias</h2>
+	<div class="row">
+		<!-- prinshops selection -->
+		<div class="col-md-8">
+			<div class="table-responsive" style="height: 250px;">
+				<table class="table">
+					<thead>
+						<tr>
+							<th style="width: 20%;">Reprografia</th>
+							<th style="width: 50%;">Morada</th>
+							<th style="width: 20%;">Distância</th>
+							<th style="width: 5%"></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="printshop in selectedPrintShops" class="animate-row">
+							<td>{{printshop.name}}</td>
+							<td>{{printshop.address}}</td>
+							<td>{{printshop.distance}} km</td>
+							<td><a href="" ng-click="removePrintShop($index)"><i class="fa fa-times"></i></a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<!-- printshops counter -->
+			<div style="float: right;">
+				<strong>{{totalSelectedPrintShops}} de 5</strong>
+			</div>
+			<!-- checbox -->
+			<label>
+				<input type="checkbox" id="distance" name="distance" ng-model="showDistance"/>
+				Filtrar por distância
+			</label>
+			<!-- slider -->
+			<div class="animate-show-slider" ng-show="showDistance">
+				<rzslider rz-slider-model="distanceSlider.value"
+				rz-slider-high="distanceSlider.maxValue"
+				rz-slider-options="distanceSlider.options" style="margin-top: 6%;"></rzslider>
+			</div>
+			<!-- selection -->
+			<div style="margin-top: 2%;">
+				<select class="form-control" ng-model="selectedPrintShop" ng-options="formatPrinShopForOption(printshop) for printshop in printshops" ng-change="addPrintShop()" ng-disabled="totalSelectedPrintShops==5">
+					<option value="">Selecione uma reprografia...</option>
+				</select>
+			</div>
 		</div>
-		<!-- printshops counter -->
-		<div style="float: right;">
-			<strong>{{totalSelectedPShops}} de 5</strong>
-		</div>
-		<!-- checbox -->
-		<label>
-			<input type="checkbox" id="distance" name="distance" ng-model="showDistance"/>
-			Filtrar por distância
-		</label>
-		<!-- slider -->
-		<div class="animate-show-slider" ng-show="showDistance">
-			<rzslider rz-slider-model="distanceSlider.value"
-			rz-slider-high="distanceSlider.maxValue"
-			rz-slider-options="distanceSlider.options" style="margin-top: 6%;"></rzslider>
-		</div>
-		<!-- selection -->
-		<div style="margin-top: 2%;">
-			<select class="form-control" ng-model="selectedPrintShop" ng-options="formatPrinShopForOption(printshop) for printshop in printshops" ng-change="addPrintShop()" ng-disabled="totalSelectedPShops==maxSelectionAllowed">
-				<option value="">Selecione uma reprografia...</option>
-			</select>
-		</div>
-	</div>
-	<!-- List of submited files -->
-	<div class="col-md-3">
-		<h4>Ficheiro Submetidos</h4>
-		<div class="scrollableTable">
-			<ul class="list-group">
-				<li class="list-group-item clearfix">
-					<strong>file1.pdf</strong>
-				</li>
-				<li class="list-group-item clearfix">
-					<strong>file2.pdf</strong>
-				</li>
-				<li class="list-group-item clearfix">
-					<strong>file3.pdf</strong>
-				</li>
-				<li class="list-group-item clearfix">
-					<strong>file4.pdf</strong>
-				</li>
-				<li class="list-group-item clearfix">
-					<strong>file4.pdf</strong>
-				</li>
-				<li class="list-group-item clearfix">
-					<strong>file4.pdf</strong>
-				</li>
-				<li class="list-group-item clearfix">
-					<strong>file4.pdf</strong>
-				</li>
-				<li class="list-group-item clearfix">
-					<strong>file4.pdf</strong>
-				</li>
-				<li class="list-group-item clearfix">
-					<strong>file4.pdf</strong>
-				</li>
-				<li class="list-group-item clearfix">
-					<strong>file4.pdf</strong>
-				</li>
-				<li class="list-group-item clearfix">
-					<strong>file4.pdf</strong>
-				</li>
-				<li class="list-group-item clearfix">
-					<strong>file4.pdf</strong>
-				</li>
-				<li class="list-group-item clearfix">
-					<strong>file4.pdf</strong>
-				</li>
-				<li class="list-group-item clearfix">
-					<strong>file4.pdf</strong>
-				</li>
-				<li class="list-group-item clearfix">
-					<strong>file4.pdf</strong>
-				</li>
-			</ul>
+		<!-- List of submited files -->
+		<div class="col-md-3">
+			<h4>Ficheiro Submetidos</h4>
+			<div class="scrollableTable">
+				<ul class="list-group">
+					<li class="list-group-item clearfix">
+						<strong>file1.pdf</strong>
+					</li>
+					<li class="list-group-item clearfix">
+						<strong>file2.pdf</strong>
+					</li>
+					<li class="list-group-item clearfix">
+						<strong>file3.pdf</strong>
+					</li>
+					<li class="list-group-item clearfix">
+						<strong>file4.pdf</strong>
+					</li>
+					<li class="list-group-item clearfix">
+						<strong>file4.pdf</strong>
+					</li>
+					<li class="list-group-item clearfix">
+						<strong>file4.pdf</strong>
+					</li>
+					<li class="list-group-item clearfix">
+						<strong>file4.pdf</strong>
+					</li>
+					<li class="list-group-item clearfix">
+						<strong>file4.pdf</strong>
+					</li>
+					<li class="list-group-item clearfix">
+						<strong>file4.pdf</strong>
+					</li>
+					<li class="list-group-item clearfix">
+						<strong>file4.pdf</strong>
+					</li>
+					<li class="list-group-item clearfix">
+						<strong>file4.pdf</strong>
+					</li>
+					<li class="list-group-item clearfix">
+						<strong>file4.pdf</strong>
+					</li>
+					<li class="list-group-item clearfix">
+						<strong>file4.pdf</strong>
+					</li>
+					<li class="list-group-item clearfix">
+						<strong>file4.pdf</strong>
+					</li>
+					<li class="list-group-item clearfix">
+						<strong>file4.pdf</strong>
+					</li>
+				</ul>
+			</div>
 		</div>
 	</div>
 </div>
 <!-- Flow navigation buttons -->
-<div class="row">
+<div class="row" style="margin-top:2%;">
 	<div class="col-md-8">
-		<div class="left" style="float: left;">
+		<div class="left">
 			<button ui-sref="consumer" style="margin:20px;" type="button" class="btn btn-default"><i class="fa fa-arrow-left"></i> Anterior</button>
 		</div>
 	</div>
