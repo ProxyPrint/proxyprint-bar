@@ -26,7 +26,7 @@ app.factory('priceTableService', ['$http', '$cookieStore','backendURLService',fu
   };
 
   service.deletePaperRow = function(row) {
-    var url = backendURLService.getBaseURL()+'printshops/'+$cookieStore.get("printShopID")+'/pricetable/deletepaperitem';
+    var url = backendURLService.getBaseURL()+'printshops/'+$cookieStore.get("printShopID")+'/pricetable/deletepaper';
     return $http.post(url,row).success(function(data){
       return data;
     });
@@ -58,7 +58,7 @@ app.factory('priceTableService', ['$http', '$cookieStore','backendURLService',fu
   };
 
   service.deleteRingRow = function(row) {
-    var url = backendURLService.getBaseURL()+'printshops/'+$cookieStore.get("printShopID")+'/pricetable/deleteringitem';
+    var url = backendURLService.getBaseURL()+'printshops/'+$cookieStore.get("printShopID")+'/pricetable/deletering';
     return $http.post(url,row).success(function(data){
       return data;
     });
@@ -67,10 +67,17 @@ app.factory('priceTableService', ['$http', '$cookieStore','backendURLService',fu
   // Binding - Covers
   service.addNewCoverRow = function(row) {
     service.newEntry = row;
-    /*var url = backendURLService.getBaseURL()+'printshops/'+$cookieStore.get("printShopID")+'/pricetable/covers';
+    var url = backendURLService.getBaseURL()+'printshops/'+$cookieStore.get("printShopID")+'/pricetable/covers';
     return $http.post(url,row).success(function(data){
       return data;
-    });*/
+    });
+  };
+
+  service.deleteCoverRow = function(row) {
+    var url = backendURLService.getBaseURL()+'printshops/'+$cookieStore.get("printShopID")+'/pricetable/deletecover';
+    return $http.post(url,row).success(function(data){
+      return data;
+    });
   };
 
   // Stapling

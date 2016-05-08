@@ -263,6 +263,37 @@ app.controller('ManagerPriceTableCtrl', ['$scope', '$uibModal', 'priceTableServi
     return diff;
   }
 
+  // delete
+  $scope.confirmCoverDelete = function(cover) {
+    priceTableService.setCurrentTable(cover);
+    $scope.openConfirmCoverDeleteModal("Tem a certeza que pertende apagar esta linha do preçário?");
+  };
+
+  $scope.openConfirmCoverDeleteModal = function(reply) {
+    var modalInstance = $uibModal.open({
+      animation: true,
+      templateUrl: 'app/components/printshop/manager/views/pricetable/modals/delete-row-modal.html',
+      controller: 'ConfirmDeleteModalCtrl',
+      size: 'sm',
+      resolve: {
+        index: function() {
+          return $scope.index;
+        },
+        text: function() {
+          return reply;
+        }
+      }
+    });
+    modalInstance.result.then(function(index) {
+      var data = priceTableService.deleteCoverRow($scope.priceTable.covers[priceTableService.getCurrentTable()]);
+      if(data.success){
+        delete $scope.priceTable.covers[priceTableService.getCurrentTable()];
+        $scope.messageModal("O item foi removido.");
+      }
+      else $scope.messageModal("Foi impossível remover o item desejado. Por favor tente mais tarde.");
+    });
+  };
+
   /*---------------------------------------
   Stapling
   ----------------------------------------*/
@@ -417,7 +448,6 @@ app.controller('NewCoverEntryCtrl', function($scope, $uibModalInstance, text, pr
   };
 
   $scope.addNewEntry = function (coverType) {
-    console.log($scope.selectedCoverType);
     var newEntry = { coverType: $scope.selectedCoverType, priceA4: $scope.priceA4, priceA3: $scope.priceA3 };
     console.log(newEntry);
     priceTableService.addNewCoverRow(newEntry);
