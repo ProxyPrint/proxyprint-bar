@@ -6,6 +6,7 @@ app.factory('priceTableService', ['$http', '$cookieStore','backendURLService',fu
   service.currentRingType = "";
   service.currentRowIndex = -1;
   service.newEntry = {};
+  service.currentEntry = {};
 
   service.getPriceTable = function() {
     var url = backendURLService.getBaseURL()+'printshops/'+$cookieStore.get("printShopID")+'/pricetable';
@@ -81,6 +82,14 @@ app.factory('priceTableService', ['$http', '$cookieStore','backendURLService',fu
 
   service.getCurrentRingType = function() {
     return service.currentRingType;
+  };
+
+  service.getCurrentEntry = function() {
+    return service.currentEntry;
+  };
+
+  service.setCurrentEntry = function(entry) {
+    service.currentEntry = entry;
   };
 
   service.getPresentationStringForRings = function(rt) {

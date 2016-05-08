@@ -4,13 +4,14 @@ app.controller('ManagerPriceTableCtrl', ['$scope', '$uibModal', 'priceTableServi
 
   $scope.priceTable = priceTable.data;
 
-  $scope.staplingPrice = $scope.priceTable["stapling"];
-  if($scope.priceTable["stapling"] > 0) {
+  $scope.staplingPrice = $scope.priceTable.stapling;
+  if($scope.priceTable.stapling > 0) {
     $scope.isStaplingFree = false;
   } else {
     $scope.isStaplingFree = true;
   }
   console.log($scope.priceTable);
+
   $scope.isEditModeOn = false;
 
   $scope.confirmDelete = function(table,index) {
@@ -35,18 +36,17 @@ app.controller('ManagerPriceTableCtrl', ['$scope', '$uibModal', 'priceTableServi
       }
     });
     modalInstance.result.then(function(index) {
-      // Why is index undifined?
       index = priceTableService.getCurrentRowIndex();
-      var data = priceTableService.deletePaperRow($scope.priceTable['printcopy'][priceTableService.getCurrentTable()][index]);
-      if(data.success) $scope.priceTable['printcopy'][priceTableService.getCurrentTable()].splice(index, 1);
+      var data = priceTableService.deletePaperRow($scope.priceTable.printcopy[priceTableService.getCurrentTable()][index]);
+      if(data.success) $scope.priceTable.printcopy[priceTableService.getCurrentTable()].splice(index, 1);
       else alert("Foi impossível remover o item desejado. Por favor tente mais tarde.");
     });
   };
 
   $scope.newEntryPrintCopyModal = function(table) {
     priceTableService.setCurrentTable(table);
-    if(!$scope.priceTable['printcopy'][priceTableService.getCurrentTable()]) {
-      $scope.priceTable['printcopy'][priceTableService.getCurrentTable()] = [];
+    if(!$scope.priceTable.printcopy[priceTableService.getCurrentTable()]) {
+      $scope.priceTable.printcopy[priceTableService.getCurrentTable()] = [];
     }
     $scope.openNewEntryPrintCopyModal("Nova entrada em impressões e cópias a preto e branco.");
   };
@@ -64,14 +64,35 @@ app.controller('ManagerPriceTableCtrl', ['$scope', '$uibModal', 'priceTableServi
       }
     });
     modalInstance.result.then(function(index) {
-      $scope.priceTable['printcopy'][priceTableService.getCurrentTable()].push(priceTableService.getNewEntry());
+      $scope.priceTable.printcopy[priceTableService.getCurrentTable()].push(priceTableService.getNewEntry());
       alert("Nova linha adicionada com sucesso!");
     });
   };
 
-  $scope.editRow = function(table,index) {
-    alert(Edit+" "+table+" "+index);
+  $scope.editRowPaper = function(table,index) {
+    console.log($scope.priceTable.printcopy[table][index]);
+    priceTableService.setCurrentEntry($scope.priceTable.printcopy[table][index]);
+    $scope.openEditPrintCopyEntryCtrl("Editar entrada em impressões e cópias a preto e branco.");
   };
+
+  $scope.openEditPrintCopyEntryCtrl = function(reply) {
+    var modalInstance = $uibModal.open({
+      animation: true,
+      templateUrl: 'app/components/printshop/manager/views/pricetable/modals/edit-printcopy-row-modal.html',
+      controller: 'EditPrintCopyEntryCtrl',
+      size: 'md',
+      resolve: {
+        text: function() {
+          return reply;
+        }
+      }
+    });
+    modalInstance.result.then(function(index) {
+      // $scope.priceTable['printcopy'][priceTableService.getCurrentTable()].push(priceTableService.getNewEntry());
+      alert("Linha editada com sucesso!");
+    });
+  };
+
 
   /*---------------------------------------
   Rings Table
@@ -81,8 +102,8 @@ app.controller('ManagerPriceTableCtrl', ['$scope', '$uibModal', 'priceTableServi
   $scope.newEntryRingsModal = function(table) {
     priceTableService.setCurrentTable(table);
     priceTableService.setCurrentRingType(table);
-    if(!$scope.priceTable['rings'][priceTableService.getCurrentTable()]) {
-      $scope.priceTable['rings'][priceTableService.getCurrentTable()] = [];
+    if(!$scope.priceTable.rings[priceTableService.getCurrentTable()]) {
+      $scope.priceTable.rings[priceTableService.getCurrentTable()] = [];
     }
     $scope.openNewRingsEntryModal("Nova entrada em encadernações, tabela de "+priceTableService.getPresentationStringForRings(table)+".");
   };
@@ -100,7 +121,7 @@ app.controller('ManagerPriceTableCtrl', ['$scope', '$uibModal', 'priceTableServi
       }
     });
     modalInstance.result.then(function(index) {
-      $scope.priceTable['rings'][priceTableService.getCurrentTable()].push(priceTableService.getNewEntry());
+      $scope.priceTable.rings[priceTableService.getCurrentTable()].push(priceTableService.getNewEntry());
       alert("Nova linha adicionada com sucesso!");
     });
   };
@@ -130,8 +151,8 @@ app.controller('ManagerPriceTableCtrl', ['$scope', '$uibModal', 'priceTableServi
     modalInstance.result.then(function(index) {
       // Why is index undifined?
       index = priceTableService.getCurrentRowIndex();
-      var data = priceTableService.deleteRingRow($scope.priceTable['rings'][priceTableService.getCurrentTable()][index]);
-      if(data.success) $scope.priceTable['rings'][priceTableService.getCurrentTable()].splice(index, 1);
+      var data = priceTableService.deleteRingRow($scope.priceTable.rings[priceTableService.getCurrentTable()][index]);
+      if(data.success) $scope.priceTable.rings[priceTableService.getCurrentTable()].splice(index, 1);
       else alert("Foi impossível remover o item desejado. Por favor tente mais tarde.");
     });
   };
@@ -140,10 +161,10 @@ app.controller('ManagerPriceTableCtrl', ['$scope', '$uibModal', 'priceTableServi
   Stapling
   ----------------------------------------*/
   $scope.editStaplingValue = function(newStaplingPrice) {
-    if(newStaplingPrice==0) {
+    if(newStaplingPrice===0) {
       $scope.isStaplingFree = true;
       priceTableService.editStaplingValue(0);
-      $scope.priceTable["stapling"] = 0;
+      $scope.priceTable.stapling = 0;
       alert("Agrafar passa agora a ser grátis.");
     }
     else if(newStaplingPrice==-1) {
@@ -157,6 +178,10 @@ app.controller('ManagerPriceTableCtrl', ['$scope', '$uibModal', 'priceTableServi
   };
 
 }]);
+
+/*---------------------------------------
+  Modals
+----------------------------------------*/
 
 // Modal for deleting a row of certain table from price table
 app.controller('ConfirmDeleteModalCtrl', function($scope, $uibModalInstance, index, text) {
@@ -178,6 +203,32 @@ app.controller('ConfirmDeleteModalCtrl', function($scope, $uibModalInstance, ind
 app.controller('NewPrintCopyEntryCtrl', function($scope, $uibModalInstance, text, priceTableService) {
 
   $scope.text = text;
+
+  $scope.addNewEntry = function () {
+    var newEntry = {infLim: $scope.infLim, supLim: $scope.supLim, priceA4SIMPLEX: $scope.priceA4SIMPLEX, priceA4DUPLEX: $scope.priceA4DUPLEX, priceA3SIMPLEX: $scope.priceA3SIMPLEX, priceA3DUPLEX: $scope.priceA3DUPLEX, colors: priceTableService.getCurrentTable()};
+
+    priceTableService.addNewPaperRow(newEntry);
+
+    $uibModalInstance.close();
+  };
+
+  $scope.closeModal = function () {
+    $uibModalInstance.dismiss('cancel');
+  };
+
+});
+
+// Modal for editing new print and copy related rows to some table in the price table
+app.controller('EditPrintCopyEntryCtrl', function($scope, $uibModalInstance, text, priceTableService) {
+
+  $scope.text = text;
+  var current = priceTableService.getCurrentEntry();
+  $scope.infLim = current.infLim;
+  $scope.supLim = current.supLim;
+  $scope.priceA4SIMPLEX = parseFloat(Math.round(current.priceA4SIMPLEX)).toFixed(2);
+  $scope.priceA4DUPLEX = parseFloat(Math.round(current.priceA4DUPLEX)).toFixed(2);
+  $scope.priceA3SIMPLEX = parseFloat(Math.round(current.priceA3SIMPLEX)).toFixed(2);
+  $scope.priceA3DUPLEX = parseFloat(Math.round(current.priceA3DUPLEX)).toFixed(2);
 
   $scope.addNewEntry = function () {
     var newEntry = {infLim: $scope.infLim, supLim: $scope.supLim, priceA4SIMPLEX: $scope.priceA4SIMPLEX, priceA4DUPLEX: $scope.priceA4DUPLEX, priceA3SIMPLEX: $scope.priceA3SIMPLEX, priceA3DUPLEX: $scope.priceA3DUPLEX, colors: priceTableService.getCurrentTable()};
