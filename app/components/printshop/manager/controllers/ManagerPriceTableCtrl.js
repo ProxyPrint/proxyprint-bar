@@ -184,7 +184,6 @@ app.controller('ManagerPriceTableCtrl', ['$scope', '$uibModal', 'priceTableServi
       }
     });
     modalInstance.result.then(function(index) {
-      // Why is index undifined?
       index = priceTableService.getCurrentRowIndex();
       var data = priceTableService.deleteRingRow($scope.priceTable.rings[priceTableService.getCurrentTable()][index]);
       if(data.success){
@@ -217,6 +216,14 @@ app.controller('ManagerPriceTableCtrl', ['$scope', '$uibModal', 'priceTableServi
     if(!$scope.priceTable.covers) {
       $scope.priceTable.covers = [];
     }
+    // Create options array with remain covers
+    var allOptions = priceTableService.getAllCoverOptions();
+    var usedOptions = [];
+    for(var c in $scope.priceTable.covers) {
+      usedOptions.push(c);
+    }
+    var remainOptions = arr_diff(allOptions,usedOptions);
+    priceTableService.setCoversOptions(remainOptions);
     $scope.openNewCoverEntryModal("Nova entrada em capas de encadernação.");
   };
 
@@ -233,10 +240,28 @@ app.controller('ManagerPriceTableCtrl', ['$scope', '$uibModal', 'priceTableServi
       }
     });
     modalInstance.result.then(function(index) {
-      $scope.priceTable.covers[priceTableService.getCurrentCoverType()] = priceTableService.getNewEntry();
+      $scope.priceTable.covers[priceTableService.getNewEntry().coverType] = priceTableService.getNewEntry();
       $scope.messageModal("Nova linha adicionada com sucesso!");
     });
   };
+
+  function arr_diff (a1, a2) {
+    var a = [], diff = [];
+    for (var i = 0; i < a1.length; i++) {
+        a[a1[i]] = true;
+    }
+    for (var i = 0; i < a2.length; i++) {
+        if (a[a2[i]]) {
+            delete a[a2[i]];
+        } else {
+            a[a2[i]] = true;
+        }
+    }
+    for (var k in a) {
+        diff.push(k);
+    }
+    return diff;
+  }
 
   /*---------------------------------------
   Stapling
@@ -385,17 +410,11 @@ Covers
 app.controller('NewCoverEntryCtrl', function($scope, $uibModalInstance, text, priceTableService) {
 
   $scope.text = text;
-  $scope.covers = [
-    {id: 1, coverKey: "CRISTAL_ACETATE", coverName: "Acetato de Cristal" },
-    {id: 2, coverKey: "PVC_TRANSPARENT", coverName: "PVC Transparente Fosco" },
-    {id: 3, coverKey: "PVC_OPAQUE", coverName: "PVC Opaco" }
-  ];
-
+  $scope.covers = priceTableService.getCoversOptions();
 
   $scope.addNewEntry = function (coverType) {
-    var newEntry = { coverType: $scope.selectedCoverType.coverKey, priceA4: $scope.priceA4, priceA3: $scope.priceA3 };
+    var newEntry = { coverType: $scope.selectedCoverType.coverType, priceA4: $scope.priceA4, priceA3: $scope.priceA3 };
     console.log(newEntry);
-    priceTableService.setCurrentCoverType($scope.selectedCoverType.coverKey);
     priceTableService.addNewCoverRow(newEntry);
     $uibModalInstance.close();
   };

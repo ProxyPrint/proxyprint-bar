@@ -4,10 +4,10 @@ app.factory('priceTableService', ['$http', '$cookieStore','backendURLService',fu
   var service = {};
   service.currentTable = "";
   service.currentRingType = "";
-  service.currentCoverType = "";
   service.currentRowIndex = -1;
   service.newEntry = {};
   service.currentEntry = {};
+  service.coversOptions = [];
 
   service.getPriceTable = function() {
     var url = backendURLService.getBaseURL()+'printshops/'+$cookieStore.get("printShopID")+'/pricetable';
@@ -110,20 +110,25 @@ app.factory('priceTableService', ['$http', '$cookieStore','backendURLService',fu
     return service.currentRingType;
   };
 
-  service.setCurrentCoverType = function(index) {
-    service.currentCoverType = index;
-  };
-
-  service.getCurrentCoverType = function() {
-    return service.currentCoverType;
-  };
-
   service.getCurrentEntry = function() {
     return service.currentEntry;
   };
 
   service.setCurrentEntry = function(entry) {
     service.currentEntry = entry;
+  };
+
+  service.getCoversOptions = function() {
+    return service.coversOptions;
+  };
+
+  service.getAllCoverOptions = function() {
+    var options = ["CRISTAL_ACETATE", "PVC_TRANSPARENT", "PVC_OPAQUE"];
+    return options;
+  };
+
+  service.setCoversOptions = function(options) {
+    service.coversOptions = options;
   };
 
   service.getPresentationStringForRings = function(rt) {
