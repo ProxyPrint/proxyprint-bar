@@ -3,7 +3,7 @@ var app = angular.module('ProxyPrint');
 app.factory('printShopListService', ['Upload', '$timeout', '$http', 'backendURLService', '$cookieStore', function(Upload, $timeout, $http, backendURLService, $cookieStore) {
 
   var service = {};
-  
+
   service.getPrintShops = function() {
     var coords = $cookieStore.get('coords');
     return $http.get( backendURLService.getBaseURL()+'printshops/nearest',{params: { latitude: coords.latitude, longitude: coords.longitude }})
@@ -72,6 +72,14 @@ app.factory('printShopListService', ['Upload', '$timeout', '$http', 'backendURLS
     }];
 
     return printshops;
+  };
+
+  service.getSelectedPrintShopsIDs = function() {
+    return $cookieStore.get('selectedPrintShops');
+  };
+
+  service.setSelectedPrintShopsIDs = function(pshopids) {
+    $cookieStore.put('selectedPrintShops', pshopids);
   };
 
   return service;

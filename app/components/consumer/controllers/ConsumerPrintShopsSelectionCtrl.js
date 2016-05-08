@@ -1,7 +1,21 @@
 angular.module('ProxyPrint')
 .controller('ConsumerPrintShopsSelectionController', ['$scope', 'printShopListService', 'printshopsList', 'fileTransferService', '$cookieStore', function($scope, printShopListService, printshopsList, fileTransferService, $cookieStore) {
 
-  // COMMIT 2
+  $scope.printshops = [];
+
+  for (var dist in printshopsList.data.printshops) {
+    console.log(printshopsList.data.printshops[dist]);
+    var pshop = printshopsList.data.printshops[dist];
+    pshop['distance'] = Math.round(dist * 100) / 100;
+    $scope.printshops.push(pshop);
+  }
+
+  $scope.selectedPrintShops = [];
+  $scope.printShopsOptions = $scope.printshops;
+  $scope.submitedFiles = $cookieStore.get("uploadedFilesNames");
+  $scope.totalSelectedPrintShops = 0;
+  $scope.maxSelectionAllowed = 5;
+  $scope.showDistance = false;
 
   // Distance slider
   $scope.distanceSlider = {
@@ -38,6 +52,17 @@ angular.module('ProxyPrint')
     $scope.totalSelectedPrintShops--;
     $scope.printshops.sort(comparePrintShopsByDistance);
   };
+
+  $scope.proceedRequest = function() {
+    var ids = [];
+    for(var i in $scope.selectedPrintShops) {
+      ids.push($scope.selectedPrintShops[i].id);
+    }
+    printShopListService.setSelectedPrintShopsIDs(ids);
+
+    // REMOVE BELOW CODE IN NEXT SPRINT
+    alert("Fazer orçamentos para reprografias: "+printShopListService.getSelectedPrintShopsIDs());
+  }
 
   function remove(arr, item) {
     for (var i = arr.length; i--;) {
