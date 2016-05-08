@@ -1,21 +1,7 @@
 angular.module('ProxyPrint')
 .controller('ConsumerPrintShopsSelectionController', ['$scope', 'printShopListService', 'printshopsList', 'fileTransferService', '$cookieStore', function($scope, printShopListService, printshopsList, fileTransferService, $cookieStore) {
 
-  //FALTA DND INTEGRATION
-  //FALTA COORDERNAR ISTO COM O FLOW DO PEDIDO
-
-  $scope.selectedPrintShops = [];
-
-  // $scope.printshops = printShopListService.getPrintShops();
-  // console.log(printShopListService.getPrintShops());
-
-  $scope.printshops = printshopsList;
-  $scope.printShopsOptions = printshopsList;
-  $scope.submitedFiles = $cookieStore.get("uploadedFilesNames");
-  console.log($scope.submitedFiles);
-  $scope.totalSelectedPrintShops = 0;
-  $scope.maxSelectionAllowed = 5;
-  $scope.showDistance = false;
+  // COMMIT 2
 
   // Distance slider
   $scope.distanceSlider = {

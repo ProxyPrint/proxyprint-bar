@@ -1,29 +1,21 @@
 var app = angular.module('ProxyPrint');
 
-app.factory('printShopListService', ['Upload', '$timeout', '$http', 'backendURLService', function(Upload, $timeout, $http, backendURLService) {
+app.factory('printShopListService', ['Upload', '$timeout', '$http', 'backendURLService', '$cookieStore', function(Upload, $timeout, $http, backendURLService, $cookieStore) {
 
   var service = {};
-  /*service.getPrintShops = function(files) {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(function(position) {
-        position = position;
-        return $http({
-          method: 'GET',
-          url: backendURLService.getBaseURL()+'printshops/nearest',
-          params: {
-            latitude: position.coords.latitude,
-            longitude: position.coords.longitude
-          }
-        }).then(function successCallback(response) {
-          // console.log(response.data.printshops);
-          return response.data.printshops;
-        }, function errorCallback(response) {
-          return null;
-        });
-      });
-    }
-  };*/
+  
   service.getPrintShops = function() {
+    var coords = $cookieStore.get('coords');
+    return $http.get( backendURLService.getBaseURL()+'printshops/nearest',{params: { latitude: coords.latitude, longitude: coords.longitude }})
+    .success(function(response) {
+      console.log(response);
+      return response.printshops;
+    }).error(function(response) {
+      return null;
+    });
+  };
+
+  service.getPrintShopsStatic = function() {
     printshops = [{
       id: 1,
       name: "Impressões Jerónimo",
@@ -80,7 +72,7 @@ app.factory('printShopListService', ['Upload', '$timeout', '$http', 'backendURLS
     }];
 
     return printshops;
-  }
+  };
 
   return service;
 }]);

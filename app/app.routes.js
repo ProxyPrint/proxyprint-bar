@@ -141,7 +141,6 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
     controller: 'ConsumerPrintShopsSelectionController',
     resolve: {
       printshopsList : ['printShopListService', function(printShopListService) {
-        // Cannot get data from response or result
         return printShopListService.getPrintShops();
       }]
     }

@@ -1,9 +1,15 @@
 angular.module('ProxyPrint').controller('ConsumerController', ['$scope','$cookieStore',
       'authenticationService', 'fileTransferService','$rootScope', '$location', '$timeout', '$state',
-      function($scope, $cookieStore, authenticationService, fileTransferService, $rootScope, $location, $timeout, $state) {
+      function($scope, $cookieStore, authenticationService, fileTransferService, $rootScope, $location, $timeout, $state, $q) {
 
    $scope.consumer = $cookieStore.get('globals').currentUser;
-   console.log($scope.consumer);
+
+   if(navigator.geolocation){
+      navigator.geolocation.getCurrentPosition(function(position) {
+        var coords = {latitude: position.coords.latitude, longitude: position.coords.longitude};
+        $cookieStore.put('coords', coords);
+      });
+    }
 
    $scope.logout = function() {
       authenticationService.ClearCredentials();
