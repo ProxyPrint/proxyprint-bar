@@ -128,7 +128,7 @@
                     <th colspan="9">Argolas de Plástico</th>
                   </thead>
                   <tbody>
-                    <tr role="row" ng-repeat="item in priceTable['rings']['PLASTIC']">
+                    <tr role="row" ng-repeat="item in priceTable.rings['PLASTIC']">
                       <td style="text-align: center;">{{item.infLim}}mm-{{item.supLim}}mm</td>
                       <td style="text-align: center;">{{item.price}} €</td>
                       <td style="text-align: center;"><button type="button" ng-click="editRowRings('PLASTIC',$index)" class="btn bg-olive btn-flat btn-sm margin"><i class="fa fa-fw fa-pencil"></i>Editar linha</button> <button button type="button" class="btn bg-red btn-flat btn-sm margin" ng-click="confirmRingDelete('PLASTIC', $index)"><i class="fa fa-fw fa-trash"></i> Apagar linha</button></td>
@@ -156,7 +156,7 @@
                     <th colspan="9">Argolas Espiral</th>
                   </thead>
                   <tbody>
-                    <tr role="row" ng-repeat="item in priceTable['rings']['SPIRAL']">
+                    <tr role="row" ng-repeat="item in priceTable.rings['SPIRAL']">
                       <td style="text-align: center;">{{item.infLim}}mm-{{item.supLim}}mm</td>
                       <td style="text-align: center;">{{item.price}} €</td>
                       <td style="text-align: center;"><button type="button" ng-click="editRowRings('SPIRAL',$index)" class="btn bg-olive btn-flat btn-sm margin"><i class="fa fa-fw fa-pencil"></i>Editar linha</button> <button button type="button" class="btn bg-red btn-flat btn-sm margin" ng-click="confirmRingDelete('SPIRAL', $index)"><i class="fa fa-fw fa-trash"></i> Apagar linha</button></td>
@@ -199,8 +199,8 @@
                 </tr>
               </thead>
               <tbody>
-                <tr role="row" class="odd" ng-repeat="item in priceTable['covers']">
-                  <td >{{item.coverType}}</td>
+                <tr role="row" class="odd" ng-repeat="item in priceTable.covers">
+                  <td >{{getPresentationStringForCovers(item.coverType)}}</td>
                   <td style="text-align: center;">{{item.priceA4}} <span ng-if="item.priceA4!='-'"> €</span></td>
                   <td style="text-align: center;">{{item.priceA3}} <span ng-if="item.priceA3!='-'"> €</span></td>
                   <td style="text-align: center; width: 20%;"><button type="button" class="btn bg-olive btn-flat btn-sm margin disabled"><i class="fa fa-fw fa-pencil"></i>Editar linha</button> <button type="button" class="btn bg-red btn-flat btn-sm margin disabled" ng-click="confirmDelete('COLOR',$index)"><i class="fa fa-fw fa-trash"></i> Apagar linha</button></td>
@@ -210,7 +210,7 @@
           </div>
         </div>
       </div>
-      <button type="button" class="btn btn-flat btn-sm bg-blue disabled" style="float: left;"><i class="fa fa-fw fa-plus" style="padding-right: 2%;"></i>Adicionar entrada</button>
+      <button type="button" class="btn btn-flat btn-sm bg-blue" ng-disabled="sizeOfCoversTable()==totalCoversTypes" ng-click="newEntryCoverModal()" style="float: left;"><i class="fa fa-fw fa-plus" style="padding-right: 2%;"></i>Adicionar entrada</button>
     </div>
     <!-- ./table-cover -->
 

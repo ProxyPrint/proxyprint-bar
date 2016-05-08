@@ -4,6 +4,7 @@ app.factory('priceTableService', ['$http', '$cookieStore','backendURLService',fu
   var service = {};
   service.currentTable = "";
   service.currentRingType = "";
+  service.currentCoverType = "";
   service.currentRowIndex = -1;
   service.newEntry = {};
   service.currentEntry = {};
@@ -63,6 +64,15 @@ app.factory('priceTableService', ['$http', '$cookieStore','backendURLService',fu
     });
   };
 
+  // Binding - Covers
+  service.addNewCoverRow = function(row) {
+    service.newEntry = row;
+    /*var url = backendURLService.getBaseURL()+'printshops/'+$cookieStore.get("printShopID")+'/pricetable/covers';
+    return $http.post(url,row).success(function(data){
+      return data;
+    });*/
+  };
+
   // Stapling
   service.editStaplingValue = function(newStaplingPrice) {
     var url = backendURLService.getBaseURL()+'printshops/'+$cookieStore.get("printShopID")+'/pricetable/editstapling';
@@ -100,6 +110,14 @@ app.factory('priceTableService', ['$http', '$cookieStore','backendURLService',fu
     return service.currentRingType;
   };
 
+  service.setCurrentCoverType = function(index) {
+    service.currentCoverType = index;
+  };
+
+  service.getCurrentCoverType = function() {
+    return service.currentCoverType;
+  };
+
   service.getCurrentEntry = function() {
     return service.currentEntry;
   };
@@ -119,13 +137,35 @@ app.factory('priceTableService', ['$http', '$cookieStore','backendURLService',fu
     return "";
   };
 
-  service.getKeyForPresentationString = function(ps) {
+  service.getKeyForCoverPresentationString = function(ps) {
     if(ps == "Argolas de Plástico") {
         return "PLASTIC";
     } else if(ps == "Argolas Espiral") {
         return "SPIRAL";
     } else if(ps == "Argolas de Arame") {
         return "WIRE";
+    }
+    return "";
+  };
+
+  service.getPresentationStringForCovers = function(ct) {
+    if(ct == "CRISTAL_ACETATE") {
+        return "Acetato de Cristal";
+    } else if(ct == "PVC_TRANSPARENT") {
+        return "PVC Transparente Fosco";
+    } else if(ct == "PVC_OPAQUE") {
+        return "PVC Opaco";
+    }
+    return "";
+  };
+
+  service.getKeyForCoverPresentationString = function(ps) {
+    if(ct == "Acetato de Cristal") {
+        return "CRISTAL_ACETATE";
+    } else if(ct == "PVC Transparente Fosco") {
+        return "PVC_TRANSPARENT";
+    } else if(ct == "PVC Opaco") {
+        return "PVC_OPAQUE";
     }
     return "";
   };

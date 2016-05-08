@@ -12,7 +12,7 @@ app.controller('ManagerPriceTableCtrl', ['$scope', '$uibModal', 'priceTableServi
   }
 
   /*---------------------------------------
-  Print&Copy Table
+  Print&Copy
   ----------------------------------------*/
 
   // add
@@ -197,6 +197,48 @@ app.controller('ManagerPriceTableCtrl', ['$scope', '$uibModal', 'priceTableServi
 
 
   /*---------------------------------------
+  Covers Table
+  ----------------------------------------*/
+  $scope.getPresentationStringForCovers = function(key) {
+    return priceTableService.getPresentationStringForCovers(key);
+  }
+
+  $scope.totalCoversTypes = 3;
+
+  $scope.sizeOfCoversTable = function() {
+    if(!$scope.priceTable.covers) return 0;
+    var i=0;
+    for(var c in $scope.priceTable.covers) i++;
+    return i;
+  };
+
+  // add
+  $scope.newEntryCoverModal = function(table) {
+    if(!$scope.priceTable.covers) {
+      $scope.priceTable.covers = [];
+    }
+    $scope.openNewCoverEntryModal("Nova entrada em capas de encadernação.");
+  };
+
+  $scope.openNewCoverEntryModal = function(reply) {
+    var modalInstance = $uibModal.open({
+      animation: true,
+      templateUrl: 'app/components/printshop/manager/views/pricetable/modals/new-cover-row-modal.html',
+      controller: 'NewCoverEntryCtrl',
+      size: 'md',
+      resolve: {
+        text: function() {
+          return reply;
+        }
+      }
+    });
+    modalInstance.result.then(function(index) {
+      $scope.priceTable.covers[priceTableService.getCurrentCoverType()] = priceTableService.getNewEntry();
+      $scope.messageModal("Nova linha adicionada com sucesso!");
+    });
+  };
+
+  /*---------------------------------------
   Stapling
   ----------------------------------------*/
   $scope.editStaplingValue = function(newStaplingPrice) {
@@ -235,25 +277,12 @@ app.controller('ManagerPriceTableCtrl', ['$scope', '$uibModal', 'priceTableServi
 
 
 /*---------------------------------------
-  Modals
+Modals
 ----------------------------------------*/
 
-// Modal for deleting a row of certain table from price table
-app.controller('ConfirmDeleteModalCtrl', function($scope, $uibModalInstance, index, text) {
-
-  $scope.index = index;
-  $scope.text = text;
-
-  $scope.confirmDeleteRow = function () {
-    $uibModalInstance.close($scope.index);
-  };
-
-  $scope.closeModal = function () {
-    $uibModalInstance.dismiss('cancel');
-  };
-
-});
-
+/*---------------------------------------
+Print&Copy
+----------------------------------------*/
 // Modal for adding new print and copy related rows to some table in the price table
 app.controller('NewPrintCopyEntryCtrl', function($scope, $uibModalInstance, text, priceTableService) {
 
@@ -301,6 +330,10 @@ app.controller('EditPrintCopyEntryCtrl', function($scope, $uibModalInstance, tex
 
 });
 
+
+/*---------------------------------------
+Rings
+----------------------------------------*/
 // Modal for adding new rings related rows to some table in the price table
 app.controller('NewRingsEntryCtrl', function($scope, $uibModalInstance, text, priceTableService) {
 
@@ -339,6 +372,57 @@ app.controller('EditRingsEntryCtrl', function($scope, $uibModalInstance, text, p
 
   $scope.itemHasChanged = function() {
     return ($scope.infLim===current.infLim && $scope.supLim===current.supLim && $scope.price===parseFloat(current.price));
+  };
+
+});
+
+
+/*---------------------------------------
+Covers
+----------------------------------------*/
+
+// Modal for adding new cover related rows to some table in the price table
+app.controller('NewCoverEntryCtrl', function($scope, $uibModalInstance, text, priceTableService) {
+
+  $scope.text = text;
+  $scope.covers = [
+    {id: 1, coverKey: "CRISTAL_ACETATE", coverName: "Acetato de Cristal" },
+    {id: 2, coverKey: "PVC_TRANSPARENT", coverName: "PVC Transparente Fosco" },
+    {id: 3, coverKey: "PVC_OPAQUE", coverName: "PVC Opaco" }
+  ];
+
+
+  $scope.addNewEntry = function (coverType) {
+    var newEntry = { coverType: $scope.selectedCoverType.coverKey, priceA4: $scope.priceA4, priceA3: $scope.priceA3 };
+    console.log(newEntry);
+    priceTableService.setCurrentCoverType($scope.selectedCoverType.coverKey);
+    priceTableService.addNewCoverRow(newEntry);
+    $uibModalInstance.close();
+  };
+
+  $scope.closeModal = function () {
+    $uibModalInstance.dismiss('cancel');
+  };
+
+});
+
+
+/*---------------------------------------
+General
+----------------------------------------*/
+
+// Modal for deleting a row of certain table from price table
+app.controller('ConfirmDeleteModalCtrl', function($scope, $uibModalInstance, index, text) {
+
+  $scope.index = index;
+  $scope.text = text;
+
+  $scope.confirmDeleteRow = function () {
+    $uibModalInstance.close($scope.index);
+  };
+
+  $scope.closeModal = function () {
+    $uibModalInstance.dismiss('cancel');
   };
 
 });
