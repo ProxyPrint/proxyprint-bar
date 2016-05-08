@@ -412,8 +412,13 @@ app.controller('NewCoverEntryCtrl', function($scope, $uibModalInstance, text, pr
   $scope.text = text;
   $scope.covers = priceTableService.getCoversOptions();
 
+  $scope.getPresentationStringForCovers = function(key) {
+    return priceTableService.getPresentationStringForCovers(key);
+  };
+
   $scope.addNewEntry = function (coverType) {
-    var newEntry = { coverType: $scope.selectedCoverType.coverType, priceA4: $scope.priceA4, priceA3: $scope.priceA3 };
+    console.log($scope.selectedCoverType);
+    var newEntry = { coverType: $scope.selectedCoverType, priceA4: $scope.priceA4, priceA3: $scope.priceA3 };
     console.log(newEntry);
     priceTableService.addNewCoverRow(newEntry);
     $uibModalInstance.close();

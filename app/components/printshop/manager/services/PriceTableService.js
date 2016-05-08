@@ -164,7 +164,7 @@ app.factory('priceTableService', ['$http', '$cookieStore','backendURLService',fu
     return "";
   };
 
-  service.getKeyForCoverPresentationString = function(ps) {
+  service.getKeyForCoverPresentationString = function(ct) {
     if(ct == "Acetato de Cristal") {
         return "CRISTAL_ACETATE";
     } else if(ct == "PVC Transparente Fosco") {

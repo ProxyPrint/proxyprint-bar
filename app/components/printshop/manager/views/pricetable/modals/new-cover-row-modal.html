@@ -13,7 +13,7 @@
   </div>
   <div class="row">
     <div class="col col-sm-10">
-      <select class="form-control" name="selectedCoverType" ng-options="cover.coverType for cover in covers" style="width:60%;" ng-model="selectedCoverType">
+      <select class="form-control" name="selectedCoverType" ng-options="getPresentationStringForCovers(cover) for cover in covers" style="width:60%;" ng-model="selectedCoverType">
         <option value="" disabled selected>Selecione uma capa...</option>
       </select>
     </div>
