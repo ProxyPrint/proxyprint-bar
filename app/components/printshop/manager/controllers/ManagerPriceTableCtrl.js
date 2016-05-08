@@ -12,7 +12,59 @@ app.controller('ManagerPriceTableCtrl', ['$scope', '$uibModal', 'priceTableServi
   }
   console.log($scope.priceTable);
 
-  $scope.isEditModeOn = false;
+  $scope.newEntryPrintCopyModal = function(table) {
+    priceTableService.setCurrentTable(table);
+    if(!$scope.priceTable.printcopy[priceTableService.getCurrentTable()]) {
+      $scope.priceTable.printcopy[priceTableService.getCurrentTable()] = [];
+    }
+    $scope.openNewEntryPrintCopyModal("Nova entrada em impressões e cópias a preto e branco.");
+  };
+
+  $scope.openNewEntryPrintCopyModal = function(reply) {
+    var modalInstance = $uibModal.open({
+      animation: true,
+      templateUrl: 'app/components/printshop/manager/views/pricetable/modals/new-printcopy-row-modal.html',
+      controller: 'NewPrintCopyEntryCtrl',
+      size: 'md',
+      resolve: {
+        text: function() {
+          return reply;
+        }
+      }
+    });
+    modalInstance.result.then(function(index) {
+      $scope.priceTable.printcopy[priceTableService.getCurrentTable()].push(priceTableService.getNewEntry());
+      alert("Nova linha adicionada com sucesso!");
+    });
+  };
+
+  $scope.editRowPaper = function(table,index) {
+    console.log($scope.priceTable.printcopy[table][index]);
+    priceTableService.setCurrentTable(table);
+    priceTableService.setCurrentRowIndex(index);
+    priceTableService.setCurrentEntry($scope.priceTable.printcopy[table][index]);
+    $scope.openEditPrintCopyEntryCtrl("Editar entrada em impressões e cópias a preto e branco.");
+  };
+
+  $scope.openEditPrintCopyEntryCtrl = function(reply) {
+    var modalInstance = $uibModal.open({
+      animation: true,
+      templateUrl: 'app/components/printshop/manager/views/pricetable/modals/edit-printcopy-row-modal.html',
+      controller: 'EditPrintCopyEntryCtrl',
+      size: 'md',
+      resolve: {
+        text: function() {
+          return reply;
+        }
+      }
+    });
+    modalInstance.result.then(function(index) {
+      console.log()
+      $scope.priceTable.printcopy[priceTableService.getCurrentTable()].splice(priceTableService.getCurrentRowIndex,1);
+      $scope.priceTable.printcopy[priceTableService.getCurrentTable()].push(priceTableService.getNewEntry());
+      alert("Linha editada com sucesso!");
+    });
+  };
 
   $scope.confirmDelete = function(table,index) {
     priceTableService.setCurrentTable(table);
@@ -42,57 +94,6 @@ app.controller('ManagerPriceTableCtrl', ['$scope', '$uibModal', 'priceTableServi
       else alert("Foi impossível remover o item desejado. Por favor tente mais tarde.");
     });
   };
-
-  $scope.newEntryPrintCopyModal = function(table) {
-    priceTableService.setCurrentTable(table);
-    if(!$scope.priceTable.printcopy[priceTableService.getCurrentTable()]) {
-      $scope.priceTable.printcopy[priceTableService.getCurrentTable()] = [];
-    }
-    $scope.openNewEntryPrintCopyModal("Nova entrada em impressões e cópias a preto e branco.");
-  };
-
-  $scope.openNewEntryPrintCopyModal = function(reply) {
-    var modalInstance = $uibModal.open({
-      animation: true,
-      templateUrl: 'app/components/printshop/manager/views/pricetable/modals/new-printcopy-row-modal.html',
-      controller: 'NewPrintCopyEntryCtrl',
-      size: 'md',
-      resolve: {
-        text: function() {
-          return reply;
-        }
-      }
-    });
-    modalInstance.result.then(function(index) {
-      $scope.priceTable.printcopy[priceTableService.getCurrentTable()].push(priceTableService.getNewEntry());
-      alert("Nova linha adicionada com sucesso!");
-    });
-  };
-
-  $scope.editRowPaper = function(table,index) {
-    console.log($scope.priceTable.printcopy[table][index]);
-    priceTableService.setCurrentEntry($scope.priceTable.printcopy[table][index]);
-    $scope.openEditPrintCopyEntryCtrl("Editar entrada em impressões e cópias a preto e branco.");
-  };
-
-  $scope.openEditPrintCopyEntryCtrl = function(reply) {
-    var modalInstance = $uibModal.open({
-      animation: true,
-      templateUrl: 'app/components/printshop/manager/views/pricetable/modals/edit-printcopy-row-modal.html',
-      controller: 'EditPrintCopyEntryCtrl',
-      size: 'md',
-      resolve: {
-        text: function() {
-          return reply;
-        }
-      }
-    });
-    modalInstance.result.then(function(index) {
-      // $scope.priceTable['printcopy'][priceTableService.getCurrentTable()].push(priceTableService.getNewEntry());
-      alert("Linha editada com sucesso!");
-    });
-  };
-
 
   /*---------------------------------------
   Rings Table
@@ -231,10 +232,10 @@ app.controller('EditPrintCopyEntryCtrl', function($scope, $uibModalInstance, tex
   $scope.priceA3SIMPLEX = parseFloat(current.priceA3SIMPLEX);
   $scope.priceA3DUPLEX = parseFloat(current.priceA3DUPLEX);
 
-  $scope.addNewEntry = function () {
-    var newEntry = {infLim: $scope.infLim, supLim: $scope.supLim, priceA4SIMPLEX: $scope.priceA4SIMPLEX, priceA4DUPLEX: $scope.priceA4DUPLEX, priceA3SIMPLEX: $scope.priceA3SIMPLEX, priceA3DUPLEX: $scope.priceA3DUPLEX, colors: priceTableService.getCurrentTable()};
+  $scope.editEntry = function () {
+    var editedEntry = {infLim: $scope.infLim, supLim: $scope.supLim, priceA4SIMPLEX: $scope.priceA4SIMPLEX, priceA4DUPLEX: $scope.priceA4DUPLEX, priceA3SIMPLEX: $scope.priceA3SIMPLEX, priceA3DUPLEX: $scope.priceA3DUPLEX, colors: priceTableService.getCurrentTable()};
 
-    priceTableService.addNewPaperRow(newEntry);
+    priceTableService.editPaperRow(editedEntry);
 
     $uibModalInstance.close();
   };

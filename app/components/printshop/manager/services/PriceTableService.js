@@ -31,6 +31,14 @@ app.factory('priceTableService', ['$http', '$cookieStore','backendURLService',fu
     });
   };
 
+  service.editPaperRow = function(row) {
+    service.newEntry = row;
+    var url = backendURLService.getBaseURL()+'printshops/'+$cookieStore.get("printShopID")+'/pricetable/papers';
+    return $http.put(url,row).success(function(data){
+      return data;
+    });
+  }
+
   // Binding - Rings
   service.addNewRingsRow = function(row) {
     service.newEntry = row;
