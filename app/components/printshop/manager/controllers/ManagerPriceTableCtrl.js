@@ -43,6 +43,7 @@ app.controller('ManagerPriceTableCtrl', ['$scope', '$uibModal', 'priceTableServi
   };
 
   // edit
+  $scope.itemWasEdited = false;
   $scope.editRowPaper = function(table,index) {
     priceTableService.setCurrentTable(table);
     priceTableService.setCurrentRowIndex(index);
@@ -263,6 +264,12 @@ app.controller('EditPrintCopyEntryCtrl', function($scope, $uibModalInstance, tex
 
   $scope.closeModal = function () {
     $uibModalInstance.dismiss('cancel');
+  };
+
+  $scope.itemHasChanged = function() {
+    return ($scope.infLim===current.infLim && $scope.supLim===current.supLim && $scope.priceA4SIMPLEX===parseFloat(current.priceA4SIMPLEX) &&
+    $scope.priceA4DUPLEX===parseFloat(current.priceA4DUPLEX) &&
+    $scope.priceA3SIMPLEX===parseFloat(current.priceA3SIMPLEX) && $scope.priceA3DUPLEX===parseFloat(current.priceA3DUPLEX));
   };
 
 });
