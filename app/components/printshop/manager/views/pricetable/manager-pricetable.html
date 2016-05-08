@@ -131,7 +131,7 @@
                     <tr role="row" ng-repeat="item in priceTable['rings']['PLASTIC']">
                       <td style="text-align: center;">{{item.infLim}}mm-{{item.supLim}}mm</td>
                       <td style="text-align: center;">{{item.price}} €</td>
-                      <td style="text-align: center;"><button type="button" class="btn bg-olive btn-flat btn-sm margin"><i class="fa fa-fw fa-pencil"></i>Editar linha</button> <button button type="button" class="btn bg-red btn-flat btn-sm margin" ng-click="confirmRingDelete('PLASTIC', $index)"><i class="fa fa-fw fa-trash"></i> Apagar linha</button></td>
+                      <td style="text-align: center;"><button type="button" ng-click="editRowRings('PLASTIC',$index)" class="btn bg-olive btn-flat btn-sm margin"><i class="fa fa-fw fa-pencil"></i>Editar linha</button> <button button type="button" class="btn bg-red btn-flat btn-sm margin" ng-click="confirmRingDelete('PLASTIC', $index)"><i class="fa fa-fw fa-trash"></i> Apagar linha</button></td>
                     </tr>
                   </tbody>
                 </table>
@@ -159,7 +159,7 @@
                     <tr role="row" ng-repeat="item in priceTable['rings']['SPIRAL']">
                       <td style="text-align: center;">{{item.infLim}}mm-{{item.supLim}}mm</td>
                       <td style="text-align: center;">{{item.price}} €</td>
-                      <td style="text-align: center;"><button type="button" class="btn bg-olive btn-flat btn-sm margin"><i class="fa fa-fw fa-pencil"></i>Editar linha</button> <button button type="button" class="btn bg-red btn-flat btn-sm margin" ng-click="confirmRingDelete('SPIRAL', $index)"><i class="fa fa-fw fa-trash"></i> Apagar linha</button></td>
+                      <td style="text-align: center;"><button type="button" ng-click="editRowRings('SPIRAL',$index)" class="btn bg-olive btn-flat btn-sm margin"><i class="fa fa-fw fa-pencil"></i>Editar linha</button> <button button type="button" class="btn bg-red btn-flat btn-sm margin" ng-click="confirmRingDelete('SPIRAL', $index)"><i class="fa fa-fw fa-trash"></i> Apagar linha</button></td>
                     </tr>
                   </tbody>
                 </table>

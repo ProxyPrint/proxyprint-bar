@@ -43,7 +43,6 @@ app.controller('ManagerPriceTableCtrl', ['$scope', '$uibModal', 'priceTableServi
   };
 
   // edit
-  $scope.itemWasEdited = false;
   $scope.editRowPaper = function(table,index) {
     priceTableService.setCurrentTable(table);
     priceTableService.setCurrentRowIndex(index);
@@ -94,7 +93,10 @@ app.controller('ManagerPriceTableCtrl', ['$scope', '$uibModal', 'priceTableServi
     modalInstance.result.then(function(index) {
       index = priceTableService.getCurrentRowIndex();
       var data = priceTableService.deletePaperRow($scope.priceTable.printcopy[priceTableService.getCurrentTable()][index]);
-      if(data.success) $scope.priceTable.printcopy[priceTableService.getCurrentTable()].splice(index, 1);
+      if(data.success){
+        $scope.priceTable.printcopy[priceTableService.getCurrentTable()].splice(index, 1);
+        $scope.messageModal("O item foi removido.");
+      }
       else $scope.messageModal("Foi impossível remover o item desejado. Por favor tente mais tarde.");
     });
   };
@@ -132,6 +134,32 @@ app.controller('ManagerPriceTableCtrl', ['$scope', '$uibModal', 'priceTableServi
     });
   };
 
+  // edit
+  $scope.editRowRings = function(table,index) {
+    priceTableService.setCurrentTable(table);
+    priceTableService.setCurrentRowIndex(index);
+    priceTableService.setCurrentEntry($scope.priceTable.rings[table][index]);
+    $scope.openEditRingsEntryModal("Editar entrada em encadernações, tabela de "+priceTableService.getPresentationStringForRings(table)+".");
+  };
+
+  $scope.openEditRingsEntryModal = function(reply) {
+    var modalInstance = $uibModal.open({
+      animation: true,
+      templateUrl: 'app/components/printshop/manager/views/pricetable/modals/edit-rings-row-modal.html',
+      controller: 'EditRingsEntryCtrl',
+      size: 'md',
+      resolve: {
+        text: function() {
+          return reply;
+        }
+      }
+    });
+    modalInstance.result.then(function(index) {
+      //$scope.priceTable.rings[priceTableService.getCurrentTable()][priceTableService.getCurrentRowIndex()] = priceTableService.getNewEntry();
+      $scope.messageModal("Item editado com sucesso!");
+    });
+  };
+
   // delete
   $scope.confirmRingDelete = function(table,index) {
     priceTableService.setCurrentTable(table);
@@ -158,7 +186,10 @@ app.controller('ManagerPriceTableCtrl', ['$scope', '$uibModal', 'priceTableServi
       // Why is index undifined?
       index = priceTableService.getCurrentRowIndex();
       var data = priceTableService.deleteRingRow($scope.priceTable.rings[priceTableService.getCurrentTable()][index]);
-      if(data.success) $scope.priceTable.rings[priceTableService.getCurrentTable()].splice(index, 1);
+      if(data.success){
+        $scope.priceTable.rings[priceTableService.getCurrentTable()].splice(index, 1);
+        $scope.messageModal("O item foi removido.");
+      }
       else $scope.messageModal("Foi impossível remover o item desejado. Por favor tente mais tarde.");
     });
   };
@@ -246,7 +277,6 @@ app.controller('EditPrintCopyEntryCtrl', function($scope, $uibModalInstance, tex
 
   $scope.text = text;
   var current = priceTableService.getCurrentEntry();
-  console.log(current);
   $scope.infLim = current.infLim;
   $scope.supLim = current.supLim;
   $scope.priceA4SIMPLEX = parseFloat(current.priceA4SIMPLEX);
@@ -293,6 +323,33 @@ app.controller('NewRingsEntryCtrl', function($scope, $uibModalInstance, text, pr
 
 });
 
+// Modal for editing rings related rows to some table in the price table
+app.controller('EditRingsEntryCtrl', function($scope, $uibModalInstance, text, priceTableService) {
+
+  $scope.text = text;
+  var current = priceTableService.getCurrentEntry();
+  $scope.infLim = current.infLim;
+  $scope.supLim = current.supLim;
+  $scope.price = current.price;
+  console.log(current);
+
+  $scope.editEntry = function () {
+    var editedEntry = {ringType: priceTableService.getCurrentRingType(),infLim: $scope.infLim, supLim: $scope.supLim, price: $scope.price};
+    console.log(editedEntry);
+    // priceTableService.addNewRingsRow(editedEntry);
+
+    $uibModalInstance.close();
+  };
+
+  $scope.closeModal = function () {
+    $uibModalInstance.dismiss('cancel');
+  };
+
+  $scope.itemHasChanged = function() {
+    return ($scope.infLim===current.infLim && $scope.supLim===current.supLim && $scope.price===current.price);
+  };
+
+});
 
 // General purpose modal message
 app.controller('MessageModal', function($scope, $uibModalInstance, text) {
