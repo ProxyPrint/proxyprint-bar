@@ -223,12 +223,13 @@ app.controller('EditPrintCopyEntryCtrl', function($scope, $uibModalInstance, tex
 
   $scope.text = text;
   var current = priceTableService.getCurrentEntry();
+  console.log(current);
   $scope.infLim = current.infLim;
   $scope.supLim = current.supLim;
-  $scope.priceA4SIMPLEX = parseFloat(Math.round(current.priceA4SIMPLEX)).toFixed(2);
-  $scope.priceA4DUPLEX = parseFloat(Math.round(current.priceA4DUPLEX)).toFixed(2);
-  $scope.priceA3SIMPLEX = parseFloat(Math.round(current.priceA3SIMPLEX)).toFixed(2);
-  $scope.priceA3DUPLEX = parseFloat(Math.round(current.priceA3DUPLEX)).toFixed(2);
+  $scope.priceA4SIMPLEX = parseFloat(current.priceA4SIMPLEX);
+  $scope.priceA4DUPLEX = parseFloat(current.priceA4DUPLEX);
+  $scope.priceA3SIMPLEX = parseFloat(current.priceA3SIMPLEX);
+  $scope.priceA3DUPLEX = parseFloat(current.priceA3DUPLEX);
 
   $scope.addNewEntry = function () {
     var newEntry = {infLim: $scope.infLim, supLim: $scope.supLim, priceA4SIMPLEX: $scope.priceA4SIMPLEX, priceA4DUPLEX: $scope.priceA4DUPLEX, priceA3SIMPLEX: $scope.priceA3SIMPLEX, priceA3DUPLEX: $scope.priceA3DUPLEX, colors: priceTableService.getCurrentTable()};
