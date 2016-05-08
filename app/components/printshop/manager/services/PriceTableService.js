@@ -22,7 +22,7 @@ app.factory('priceTableService', ['$http', '$cookieStore','backendURLService',fu
     return $http.post(url,row).success(function(data){
       return data;
     });
-  }
+  };
 
   service.deletePaperRow = function(row) {
     var url = backendURLService.getBaseURL()+'printshops/'+$cookieStore.get("printShopID")+'/pricetable/deletepaperitem';
@@ -37,7 +37,7 @@ app.factory('priceTableService', ['$http', '$cookieStore','backendURLService',fu
     return $http.put(url,row).success(function(data){
       return data;
     });
-  }
+  };
 
   // Binding - Rings
   service.addNewRingsRow = function(row) {
@@ -46,7 +46,15 @@ app.factory('priceTableService', ['$http', '$cookieStore','backendURLService',fu
     return $http.post(url,row).success(function(data){
       return data;
     });
-  }
+  };
+
+  service.editRingsRow = function(row) {
+    service.newEntry = row;
+    var url = backendURLService.getBaseURL()+'printshops/'+$cookieStore.get("printShopID")+'/pricetable/rings';
+    return $http.put(url,row).success(function(data){
+      return data;
+    });
+  };
 
   service.deleteRingRow = function(row) {
     var url = backendURLService.getBaseURL()+'printshops/'+$cookieStore.get("printShopID")+'/pricetable/deleteringitem';
@@ -74,7 +82,7 @@ app.factory('priceTableService', ['$http', '$cookieStore','backendURLService',fu
 
   service.getNewEntry = function() {
     return service.newEntry;
-  }
+  };
 
   service.setCurrentRowIndex = function(index) {
     service.currentRowIndex = index;
@@ -107,6 +115,17 @@ app.factory('priceTableService', ['$http', '$cookieStore','backendURLService',fu
         return "Argolas Espiral";
     } else if(rt == "WIRE") {
         return "Argolas de Arame";
+    }
+    return "";
+  };
+
+  service.getKeyForPresentationString = function(ps) {
+    if(ps == "Argolas de Plástico") {
+        return "PLASTIC";
+    } else if(ps == "Argolas Espiral") {
+        return "SPIRAL";
+    } else if(ps == "Argolas de Arame") {
+        return "WIRE";
     }
     return "";
   };

@@ -136,6 +136,7 @@ app.controller('ManagerPriceTableCtrl', ['$scope', '$uibModal', 'priceTableServi
 
   // edit
   $scope.editRowRings = function(table,index) {
+    priceTableService.setCurrentRingType(table);
     priceTableService.setCurrentTable(table);
     priceTableService.setCurrentRowIndex(index);
     priceTableService.setCurrentEntry($scope.priceTable.rings[table][index]);
@@ -155,7 +156,7 @@ app.controller('ManagerPriceTableCtrl', ['$scope', '$uibModal', 'priceTableServi
       }
     });
     modalInstance.result.then(function(index) {
-      //$scope.priceTable.rings[priceTableService.getCurrentTable()][priceTableService.getCurrentRowIndex()] = priceTableService.getNewEntry();
+      $scope.priceTable.rings[priceTableService.getCurrentTable()][priceTableService.getCurrentRowIndex()] = priceTableService.getNewEntry();
       $scope.messageModal("Item editado com sucesso!");
     });
   };
@@ -260,9 +261,7 @@ app.controller('NewPrintCopyEntryCtrl', function($scope, $uibModalInstance, text
 
   $scope.addNewEntry = function () {
     var newEntry = {infLim: $scope.infLim, supLim: $scope.supLim, priceA4SIMPLEX: $scope.priceA4SIMPLEX, priceA4DUPLEX: $scope.priceA4DUPLEX, priceA3SIMPLEX: $scope.priceA3SIMPLEX, priceA3DUPLEX: $scope.priceA3DUPLEX, colors: priceTableService.getCurrentTable()};
-
     priceTableService.addNewPaperRow(newEntry);
-
     $uibModalInstance.close();
   };
 
@@ -286,9 +285,7 @@ app.controller('EditPrintCopyEntryCtrl', function($scope, $uibModalInstance, tex
 
   $scope.editEntry = function () {
     var editedEntry = {infLim: $scope.infLim, supLim: $scope.supLim, priceA4SIMPLEX: $scope.priceA4SIMPLEX, priceA4DUPLEX: $scope.priceA4DUPLEX, priceA3SIMPLEX: $scope.priceA3SIMPLEX, priceA3DUPLEX: $scope.priceA3DUPLEX, colors: priceTableService.getCurrentTable()};
-
     priceTableService.editPaperRow(editedEntry);
-
     $uibModalInstance.close();
   };
 
@@ -311,9 +308,7 @@ app.controller('NewRingsEntryCtrl', function($scope, $uibModalInstance, text, pr
 
   $scope.addNewEntry = function () {
     var newEntry = {ringType: priceTableService.getCurrentRingType(),infLim: $scope.infLim, supLim: $scope.supLim, price: $scope.price};
-    console.log(newEntry);
     priceTableService.addNewRingsRow(newEntry);
-
     $uibModalInstance.close();
   };
 
@@ -330,14 +325,11 @@ app.controller('EditRingsEntryCtrl', function($scope, $uibModalInstance, text, p
   var current = priceTableService.getCurrentEntry();
   $scope.infLim = current.infLim;
   $scope.supLim = current.supLim;
-  $scope.price = current.price;
-  console.log(current);
+  $scope.price = parseFloat(current.price);
 
   $scope.editEntry = function () {
     var editedEntry = {ringType: priceTableService.getCurrentRingType(),infLim: $scope.infLim, supLim: $scope.supLim, price: $scope.price};
-    console.log(editedEntry);
-    // priceTableService.addNewRingsRow(editedEntry);
-
+    priceTableService.editRingsRow(editedEntry);
     $uibModalInstance.close();
   };
 
@@ -346,7 +338,7 @@ app.controller('EditRingsEntryCtrl', function($scope, $uibModalInstance, text, p
   };
 
   $scope.itemHasChanged = function() {
-    return ($scope.infLim===current.infLim && $scope.supLim===current.supLim && $scope.price===current.price);
+    return ($scope.infLim===current.infLim && $scope.supLim===current.supLim && $scope.price===parseFloat(current.price));
   };
 
 });
