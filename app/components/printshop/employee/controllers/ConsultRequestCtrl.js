@@ -3,7 +3,6 @@ var app = angular.module('ProxyPrint');
 app.controller('ConsultRequestCtrl', ['$scope', 'pendingPrintRequest', '$uibModal', 'pendingPrintRequestsService', '$state', '$http', function($scope, pendingPrintRequest, $uibModal, pendingPrintRequestsService, $state, $http) {
 
     $scope.request = pendingPrintRequest.data.printrequest;
-    console.log($scope.request);
 
     $scope.$watch( '$scope.request.status', function(){
         if ($scope.request.status == 'PENDING') {
@@ -36,18 +35,22 @@ app.controller('ConsultRequestCtrl', ['$scope', 'pendingPrintRequest', '$uibModa
 
     // Callbacks to handle status change
     $scope.onChangeStatusSuccessCallback = function(data) {
-      console.log(data);
-      $scope.request.status = data.newStatus;
-      alert("Pedido passará agora a "+$scope.request.status);
-      //Falta fazer reload do estado.
-      $state.reload();
+        $scope.request.status = data.newStatus;
+        //Falta fazer reload do estado.
+        $state.reload();
+        if ($scope.request.status == 'PENDING') {
+            $scope.message = "Pedido pendente.";
+        } else if ($scope.request.status == 'IN_PROGRESS') {
+            $scope.message = "A ser atendido.";
+        } else if ($scope.request.status == 'FINISHED') {
+            $scope.message = "Finalizado";
+        }
+        $scope.openSuccessModal("Pedido passará agora para o estado: "+$scope.message);
     };
 
     $scope.onChangeStatusErroCallback = function(data) {
-      alert("error"); // handle error...
+        $scope.openSuccessModal("Ocorreu um erro a alterar o estado do pedido!");
     };
-
-
 
     $scope.openRejectModal = function(reply) {
 
@@ -68,6 +71,21 @@ app.controller('ConsultRequestCtrl', ['$scope', 'pendingPrintRequest', '$uibModa
             $state.go('employee.pending');
         });
     }
+
+    $scope.openSuccessModal = function(reply) {
+
+        var modalInstance = $uibModal.open({
+            animation: true,
+            templateUrl: 'app/components/printshop/employee/views/success-modal.html',
+            controller: 'PrintRequestModalController',
+            size: 'sm',
+            resolve: {
+                text: function() {
+                    return reply;
+                }
+            }
+        });
+    };
 
     $scope.files = [
         {
