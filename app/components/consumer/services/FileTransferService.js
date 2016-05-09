@@ -1,7 +1,9 @@
-angular.module('ProxyPrint').factory('fileTransferService', ['Upload', '$timeout', 'backendURLService', '$cookieStore', function(Upload, $timeout, backendURLService, $cookieStore) {
+angular.module('ProxyPrint').factory('fileTransferService', ['Upload', '$timeout', 'backendURLService', '$cookieStore', 'printShopListService', function(Upload, $timeout, backendURLService, $cookieStore, printShopListService) {
 
     var service = {};
     service.processedFiles = {};
+    service.processedFiles.printshops = printShopListService.getSelectedPrintShopsIDs();
+    service.processedFiles.files = [];
 
     service.TransferFiles = function(files, callback) {
         var filesToStore = [];
@@ -21,9 +23,9 @@ angular.module('ProxyPrint').factory('fileTransferService', ['Upload', '$timeout
                         var numPages = doc.numPages;
                         console.log('# Document Loaded');
                         console.log('Number of Pages: ' + numPages);
-                        service.processedFiles[file.name] = {
-                          specs: file.specs,
-                          pages: numPages
+                        service.processedFiles.files[file.name] = {
+                            specs: file.specs,
+                            pages: numPages
                         }
                         console.log(service.processedFiles);
                     });
@@ -54,7 +56,7 @@ angular.module('ProxyPrint').factory('fileTransferService', ['Upload', '$timeout
     };
 
     service.getProcessedFiles = function() {
-      return service.processedFiles;
+        return service.processedFiles;
     }
 
     return service;
