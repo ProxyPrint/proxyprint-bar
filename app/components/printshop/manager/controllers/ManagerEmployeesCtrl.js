@@ -30,16 +30,24 @@ function($scope, $state, employeesList, employeesService, $uibModal) {
       }
     });
     modalInstance.result.then(function(index) {
-      var newEmployee = employeesService.getCurrentEmployee();
-      console.log(newEmployee);
-      var res = employeesService.addEmployee(newEmployee);
-      if(res.success) {
-        $scope.employees.push(employeesService.getCurrentEmployee());
-        alert("Novo(a) funcionário(a) adicionado com sucesso!");
-      } else {
-        alert("Foi impossível criar um novo(a) funcionário(a). Por favor tente mais tarde.");
-      }
+      employeesService.addEmployee(employeesService.getCurrentEmployee(), $scope.newEmployeeSuccessCallback, $scope.newEmployeeErrorCallback);
     });
+  };
+
+  $scope.newEmployeeSuccessCallback = function(data) {
+    var newEmployee = employeesService.getCurrentEmployee();
+    newEmployee.id = data.id;
+    console.log(newEmployee);
+    $scope.employees.push(newEmployee);
+    alert("Novo(a) funcionário(a) adicionado com sucesso!");
+  };
+
+  $scope.newEmployeeErrorCallback = function(data) {
+    if(data.message) {
+      alert("Impossível adicionar empregado. Motivo: "+data.message+". Por favor tente mais tarde.");
+    } else {
+      alert("Impossível adicionar empregado. Por favor tente mais tarde.");
+    }
   };
 
   // delete
@@ -88,8 +96,8 @@ app.controller('NewEmployeeCtrl', function($scope, $uibModalInstance, text, empl
   $scope.text = text;
 
   $scope.addEmployee = function () {
-    // Id is generated in server
-    var newEmployee = {id: "", name: $scope.name, username: $scope.username, password: $scope.password };
+    // id is generated in server
+    var newEmployee = {id: 0, name: $scope.name, username: $scope.username, password: $scope.password };
     employeesService.setCurrentEmployee(newEmployee);
     $uibModalInstance.close();
   };

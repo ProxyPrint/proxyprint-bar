@@ -12,13 +12,17 @@ app.factory('employeesService', ['$http', '$cookieStore','backendURLService',fun
     });
   };
 
-  service.addEmployee = function(emp) {
-    /*var url = backendURLService.getBaseURL()+'printshops/'+$cookieStore.get("printShopID")+'/employees';
+  service.addEmployee = function(emp, successCallback, errorCallback) {
+    // console.log(emp); Check Password BUG
+    service.currentEmployee = emp;
+    var url = backendURLService.getBaseURL()+'printshops/'+$cookieStore.get("printShopID")+'/employees';
     return $http.post(url,emp).success(function(response){
-      return response;
-    });*/
-    var r = {success:false};
-    return r;
+      if(response.success) {
+        successCallback(response);
+      } else {
+        return errorCallback(response);
+      }
+    });
   };
 
   service.deleteEmployee = function(employeeID) {
