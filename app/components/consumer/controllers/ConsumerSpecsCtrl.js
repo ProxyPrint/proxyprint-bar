@@ -44,6 +44,8 @@ angular.module('ProxyPrint').controller('ConsumerSpecsController',
         var index = files[i].specs.indexOf($scope.lastItem);
         if (index > -1) {
             files[i].specs[index].pages = interval;
+            files[i].specs[index]['infLim'] = init;
+            files[i].specs[index]['supLim'] = end;
         }
         $scope.showModal = false;
     };
