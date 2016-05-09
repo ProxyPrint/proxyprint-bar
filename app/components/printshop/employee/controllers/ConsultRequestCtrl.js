@@ -3,6 +3,7 @@ var app = angular.module('ProxyPrint');
 app.controller('ConsultRequestCtrl', ['$scope', 'pendingPrintRequest', '$uibModal', 'pendingPrintRequestsService', '$state', '$http', function($scope, pendingPrintRequest, $uibModal, pendingPrintRequestsService, $state, $http) {
 
     $scope.request = pendingPrintRequest.data.printrequest;
+    console.log($scope.request);
 
     $scope.$watch( '$scope.request.status', function(){
         if ($scope.request.status == 'PENDING') {
@@ -29,11 +30,24 @@ app.controller('ConsultRequestCtrl', ['$scope', 'pendingPrintRequest', '$uibModa
         });
 
         modalInstance.result.then(function() {
-            pendingPrintRequestsService.acceptRequest($scope.request.id);
-            //Falta fazer reload do estado.
-            $state.reload();
+            pendingPrintRequestsService.acceptRequest($scope.request.id, $scope.onChangeStatusSuccessCallback, $scope.onChangeStatusErroCallback);
         });
-    }
+    };
+
+    // Callbacks to handle status change
+    $scope.onChangeStatusSuccessCallback = function(data) {
+      console.log(data);
+      $scope.request.status = data.newStatus;
+      alert("Pedido passará agora a "+$scope.request.status);
+      //Falta fazer reload do estado.
+      $state.reload();
+    };
+
+    $scope.onChangeStatusErroCallback = function(data) {
+      alert("error"); // handle error...
+    };
+
+
 
     $scope.openRejectModal = function(reply) {
 
