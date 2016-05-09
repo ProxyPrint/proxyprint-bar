@@ -217,7 +217,6 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
         controller: 'ManagerEmployeesCtrl',
         resolve: {
           employeesList: ['employeesService', function(employeesService) {
-            console.log("resolve");
             return employeesService.getEmployeesList();
           }]
         }

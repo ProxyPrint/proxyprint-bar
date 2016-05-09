@@ -11,13 +11,41 @@ function($scope, $state, employeesList, employeesService, $uibModal) {
 
   // add
   $scope.newEmployee = function() {
-    alert("new emp");
+    if(!$scope.employees) {
+      $scope.employees = [];
+    }
+    $scope.openNewEmployeeModal("Novo registo de funcionário(a).");
+  };
+
+  $scope.openNewEmployeeModal = function(reply) {
+    var modalInstance = $uibModal.open({
+      animation: true,
+      templateUrl: 'app/components/printshop/manager/views/employees/new-employee-modal.html',
+      controller: 'NewEmployeeCtrl',
+      size: 'md',
+      resolve: {
+        text: function() {
+          return reply;
+        }
+      }
+    });
+    modalInstance.result.then(function(index) {
+      var newEmployee = employeesService.getCurrentEmployee();
+      console.log(newEmployee);
+      var res = employeesService.addEmployee(newEmployee);
+      if(res.success) {
+        $scope.employees.push(employeesService.getCurrentEmployee());
+        alert("Novo(a) funcionário(a) adicionado com sucesso!");
+      } else {
+        alert("Foi impossível criar um novo(a) funcionário(a). Por favor tente mais tarde.");
+      }
+    });
   };
 
   // delete
   $scope.confirmDelete = function(index) {
     employeesService.setCurrentIndex(index);
-    $scope.openConfirmDeleteModal("Tem a certeza que pertende eliminar este empregado?");
+    $scope.openConfirmDeleteModal("Tem a certeza que pertende eliminar este funcionário?");
   };
 
   $scope.openConfirmDeleteModal = function(reply) {
@@ -51,8 +79,26 @@ function($scope, $state, employeesList, employeesService, $uibModal) {
 
 
 /*------------------
- Modals
+Modals
 ------------------*/
+
+// Modal for adding new employee
+app.controller('NewEmployeeCtrl', function($scope, $uibModalInstance, text, employeesService) {
+
+  $scope.text = text;
+
+  $scope.addEmployee = function () {
+    // Id is generated in server
+    var newEmployee = {id: "", name: $scope.name, username: $scope.username, password: $scope.password };
+    employeesService.setCurrentEmployee(newEmployee);
+    $uibModalInstance.close();
+  };
+
+  $scope.closeModal = function () {
+    $uibModalInstance.dismiss('cancel');
+  };
+
+});
 
 // Modal for deleting an employee
 app.controller('ConfirmDeleteModalCtrl', function($scope, $uibModalInstance, index, text) {
