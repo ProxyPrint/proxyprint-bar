@@ -75,10 +75,10 @@ app.factory('priceTableService', ['$http', '$cookieStore','backendURLService',fu
 
   service.editCoverRow = function(row) {
     service.newEntry = row;
-    /*var url = backendURLService.getBaseURL()+'printshops/'+$cookieStore.get("printShopID")+'/pricetable/covers';
+    var url = backendURLService.getBaseURL()+'printshops/'+$cookieStore.get("printShopID")+'/pricetable/covers';
     return $http.put(url,row).success(function(data){
       return data;
-    });*/
+    });
   };
 
   service.deleteCoverRow = function(row) {
