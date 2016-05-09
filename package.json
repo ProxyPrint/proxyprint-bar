@@ -9,6 +9,7 @@
     "compression": "^1.6.1",
     "express": "^4.13.4",
     "express-minify": "^0.2.0",
+    "express-redirect": "^1.2.2",
     "ng-file-upload": "12.0.4"
   },
   "devDependencies": {
