@@ -36,7 +36,7 @@ function($scope, $state, employeesList, employeesService, $uibModal) {
 
   $scope.newEmployeeSuccessCallback = function(data) {
     var newEmployee = employeesService.getCurrentEmployee();
-    newEmployee.id = data.id;
+    newEmployee['id'] = data.id;
     $scope.employees.push(newEmployee);
     alert("Novo(a) funcionário(a) adicionado com sucesso!");
   };
@@ -100,7 +100,7 @@ app.controller('NewEmployeeCtrl', function($scope, $uibModalInstance, text, empl
 
   $scope.addEmployee = function () {
     // id is generated in server
-    var newEmployee = {id: 0, name: $scope.name, username: $scope.username, password: $scope.password };
+    var newEmployee = { name: $scope.name, username: $scope.username, password: $scope.password };
     employeesService.setCurrentEmployee(newEmployee);
     $uibModalInstance.close();
   };
