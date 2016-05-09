@@ -203,7 +203,7 @@
                   <td >{{getPresentationStringForCovers(item.coverType)}}</td>
                   <td style="text-align: center;">{{item.priceA4}} <span ng-if="item.priceA4!='-'"> €</span></td>
                   <td style="text-align: center;">{{item.priceA3}} <span ng-if="item.priceA3!='-'"> €</span></td>
-                  <td style="text-align: center; width: 20%;"><button type="button" class="btn bg-olive btn-flat btn-sm margin disabled"><i class="fa fa-fw fa-pencil"></i>Editar linha</button> <button type="button" class="btn bg-red btn-flat btn-sm margin" ng-click="confirmCoverDelete(item.coverType)"><i class="fa fa-fw fa-trash"></i> Apagar linha</button></td>
+                  <td style="text-align: center; width: 20%;"><button type="button" class="btn bg-olive btn-flat btn-sm margin" ng-click="editRowCover(item.coverType)"><i class="fa fa-fw fa-pencil"></i>Editar linha</button> <button type="button" class="btn bg-red btn-flat btn-sm margin" ng-click="confirmCoverDelete(item.coverType)"><i class="fa fa-fw fa-trash"></i> Apagar linha</button></td>
                 </tr>
               </tbody>
             </table>

@@ -200,7 +200,7 @@ app.controller('ManagerPriceTableCtrl', ['$scope', '$uibModal', 'priceTableServi
   ----------------------------------------*/
   $scope.getPresentationStringForCovers = function(key) {
     return priceTableService.getPresentationStringForCovers(key);
-  }
+  };
 
   $scope.totalCoversTypes = 3;
 
@@ -212,7 +212,7 @@ app.controller('ManagerPriceTableCtrl', ['$scope', '$uibModal', 'priceTableServi
   };
 
   // add
-  $scope.newEntryCoverModal = function(table) {
+  $scope.newEntryCoverModal = function() {
     if(!$scope.priceTable.covers) {
       $scope.priceTable.covers = [];
     }
@@ -262,6 +262,30 @@ app.controller('ManagerPriceTableCtrl', ['$scope', '$uibModal', 'priceTableServi
     }
     return diff;
   }
+
+  // edit
+  $scope.editRowCover = function(coverType) {
+    priceTableService.setCurrentEntry($scope.priceTable.covers[coverType]);
+    $scope.openEditCoverEntryModal("Editar entrada em capas de encadernação, "+priceTableService.getPresentationStringForCovers(coverType)+".");
+  };
+
+  $scope.openEditCoverEntryModal = function(reply) {
+    var modalInstance = $uibModal.open({
+      animation: true,
+      templateUrl: 'app/components/printshop/manager/views/pricetable/modals/edit-cover-row-modal.html',
+      controller: 'EditCoverEntryCtrl',
+      size: 'md',
+      resolve: {
+        text: function() {
+          return reply;
+        }
+      }
+    });
+    modalInstance.result.then(function(index) {
+      $scope.priceTable.covers[priceTableService.getNewEntry().coverType] = priceTableService.getNewEntry();
+      $scope.messageModal("Item editado com sucesso!");
+    });
+  };
 
   // delete
   $scope.confirmCoverDelete = function(cover) {
@@ -460,6 +484,34 @@ app.controller('NewCoverEntryCtrl', function($scope, $uibModalInstance, text, pr
 
 });
 
+// Modal for editing cover related rows to some table in the price table
+app.controller('EditCoverEntryCtrl', function($scope, $uibModalInstance, text, priceTableService) {
+
+  $scope.text = text;
+  var current = priceTableService.getCurrentEntry();
+  $scope.selectedCoverType = current.coverType;
+  $scope.priceA4 = parseFloat(current.priceA4);
+  $scope.priceA3 = parseFloat(current.priceA3);
+
+  $scope.getPresentationStringForCovers = function(key) {
+    return priceTableService.getPresentationStringForCovers(key);
+  };
+
+  $scope.editEntry = function () {
+    var editedEntry = {coverType: $scope.selectedCoverType, priceA4: $scope.priceA4, priceA3: $scope.priceA3 };
+    priceTableService.editCoverRow(editedEntry);
+    $uibModalInstance.close();
+  };
+
+  $scope.closeModal = function () {
+    $uibModalInstance.dismiss('cancel');
+  };
+
+  $scope.itemHasChanged = function() {
+    return ($scope.priceA3===parseFloat(current.priceA3) && $scope.priceA4===parseFloat(current.priceA4));
+  };
+
+});
 
 /*---------------------------------------
 General

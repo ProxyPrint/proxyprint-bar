@@ -12,9 +12,7 @@
   </div>
   <div class="row">
     <div class="col col-sm-10">
-      <select class="form-control" name="selectedCoverType" ng-options="getPresentationStringForCovers(cover) for cover in covers" style="width:60%;" ng-model="selectedCoverType">
-        <option value="" disabled selected>Selecione uma capa...</option>
-      </select>
+      <label style="float: left;">{{getPresentationStringForCovers(selectedCoverType)}}</label>
     </div>
   </div>
   <!-- ./cover -->
@@ -35,7 +33,7 @@
 <!-- ./prices -->
 <!-- footer -->
 <div class="modal-footer" style="text-align:center; margin-top: 4%;">
-  <button class="btn btn-success btn-sm btn-flat" type="button" ng-click="addNewEntry(selectedCoverType)"><i class="fa fa-check" style="margin-right: 2%;"/>Adicionar</button>
-  <button class="btn btn-danger btn-sm btn-flat" type="button" ng-click="closeModal()"><i class="fa fa-times" style="margin-right: 2%;"/>Cancelar</button>
+  <button class="btn btn-primary btn-sm btn-flat" type="button" ng-click="editEntry()" ng-disabled="itemHasChanged()"><i class="fa fa-save" style="margin-right: 2%;"/>  Guardar</button>
+  <button class="btn btn-danger btn-sm btn-flat" type="button" ng-click="closeModal()"><i class="fa fa-times" style="margin-right: 2%;"/>  Cancelar</button>
 </div>
 <!-- ./footer -->
