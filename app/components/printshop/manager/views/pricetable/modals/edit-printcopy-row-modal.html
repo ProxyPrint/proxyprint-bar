@@ -13,11 +13,11 @@
   <div class="row">
     <div class="col col-sm-1">De</div>
     <div class="col col-sm-3">
-      <input type="number" class="form-control input-sm" ng-model="infLim">
+      <input type="number" class="form-control input-sm" min="0" ng-model="infLim">
     </div>
     <div class="col col-sm-1">até</div>
     <div class="col col-sm-3">
-      <input type="number" class="form-control input-sm" ng-model="supLim">
+      <input type="number" class="form-control input-sm" min="0" ng-model="supLim">
     </div>
   </div>
   <!-- ./Quantity -->
@@ -30,11 +30,11 @@
   <div class="row">
     <div class="col col-sm-2">1 Lado</div>
     <div class="col col-sm-3">
-      <input type="number" class="form-control input-sm" ng-pattern="/^[0-9]+(\.[0-9]{0,2})?$/" step="0.01" placeholder="€" ng-model="priceA4SIMPLEX">
+      <input type="number" class="form-control input-sm" ng-pattern="/^[0-9]+(\.[0-9]{0,2})?$/" step="0.01" min="0" placeholder="€" ng-model="priceA4SIMPLEX">
     </div>
     <div class="col col-sm-2">2 Lados</div>
     <div class="col col-sm-3">
-      <input type="number" class="form-control input-sm" ng-pattern="/^[0-9]+(\.[0-9]{0,2})?$/" step="0.01" placeholder="€" ng-model="priceA4DUPLEX">
+      <input type="number" class="form-control input-sm" ng-pattern="/^[0-9]+(\.[0-9]{0,2})?$/" step="0.01" min="0" placeholder="€" ng-model="priceA4DUPLEX">
     </div>
   </div>
   <!-- ./A4 -->
@@ -47,11 +47,11 @@
   <div class="row">
     <div class="col col-sm-2">1 Lado</div>
     <div class="col col-sm-3">
-      <input type="number" class="form-control input-sm" ng-pattern="/^[0-9]+(\.[0-9]{0,2})?$/" step="0.01" placeholder="€" ng-model="priceA3SIMPLEX">
+      <input type="number" class="form-control input-sm" ng-pattern="/^[0-9]+(\.[0-9]{0,2})?$/" step="0.01" min="0" placeholder="€" ng-model="priceA3SIMPLEX">
     </div>
     <div class="col col-sm-2">2 Lados</div>
     <div class="col col-sm-3">
-      <input type="number" class="form-control input-sm" ng-pattern="/^[0-9]+(\.[0-9]{0,2})?$/" step="0.01" placeholder="€" ng-model="priceA3DUPLEX">
+      <input type="number" class="form-control input-sm" ng-pattern="/^[0-9]+(\.[0-9]{0,2})?$/" step="0.01" min="0" placeholder="€" ng-model="priceA3DUPLEX">
     </div>
   </div>
   <!-- ./A3 -->
