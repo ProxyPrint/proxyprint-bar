@@ -37,7 +37,6 @@ function($scope, $state, employeesList, employeesService, $uibModal) {
   $scope.newEmployeeSuccessCallback = function(data) {
     var newEmployee = employeesService.getCurrentEmployee();
     newEmployee.id = data.id;
-    console.log(newEmployee);
     $scope.employees.push(newEmployee);
     alert("Novo(a) funcionário(a) adicionado com sucesso!");
   };
@@ -73,14 +72,18 @@ function($scope, $state, employeesList, employeesService, $uibModal) {
     });
     modalInstance.result.then(function(index) {
       index = employeesService.getCurrentIndex();
-      var res = employeesService.deleteEmployee($scope.employees[index].id);
-      if(res.success) {
-        $scope.employees.splice(index,1);
-        alert("Empregado removido com sucesso.");
-      } else {
-        alert("Foi impossível remover o empregado. Por favor tente mais tarde");
-      }
+      employeesService.deleteEmployee($scope.employees[index].id, $scope.deleteSuccessCallback, $scope.deleteErrorCallback);
     });
+  };
+
+  $scope.deleteSuccessCallback = function(data) {
+    index = employeesService.getCurrentIndex();
+    $scope.employees.splice(index,1);
+    alert("Empregado removido com sucesso.");
+  };
+
+  $scope.deleteErrorCallback = function(data) {
+    alert("Foi impossível remover o empregado. Por favor tente mais tarde");
   };
 
 }]);

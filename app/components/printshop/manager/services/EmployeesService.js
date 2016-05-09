@@ -25,10 +25,14 @@ app.factory('employeesService', ['$http', '$cookieStore','backendURLService',fun
     });
   };
 
-  service.deleteEmployee = function(employeeID) {
+  service.deleteEmployee = function(employeeID, successCallback, errorCallback) {
     var url = backendURLService.getBaseURL()+'printshops/'+$cookieStore.get("printShopID")+'/employees/'+employeeID;
     return $http.delete(url).success(function(response){
-      return response;
+      if(response.success) {
+        successCallback(response);
+      } else {
+        errorCallback(response);
+      }
     });
   };
 
