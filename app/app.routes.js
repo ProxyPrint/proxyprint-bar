@@ -172,7 +172,6 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
             }]
         }
     })
-
     .state('employee.satisfied', {
         url: '/satisfied',
         templateUrl: '/app/components/printshop/employee/views/employee-requests-satisfied.html',
@@ -214,7 +213,8 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
     })
     .state('manager.employees', {
         url: '/employees',
-        templateUrl: '/app/components/printshop/manager/views/manager-employees.html'
+        templateUrl: '/app/components/printshop/manager/views/manager-employees.html',
+        controller: 'ManagerEmployeesCtrl'
     })
 
     /*Admin*/

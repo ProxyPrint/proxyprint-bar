@@ -1,6 +1,40 @@
-<section class="content-header">
-  <h1>
-    Employees
-    <small>...</small>
-  </h1>
+<section class="header">
+  <h1>Empregados <small>Gestão dos empregados</small></h1>
 </section>
+<!-- filter -->
+<div class="form-group has-feedback" style="margin-top: 12px;width:70%;">
+  <input type="text" class="form-control" ng-model="request.pShopName" name="search" id="search" placeholder="Pesquise uma reprografia">
+  <span class="glyphicon glyphicon-search form-control-feedback"></span>
+</div>
+<!-- ./filter -->
+<!-- table -->
+<div class="box" style="margin-top: 12px;width: 70%;">
+  <div class="box-body table-responsive no-padding">
+    <table class="table table-striped">
+      <tbody>
+        <tr>
+          <th>ID</th>
+          <th>Nome</th>
+          <th>Username</th>
+          <th></th>
+        </tr>
+        <tr ng-repeat="employee in employees | filter:employee.pShopName"><!-- |  -->
+          <td><b>#{{employee.id}}</b></td>
+          <td>{{employee.name}}</td>
+          <td>{{employee.username}}</td>
+          <td><button ng-click="" class="btn bg-olive btn-flat btn-sm margin"><i class="fa fa-pencil" style="margin-right: 0.2em;"></i>  Editar</button><button ng-click="" class="btn bg-red btn-flat btn-sm margin"><i class="fa fa-trash" style="margin-right: 0.2em;"></i>  Eliminar</button></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="box-footer clearfix">
+      <ul class="pagination pagination-sm no-margin pull-right">
+        <li><a href="">«</a></li>
+        <li><a href="">1</a></li>
+        <li><a href="">2</a></li>
+        <li><a href="">3</a></li>
+        <li><a href="">»</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+<!-- ./table -->
