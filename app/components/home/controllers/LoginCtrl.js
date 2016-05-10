@@ -23,7 +23,7 @@ function($scope, $rootScope, $location, authenticationService, $state, $cookieSt
         else if(response.user.roles[0] == "ROLE_USER") {
           $cookieStore.put("consumerID", response.user.id);
           authenticationService.SetCredentials($scope.username, $scope.password);
-          $state.go('consumer', {"consumerID":$scope.username});
+          $state.go('consumer.mainpage', {"consumerID":$scope.username});
         }
         // Admin
         else if(response.user.roles[0] == "ROLE_ADMIN") {

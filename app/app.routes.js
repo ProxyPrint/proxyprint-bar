@@ -14,7 +14,8 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
     '//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css',
     '/assets/css/angular-notification-icons.css',
     'http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic',
-    'https://cdnjs.cloudflare.com/ajax/libs/ng-table/0.8.3/ng-table.min.css'
+    'https://cdnjs.cloudflare.com/ajax/libs/ng-table/0.8.3/ng-table.min.css',
+    '/node_modules/hover.css/css/hover-min.css'
   ];
 
   var mainPrintShopCSS = [
@@ -95,10 +96,11 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
 
   /*Consumer*/
   .state('consumer', {
+    abstract: true,
     url: '/:consumerID',
     views: {
       '': {
-        templateUrl: '/app/components/consumer/views/consumer-mainpage.html',
+        templateUrl: '/app/components/consumer/views/consumer-base.html',
         controller: 'ConsumerController'
       }
     },
@@ -117,7 +119,7 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
   })
   .state('consumer.mainpage' ,{
     url: '/mainpage',
-    templateUrl: '/app/components/consumer/views/consumer-maincontent.html'
+    templateUrl: '/app/components/consumer/views/consumer-mainpage.html'
   })
   .state('consumer.history' , {
     url: '/history',

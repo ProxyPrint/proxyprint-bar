@@ -1,0 +1,151 @@
+<div id="custom-bootstrap-menu" class="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-default">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">
+                  <span><img src="assets/img/logo/logo_white.png" width="40" height="40" style="margin-top: -8px;"/></span>
+                  <strong style="margin-left:4%;font-size:120%;">ProxyPrint</strong>
+                </a>
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-menubuilder"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+                </button>
+            </div>
+        </div>
+        <div class="collapse navbar-collapse navbar-menubuilder navbar-right">
+            <ul class="nav navbar-nav navbar-left">
+                <li><a href="/">{{consumer.username}}</a>
+                </li>
+                <li id="notification_li">
+                        <a href="" id="notificationLink">
+                            <notification-icon count='newNotifications' animation='bounce'>
+                                <i class="fa fa-bell-o"></i>
+                            </notification-icon>
+                        </a>
+                        <div id="notificationContainer">
+                            <div id="notificationTitle">Notifications</div>
+                            <div id="notificationsBody" class="notifications">
+                            </div>
+
+                            <div class="notifications-scrollable-box">
+
+                            <ul class="list-group">
+                                <li class="list-group-item" ng-repeat="notification in notifications">
+                                    <div row>
+                                      <div class="col-sm-8">
+                                        {{notification.message}}
+                                        </div>
+                                        <div class="col-sm-4">
+                                          <button class="btn btn-default" ng-click="readNotification($index)" ng-disabled="notification.read">
+                                            <div ng-show="!notification.read">
+                                              <small>Ler</small>
+                                            </div>
+                                            <div ng-show="notification.read">
+                                              <small>Lido</small>
+                                            </div>
+                                          </button>
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <small>{{notification.day}}, {{notification.hour}}</small>
+
+                                </li>
+                            </ul>
+                          </div>
+                            <div id="notificationFooter"><a href="#">See All</a></div>
+                        </div>
+
+                    </li>
+                <li><a ui-sref=".settings"><i class="fa fa-cog fa-lg"></i></a>
+                </li>
+                <li><a ui-sref="home"><i class="fa fa-sign-out fa-lg" ng-click"logout()"></i></a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+
+    <div class="row row-offcanvas row-offcanvas-left">
+
+        <div class="col-sm-3 col-md-2 sidebar-offcanvas" id="sidebar" role="navigation">
+
+            <ul class="nav nav-sidebar">
+                <li><a ui-sref=".mainpage"><i class="fa fa-home fa-lg"></i> Início</a></li>
+                <li><a ui-sref=".printshoplist"><i class="fa fa-book fa-lg"></i> Reprografias</a></li>
+                <li><a ui-sref=".history"><i class="fa fa-history fa-lg"></i> Histórico</a></li>
+            </ul>
+        </div>
+        <!--/span-->
+
+        <div class="col-sm-9 col-md-10 main">
+            <div ui-view></div>
+        </div>
+        <!--/row-->
+    </div>
+</div>
+<footer class="footer-distributed">
+
+    <div class="footer-right">
+
+        <span class="fa-stack fa-lg fa-white-icon">
+          <i class="fa fa-square-o fa-stack-2x"></i>
+          <a href="https://www.facebook.com/jose.cortez.378">
+          <i class="fa fa-facebook fa-stack-1x"></i>
+          </a>
+        </span>
+
+        <span class="fa-stack fa-lg fa-white-icon">
+          <i class="fa fa-square-o fa-stack-2x"></i>
+          <a href="https://twitter.com/jospCortez">
+          <i class="fa fa-twitter fa-stack-1x"></i>
+        </a>
+        </span>
+        <span class="fa-stack fa-lg fa-white-icon">
+          <i class="fa fa-square-o fa-stack-2x"></i>
+          <a href="https://pt.linkedin.com/in/jospcortez">
+          <i class="fa fa-linkedin fa-stack-1x"></i>
+          </a>
+        </span>
+        <span class="fa-stack fa-lg fa-white-icon">
+          <i class="fa fa-square-o fa-stack-2x"></i>
+          <a href="https://github.com/ProxyPrint">
+          <i class="fa fa-github fa-stack-1x"></i>
+          </a>
+        </span>
+
+    </div>
+
+    <div class="footer-left">
+
+        <p class="footer-links">
+            <a href="http://www.louisvuitton.com/">Home</a> ·
+            <a href="https://pt.wikipedia.org/wiki/Tautologia_(l%C3%B3gica)">About</a> ·
+            <a href="https://www.youtube.com/watch?v=7ZHa_ZOV6C8">Contact</a>
+        </p>
+
+        <p>ProxyPrint &copy; 2016</p>
+    </div>
+
+</footer>
+
+<!--/.container-->
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#notificationLink").click(function() {
+            $("#notificationContainer").fadeToggle(300);
+            $("#notification_count").fadeOut("slow");
+            return false;
+        });
+
+        //Document Click hiding the popup
+        $(document).click(function() {
+            $("#notificationContainer").hide();
+        });
+
+        //Popup on click
+        $("#notificationContainer").click(function() {
+            return false;
+        });
+
+    });
+</script>

@@ -9,7 +9,7 @@ angular.module('Auth').controller('RegisterController',
             authenticationService.Register($scope.name, $scope.email, $scope.username, $scope.password, function (response) {
                 if (response.success) {
                     authenticationService.SetCredentials($scope.username, $scope.password);
-                    $state.go('consumer');
+                    $state.go('consumer.mainpage');
                     $location.path('/consumerID');
                 } else {
                     $scope.error = response.message;
