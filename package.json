@@ -1,30 +1,37 @@
 {
-    "name": "ProxyPrint",
-    "version": "0.0.0",
-    "license": "MIT",
-    "dependencies": {
-        "angular": "^1.5.0",
-        "angular-ui-router": "^0.2.18",
-        "ng-file-upload": "12.0.4"
-    },
-    "devDependencies": {
-        "angular-mocks": "^1.4.8",
-        "http-server": "^0.6.1",
-        "karma": "^0.13.19",
-        "karma-chrome-launcher": "^0.2.2",
-        "karma-firefox-launcher": "^0.1.6",
-        "karma-jasmine": "^0.3.7",
-        "protractor": "^1.8.0"
-    },
-    "scripts": {
-        "prestart": "npm install",
-        "start": "http-server -a 0.0.0.0 -p 9000",
-        "pretest": "npm install",
-        "test": "node node_modules/karma/bin/karma start test/karma.conf.js",
-        "test-single": "node node_modules/karma/bin/karma start test/karma.conf.js --single-run",
-        "preupdate-webdriver": "npm install",
-        "update-webdriver": "webdriver-manager update",
-        "preprotractor": "npm run update-webdriver",
-        "protractor": "protractor test/protractor.conf.js"
-    }
+  "name": "ProxyPrint",
+  "version": "0.0.0",
+  "license": "MIT",
+  "dependencies": {
+    "angular": "^1.5.0",
+    "angular-ui-router": "^0.2.18",
+    "cluster": "^0.7.7",
+    "compression": "^1.6.1",
+    "express": "^4.13.4",
+    "express-minify": "^0.2.0",
+    "express-redirect": "^1.2.2",
+    "ng-file-upload": "^12.0.4",
+    "hover.css": "^2.0.2",
+    "angularjs-slider": "^2.13.0"
+  },
+  "devDependencies": {
+    "angular-mocks": "^1.4.8",
+    "http-server": "^0.6.1",
+    "karma": "^0.13.19",
+    "karma-chrome-launcher": "^0.2.2",
+    "karma-firefox-launcher": "^0.1.6",
+    "karma-jasmine": "^0.3.7",
+    "protractor": "^1.8.0"
+  },
+  "scripts": {
+    "prestart": "npm install",
+    "start": "node web.js",
+    "pretest": "npm install",
+    "test": "node node_modules/karma/bin/karma start test/karma.conf.js",
+    "test-single": "node node_modules/karma/bin/karma start test/karma.conf.js --single-run",
+    "preupdate-webdriver": "npm install",
+    "update-webdriver": "webdriver-manager update",
+    "preprotractor": "npm run update-webdriver",
+    "protractor": "protractor test/protractor.conf.js"
+  }
 }

@@ -5,7 +5,10 @@ angular.module('ProxyPrint').controller('ConsumerController', ['$scope','$cookie
         $scope.consumer = $cookieStore.get('globals').currentUser;
         var audio = new Audio('assets/sound2.mp3');
 
-        var source = new EventSource(backendURLService.getBaseURL() + "consumer/subscribe?username=" + $scope.consumer.username, {
+        console.log("cenas");
+        console.log($scope.consumer);
+
+        var source = new EventSource(backendURLService.getBaseURL() + "consumer/subscribe?username=" + $scope.consumer.username + "&password=" + $scope.consumer.password, {
             withCredentials: true
         });
 
