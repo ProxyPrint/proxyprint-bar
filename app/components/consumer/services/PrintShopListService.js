@@ -5,7 +5,9 @@ app.factory('printShopListService', ['Upload', '$timeout', '$http', 'backendURLS
   var service = {};
 
   service.getPrintShops = function() {
-    var coords = $cookieStore.get('coords');
+    console.log("getPrintShops");
+    var coords = $cookieStore.get("coords");
+    console.log(coords);
     return $http.get( backendURLService.getBaseURL()+'printshops/nearest',{params: { latitude: coords.latitude, longitude: coords.longitude }})
     .success(function(response) {
       console.log(response);

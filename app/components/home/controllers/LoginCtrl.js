@@ -22,14 +22,6 @@ function($scope, $rootScope, $location, authenticationService, $state, $cookieSt
         // Consumer
         else if(response.user.roles[0] == "ROLE_USER") {
           $cookieStore.put("consumerID", response.user.id);
-          if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function(position) {
-              $rootScope.position = position;
-              console.log($rootScope.position.coords.latitude);
-              console.log($rootScope.position.coords.longitude);
-            });
-          }
-
           authenticationService.SetCredentials($scope.username, $scope.password);
           $state.go('consumer', {"consumerID":$scope.username});
         }

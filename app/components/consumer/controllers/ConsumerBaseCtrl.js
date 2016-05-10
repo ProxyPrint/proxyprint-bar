@@ -2,6 +2,18 @@ angular.module('ProxyPrint').controller('ConsumerController', ['$scope','$cookie
 'authenticationService', 'fileTransferService', '$state', 'notifications', 'backendURLService',
 function($scope, $cookieStore, authenticationService, fileTransferService, $state, notifications,backendURLService) {
 
+  // Get consumer location
+  if(navigator.geolocation){
+    navigator.geolocation.getCurrentPosition(function(position) {
+      var coords = {latitude: position.coords.latitude, longitude: position.coords.longitude};
+      $cookieStore.put('coords', coords);
+    });
+  } else {
+    // Default coords University of Minho
+    var coords = {latitude:41.560501, longitude:-8.397250};
+    $cookieStore.put('coords', coords);
+  }
+
   $scope.consumer = $cookieStore.get('globals').currentUser;
   var audio = new Audio('assets/audio/notifications.mp3');
 
