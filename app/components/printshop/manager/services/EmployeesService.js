@@ -12,8 +12,8 @@ app.factory('employeesService', ['$http', '$cookieStore','backendURLService',fun
     });
   };
 
+  // add
   service.addEmployee = function(emp, successCallback, errorCallback) {
-    // console.log(emp); Check Password BUG
     service.currentEmployee = emp;
     var url = backendURLService.getBaseURL()+'printshops/'+$cookieStore.get("printShopID")+'/employees';
     return $http.post(url,emp).success(function(response){
@@ -25,6 +25,20 @@ app.factory('employeesService', ['$http', '$cookieStore','backendURLService',fun
     });
   };
 
+  // edit
+  service.editEmployee = function(emp, successCallback, errorCallback) {
+    service.currentEmployee = emp;
+    var url = backendURLService.getBaseURL()+'printshops/'+$cookieStore.get("printShopID")+'/employees';
+    return $http.put(url,emp).success(function(response){
+      if(response.success) {
+        successCallback(response);
+      } else {
+        return errorCallback(response);
+      }
+    });
+  };
+
+  // delete
   service.deleteEmployee = function(employeeID, successCallback, errorCallback) {
     var url = backendURLService.getBaseURL()+'printshops/'+$cookieStore.get("printShopID")+'/employees/'+employeeID;
     return $http.delete(url).success(function(response){

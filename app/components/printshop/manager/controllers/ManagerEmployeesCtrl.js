@@ -49,6 +49,44 @@ function($scope, $state, employeesList, employeesService, $uibModal) {
     }
   };
 
+  // edit
+  $scope.editEmployee = function(index) {
+    employeesService.setCurrentEmployee($scope.employees[index]);
+    $scope.openEditEmployeeModal("Edição de registo de funcionário(a).");
+  };
+
+  $scope.openEditEmployeeModal = function(reply) {
+    var modalInstance = $uibModal.open({
+      animation: true,
+      templateUrl: 'app/components/printshop/manager/views/employees/edit-employee-modal.html',
+      controller: 'NewEmployeeCtrl',
+      size: 'md',
+      resolve: {
+        text: function() {
+          return reply;
+        }
+      }
+    });
+    modalInstance.result.then(function(index) {
+      employeesService.addEmployee(employeesService.getCurrentEmployee(), $scope.newEmployeeSuccessCallback, $scope.newEmployeeErrorCallback);
+    });
+  };
+
+  $scope.newEmployeeSuccessCallback = function(data) {
+    var newEmployee = employeesService.getCurrentEmployee();
+    newEmployee['id'] = data.id;
+    $scope.employees.push(newEmployee);
+    alert("Novo(a) funcionário(a) adicionado com sucesso!");
+  };
+
+  $scope.newEmployeeErrorCallback = function(data) {
+    if(data.message) {
+      alert("Impossível adicionar empregado. Motivo: "+data.message+". Por favor tente mais tarde.");
+    } else {
+      alert("Impossível adicionar empregado. Por favor tente mais tarde.");
+    }
+  };
+
   // delete
   $scope.confirmDelete = function(index) {
     employeesService.setCurrentIndex(index);
