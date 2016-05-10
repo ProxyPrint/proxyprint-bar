@@ -1,10 +1,22 @@
-angular.module('ProxyPrint').factory('backendURLService', [function() {
+angular.module('ProxyPrint').factory('backendURLService', ['$http', function($http) {
 
-  var service = {};
+    var service = {};
 
-  service.getBaseURL = function() {
-    return'https://proxyprint-kitchen.herokuapp.com/';
-  };
+    var url;
 
-  return service;
+    $http({
+        method: 'GET',
+        url: '/config'
+    }).then(function successCallback(response) {
+        console.log(response.data);
+        url = response.data;
+    }, function errorCallback(response) {
+        //cant establish connection with backend
+    });
+
+    service.getBaseURL = function() {
+        return url;
+    };
+
+    return service;
 }]);
