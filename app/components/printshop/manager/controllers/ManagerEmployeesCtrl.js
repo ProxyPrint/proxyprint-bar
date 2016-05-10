@@ -51,6 +51,7 @@ function($scope, $state, employeesList, employeesService, $uibModal) {
 
   // edit
   $scope.editEmployee = function(index) {
+    employeesService.setCurrentIndex(index);
     employeesService.setCurrentEmployee($scope.employees[index]);
     $scope.openEditEmployeeModal("Edição de registo de funcionário(a).");
   };
@@ -59,7 +60,7 @@ function($scope, $state, employeesList, employeesService, $uibModal) {
     var modalInstance = $uibModal.open({
       animation: true,
       templateUrl: 'app/components/printshop/manager/views/employees/edit-employee-modal.html',
-      controller: 'NewEmployeeCtrl',
+      controller: 'EditEmployeeCtrl',
       size: 'md',
       resolve: {
         text: function() {
@@ -68,22 +69,21 @@ function($scope, $state, employeesList, employeesService, $uibModal) {
       }
     });
     modalInstance.result.then(function(index) {
-      employeesService.addEmployee(employeesService.getCurrentEmployee(), $scope.newEmployeeSuccessCallback, $scope.newEmployeeErrorCallback);
+      employeesService.editEmployee(employeesService.getCurrentEmployee(), $scope.editEmployeeSuccessCallback, $scope.editEmployeeErrorCallback);
     });
   };
 
-  $scope.newEmployeeSuccessCallback = function(data) {
-    var newEmployee = employeesService.getCurrentEmployee();
-    newEmployee['id'] = data.id;
-    $scope.employees.push(newEmployee);
-    alert("Novo(a) funcionário(a) adicionado com sucesso!");
+  $scope.editEmployeeSuccessCallback = function(data) {
+    var editedEmployee = employeesService.getCurrentEmployee();
+    $scope.employees[employeesService.getCurrentIndex()] = editedEmployee;
+    alert("Funcionário(a) editado(a) com sucesso.");
   };
 
-  $scope.newEmployeeErrorCallback = function(data) {
+  $scope.editEmployeeErrorCallback = function(data) {
     if(data.message) {
-      alert("Impossível adicionar empregado. Motivo: "+data.message+". Por favor tente mais tarde.");
+      alert("Impossível editar empregado. Motivo: "+data.message+". Por favor tente mais tarde.");
     } else {
-      alert("Impossível adicionar empregado. Por favor tente mais tarde.");
+      alert("Impossível editar empregado. Por favor tente mais tarde.");
     }
   };
 
@@ -140,6 +140,29 @@ app.controller('NewEmployeeCtrl', function($scope, $uibModalInstance, text, empl
     // id is generated in server
     var newEmployee = { name: $scope.name, username: $scope.username, password: $scope.password };
     employeesService.setCurrentEmployee(newEmployee);
+    $uibModalInstance.close();
+  };
+
+  $scope.closeModal = function () {
+    $uibModalInstance.dismiss('cancel');
+  };
+
+});
+
+// Modal for editing new employee
+app.controller('EditEmployeeCtrl', function($scope, $uibModalInstance, text, employeesService) {
+
+  $scope.text = text;
+  var currentEmployee = employeesService.getCurrentEmployee();
+  $scope.id = currentEmployee.id;
+  $scope.name = currentEmployee.name;
+  $scope.username = currentEmployee.username;
+  $scope.password = currentEmployee.password;
+
+  $scope.editEmployee = function () {
+    // Need to pass id for edition on server
+    var editedEmployee = { id: $scope.id, name: $scope.name, username: $scope.username, password: $scope.password };
+    employeesService.setCurrentEmployee(editedEmployee);
     $uibModalInstance.close();
   };
 

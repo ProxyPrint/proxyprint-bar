@@ -26,7 +26,7 @@
           <td><b>#{{employee.id}}</b></td>
           <td>{{employee.name}}</td>
           <td>{{employee.username}}</td>
-          <td><button ng-click="" class="btn bg-olive btn-flat btn-sm margin"><i class="fa fa-pencil" style="margin-right: 0.2em;"></i>  Editar</button><button ng-click="confirmDelete($index)" class="btn bg-red btn-flat btn-sm margin"><i class="fa fa-trash" style="margin-right: 0.2em;"></i>  Eliminar</button></td>
+          <td><button ng-click="editEmployee($index)" class="btn bg-olive btn-flat btn-sm margin"><i class="fa fa-pencil" style="margin-right: 0.2em;"></i>  Editar</button><button ng-click="confirmDelete($index)" class="btn bg-red btn-flat btn-sm margin"><i class="fa fa-trash" style="margin-right: 0.2em;"></i>  Eliminar</button></td>
         </tr>
       </tbody>
     </table>
