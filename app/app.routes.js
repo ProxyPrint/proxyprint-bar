@@ -172,7 +172,6 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
             }]
         }
     })
-
     .state('employee.consult', {
         url: '/pending/:requestid',
         templateUrl: '/app/components/printshop/employee/views/employee-request-consult.html',
@@ -225,7 +224,13 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
     })
     .state('manager.employees', {
         url: '/employees',
-        templateUrl: '/app/components/printshop/manager/views/manager-employees.html'
+        templateUrl: '/app/components/printshop/manager/views/manager-employees.html',
+        controller: 'ManagerEmployeesCtrl',
+        resolve: {
+          employeesList: ['employeesService', function(employeesService) {
+            return employeesService.getEmployeesList();
+          }]
+        }
     })
 
     /*Admin*/
