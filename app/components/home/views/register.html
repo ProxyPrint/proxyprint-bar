@@ -1,37 +1,45 @@
-<div class="container">
-<div class="form-container">
-   <div ng-show="error" class="alert alert-danger">{{error}}</div>
-   <form name="form" ng-submit="register()" role="form">
-      <div class="form-group">
-         <label for="name">Name</label>
-         <input name="name" type="text" class="form-control" ng-model="name" required/>
-         <span ng-show="form.name.$dirty && form.name.$error.required" class="help-block">Name is required</span>
-      </div>
-      <!--<div class="form-group">
-         <label for="email">Email</label>
-         <input name="email" type="email" class="form-control" ng-model="email" required/>
-         <span ng-show="form.email.$dirty && form.email.$error.required" class="help-block">Email is required</span>
-      </div>-->
-      <div class="form-group">
-         <label for="username">Username</label>
-         <input name="username" type="text" class="form-control" ng-model="username" required/>
-         <span ng-show="form.username.$dirty && form.username.$error.required" class="help-block">Username is required</span>
-      </div>
-      <div class="form-group">
-         <label for="password">Password</label>
-         <i class="fa fa-lock"></i>
-         <input name="password" type="password" class="form-control" ng-model="password" required/>
-         <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Password is required</span>
-      </div>
-      <div class="form-actions">
-         <div class="login-button">
-            <button type="submit" ng-disabled="form.$invalid || dataLoading" class="btn btn-primary">Register</button>
-            <img
-               ng-if="dataLoading"
-               src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="/>
-               <br>
-         </div>
-      </div>
-   </form>
+<div class="container container-margintop">
+  <center><a ui-sref="home" class="hvr-pulse"><img src="/assets/img/logo/logo_blue_dark.png" width="120" height="120"/></a></center>
+  <center><h3 class="title">Registe-se gratuitamente e experimente o ProxyPrint ainda hoje!</h3></center>
 </div>
+<center><div style="width: 70%;"><hr class="gradient"></div></center>
+<div class="container" style="margin-top:2%; width: 50%;">
+  <div class="form-container">
+    <div class="row">
+      <div class="col-md-6">
+        <h4 class="text">De que está à espera para tornar o seu dia mais produtivo.</h4>
+        <h4 class="text margintop">O registo na plataforma é gratuito, terá ao seu dispor uma ferramenta muito útil, provabelmente já procurava algo assim há já algum tempo</h4>
+        <h5 class="text margintop">Para mais informações pode contactar diretamente a equipa ProxyPrint através do endereço mail <a class="title" href="mailto:proxyprint.pt@gmail.com?Subject=Consumidor%20Contacto">proxyprint.pt@gmail.com</a></h5>
+      </div>
+      <div class="col-md-6">
+        <div ng-show="error" class="alert alert-danger">{{error}}</div>
+        <form name="form" ng-submit="register()" role="form">
+          <div class="form-group input-group-lg">
+            <input name="name" type="text" class="form-control" ng-model="name" placeholder="Nome" required/>
+            <span ng-show="form.name.$dirty && form.name.$error.required" class="help-block">Name is required</span>
+          </div>
+          <div class="form-group input-group-lg">
+            <input name="email" type="email" class="form-control" ng-model="email" placeholder="Email" required style="border: 8px;"/>
+            <span ng-show="form.email.$dirty && form.email.$error.required" class="help-block">Email is required</span>
+          </div>
+          <div class="form-group input-group-lg">
+            <input name="username" type="text" class="form-control" ng-model="username" placeholder="Username" required/>
+            <span ng-show="form.username.$dirty && form.username.$error.required" class="help-block">Username is required</span>
+          </div>
+          <div class="form-group input-group-lg">
+            <input name="password" type="password" class="form-control" ng-model="password" placeholder="Password" required/>
+            <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Password is required</span>
+          </div>
+          <hr class="gradient">
+          <div class="form-actions">
+            <button type="submit" ng-disabled="form.$invalid || dataLoading" class="btn btn-primary btn-lg" style="width: 100%;">Registar</button>
+            <center><img
+            ng-if="dataLoading"
+            src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="/></center>
+            <br>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>
