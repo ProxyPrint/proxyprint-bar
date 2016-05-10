@@ -4,7 +4,7 @@ var express = require('express');
 var minify = require('express-minify');
 var redirect = require("express-redirect");
 var app = express();
-var backendURL = process.env.BACKEND_URL || "http://localhost:8080"
+var backendURL = process.env.BACKEND_URL || "http://localhost:8080/"
 var port = Number(process.env.PORT || 9000);
 
 if (cluster.isMaster) {
@@ -21,10 +21,8 @@ if (cluster.isMaster) {
 
     app.use(express.static(__dirname + '/'));
 
-    app.all('/api/*', function(req, res, next) {
-        var url = req.url;
-        url = url.replace(/^\/api/gi, backendURL);
-        res.redirect(307, url);
+    app.get("/config", function(req, res) {
+        res.send(backendURL);
     });
 
     var server = app.listen(port, function() {
