@@ -1,0 +1,58 @@
+<div class="modal-header">
+  {{text}}
+  <br/>
+  <small>Todos os campos são de preenchimento obrigatório.</small>
+</div>
+<form name="form" ng-submit="addEmployee()" role="form">
+  <div class="modal-body" style="text-align:center; float:center;">
+    <div ng-show="error" class="alert alert-danger">{{error}}</div>
+    <!-- name -->
+    <div class="row">
+      <div class="row">
+        <div class="col col-sm-2">
+          <label>Nome</label>
+        </div>
+      </div>
+      <div clas="row">
+        <div class="col col-sm-7">
+          <input type="text" class="form-control input-sm" placeholder="Nome" name="name" ng-model="name" required>
+          <span ng-show="form.name.$dirty && form.name.$error.required" class="help-block" style="float:left;color:red;">Nome é obrigatório.</span>
+        </div>
+      </div>
+    </div>
+    <!-- ./name -->
+    <!-- username -->
+    <div class="row" style="margin-top:2%;">
+      <div class="row">
+        <div class="col col-sm-2">
+          <label style="margin-left:25%;">Username</label>
+        </div>
+      </div>
+      <div clas="row">
+        <div class="col col-sm-7">
+          <input type="text" class="form-control input-sm" placeholder="Com o qual o funcionário(a) deverá fazer login" name="username" ng-model="username" required>
+          <span ng-show="form.username.$dirty && form.username.$error.required" class="help-block" style="float:left;color:red;">Username é obrigatório.</span>
+        </div>
+      </div>
+    </div>
+    <!-- ./username -->
+    <!-- password -->
+    <div class="row" style="margin-top:2%;">
+      <div class="col col-sm-2">
+        <label>Password</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col col-sm-7">
+        <input type="password" class="form-control input-sm" placeholder="Password" name="password" ng-model="password" required>
+        <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block" style="float:left;color:red;">Password é obrigatória.</span>
+      </div>
+    </div>
+  </div>
+  <!-- footer -->
+  <div class="modal-footer" style="text-align:center; margin-top: 4%;">
+    <button type="submit" ng-disabled="form.$invalid" class="btn btn-success btn-sm btn-flat"><i class="fa fa-check" style="margin-right: 2%;"/>Adicionar</button>
+    <button class="btn btn-danger btn-sm btn-flat" type="button" ng-click="closeModal()"><i class="fa fa-times" style="margin-right: 2%;"/>Cancelar</button>
+  </div>
+</form>
+<!-- ./footer -->

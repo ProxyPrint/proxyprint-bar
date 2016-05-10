@@ -1,10 +1,23 @@
-angular.module('ProxyPrint').factory('backendURLService', [function() {
+angular.module('ProxyPrint').factory('backendURLService', ['$http', '$cookieStore', function($http, $cookieStore) {
 
-  var service = {};
+    var service = {};
 
-  service.getBaseURL = function () {
-    return 'http://localhost:8080/';
-  };
+    var url;
 
-  return service;
+    $http({
+        method: 'GET',
+        url: '/config'
+    }).then(function successCallback(response) {
+        console.log(response.data);
+        url = response.data;
+        $cookieStore.put("baseURL", url);
+    }, function errorCallback(response) {
+        //cant establish connection with backend
+    });
+
+    service.getBaseURL = function() {
+        return $cookieStore.get("baseURL");
+    };
+
+    return service;
 }]);

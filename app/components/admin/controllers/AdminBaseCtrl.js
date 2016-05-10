@@ -8,4 +8,11 @@ angular.module('ProxyPrint').controller('AdminBaseCtrl', ['$scope', '$cookieStor
       $state.go('adminlogin');
    };
 
+   // Navigation highlight
+   $scope.navigation = { requests: "active", printshops: "" };
+   $scope.navigate = function(where) {
+     for(var i in $scope.navigation){ $scope.navigation[i] = ""; }
+     $scope.navigation[where] = "active";
+   };
+
 }]);

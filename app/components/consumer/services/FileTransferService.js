@@ -28,7 +28,7 @@ angular.module('ProxyPrint').factory('fileTransferService', ['Upload', '$timeout
         };
         //ler ficheiro
         reader.readAsArrayBuffer(file);
-    }
+    };
 
     service.TransferFiles = function(files, callback) {
         var filesToStore = [];
@@ -43,14 +43,14 @@ angular.module('ProxyPrint').factory('fileTransferService', ['Upload', '$timeout
                     service.processedFiles.files[processedFile.name] = {
                         specs: processedFile.specs,
                         pages: processedFile.pages
-                    }
+                    };
                 });
             }
         }
         $cookieStore.put("uploadedFilesNames", filesToStore);
         queue.drain = function() {
             console.log(service.processedFiles);
-        }
+        };
     };
 
     service.setFiles = function(files) {
@@ -67,7 +67,7 @@ angular.module('ProxyPrint').factory('fileTransferService', ['Upload', '$timeout
 
     service.getProcessedFiles = function() {
         return service.processedFiles;
-    }
+    };
 
     return service;
 }]);

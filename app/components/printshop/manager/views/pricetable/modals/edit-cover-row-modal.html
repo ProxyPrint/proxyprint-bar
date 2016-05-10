@@ -1,0 +1,39 @@
+<div class="modal-header">
+  {{text}}
+  <br/>
+  <small>Caso não pretenda preencher algum dos campos simplesmente o deixe em branco.</small>
+</div>
+<div class="modal-body" style="text-align:center;">
+  <!-- cover -->
+  <div class="row">
+    <div class="col col-sm-6">
+      <label style="float: left;">Tipo de capa</label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col col-sm-10">
+      <label style="float: left;">{{getPresentationStringForCovers(selectedCoverType)}}</label>
+    </div>
+  </div>
+  <!-- ./cover -->
+  <!-- prices -->
+  <div class="row" style="margin-top: 2%;">
+    <div class="col col-sm-1">A4</div>
+    <div class="col col-sm-5">A3</div>
+  </div>
+  <div class="row">
+    <div class="col col-sm-3">
+      <input type="number" class="form-control input-sm" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.01" min="0" placeholder="€" ng-model="priceA4">
+    </div>
+    <div class="col col-sm-3">
+      <input type="number" class="form-control input-sm" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.01" min="0" placeholder="€" ng-model="priceA3">
+    </div>
+  </div>
+</div>
+<!-- ./prices -->
+<!-- footer -->
+<div class="modal-footer" style="text-align:center; margin-top: 4%;">
+  <button class="btn btn-primary btn-sm btn-flat" type="button" ng-click="editEntry()" ng-disabled="itemHasChanged()"><i class="fa fa-save" style="margin-right: 2%;"/>  Guardar</button>
+  <button class="btn btn-danger btn-sm btn-flat" type="button" ng-click="closeModal()"><i class="fa fa-times" style="margin-right: 2%;"/>  Cancelar</button>
+</div>
+<!-- ./footer -->

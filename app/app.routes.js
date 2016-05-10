@@ -31,20 +31,20 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
     '/assets/adminlte/dist/css/skins/skin-blue.min.css'
   ];
 
-  var adminLoginCSS = [
+  var gradientSoligBgCSS = [
     '/assets/adminlte/bootstrap/css/bootstrap.min.css',
     'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css',
     'https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css',
     '/assets/adminlte/dist/css/AdminLTE.min.css',
-    '/assets/css/adminlogin.css'
-
+    '/assets/css/gradientpage.css',
+    '/node_modules/hover.css/css/hover-min.css'
   ];
 
   /*Consumer*/
   $stateProvider
   .state('notFound', {
     url: '/404',
-    templateUrl: '/app/components/errors/404.html',
+    templateUrl: '/app/shared/views/404.html',
     data: {
       css: adminlteCSS
     }
@@ -62,7 +62,7 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
     templateUrl: '/app/components/home/views/register.html',
     controller: 'RegisterController',
     data: {
-      css: frontpageCSS
+      css: gradientSoligBgCSS
     }
   })
   /*Print Shop landing page*/
@@ -79,7 +79,7 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
     templateUrl: '/app/components/home/views/printshop-register.html',
     controller: 'PrintShopRegisterCtrl',
     data: {
-      css: mainPrintShopCSS
+      css: gradientSoligBgCSS
     }
   })
   .state('adminlogin', {
@@ -87,7 +87,7 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
     templateUrl: '/app/components/admin/views/admin-login.html',
     controller: 'LoginController',
     data: {
-      css: adminLoginCSS
+      css: gradientSoligBgCSS
     }
   })
 
@@ -103,8 +103,12 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
     },
     data: {
       css: mainCSS
+    },
+    resolve: {
+      notifications: ['notificationsService', function (notificationsService) {
+        return notificationsService.getNotifications();
+      }]
     }
-
   })
   .state('consumer.settings' ,{
     url: '/settings',
@@ -172,7 +176,17 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
       }]
     }
   })
-
+  .state('employee.consult', {
+    url: '/pending/:requestid',
+    templateUrl: '/app/components/printshop/employee/views/employee-request-consult.html',
+    controller: 'ConsultRequestCtrl',
+    resolve: {
+      pendingPrintRequest: ['pendingPrintRequestsService', '$stateParams',
+      function (pendingPrintRequestsService, $stateParams) {
+        return pendingPrintRequestsService.getRequest($stateParams.requestid);
+      }]
+    }
+  })
   .state('employee.satisfied', {
     url: '/satisfied',
     templateUrl: '/app/components/printshop/employee/views/employee-requests-satisfied.html',
@@ -214,7 +228,13 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
   })
   .state('manager.employees', {
     url: '/employees',
-    templateUrl: '/app/components/printshop/manager/views/manager-employees.html'
+    templateUrl: '/app/components/printshop/manager/views/manager-employees.html',
+    controller: 'ManagerEmployeesCtrl',
+    resolve: {
+      employeesList: ['employeesService', function(employeesService) {
+        return employeesService.getEmployeesList();
+      }]
+    }
   })
 
   /*Admin*/
@@ -236,8 +256,8 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
     templateUrl: '/app/components/admin/views/admin-pending-requests.html',
     controller: 'AdminPendingRequestsCtrl',
     resolve: {
-      pendingRequests: ['PendingRequestsService', function(PendingRequestsService) {
-        return PendingRequestsService.getPendingRequests();
+      pendingRequests: ['pendingRequestsService', function(pendingRequestsService) {
+        return pendingRequestsService.getPendingRequests();
       }]
     }
   })
@@ -246,8 +266,8 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
     templateUrl: '/app/components/admin/views/admin-request.html',
     controller: 'AdminPendingRequestDetailCtrl',
     resolve: {
-      pendingRequest: ['PendingRequestsService', function (PendingRequestsService) {
-        return PendingRequestsService.getCurrentRequest();
+      pendingRequest: ['pendingRequestsService', function (pendingRequestsService) {
+        return pendingRequestsService.getCurrentRequest();
       }]
     }
   })

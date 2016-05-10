@@ -11,12 +11,12 @@ function($scope, $rootScope, $location, authenticationService, $state, $cookieSt
         // PrintShop - Manager
         if(response.user.roles[0] == "ROLE_MANAGER") {
           authenticationService.SetCredentials($scope.username, $scope.password);
-          $cookieStore.put("printShopID", response.user.printShop['id']);
+          $cookieStore.put("printShopID", response.user.printShop.id);
           $state.go('manager.stats', {"username": $scope.username});
         }
         // PrintShop - Employee
         else if (response.user.roles[0] == "ROLE_EMPLOYEE") {
-          AuthenticationService.SetCredentials($scope.username, $scope.password);
+          authenticationService.SetCredentials($scope.username, $scope.password);
           $state.go('employee.pending', {"username": $scope.username});
         }
         // Consumer

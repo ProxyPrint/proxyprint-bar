@@ -33,6 +33,10 @@ body {
 
 /***************************** CONSUMER GLOBAL ELEMENTS ********************************/
 
+.navbar-logo {
+  margin-left:6%;
+}
+
 /*** NAV BAR ***/
 
 #custom-bootstrap-menu.navbar-default .navbar-brand {
@@ -60,6 +64,8 @@ body {
     border-color: #428bca;
 }
 
+
+
 /* Header */
 
 .header {
@@ -84,16 +90,80 @@ body {
     background-color: #428bca;
 }
 
+/*Notifications*/
+
+#notification_li
+{
+position:relative
+}
+#notificationContainer
+{
+background-color: #fff;
+border: 1px solid rgba(100, 100, 100, .4);
+-webkit-box-shadow: 0 3px 8px rgba(0, 0, 0, .25);
+overflow: visible;
+position: absolute;
+margin-left: -170px;
+width: 250px;
+z-index: 9999;
+display: none; // Enable this after jquery implementation
+}
+#notificationContainer:before {
+content: '';
+display: block;
+position: absolute;
+width: 0;
+height: 0;
+color: transparent;
+border: 10px solid black;
+border-color: transparent transparent white;
+margin-top: -20px;
+margin-left: 188px;
+}
+
+#notificationTitle
+{
+font-weight: bold;
+padding: 8px;
+font-size: 13px;
+background-color: #ffffff;
+position: relative;
+z-index: 9999;
+width: 245px;
+border-bottom: 1px solid #dddddd;
+}
+#notificationsBody
+{
+padding: 0px 0px 0px 0px !important;
+}
+#notificationFooter
+{
+background-color: #e9eaed;
+text-align: center;
+font-weight: bold;
+padding: 8px;
+font-size: 12px;
+border-top: 1px solid #dddddd;
+}
+
+.notifications-scrollable-box {
+  max-height: 300px;
+  overflow-y: scroll;
+}
+
+
+
 /************************* Costumer Main Page******************************/
+
+
 
 
 /** Drag N' Drop box**/
 
+
 .dndbox {
-    width: 600px;
-    height: 400px;
+    height: 350px;
     padding-top: 50px;
-    float: left;
 }
 .drop-box {
     background: #F8F8F8;
@@ -107,14 +177,24 @@ body {
     border: 5px dashed blue;
 }
 
+.uploaded-files-box {
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-bottom: 5%;
+  margin-top:5%;
+  overflow-y: scroll;
+  border-radius: 10px 10px 10px 10px;
+  -moz-border-radius: 10px 10px 10px 10px;
+  -webkit-border-radius: 10px 10px 10px 10px;
+  border: 2px solid #000000;
+  border-color: #DDD;
+}
+
+
+
+
 /** Pending requests table**/
 
-.pendingRequests {
-    width: 300px;
-    margin-top: 50px;
-    float: right;
-    margin-right: 10%;
-}
 .scrollableTable {
     max-height: 300px;
     overflow-y: scroll;
@@ -309,7 +389,6 @@ body {
   color: #c60008; }
 
 
-
 /**Add spec modal **/
 .finishingOptions {
   margin-left: 15%;
@@ -332,4 +411,85 @@ body {
   line-height: 0;
   opacity: 0;
   padding: 0 10px;
+}
+
+
+/* Footer */
+.footer-distributed{
+  bottom:0;
+	background-color: rgba(66, 139, 202, 1);
+	box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);
+	box-sizing: border-box;
+	width: 100%;
+  height: 100px;
+	text-align: left;
+	font: normal 16px sans-serif;
+  position: absolute;
+	padding: 25px 20px;
+	margin-top: 40px;
+}
+
+.footer-distributed .footer-left p{
+	color:  #ffffff;
+	font-size: 14px;
+	margin: 0;
+}
+
+/* Footer links */
+
+.footer-distributed p.footer-links{
+	font-size:18px;
+	font-weight: bold;
+	color:  #ffffff;
+	margin: 0 0 10px;
+	padding: 0;
+}
+
+.footer-distributed p.footer-links a{
+	display:inline-block;
+	line-height: 1.8;
+	text-decoration: none;
+	color:  inherit;
+}
+
+.footer-distributed .footer-right{
+	float: right;
+	margin-top: 6px;
+	max-width: 200px;
+}
+
+.footer-distributed .footer-right a{
+	display: inline-block;
+	width: 35px;
+	height: 35px;
+	background-color:  rgba(66, 139, 202, 1);
+	border-radius: 2px;
+
+	font-size: 20px;
+	color: #ffffff;
+	text-align: center;
+
+	margin-left: 3px;
+}
+
+.fa-white-icon {
+  color: white;
+}
+
+
+/* If you don't want the footer to be responsive, remove these media queries */
+@media (max-width: 600px) {
+	.footer-distributed .footer-left,
+	.footer-distributed .footer-right{
+		text-align: center;
+	}
+
+	.footer-distributed .footer-right{
+		float: none;
+		margin: 0 auto 20px;
+	}
+
+	.footer-distributed .footer-left p.footer-links{
+		line-height: 1.8;
+	}
 }

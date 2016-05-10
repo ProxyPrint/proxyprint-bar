@@ -1,11 +1,12 @@
 var app = angular.module('ProxyPrint');
 
-app.factory('pendingRequestsService', ['$http', function($http) {
+app.factory('pendingRequestsService', ['$http', 'backendURLService', function($http, backendURLService) {
   var service = {};
   service.currentRequest = {};
 
   service.getPendingRequests = function() {
     return $http.get(backendURLService.getBaseURL()+'requests/pending').success(function(data){
+      console.log(data);
       return data;
     });
   };
