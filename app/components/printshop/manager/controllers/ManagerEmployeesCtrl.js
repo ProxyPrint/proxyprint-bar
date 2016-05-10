@@ -1,4 +1,6 @@
-angular.module('ProxyPrint').controller('ManagerEmployeesCtrl', ['$scope', '$state', 'employeesList', 'employeesService', '$uibModal',
+var app = angular.module('ProxyPrint');
+
+app.controller('ManagerEmployeesCtrl', ['$scope', '$state', 'employeesList', 'employeesService', '$uibModal',
 function($scope, $state, employeesList, employeesService, $uibModal) {
 
   $scope.employees = employeesList.data.employees;
@@ -132,7 +134,7 @@ Modals
 ------------------*/
 
 // Modal for adding new employee
-app.controller('NewEmployeeCtrl', function($scope, $uibModalInstance, text, employeesService) {
+app.controller('NewEmployeeCtrl', ['$scope', '$uibModalInstance', 'text', 'employeesService', function($scope, $uibModalInstance, text, employeesService) {
 
   $scope.text = text;
 
@@ -147,10 +149,10 @@ app.controller('NewEmployeeCtrl', function($scope, $uibModalInstance, text, empl
     $uibModalInstance.dismiss('cancel');
   };
 
-});
+}]);
 
 // Modal for editing new employee
-app.controller('EditEmployeeCtrl', function($scope, $uibModalInstance, text, employeesService) {
+app.controller('EditEmployeeCtrl', ['$scope', '$uibModalInstance', 'text', 'employeesService', function($scope, $uibModalInstance, text, employeesService) {
 
   $scope.text = text;
   var currentEmployee = employeesService.getCurrentEmployee();
@@ -170,10 +172,10 @@ app.controller('EditEmployeeCtrl', function($scope, $uibModalInstance, text, emp
     $uibModalInstance.dismiss('cancel');
   };
 
-});
+}]);
 
 // Modal for deleting an employee
-app.controller('ConfirmDeleteModalCtrl', function($scope, $uibModalInstance, index, text) {
+app.controller('ConfirmDeleteModalCtrl', ['$scope', '$uibModalInstance', 'index', 'text', function($scope, $uibModalInstance, index, text) {
   $scope.index = index;
   $scope.text = text;
   $scope.confirmDeleteRow = function () {
@@ -183,4 +185,4 @@ app.controller('ConfirmDeleteModalCtrl', function($scope, $uibModalInstance, ind
     $uibModalInstance.dismiss('cancel');
   };
 
-});
+}]);

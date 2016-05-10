@@ -364,7 +364,7 @@ Modals
 Print&Copy
 ----------------------------------------*/
 // Modal for adding new print and copy related rows to some table in the price table
-app.controller('NewPrintCopyEntryCtrl', function($scope, $uibModalInstance, text, priceTableService) {
+app.controller('NewPrintCopyEntryCtrl', ['$scope', '$uibModalInstance', 'text', 'priceTableService', function($scope, $uibModalInstance, text, priceTableService) {
 
   $scope.text = text;
 
@@ -378,10 +378,10 @@ app.controller('NewPrintCopyEntryCtrl', function($scope, $uibModalInstance, text
     $uibModalInstance.dismiss('cancel');
   };
 
-});
+}]);
 
 // Modal for editing new print and copy related rows to some table in the price table
-app.controller('EditPrintCopyEntryCtrl', function($scope, $uibModalInstance, text, priceTableService) {
+app.controller('EditPrintCopyEntryCtrl', ['$scope', '$uibModalInstance', 'text', 'priceTableService', function($scope, $uibModalInstance, text, priceTableService) {
 
   $scope.text = text;
   var current = priceTableService.getCurrentEntry();
@@ -408,14 +408,14 @@ app.controller('EditPrintCopyEntryCtrl', function($scope, $uibModalInstance, tex
     $scope.priceA3SIMPLEX===parseFloat(current.priceA3SIMPLEX) && $scope.priceA3DUPLEX===parseFloat(current.priceA3DUPLEX));
   };
 
-});
+}]);
 
 
 /*---------------------------------------
 Rings
 ----------------------------------------*/
 // Modal for adding new rings related rows to some table in the price table
-app.controller('NewRingsEntryCtrl', function($scope, $uibModalInstance, text, priceTableService) {
+app.controller('NewRingsEntryCtrl', ['$scope', '$uibModalInstance', 'text', 'priceTableService', function($scope, $uibModalInstance, text, priceTableService) {
 
   $scope.text = text;
 
@@ -429,10 +429,10 @@ app.controller('NewRingsEntryCtrl', function($scope, $uibModalInstance, text, pr
     $uibModalInstance.dismiss('cancel');
   };
 
-});
+}]);
 
 // Modal for editing rings related rows to some table in the price table
-app.controller('EditRingsEntryCtrl', function($scope, $uibModalInstance, text, priceTableService) {
+app.controller('EditRingsEntryCtrl', ['$scope', '$uibModalInstance', 'text', 'priceTableService', function($scope, $uibModalInstance, text, priceTableService) {
 
   $scope.text = text;
   var current = priceTableService.getCurrentEntry();
@@ -454,7 +454,7 @@ app.controller('EditRingsEntryCtrl', function($scope, $uibModalInstance, text, p
     return ($scope.infLim===current.infLim && $scope.supLim===current.supLim && $scope.price===parseFloat(current.price));
   };
 
-});
+}]);
 
 
 /*---------------------------------------
@@ -462,7 +462,7 @@ Covers
 ----------------------------------------*/
 
 // Modal for adding new cover related rows to some table in the price table
-app.controller('NewCoverEntryCtrl', function($scope, $uibModalInstance, text, priceTableService) {
+app.controller('NewCoverEntryCtrl', ['$scope', '$uibModalInstance', 'text', 'priceTableService', function($scope, $uibModalInstance, text, priceTableService) {
 
   $scope.text = text;
   $scope.covers = priceTableService.getCoversOptions();
@@ -482,10 +482,10 @@ app.controller('NewCoverEntryCtrl', function($scope, $uibModalInstance, text, pr
     $uibModalInstance.dismiss('cancel');
   };
 
-});
+}]);
 
 // Modal for editing cover related rows to some table in the price table
-app.controller('EditCoverEntryCtrl', function($scope, $uibModalInstance, text, priceTableService) {
+app.controller('EditCoverEntryCtrl', ['$scope', '$uibModalInstance', 'text', 'priceTableService', function($scope, $uibModalInstance, text, priceTableService) {
 
   $scope.text = text;
   var current = priceTableService.getCurrentEntry();
@@ -511,14 +511,14 @@ app.controller('EditCoverEntryCtrl', function($scope, $uibModalInstance, text, p
     return ($scope.priceA3===parseFloat(current.priceA3) && $scope.priceA4===parseFloat(current.priceA4));
   };
 
-});
+}]);
 
 /*---------------------------------------
 General
 ----------------------------------------*/
 
 // Modal for deleting a row of certain table from price table
-app.controller('ConfirmDeleteModalCtrl', function($scope, $uibModalInstance, index, text) {
+app.controller('ConfirmDeleteModalCtrl', ['$scope', '$uibModalInstance', 'index', 'text', function($scope, $uibModalInstance, index, text) {
 
   $scope.index = index;
   $scope.text = text;
@@ -531,13 +531,13 @@ app.controller('ConfirmDeleteModalCtrl', function($scope, $uibModalInstance, ind
     $uibModalInstance.dismiss('cancel');
   };
 
-});
+}]);
 
 // General purpose modal message
-app.controller('MessageModal', function($scope, $uibModalInstance, text) {
+app.controller('MessageModal', ['$scope', '$uibModalInstance', 'text', function($scope, $uibModalInstance, text) {
   $scope.text = text;
   $scope.closeModal = function () {
     $uibModalInstance.dismiss('cancel');
   };
 
-});
+}]);
