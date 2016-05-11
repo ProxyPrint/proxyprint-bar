@@ -1,14 +1,15 @@
 angular.module('ProxyPrint')
-.controller('ConsumerPrintShopsSelectionController', ['$scope', 'printShopListService', 'printshopsList', 'fileTransferService', '$cookieStore', function($scope, printShopListService, printshopsList, fileTransferService, $cookieStore) {
+.controller('ConsumerPrintShopsSelectionController', ['$scope', 'printShopListService', 'printshopsList', 'fileTransferService', '$cookieStore', 'budgetService', function($scope, printShopListService, printshopsList, fileTransferService, $cookieStore, budgetService) {
 
   $scope.printshops = [];
 
   for (var dist in printshopsList.data.printshops) {
-    console.log(printshopsList.data.printshops[dist]);
     var pshop = printshopsList.data.printshops[dist];
     pshop['distance'] = Math.round(dist * 100) / 100;
     $scope.printshops.push(pshop);
   }
+
+  console.log($scope.printshops);
 
   $scope.selectedPrintShops = [];
   $scope.printShopsOptions = $scope.printshops;
@@ -16,6 +17,7 @@ angular.module('ProxyPrint')
   $scope.totalSelectedPrintShops = 0;
   $scope.maxSelectionAllowed = 5;
   $scope.showDistance = false;
+  $scope.pshopNames = {};
 
   // Distance slider
   $scope.distanceSlider = {
@@ -56,13 +58,35 @@ angular.module('ProxyPrint')
   $scope.proceedRequest = function() {
     var ids = [];
     for(var i in $scope.selectedPrintShops) {
+      $scope.pshopNames[$scope.selectedPrintShops[i].id] = $scope.selectedPrintShops[i].name;
       ids.push($scope.selectedPrintShops[i].id);
     }
     printShopListService.setSelectedPrintShopsIDs(ids);
 
-    // REMOVE BELOW CODE IN NEXT SPRINT
+    // REMOVE BELOW SHOULD GO TO ANOTHER CONTROLLER IN NEXT SPRINT
     alert("Fazer orçamentos para reprografias: "+printShopListService.getSelectedPrintShopsIDs());
-  }
+
+    var printRequest = fileTransferService.getProcessedFiles();
+    if(printRequest!==null) {
+      budgetService.getMeBudgetsForThis($scope.budgetSuccessCallback, $scope.budgetErrorCallback, fileTransferService.getProcessedFiles());
+    }
+  };
+
+  /*---------------------------- Budget Callbacks ------------------------------*/
+  $scope.budgetSuccessCallback = function(data) {
+    console.log($scope.pshopNames);
+    var budgets = data.budgets;
+    var res = "";
+    for(var pshopid in data.budgets) {
+      res = res.concat("Printshop: "+$scope.pshopNames[pshopid]+" custa "+data.budgets[pshopid].toFixed(2)+" €.\n");
+    }
+    alert(res);
+  };
+
+  $scope.budgetErrorCallback = function(data) {
+    console.log(data);
+  };
+  /*----------------------------------------------------------------------------*/
 
   function remove(arr, item) {
     for (var i = arr.length; i--;) {
