@@ -78,7 +78,7 @@ angular.module('ProxyPrint')
     var budgets = data.budgets;
     var res = "";
     for(var pshopid in data.budgets) {
-      res = res.concat("Printshop: "+$scope.pshopNames[pshopid]+" custa "+data.budgets[pshopid].toFixed(2)+" €.\n");
+      res = res.concat("Printshop: "+pshopid+" custa "+data.budgets[pshopid].toFixed(2)+" €.\n");
     }
     alert(res);
   };
