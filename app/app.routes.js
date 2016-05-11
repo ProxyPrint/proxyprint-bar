@@ -193,7 +193,13 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
   .state('employee.satisfied', {
     url: '/satisfied',
     templateUrl: '/app/components/printshop/employee/views/employee-requests-satisfied.html',
-    controller: 'SatisfiedRequestsCtrl'
+    controller: 'SatisfiedRequestsCtrl',
+    resolve: {
+      satisfiedPrintRequest: ['satisfiedPrintRequestsService',
+      function (satisfiedPrintRequestsService) {
+        return satisfiedPrintRequestsService.getSatisfiedRequests();
+      }]
+  }
   })
   .state('employee.history', {
     url: '/history',
