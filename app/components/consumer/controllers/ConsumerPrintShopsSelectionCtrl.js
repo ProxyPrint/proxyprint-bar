@@ -58,9 +58,11 @@ angular.module('ProxyPrint')
   $scope.proceedRequest = function() {
     var ids = [];
     for(var i in $scope.selectedPrintShops) {
+      console.log("INDEX: "+i);
       $scope.pshopNames[$scope.selectedPrintShops[i].id] = $scope.selectedPrintShops[i].name;
       ids.push($scope.selectedPrintShops[i].id);
     }
+    console.log(ids);
     printShopListService.setSelectedPrintShopsIDs(ids);
 
     // REMOVE BELOW SHOULD GO TO ANOTHER CONTROLLER IN NEXT SPRINT
@@ -78,7 +80,7 @@ angular.module('ProxyPrint')
     var budgets = data.budgets;
     var res = "";
     for(var pshopid in data.budgets) {
-      res = res.concat("Printshop: "+pshopid+" custa "+data.budgets[pshopid].toFixed(2)+" €.\n");
+      res = res.concat("Printshop: "+$scope.pshopNames[pshopid]+" custa "+data.budgets[pshopid].toFixed(2)+" €.\n");
     }
     alert(res);
   };

@@ -1,8 +1,7 @@
-angular.module('ProxyPrint').factory('fileTransferService', ['Upload', '$timeout', 'backendURLService', '$cookieStore', 'printShopListService', function(Upload, $timeout, backendURLService, $cookieStore, printShopListService) {
+angular.module('ProxyPrint').factory('fileTransferService', ['Upload', '$timeout', 'backendURLService', '$cookieStore', function(Upload, $timeout, backendURLService, $cookieStore) {
 
     var service = {};
     service.processedFiles = {};
-    service.processedFiles.printshops = printShopListService.getSelectedPrintShopsIDs();
     service.processedFiles.files = {};
 
     var readPages = function(file, callback) {
