@@ -13,7 +13,7 @@ function($rootScope, $scope, $state, $http, pendingRequests, pendingRequestsServ
 
 }]);
 
-app.controller('RequestModalController', function ($scope, $uibModalInstance,$state, index, text) {
+app.controller('RequestModalController', ['$scope', '$uibModalInstance', '$state', 'index', 'text', function ($scope, $uibModalInstance,$state, index, text) {
 
   $scope.index = index;
   $scope.text = text;
@@ -25,11 +25,11 @@ app.controller('RequestModalController', function ($scope, $uibModalInstance,$st
   $scope.closeModal = function () {
     $uibModalInstance.dismiss('cancel');
   };
-});
+
+}]);
 
 // Consult detail of pending request
-app.controller('AdminPendingRequestDetailCtrl', ['$scope', '$state', '$http', 'pendingRequest', '$uibModal', 'pendingRequestsService'
-, function($scope, $state, $http, pendingRequest, $uibModal, pendingRequestsService){
+app.controller('AdminPendingRequestDetailCtrl', ['$scope', '$state', '$http', 'pendingRequest', '$uibModal', 'pendingRequestsService', function($scope, $state, $http, pendingRequest, $uibModal, pendingRequestsService){
 
   $scope.request = pendingRequest;
   $scope.showSuccess = false;
@@ -69,7 +69,7 @@ $scope.openAcceptModal = function(reply) {
     $scope.showSuccess = true;
     pendingRequestsService.acceptRequest($scope.request.id);
   });
-}
+};
 
 $scope.openRejectModal = function(reply) {
 
@@ -92,6 +92,6 @@ $scope.openRejectModal = function(reply) {
     $scope.showReject = true;
     pendingRequestsService.rejectRequest($scope.request.id);
   });
-}
+};
 
 }]);
