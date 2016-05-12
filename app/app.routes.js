@@ -110,7 +110,10 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
     resolve: {
       notifications: ['notificationsService', function (notificationsService) {
         return notificationsService.getNotifications();
-      }]
+    }],
+    consumerPendingRequests: ['consumerPendingRequestsService', function (consumerPendingRequestsService) {
+      return consumerPendingRequestsService.getPendingRequests();
+    }]
     }
   })
   .state('consumer.settings' ,{

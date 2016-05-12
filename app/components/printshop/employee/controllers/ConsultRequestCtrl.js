@@ -48,6 +48,11 @@ app.controller('ConsultRequestCtrl', ['$scope', 'pendingPrintRequest', '$uibModa
         $scope.openSuccessModal("Pedido passará agora para o estado: "+$scope.message);
     };
 
+    $scope.onCancelSuccessCallback = function(data) {
+        $state.go('employee.pending');
+        $scope.openSuccessModal("O pedido foi cancelado com sucesso!");
+    };
+
     $scope.onChangeStatusErroCallback = function(data) {
         $scope.openSuccessModal("Ocorreu um erro a alterar o estado do pedido!");
     };
@@ -62,8 +67,7 @@ app.controller('ConsultRequestCtrl', ['$scope', 'pendingPrintRequest', '$uibModa
         });
 
         modalInstance.result.then(function(motive) {
-            pendingPrintRequestsService.rejectRequest($scope.request.id, motive, $scope.onChangeStatusSuccessCallback, $scope.onChangeStatusErroCallback);
-            //$state.go('employee.pending');
+            pendingPrintRequestsService.rejectRequest($scope.request.id, motive, $scope.onCancelSuccessCallback, $scope.onChangeStatusErroCallback);
         });
     }
 
