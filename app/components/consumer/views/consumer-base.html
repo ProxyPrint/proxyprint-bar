@@ -35,7 +35,7 @@
                                         </div>
                                         <div style="display:inline-block; vertical-align: middle; float:right">
                                           <button ng-show="!notification.read" ng-click="readNotification($index)" class="button button-flat button-primary button-border button-circle button-small"><i class="fa fa-check" ></i></button>
-                                          <button class="button button-inverse button-flat button-caution button-circle button-border button-small"><i class="fa fa-times"></i></button>
+                                          <button class="button button-inverse button-flat button-caution button-circle button-border button-small" ng-click="removeNotification($index)"><i class="fa fa-times"></i></button>
                                         </div>
                                     </div>
                                     <br />
@@ -44,7 +44,7 @@
                                 </li>
                             </ul>
                           </div>
-                            <div id="notificationFooter"><a href="#">See All</a></div>
+                            <div id="notificationFooter"><a style="float:left" ng-click="removeAllNotifications()" href="/">Remover tudo</a><a href="/" ng-click="markAllRead()">Marcar tudo como lido</a></div>
                         </div>
 
                     </li>

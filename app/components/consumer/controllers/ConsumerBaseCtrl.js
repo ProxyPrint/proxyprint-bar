@@ -46,6 +46,26 @@ function($scope, $cookieStore, authenticationService, fileTransferService, $stat
     $scope.newNotifications -= 1;
   };
 
+  $scope.removeNotification = function (index) {
+    if (!$scope.notifications[index].read)
+      $scope.newNotifications -= 1;
+    $scope.notifications.splice(index,1);
+  }
+
+  $scope.removeAllNotifications = function () {
+    $scope.notifications = new Array();
+    $scope.newNotifications = 0;
+  }
+
+  $scope.markAllRead = function () {
+    var i;
+    for (i=0;i<$scope.notifications.length;i++){
+      $scope.notifications[i].read = true;
+      console.log($scope.notifications[i].read);
+    }
+    $scope.newNotifications = 0;
+  }
+
   source.addEventListener('message', increaseNotifications, false);
 
   $scope.zeroNotifications = function() {
