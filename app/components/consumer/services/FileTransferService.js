@@ -29,7 +29,7 @@ angular.module('ProxyPrint').factory('fileTransferService', ['Upload', '$timeout
         reader.readAsArrayBuffer(file);
     };
 
-    service.TransferFiles = function(files, callback) {
+    service.ProcessFiles = function(files, callback) {
         var filesToStore = [];
         var queue = async.queue(readPages, 1);
         for (var i = 0; i < files.length; i++) {
@@ -49,7 +49,28 @@ angular.module('ProxyPrint').factory('fileTransferService', ['Upload', '$timeout
         $cookieStore.put("uploadedFilesNames", filesToStore);
         queue.drain = function() {
             console.log(service.processedFiles);
+            service.TransferFiles(service.files);
         };
+    };
+
+    service.TransferFiles = function(files, callback) {
+        console.log(files);
+        Upload.upload({
+            url: backendURLService.getBaseURL() + 'consumer/upload',
+            data: {
+                files: files,
+                processedFiles: service.processedFiles,
+                printshop: "1"
+            }
+        }).then(function(resp) {
+            $timeout(function() {
+                console.log('Response: ' + JSON.stringify(resp.data));
+            });
+        }, null, function(evt) {
+            var progressPercentage = parseInt(100.0 *
+                evt.loaded / evt.total);
+            console.log(evt);
+        });
     };
 
     service.setFiles = function(files) {
