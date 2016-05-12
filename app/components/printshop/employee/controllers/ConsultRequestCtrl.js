@@ -56,19 +56,14 @@ app.controller('ConsultRequestCtrl', ['$scope', 'pendingPrintRequest', '$uibModa
 
         var modalInstance = $uibModal.open({
             animation: true,
-            templateUrl: 'app/components/printshop/employee/views/request-modal.html',
-            controller: 'PrintRequestModalController',
-            size: 'sm',
-            resolve: {
-                text: function() {
-                    return reply;
-                }
-            }
+            templateUrl: 'app/components/printshop/employee/views/reject-modal.html',
+            controller: 'PrintRequestCancelModalController',
+            size: 'md'
         });
 
-        modalInstance.result.then(function() {
-            pendingPrintRequestsService.rejectRequest($scope.request.id);
-            $state.go('employee.pending');
+        modalInstance.result.then(function(motive) {
+            pendingPrintRequestsService.rejectRequest($scope.request.id, motive, $scope.onChangeStatusSuccessCallback, $scope.onChangeStatusErroCallback);
+            //$state.go('employee.pending');
         });
     }
 
@@ -124,6 +119,18 @@ function($scope, $uibModalInstance, text){
 
     $scope.performAction = function () {
         $uibModalInstance.close();
+    };
+
+    $scope.closeModal = function () {
+        $uibModalInstance.dismiss('cancel');
+    };
+}]);
+
+app.controller('PrintRequestCancelModalController', ['$scope', '$uibModalInstance',
+function($scope, $uibModalInstance){
+
+    $scope.performAction = function () {
+        $uibModalInstance.close($scope.motive);
     };
 
     $scope.closeModal = function () {
