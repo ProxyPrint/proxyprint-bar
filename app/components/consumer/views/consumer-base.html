@@ -30,22 +30,16 @@
                             <ul class="list-group">
                                 <li class="list-group-item" ng-repeat="notification in notifications">
                                     <div row>
-                                      <div class="col-sm-8">
+                                      <div style="float:left">
                                         {{notification.message}}
                                         </div>
-                                        <div class="col-sm-4">
-                                          <button class="btn btn-default" ng-click="readNotification($index)" ng-disabled="notification.read">
-                                            <div ng-show="!notification.read">
-                                              <small>Ler</small>
-                                            </div>
-                                            <div ng-show="notification.read">
-                                              <small>Lido</small>
-                                            </div>
-                                          </button>
+                                        <div style="display:inline-block; vertical-align: middle; float:right">
+                                          <button ng-show="!notification.read" ng-click="readNotification($index)" class="button button-flat button-primary button-border button-circle button-small"><i class="fa fa-check" ></i></button>
+                                          <button class="button button-inverse button-flat button-caution button-circle button-border button-small"><i class="fa fa-times"></i></button>
                                         </div>
                                     </div>
                                     <br />
-                                    <small>{{notification.day}}, {{notification.hour}}</small>
+                                    <div class="xsmall-font">{{notification.day}}, {{notification.hour}}</div>
 
                                 </li>
                             </ul>
