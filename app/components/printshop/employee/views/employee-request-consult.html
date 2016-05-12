@@ -24,7 +24,7 @@
                 <tr ng-repeat="file in files">
                     <td><b>{{file.name}}</b></td>
                     <td>{{file.specs.format}} + {{file.specs.sides}} + {{file.specs.colors}} + {{file.specs.cover}}</td>
-                    <td><button class="btn btn-primary btn-flat" type="button" ng-click="download(file)"><i class="fa fa-download " style="margin-right: 0.2em;"></i>Download</button></td>
+                    <td><button class="btn btn-primary btn-flat" type="button" ng-click="download(file.id)"><i class="fa fa-download " style="margin-right: 0.2em;"></i>Download</button></td>
                 </tr>
             </tbody>
         </table>

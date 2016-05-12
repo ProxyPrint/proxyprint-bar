@@ -7,6 +7,7 @@ function($http,backendURLService) {
 
     service.getPendingRequests = function() {
         return $http.get(backendURLService.getBaseURL()+'printshops/requests').success(function(data){
+          console.log(data);
             return data;
         });
     };
