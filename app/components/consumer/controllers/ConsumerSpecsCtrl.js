@@ -80,8 +80,14 @@ function($scope, $uibModal, $log, fileTransferService, specMarshallService,
     /** Add file to queue */
     $scope.submit = function(init, end, check){
       var interval;
-      if(!check){ interval = init + ' - ' + end; }
-      else{ interval = "Completo"; }
+      if(!check) {
+        interval = init + ' - ' + end;
+      }
+      else {
+        interval = "Completo";
+        init = 0;
+        end = 0;
+      }
 
       var files = $scope.files();
       var i = files.indexOf($scope.lastFile);
