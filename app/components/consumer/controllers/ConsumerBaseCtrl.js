@@ -1,6 +1,6 @@
 angular.module('ProxyPrint').controller('ConsumerController', ['$scope','$cookieStore',
-'authenticationService', 'fileTransferService', '$state', 'notifications', 'backendURLService',
-function($scope, $cookieStore, authenticationService, fileTransferService, $state, notifications,backendURLService) {
+'authenticationService', 'fileTransferService', '$state', 'notifications', 'backendURLService', 'notificationsService',
+function($scope, $cookieStore, authenticationService, fileTransferService, $state, notifications,backendURLService,notificationsService) {
 
   // Get consumer location
   if(navigator.geolocation){
@@ -32,7 +32,7 @@ function($scope, $cookieStore, authenticationService, fileTransferService, $stat
       var message = JSON.parse(msg.data);
       var d = new Date(message.timestamp);
       message.day = d.getDate() + '/' + d.getMonth() + '/' + d.getFullYear();
-      message.hour = d.getHours() + ':' + d.getMinutes();
+      message.hour = d.getHours() + ':' + ('0'+d.getMinutes()).slice(-2);
       message.read = false;
       $scope.notifications.unshift(message);
       $scope.newNotifications += 1;
@@ -49,6 +49,8 @@ function($scope, $cookieStore, authenticationService, fileTransferService, $stat
   $scope.removeNotification = function (index) {
     if (!$scope.notifications[index].read)
       $scope.newNotifications -= 1;
+
+    notificationsService.deleteNotification($scope.notifications[index].id);
     $scope.notifications.splice(index,1);
   }
 
@@ -61,7 +63,6 @@ function($scope, $cookieStore, authenticationService, fileTransferService, $stat
     var i;
     for (i=0;i<$scope.notifications.length;i++){
       $scope.notifications[i].read = true;
-      console.log($scope.notifications[i].read);
     }
     $scope.newNotifications = 0;
   }

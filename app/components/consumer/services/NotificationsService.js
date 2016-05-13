@@ -21,6 +21,13 @@ angular.module('ProxyPrint').factory('notificationsService', ['$http', 'backendU
             });
     };
 
+    service.deleteNotification = function (notificationID) {
+      return $http.delete(backendURLService.getBaseURL()+'notifications/'+notificationID)
+        .success(function (data){
+          return data;
+        });
+    };
+
 
     return service;
 }]);
