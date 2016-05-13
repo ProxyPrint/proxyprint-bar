@@ -55,6 +55,7 @@ function($scope, $cookieStore, authenticationService, fileTransferService, $stat
   }
 
   $scope.removeAllNotifications = function () {
+    notificationsService.deleteAllNotifications($scope.consumer.username);
     $scope.notifications = new Array();
     $scope.newNotifications = 0;
   }
