@@ -17,7 +17,7 @@
                 <li id="notification_li">
                         <a href="" id="notificationLink">
                             <notification-icon count='newNotifications' animation='bounce'>
-                                <i class="fa fa-bell-o"></i>
+                                <i class="fa fa-icon fa-bell-o"></i>
                             </notification-icon>
                         </a>
                         <div id="notificationContainer">
@@ -30,12 +30,14 @@
                             <ul class="list-group">
                                 <li class="list-group-item" ng-repeat="notification in notifications">
                                     <div row>
-                                      <div style="float:left">
+                                      <div class="left">
                                         {{notification.message}}
                                         </div>
-                                        <div style="display:inline-block; vertical-align: middle; float:right">
+                                        <div class="right">
+                                        <div class="inline-buttons">
                                           <button ng-show="!notification.read" ng-click="readNotification($index)" class="button button-flat button-primary button-border button-circle button-small"><i class="fa fa-check" ></i></button>
                                           <button class="button button-inverse button-flat button-caution button-circle button-border button-small" ng-click="removeNotification($index)"><i class="fa fa-times"></i></button>
+                                        </div>
                                         </div>
                                     </div>
                                     <br />
@@ -44,13 +46,13 @@
                                 </li>
                             </ul>
                           </div>
-                            <div id="notificationFooter"><a style="float:left" ng-click="removeAllNotifications()" href="/">Remover tudo</a><a href="/" ng-click="markAllRead()">Marcar tudo como lido</a></div>
+                            <div id="notificationFooter"><a class="left" ng-click="removeAllNotifications()" href="/">Remover tudo</a><a href="/" ng-click="markAllRead()">Marcar tudo como lido</a></div>
                         </div>
 
                     </li>
-                <li><a ui-sref=".settings"><i class="fa fa-cog fa-lg"></i></a>
+                <li><a ui-sref=".settings"><i class="fa fa-icon fa-cog fa-lg"></i></a>
                 </li>
-                <li><a ui-sref="home"><i class="fa fa-sign-out fa-lg" ng-click"logout()"></i></a></li>
+                <li><a ui-sref="home"><i class="fa fa-icon fa-sign-out fa-lg" ng-click"logout()"></i></a></li>
             </ul>
         </div>
     </div>
@@ -83,26 +85,26 @@
         <span class="fa-stack fa-lg fa-white-icon">
           <i class="fa fa-square-o fa-stack-2x"></i>
           <a href="https://www.facebook.com/jose.cortez.378">
-          <i class="fa fa-facebook fa-stack-1x"></i>
+          <i class="fa fa-facebook fa-icon fa-stack-1x"></i>
           </a>
         </span>
 
         <span class="fa-stack fa-lg fa-white-icon">
           <i class="fa fa-square-o fa-stack-2x"></i>
           <a href="https://twitter.com/jospCortez">
-          <i class="fa fa-twitter fa-stack-1x"></i>
+          <i class="fa fa-twitter fa-icon fa-stack-1x"></i>
         </a>
         </span>
         <span class="fa-stack fa-lg fa-white-icon">
           <i class="fa fa-square-o fa-stack-2x"></i>
           <a href="https://pt.linkedin.com/in/jospcortez">
-          <i class="fa fa-linkedin fa-stack-1x"></i>
+          <i class="fa fa-linkedin fa-icon fa-stack-1x"></i>
           </a>
         </span>
         <span class="fa-stack fa-lg fa-white-icon">
           <i class="fa fa-square-o fa-stack-2x"></i>
           <a href="https://github.com/ProxyPrint">
-          <i class="fa fa-github fa-stack-1x"></i>
+          <i class="fa fa-github fa-icon fa-stack-1x"></i>
           </a>
         </span>
 

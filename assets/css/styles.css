@@ -155,6 +155,10 @@ border-top: 1px solid #dddddd;
   overflow-y: scroll;
 }
 
+.inline-buttons {
+  display:inline-block;
+  vertical-align: middle;
+}
 
 
 /************************* Costumer Main Page******************************/
@@ -456,6 +460,10 @@ border-top: 1px solid #dddddd;
 	color:  inherit;
 }
 
+.footer-distributed p.footer-links a:hover{
+	color:  #3A6DB0;
+}
+
 .footer-distributed .footer-right{
 	float: right;
 	margin-top: 6px;
@@ -496,4 +504,16 @@ border-top: 1px solid #dddddd;
 	.footer-distributed .footer-left p.footer-links{
 		line-height: 1.8;
 	}
+}
+
+/** Font-awesome hover **/
+
+.fa-icon:hover{
+  color: #3A6DB0;
+}
+
+
+
+.fa-white-icon:hover{
+  color:#3A6DB0;
 }
