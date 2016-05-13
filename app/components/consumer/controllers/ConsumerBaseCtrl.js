@@ -75,6 +75,7 @@ function($scope, $cookieStore, authenticationService, fileTransferService, $stat
 
   $scope.markAllRead = function () {
     var i;
+    notificationsService.readAllNotifications($scope.consumer.username);
     for (i=0;i<$scope.notifications.length;i++){
       $scope.notifications[i].read = true;
     }

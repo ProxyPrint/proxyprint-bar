@@ -42,6 +42,13 @@ angular.module('ProxyPrint').factory('notificationsService', ['$http', 'backendU
         });
     }
 
+    service.readAllNotifications = function (consumerName) {
+      return $http.put(backendURLService.getBaseURL()+'consumer/'+consumerName+'/notifications')
+        .success( function (data) {
+          return data;
+        });
+    }
+
 
     return service;
 }]);
