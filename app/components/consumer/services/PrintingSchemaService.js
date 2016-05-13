@@ -5,7 +5,7 @@ angular.module('ProxyPrint').factory('printingSchemaService',['$http', 'backendU
     service.getPrintingSchemas = function(consumerID) {
       return $http.get(backendURLService.getBaseURL()+'consumer/'+consumerID+'/printingschemas')
       .success(function(data){
-        return setFakeIDs(data);
+        return setFakeIDs(data.pschemas);
       });
     };
 

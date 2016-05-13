@@ -7,7 +7,9 @@ function($scope, $uibModal, $log, fileTransferService, specMarshallService,
     /** Page range logic */
     $scope.lastItem = null;
     $scope.lastFile = null;
-    $scope.specs = printingSchemas.data;
+    $scope.specs = printingSchemas.data.pschemas;
+
+    console.log($scope.specs);
 
     $scope.addPageModal = function(file, item) {
       $scope.lastItem = item;
@@ -94,8 +96,8 @@ function($scope, $uibModal, $log, fileTransferService, specMarshallService,
       var index = files[i].specs.indexOf($scope.lastItem);
       if (index > -1) {
         files[i].specs[index].pages = interval;
-        files[i].specs[index]['infLim'] = init;
-        files[i].specs[index]['supLim'] = end;
+        files[i].specs[index]['from'] = init;
+        files[i].specs[index]['to'] = end;
       }
       $scope.showModal = false;
     };
