@@ -54,6 +54,7 @@ function($scope, $cookieStore, authenticationService, fileTransferService, $stat
   };
 
   $scope.readNotification = function(index) {
+    notificationsService.readNotification($scope.notifications[index].id);
     $scope.notifications[index].read = true;
     $scope.newNotifications -= 1;
   };
