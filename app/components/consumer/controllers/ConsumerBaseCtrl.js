@@ -17,14 +17,15 @@ function($scope, $cookieStore, authenticationService, fileTransferService, $stat
   $scope.consumer = $cookieStore.get('globals').currentUser;
   var audio = new Audio('assets/audio/notifications.mp3');
 
-  console.log($scope.consumer);
 
   var source = new EventSource(backendURLService.getBaseURL() + "/consumer/subscribe?username=" + $scope.consumer.username + "&password=" + $scope.consumer.password, {
     withCredentials: true
   });
 
+  console.log(notifications.data);
+
   $scope.notifications = notifications.data;
-  $scope.newNotifications = 0;
+  $scope.newNotifications = getNewNotificationsNumber($scope.notifications);
 
   var increaseNotifications = function(msg) {
     $scope.$apply(function() {
@@ -38,6 +39,17 @@ function($scope, $cookieStore, authenticationService, fileTransferService, $stat
       $scope.newNotifications += 1;
       audio.play();
     });
+
+  };
+
+   function getNewNotificationsNumber (notifications) {
+    var i, total;
+    total = 0;
+    for (i=0;i<notifications.length;i++){
+      if (!notifications[i].read)
+        total ++;
+    }
+    return total;
 
   };
 

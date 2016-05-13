@@ -6,7 +6,7 @@ angular.module('ProxyPrint').factory('notificationsService', ['$http', 'backendU
         var d = new Date(message.timestamp);
         message.day = d.getDate() + '/' + d.getMonth() + '/' + d.getFullYear();
         message.hour = d.getHours() + ':' + d.getMinutes();
-        message.read = true;
+        message.read = message.readStatus;
         return message;
     }
 
