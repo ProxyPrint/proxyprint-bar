@@ -70,7 +70,8 @@ angular.module('ProxyPrint')
 
     var printRequest = fileTransferService.getProcessedFiles();
     if(printRequest!==null) {
-      budgetService.getMeBudgetsForThis($scope.budgetSuccessCallback, $scope.budgetErrorCallback, fileTransferService.getProcessedFiles());
+      printRequest["printshops"] = ids;
+      budgetService.getMeBudgetsForThis($scope.budgetSuccessCallback, $scope.budgetErrorCallback, printRequest);
     }
   };
 
