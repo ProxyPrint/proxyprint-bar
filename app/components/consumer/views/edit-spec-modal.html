@@ -1,0 +1,88 @@
+<div class="modal-header">
+</div>
+<div class="modal-body" style="text-align:center">
+    <div class="input-group" style="margin: 0 auto"><strong>Nome</strong>
+        <input type="text" class="form-control" ng-model="schema.name" id="name">
+    </div>
+    <div style="margin-left:25%; margin-right:25%">
+        <hr />
+    </div>
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label for="spec-format">Formato</label>
+                <select required class="form-control" ng-model="schema.format" id="spec-format">
+                    <option>A1</option>
+                    <option>A2</option>
+                    <option>A3</option>
+                    <option>A4</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label for="spec-sides">Lados</label>
+                <select required class="form-control" ng-model="schema.sides" id="spec-sides">
+                    <option value="SIMPLEX">Frente</option>
+                    <option value="DUPLEX">Frente e verso</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label for="spec-colors">Cores</label>
+                <select required class="form-control" ng-model="schema.colors" id="spec-colors">
+                    <option value="BW">Preto e branco</option>
+                    <option value="GREY_TONES">Tons de cinza</option>
+                    <option value="COLOR">A cores</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
+<div style="margin-left:25%; margin-right:25%">
+    <hr />
+</div>
+<div class="center">
+    <strong>Acabamentos</strong>
+    <br />
+    <label class="radio-inline">
+        <input type="radio" name="content" ng-model="content" value="enc">Encadernar</label>
+    <label class="radio-inline">
+        <input type="radio" name="content" ng-model="content" value="stapled">Agrafar</label>
+    <div ng-show="content == 'enc'">
+        <div class="finishingOptions">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="spec-cover">Capa</label>
+                        <select required class="form-control" ng-model="cover" id="spec-cover">
+                            <option value="CRISTAL_ACETATE">Acetato em cristal</option>
+                            <option value="PVC_TRANSPARENT">PVC transparente fosco</option>
+                            <option value="PVC_OPAQUE">PVC opaco</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="spec-bindings">Tipo de argolas</label>
+                        <select required class="form-control" ng-model="bindings" id="spec-bindings">
+                            <option value="PLASTIC">Argolas de plástico</option>
+                            <option value="SPIRAL">Argolas em espiral</option>
+                            <option value="WIRE">Argolas de arame</option>
+                            <option value="STEELMAT">Encadernação térmica</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer" style="text-align:center">
+    <button class="btn btn-primary btn-flat" type="button" ng-disabled="!((name&&format&&sides&&colors)&&((content=='stapled')||(cover&&bindings)||(content==null)||(bindings)))" ng-click="performAction()">Adicionar especificação</button>
+    <button class="btn btn-default btn-flat" type="button" ng-click="closeModal()">Cancelar</button>
+</div>
+
+<script>
+document.getElementById("name").value = "Goofy";
+</script>

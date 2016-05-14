@@ -154,6 +154,25 @@ function($scope, $uibModal, $log, fileTransferService, specMarshallService,
       });
     };
 
+    $scope.editSpecModal = function (index) {
+      var modalInstance = $uibModal.open({
+        animation: true,
+        templateUrl: 'app/components/consumer/views/edit-spec-modal.html',
+        controller: 'EditSpecificationController',
+        size: 'md',
+        resolve: {
+          schema: function () {
+            return $scope.specs[index];
+          }
+        }
+      });
+
+
+      modalInstance.result.then(function() {
+        console.log("hi!");
+      });
+    }
+
     $scope.removePrintingSchema = function (index) {
       printingSchemaService.deletePrintingSchema($scope.specs[index].id, $cookieStore.get('consumerID'));
       $scope.specs.splice(index,1);
@@ -212,4 +231,22 @@ function($scope, $uibModal, $log, fileTransferService, specMarshallService,
     $scope.closeModal = function () {
       $uibModalInstance.dismiss('cancel');
     };
+  }]);
+
+  angular.module('ProxyPrint').controller('EditSpecificationController',
+          ['$scope', '$uibModalInstance', 'schema', 'specMarshallService',
+          function ($scope, $uibModalInstance, schema,specMarshallService) {
+
+            $scope.schema = specMarshallService.unmarshallSpecification(schema);
+            console.log($scope.schema);
+
+            $scope.performAction = function () {
+              var values = [];
+              $uibModalInstance.dismiss('cancel');
+            };
+
+            $scope.closeModal = function () {
+              $uibModalInstance.dismiss('cancel');
+            };
+
   }]);
