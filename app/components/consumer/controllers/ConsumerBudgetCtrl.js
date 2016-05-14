@@ -14,10 +14,14 @@ function($scope, $cookieStore, $state, budgets, printShopListService, fileTransf
     $scope.selectedPrintShops[pshopID]['budget'] = $scope.budgets[pshopID];
   }
 
-  $scope.finishPrintRequest = function(a) {
+  $scope.finishPrintRequest = function() {
     console.log($scope.printRequestID);
-    var submitParams = {printshopID: $scope.theChosenOne , budget: parseFloat($scope.budgets[$scope.theChosenOne])};
-    budgetService.submitPrintRequest($scope.submitRequestSuccessCallback, $scope.submitRequestErrorCallback, $scope.printRequestID, submitParams);
+    if($scope.theChosenOne!==null && $scope.theChosenOne > 0) {
+      var submitParams = {printshopID: $scope.theChosenOne , budget: parseFloat($scope.budgets[$scope.theChosenOne])};
+      budgetService.submitPrintRequest($scope.submitRequestSuccessCallback, $scope.submitRequestErrorCallback, $scope.printRequestID, submitParams);
+    } else {
+      alert("Por favor escolha de entre uma das reprografias. Caso nenhuma satisfaça o pedido volte atrás e tente outras reprografias.");
+    }
   };
 
   $scope.submitRequestSuccessCallback = function(data) {
