@@ -56,21 +56,25 @@ angular.module('ProxyPrint')
   };
 
   $scope.proceedRequest = function() {
-    var ids = [];
-    for(var i in $scope.selectedPrintShops) {
+    var choosenPShops = {};
+    var choosenPShopsIDs = [];
+    console.log("SELECTED!");
+    console.log($scope.selectedPrintShops);
+    for(var i=0; i < $scope.selectedPrintShops.length; i++) {
       console.log("INDEX: "+i);
       $scope.pshopNames[$scope.selectedPrintShops[i].id] = $scope.selectedPrintShops[i].name;
-      ids.push($scope.selectedPrintShops[i].id);
+      choosenPShops[$scope.selectedPrintShops[i].id] = $scope.selectedPrintShops[i];
+      choosenPShopsIDs.push($scope.selectedPrintShops[i].id);
     }
-    console.log(ids);
-    printShopListService.setSelectedPrintShopsIDs(ids);
+    console.log(choosenPShops);
+    printShopListService.setSelectedPrintShops(choosenPShops);
 
     // REMOVE BELOW SHOULD GO TO ANOTHER CONTROLLER IN NEXT SPRINT
-    alert("Fazer orçamentos para reprografias: "+printShopListService.getSelectedPrintShopsIDs());
+    // alert("Fazer orçamentos para reprografias: "+printShopListService.getSelectedPrintShops());
 
     var printRequest = fileTransferService.getProcessedFiles();
     if(printRequest!==null) {
-      printRequest["printshops"] = ids;
+      printRequest["printshops"] = choosenPShopsIDs;
       $cookieStore.put("printRequest", printRequest);
       // budgetService.getMeBudgetsForThis($scope.budgetSuccessCallback, $scope.budgetErrorCallback, printRequest);
       $state.go("consumer.budgetselection");

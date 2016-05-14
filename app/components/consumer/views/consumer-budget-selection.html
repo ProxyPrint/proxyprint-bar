@@ -8,19 +8,17 @@
 					<thead>
 						<tr>
 							<th style="width: 25%;">Reprografia</th>
-							<th style="width: 45%;">Morada</th>
-							<th style="width: 20%;">Distância</th>
-							<th style="width: 5%"></th>
+							<th style="width: 15%;">Distância</th>
+							<th style="width: 60%">Preço</th>
 						</tr>
 					</thead>
-					<!--<tbody>
+					<tbody>
 						<tr ng-repeat="printshop in selectedPrintShops" class="animate-row">
 							<td>{{printshop.name}}</td>
-							<td>{{printshop.address}}</td>
 							<td>{{printshop.distance}} km</td>
-							<td><a href="" ng-click="removePrintShop($index)" style="color:red;"><i class="fa fa-times"></i></a></td>
+							<td>{{printshop.budget}}  <span ng-if="printshop.hasBudget==true">€</span></td>
 						</tr>
-					</tbody>-->
+					</tbody>
 				</table>
 			</div>
 		</div>
@@ -29,10 +27,9 @@
 			<h4>Ficheiro Submetidos</h4>
 			<div class="scrollableTable">
 				<ul class="list-group">
-					<!-- attention much text on <li> not being fully displayed -->
-					<!--<li class="list-group-item clearfix" ng-repeat="file in submitedFiles" style="overflow-x:hidden;">
+					<li class="list-group-item clearfix" ng-repeat="file in submitedFilesNames" style="overflow-x:hidden;">
 						<strong>{{file}}</strong>
-					</li>-->
+					</li>
 				</ul>
 			</div>
 		</div>
