@@ -47,16 +47,16 @@
     <strong>Acabamentos</strong>
     <br />
     <label class="radio-inline">
-        <input type="radio" name="content" ng-model="content" value="enc">Encadernar</label>
+        <input type="radio" name="content" ng-model="schema.content" value="enc">Encadernar</label>
     <label class="radio-inline">
-        <input type="radio" name="content" ng-model="content" value="stapled">Agrafar</label>
-    <div ng-show="content == 'enc'">
+        <input type="radio" name="content" ng-model="schema.content" value="stapled">Agrafar</label>
+    <div ng-show="schema.content == 'enc'">
         <div class="finishingOptions">
             <div class="row">
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label for="spec-cover">Capa</label>
-                        <select required class="form-control" ng-model="cover" id="spec-cover">
+                        <select required class="form-control" ng-model="schema.coverSpecs" id="spec-cover">
                             <option value="CRISTAL_ACETATE">Acetato em cristal</option>
                             <option value="PVC_TRANSPARENT">PVC transparente fosco</option>
                             <option value="PVC_OPAQUE">PVC opaco</option>
@@ -66,7 +66,7 @@
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label for="spec-bindings">Tipo de argolas</label>
-                        <select required class="form-control" ng-model="bindings" id="spec-bindings">
+                        <select required class="form-control" ng-model="schema.bindingSpecs" id="spec-bindings">
                             <option value="PLASTIC">Argolas de plástico</option>
                             <option value="SPIRAL">Argolas em espiral</option>
                             <option value="WIRE">Argolas de arame</option>
@@ -79,10 +79,6 @@
     </div>
 </div>
 <div class="modal-footer" style="text-align:center">
-    <button class="btn btn-primary btn-flat" type="button" ng-disabled="!((name&&format&&sides&&colors)&&((content=='stapled')||(cover&&bindings)||(content==null)||(bindings)))" ng-click="performAction()">Adicionar especificação</button>
+    <button class="btn btn-primary btn-flat" type="button" ng-disabled="!((schema.name&&schema.format&&schema.sides&&schema.colors)&&((schema.content=='stapled')||(schema.coverSpecs&&schema.bindingSpecs)||(schema.content==null)||(schema.bindingSpecs)))" ng-click="performAction()">Guardar especificação</button>
     <button class="btn btn-default btn-flat" type="button" ng-click="closeModal()">Cancelar</button>
 </div>
-
-<script>
-document.getElementById("name").value = "Goofy";
-</script>

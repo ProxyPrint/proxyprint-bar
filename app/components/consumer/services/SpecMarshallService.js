@@ -34,39 +34,27 @@ angular.module('ProxyPrint').factory('specMarshallService',[function () {
       schema.format = paperSpecs[0];
       schema.sides = paperSpecs[1];
       schema.colors = paperSpecs[2];
-      if (specification.bindingSpecs!=null)
-        schema.bindingSpecs = bindingEngToPt(specification.bindingSpecs);
-      if (specification.coverSpecs!=null)
-        schema.coverSpecs = coverEngToPt(specification.coverSpecs);
+      if (specification.bindingSpecs!=''){
+        var bindings = specification.bindingSpecs.split(',');
+        if (bindings=="STAPLING")
+          schema.content = 'stapled';
+        else schema.content = 'enc';
+        schema.bindingSpecs = bindings[0];
+      }
+      if (specification.coverSpecs!=''){
+        var cover = specification.coverSpecs.split(',');
+        schema.coverSpecs = cover[0];
+      }
+
 
 
       return schema;
     }
 
-    function sidesEngToPt(sides) {
-      switch (sides) {
-        case 'SIMPLEX':
-          return 'Frente';
-        case 'DUPLEX':
-          return 'Frente e verso';
-      }
 
-    }
-
-    function colorsEngToPt (colors) {
-      switch (colors){
-        case 'COLOR':
-          return 'A cores';
-        case 'GREY_TONES':
-          return 'Tons de cinza';
-        case 'BW':
-          return 'Preto e branco'
-      }
-    }
 
     function bindingEngToPt (bindingSpecs) {
-      var bindings = bindingSpecs.split(',');
-      switch (bindings[0]){
+      switch (bindingSpecs){
         case 'PLASTIC':
           return 'Argolas de plástico';
         case 'SPIRAL':
