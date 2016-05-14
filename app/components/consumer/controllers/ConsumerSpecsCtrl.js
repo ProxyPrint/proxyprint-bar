@@ -55,7 +55,7 @@ function($scope, $uibModal, $log, fileTransferService, specMarshallService,
 
     $scope.request = function(){
       /** Send Request */
-      fileTransferService.TransferFiles($scope.files(), function(){
+      fileTransferService.ProcessFiles($scope.files(), function(){
         $scope.showRequest = false;
         $state.go('consumer.requestprintshopsbudget');
       });
@@ -96,7 +96,7 @@ function($scope, $uibModal, $log, fileTransferService, specMarshallService,
 
     $scope.request = function(){
       /** Send Request */
-      fileTransferService.TransferFiles($scope.files(), function(){
+      fileTransferService.ProcessFiles($scope.files(), function(){
         $scope.showRequest = false;
         $state.go('consumer.printshopselection');
       });
@@ -129,7 +129,7 @@ function($scope, $uibModal, $log, fileTransferService, specMarshallService,
       });
 
       modalInstance.result.then(function() {
-        fileTransferService.TransferFiles($scope.files());
+        fileTransferService.ProcessFiles($scope.files());
         $state.go('consumer.printshopselection');
       });
     };
