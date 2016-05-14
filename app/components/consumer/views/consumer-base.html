@@ -3,8 +3,8 @@
         <div class="navbar-default">
             <div class="navbar-header">
                 <a class="navbar-logo" href="">
-                  <span><img src="assets/img/logo/logo_white.png" width="40" height="40" style="margin-top: 2%;"/></span>
-                  <strong style="margin-left:6%;font-size:120%;color:white;">ProxyPrint</strong>
+                    <span><img src="assets/img/logo/logo_white.png" width="40" height="40" style="margin-top: 2%;"/></span>
+                    <strong style="margin-left:6%;font-size:120%;color:white;">ProxyPrint</strong>
                 </a>
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-menubuilder"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
                 </button>
@@ -15,29 +15,29 @@
                 <li><a href="/">{{consumer.username}}</a>
                 </li>
                 <li id="notification_li">
-                        <a href="" id="notificationLink">
-                            <notification-icon count='newNotifications' animation='bounce'>
-                                <i class="fa fa-icon fa-bell-o"></i>
-                            </notification-icon>
-                        </a>
-                        <div id="notificationContainer">
-                            <div id="notificationTitle">Notifications</div>
-                            <div id="notificationsBody" class="notifications">
-                            </div>
+                    <a href="" id="notificationLink">
+                        <notification-icon count='newNotifications' animation='bounce'>
+                            <i class="fa fa-icon fa-bell-o"></i>
+                        </notification-icon>
+                    </a>
+                    <div id="notificationContainer">
+                        <div id="notificationTitle">Notifications</div>
+                        <div id="notificationsBody" class="notifications">
+                        </div>
 
-                            <div class="notifications-scrollable-box">
+                        <div class="notifications-scrollable-box">
 
                             <ul class="list-group">
                                 <li class="list-group-item" ng-repeat="notification in notifications">
                                     <div row>
-                                      <div class="left">
-                                        {{notification.message}}
+                                        <div class="left">
+                                            {{notification.message}}
                                         </div>
                                         <div class="right">
-                                        <div class="inline-buttons">
-                                          <button ng-show="!notification.read" ng-click="readNotification($index)" class="button button-flat button-primary button-border button-circle button-small"><i class="fa fa-check" ></i></button>
-                                          <button class="button button-inverse button-flat button-caution button-circle button-border button-small" ng-click="removeNotification($index)"><i class="fa fa-times"></i></button>
-                                        </div>
+                                            <div class="inline-buttons">
+                                                <button ng-show="!notification.read" ng-click="readNotification($index)" class="button button-flat button-primary button-border button-circle button-small"><i class="fa fa-check"></i></button>
+                                                <button class="button button-inverse button-flat button-caution button-circle button-border button-small" ng-click="removeNotification($index)"><i class="fa fa-times"></i></button>
+                                            </div>
                                         </div>
                                     </div>
                                     <br />
@@ -45,11 +45,11 @@
 
                                 </li>
                             </ul>
-                          </div>
-                            <div id="notificationFooter"><a class="left" ng-click="removeAllNotifications()" href="/">Remover tudo</a><a href="/" ng-click="markAllRead()">Marcar tudo como lido</a></div>
                         </div>
+                        <div id="notificationFooter"><a class="left" ng-click="removeAllNotifications()" href="/">Remover tudo</a><a href="/" ng-click="markAllRead()">Marcar tudo como lido</a></div>
+                    </div>
 
-                    </li>
+                </li>
                 <li><a ui-sref=".settings"><i class="fa fa-icon fa-cog fa-lg"></i></a>
                 </li>
                 <li><a ui-sref="home"><i class="fa fa-icon fa-sign-out fa-lg" ng-click"logout()"></i></a></li>
@@ -57,27 +57,34 @@
         </div>
     </div>
 </div>
+<div id="content">
+    <div class="container-fluid">
 
-<div class="container-fluid">
 
-    <div class="row row-offcanvas row-offcanvas-left">
 
-        <div class="col-sm-3 col-md-2 sidebar-offcanvas" id="sidebar" role="navigation">
+        <div class="row row-offcanvas row-offcanvas-left">
 
-            <ul class="nav nav-sidebar">
-                <li><a ui-sref=".mainpage"><i class="fa fa-home fa-lg"></i> Início</a></li>
-                <li><a ui-sref=".printshoplist"><i class="fa fa-book fa-lg"></i> Reprografias</a></li>
-                <li><a ui-sref=".history"><i class="fa fa-history fa-lg"></i> Histórico</a></li>
-            </ul>
+            <div class="col-sm-3 col-md-2 sidebar-offcanvas" id="sidebar" role="navigation">
+
+                <ul class="nav nav-sidebar">
+                    <li><a ui-sref=".mainpage"><i class="fa fa-home fa-lg"></i> Início</a></li>
+                    <li><a ui-sref=".printshoplist"><i class="fa fa-book fa-lg"></i> Reprografias</a></li>
+                    <li><a ui-sref=".history"><i class="fa fa-history fa-lg"></i> Histórico</a></li>
+                </ul>
+            </div>
+            <!--/span-->
+
+            <div class="col-sm-9 col-md-10 main">
+
+
+
+                <div ui-view></div>
+
+            </div>
+            <!--/row-->
         </div>
-        <!--/span-->
-
-        <div class="col-sm-9 col-md-10 main">
-            <div ui-view></div>
-        </div>
-        <!--/row-->
     </div>
-</div>
+    </div>
 <footer class="footer-distributed">
 
     <div class="footer-right">
