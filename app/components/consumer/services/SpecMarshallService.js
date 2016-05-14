@@ -28,7 +28,7 @@ angular.module('ProxyPrint').factory('specMarshallService',[function () {
 
     service.marshallEditedSpecification = function (specification) {
       var spec = new Object();
-      spec.id = specification.id;
+
       spec.name = specification.name;
       spec.paperSpecs = specification.format+','+specification.sides+','+specification.colors;
 
@@ -46,13 +46,11 @@ angular.module('ProxyPrint').factory('specMarshallService',[function () {
         }
 
       }
-      console.log(spec);
       return spec;
     }
 
     service.unmarshallSpecification = function (specification) {
       var schema = new Object();
-      console.log(specification);
       schema.name = specification.name;
       var paperSpecs = specification.paperSpecs.split(',');
       schema.format = paperSpecs[0];

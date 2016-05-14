@@ -17,8 +17,8 @@ angular.module('ProxyPrint').factory('printingSchemaService',['$http', 'backendU
       return $http.delete(backendURLService.getBaseURL()+'consumer/'+consumerID+'/printingschemas/'+schemaID);
     }
 
-    service.editPrintingSchema = function (schema, consumerID) {
-      return $http.put(backendURLService.getBaseURL()+'consumer/'+consumerID+'/printingschemas/'+schema.id, schema);
+    service.editPrintingSchema = function (schemaID, schema, consumerID) {
+      return $http.put(backendURLService.getBaseURL()+'consumer/'+consumerID+'/printingschemas/'+schemaID, schema);
     }
 
     setFakeIDs = function (data) {

@@ -173,7 +173,11 @@ function($scope, $uibModal, $log, fileTransferService, specMarshallService,
 
       modalInstance.result.then(function(spec) {
         var schema = specMarshallService.marshallEditedSpecification(spec);
-        //printingSchemaService.editPrintingSchema(spec, spec.id, $cookieStore.get('consumerID'))
+        console.log(schema);
+        printingSchemaService.editPrintingSchema(spec.id, schema,$cookieStore.get('consumerID'));
+        schema.fakeID = spec.fakeID;
+        schema.id = spec.id;
+        $scope.specs[spec.fakeID-1] = schema;
       });
     }
 
@@ -184,6 +188,7 @@ function($scope, $uibModal, $log, fileTransferService, specMarshallService,
 
     $scope.addPrintingSchema = function (schema) {
       printingSchemaService.addPrintingSchema(schema, $cookieStore.get('consumerID'));
+      console.log(schema);
       $scope.specs.push(schema);
     };
 
@@ -243,7 +248,7 @@ function($scope, $uibModal, $log, fileTransferService, specMarshallService,
 
             $scope.schema = specMarshallService.unmarshallSpecification(schema);
             $scope.schema.id = id;
-            console.log($scope.schema);
+            $scope.schema.fakeID = schema.fakeID;
 
             $scope.performAction = function () {
               $uibModalInstance.close($scope.schema);
