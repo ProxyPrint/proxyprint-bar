@@ -13,4 +13,9 @@ function($scope, $cookieStore, $state, budgets, printShopListService, fileTransf
     $scope.selectedPrintShops[pshopID]['budget'] = $scope.budgets[pshopID];
   }
 
+  $scope.finishPrintRequest = function(a) {
+    console.log(a);
+    console.log($scope.theChosenOne);
+  };
+
 }]);
