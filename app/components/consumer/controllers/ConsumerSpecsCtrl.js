@@ -176,7 +176,6 @@ function($scope, $uibModal, $log, fileTransferService, specMarshallService,
         console.log(schema);
         printingSchemaService.editPrintingSchema(spec.id, schema,$cookieStore.get('consumerID'));
         schema.fakeID = spec.fakeID;
-        schema.id = spec.id;
         $scope.specs[spec.fakeID-1] = schema;
       });
     }
