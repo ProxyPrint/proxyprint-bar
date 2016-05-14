@@ -26,6 +26,30 @@ angular.module('ProxyPrint').factory('specMarshallService',[function () {
 
     }
 
+    service.marshallEditedSpecification = function (specification) {
+      var spec = new Object();
+      spec.id = specification.id;
+      spec.name = specification.name;
+      spec.paperSpecs = specification.format+','+specification.sides+','+specification.colors;
+
+
+      if (specification.content == null)
+        spec.bindingSpecs = spec.coverSpecs = "";
+      else {
+        if (specification.bindingSpecs == "STAPLING"){
+          spec.bindingSpecs = "STAPLING";
+          spec.coverSpecs = "";
+        }
+        else {
+          spec.coverSpecs = specification.coverSpecs;
+          spec.bindingSpecs = specification.bindingSpecs+","+specification.format;
+        }
+
+      }
+      console.log(spec);
+      return spec;
+    }
+
     service.unmarshallSpecification = function (specification) {
       var schema = new Object();
       console.log(specification);
@@ -45,40 +69,11 @@ angular.module('ProxyPrint').factory('specMarshallService',[function () {
         var cover = specification.coverSpecs.split(',');
         schema.coverSpecs = cover[0];
       }
-
-
-
       return schema;
     }
 
 
 
-    function bindingEngToPt (bindingSpecs) {
-      switch (bindingSpecs){
-        case 'PLASTIC':
-          return 'Argolas de plástico';
-        case 'SPIRAL':
-          return 'Argolas em espiral';
-        case 'WIRE':
-          return 'Argolas de arame';
-        case 'STEELMAT':
-          return 'Encadernação térmica';
-        case 'STAPLING':
-          return 'STAPLING';
-      }
-    }
-
-    function coverEngToPt (coverSpecs) {
-      var cover = coverSpecs.split(',');
-      switch(cover[0]){
-        case 'CRISTAL_ACETATE':
-          return 'Acetato em cristal';
-        case 'PVC_TRANSPARENT':
-          return 'PVC transparente fosco';
-        case 'PVC_OPAQUE':
-          return 'PVC opaco';
-      }
-    }
 
 
 

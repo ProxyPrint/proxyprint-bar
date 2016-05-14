@@ -163,13 +163,17 @@ function($scope, $uibModal, $log, fileTransferService, specMarshallService,
         resolve: {
           schema: function () {
             return $scope.specs[index];
+          },
+          id: function () {
+            return $scope.specs[index].id;
           }
         }
       });
 
 
-      modalInstance.result.then(function() {
-        console.log("hi!");
+      modalInstance.result.then(function(spec) {
+        var schema = specMarshallService.marshallEditedSpecification(spec);
+        //printingSchemaService.editPrintingSchema(spec, spec.id, $cookieStore.get('consumerID'))
       });
     }
 
@@ -234,15 +238,15 @@ function($scope, $uibModal, $log, fileTransferService, specMarshallService,
   }]);
 
   angular.module('ProxyPrint').controller('EditSpecificationController',
-          ['$scope', '$uibModalInstance', 'schema', 'specMarshallService',
-          function ($scope, $uibModalInstance, schema,specMarshallService) {
+          ['$scope', '$uibModalInstance', 'schema','id', 'specMarshallService',
+          function ($scope, $uibModalInstance, schema, id, specMarshallService) {
 
             $scope.schema = specMarshallService.unmarshallSpecification(schema);
+            $scope.schema.id = id;
             console.log($scope.schema);
 
             $scope.performAction = function () {
-              var values = [];
-              $uibModalInstance.dismiss('cancel');
+              $uibModalInstance.close($scope.schema);
             };
 
             $scope.closeModal = function () {
