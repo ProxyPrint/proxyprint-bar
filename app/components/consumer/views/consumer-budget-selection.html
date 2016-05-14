@@ -1,0 +1,50 @@
+<div class="container">
+	<h2>Orçamentos</h2>
+	<h4>Selecione uma reprografia para finalizar o pedido</h4>
+	<div class="row" style="margin-top:2%;">
+		<!-- prinshops selection -->
+		<div class="col-md-8">
+			<div class="table-responsive" style="height: 250px;">
+				<table class="table">
+					<thead>
+						<tr>
+							<th style="width: 25%;">Reprografia</th>
+							<th style="width: 15%;">Distância</th>
+							<th style="width: 50%">Preço</th>
+							<th style="width: 10%"></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="printshop in selectedPrintShops" class="animate-row">
+							<td>{{printshop.name}}</td>
+							<td>{{printshop.distance}} km</td>
+							<td>{{printshop.budget}}  <span ng-if="printshop.hasBudget==true">€</span></td>
+							<td><input type="radio" name="theChosenOne" ng-model="$parent.theChosenOne" value="printshop.id" ng-value="printshop.id"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<!-- submited files -->
+		<div class="col-md-3">
+			<h4>Ficheiro Submetidos</h4>
+			<div class="scrollableTable">
+				<ul class="list-group">
+					<li class="list-group-item clearfix" ng-repeat="file in submitedFilesNames" style="overflow-x:hidden;">
+						<strong>{{file}}</strong>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<center><button type="button" class="btn btn-default btn-lg hvr-bounce-to-right" style="margin-top: 4%;" ng-click="finishPrintRequest()">Finalizar Pedido</button></center>
+  <!-- ./submited files-->
+	<!-- flow navigation buttons -->
+	<div class="row" style="margin-top:4%;">
+		<div class="col-md-8">
+			<div class="left">
+				<button ui-sref="consumer.printshopselection" type="button" class="btn btn-default"><i class="fa fa-arrow-left"></i> Anterior</button>
+			</div>
+		</div>
+	</div>
+</div>

@@ -7,7 +7,9 @@ function($scope, $uibModal, $log, fileTransferService, specMarshallService,
     /** Page range logic */
     $scope.lastItem = null;
     $scope.lastFile = null;
-    $scope.specs = printingSchemas.data;
+    $scope.specs = printingSchemas.data.pschemas;
+
+    console.log($scope.specs);
 
     $scope.addPageModal = function(file, item) {
       $scope.lastItem = item;
@@ -27,14 +29,21 @@ function($scope, $uibModal, $log, fileTransferService, specMarshallService,
         var flag = values[2];
         var interval;
 
-        if(flag == 'enc'){ interval = init + ' - ' + end; }
-        else{ interval = "Completo"; }
+        if(flag == 'enc'){
+          interval = init + ' - ' + end;
+        }
+        else {
+          interval = "Completo";
+          init=end=0;
+        }
 
         var files = $scope.files();
         var i = files.indexOf($scope.lastFile);
         var index = files[i].specs.indexOf($scope.lastItem);
         if (index > -1) {
           files[i].specs[index].pages = interval;
+          files[i].specs[index]['from'] = init;
+          files[i].specs[index]['to'] = end;
         }
       }, function () {
         // dismissed here.
@@ -80,16 +89,20 @@ function($scope, $uibModal, $log, fileTransferService, specMarshallService,
     /** Add file to queue */
     $scope.submit = function(init, end, check){
       var interval;
-      if(!check){ interval = init + ' - ' + end; }
-      else{ interval = "Completo"; }
+      if(!check) {
+        interval = init + ' - ' + end;
+      }
+      else {
+        interval = "Completo";
+        init = 0;
+        end = 0;
+      }
 
       var files = $scope.files();
       var i = files.indexOf($scope.lastFile);
       var index = files[i].specs.indexOf($scope.lastItem);
       if (index > -1) {
         files[i].specs[index].pages = interval;
-        files[i].specs[index]['infLim'] = init;
-        files[i].specs[index]['supLim'] = end;
       }
       $scope.showModal = false;
     };
