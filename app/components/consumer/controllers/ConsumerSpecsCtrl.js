@@ -29,14 +29,21 @@ function($scope, $uibModal, $log, fileTransferService, specMarshallService,
         var flag = values[2];
         var interval;
 
-        if(flag == 'enc'){ interval = init + ' - ' + end; }
-        else{ interval = "Completo"; }
+        if(flag == 'enc'){
+          interval = init + ' - ' + end;
+        }
+        else {
+          interval = "Completo";
+          init=end=0;
+        }
 
         var files = $scope.files();
         var i = files.indexOf($scope.lastFile);
         var index = files[i].specs.indexOf($scope.lastItem);
         if (index > -1) {
           files[i].specs[index].pages = interval;
+          files[i].specs[index]['from'] = init;
+          files[i].specs[index]['to'] = end;
         }
       }, function () {
         // dismissed here.
@@ -96,8 +103,6 @@ function($scope, $uibModal, $log, fileTransferService, specMarshallService,
       var index = files[i].specs.indexOf($scope.lastItem);
       if (index > -1) {
         files[i].specs[index].pages = interval;
-        files[i].specs[index]['from'] = init;
-        files[i].specs[index]['to'] = end;
       }
       $scope.showModal = false;
     };

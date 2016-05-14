@@ -1,5 +1,5 @@
 angular.module('ProxyPrint')
-.controller('ConsumerPrintShopsSelectionController', ['$scope', 'printShopListService', 'printshopsList', 'fileTransferService', '$cookieStore', 'budgetService', function($scope, printShopListService, printshopsList, fileTransferService, $cookieStore, budgetService) {
+.controller('ConsumerPrintShopsSelectionController', ['$scope', 'printShopListService', 'printshopsList', 'fileTransferService', '$cookieStore', 'budgetService', '$state', function($scope, printShopListService, printshopsList, fileTransferService, $cookieStore, budgetService, $state) {
 
   $scope.printshops = [];
 
@@ -71,7 +71,9 @@ angular.module('ProxyPrint')
     var printRequest = fileTransferService.getProcessedFiles();
     if(printRequest!==null) {
       printRequest["printshops"] = ids;
-      budgetService.getMeBudgetsForThis($scope.budgetSuccessCallback, $scope.budgetErrorCallback, printRequest);
+      $cookieStore.put("printRequest", printRequest);
+      // budgetService.getMeBudgetsForThis($scope.budgetSuccessCallback, $scope.budgetErrorCallback, printRequest);
+      $state.go("consumer.budgetselection");
     }
   };
 

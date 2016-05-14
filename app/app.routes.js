@@ -152,6 +152,16 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
       }]
     }
   })
+  .state('consumer.budgetselection', {
+    url: '/budgets',
+    templateUrl: '/app/components/consumer/views/consumer-budget-selection.html',
+    controller: 'ConsumerBudgetCtrl',
+    resolve: {
+      budgets : ['budgetService', '$cookieStore', function(budgetService, $cookieStore) {
+        return budgetService.getMeBudgetsForThis($cookieStore.get("printRequest"));
+      }]
+    }
+  })
 
   /*PrintShop*/
 
