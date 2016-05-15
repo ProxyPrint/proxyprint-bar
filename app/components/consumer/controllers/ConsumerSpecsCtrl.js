@@ -7,7 +7,9 @@ function($scope, $uibModal, $log, fileTransferService, specMarshallService,
     /** Page range logic */
     $scope.lastItem = null;
     $scope.lastFile = null;
-    $scope.specs = printingSchemas.data;
+    $scope.specs = printingSchemas.data.pschemas;
+
+    console.log($scope.specs);
 
     $scope.addPageModal = function(file, item) {
       $scope.lastItem = item;
@@ -27,14 +29,21 @@ function($scope, $uibModal, $log, fileTransferService, specMarshallService,
         var flag = values[2];
         var interval;
 
-        if(flag == 'enc'){ interval = init + ' - ' + end; }
-        else{ interval = "Completo"; }
+        if(flag == 'enc'){
+          interval = init + ' - ' + end;
+        }
+        else {
+          interval = "Completo";
+          init=end=0;
+        }
 
         var files = $scope.files();
         var i = files.indexOf($scope.lastFile);
         var index = files[i].specs.indexOf($scope.lastItem);
         if (index > -1) {
           files[i].specs[index].pages = interval;
+          files[i].specs[index]['from'] = init;
+          files[i].specs[index]['to'] = end;
         }
       }, function () {
         // dismissed here.
@@ -55,7 +64,7 @@ function($scope, $uibModal, $log, fileTransferService, specMarshallService,
 
     $scope.request = function(){
       /** Send Request */
-      fileTransferService.TransferFiles($scope.files(), function(){
+      fileTransferService.ProcessFiles($scope.files(), function(){
         $scope.showRequest = false;
         $state.go('consumer.requestprintshopsbudget');
       });
@@ -80,23 +89,27 @@ function($scope, $uibModal, $log, fileTransferService, specMarshallService,
     /** Add file to queue */
     $scope.submit = function(init, end, check){
       var interval;
-      if(!check){ interval = init + ' - ' + end; }
-      else{ interval = "Completo"; }
+      if(!check) {
+        interval = init + ' - ' + end;
+      }
+      else {
+        interval = "Completo";
+        init = 0;
+        end = 0;
+      }
 
       var files = $scope.files();
       var i = files.indexOf($scope.lastFile);
       var index = files[i].specs.indexOf($scope.lastItem);
       if (index > -1) {
         files[i].specs[index].pages = interval;
-        files[i].specs[index]['infLim'] = init;
-        files[i].specs[index]['supLim'] = end;
       }
       $scope.showModal = false;
     };
 
     $scope.request = function(){
       /** Send Request */
-      fileTransferService.TransferFiles($scope.files(), function(){
+      fileTransferService.ProcessFiles($scope.files(), function(){
         $scope.showRequest = false;
         $state.go('consumer.printshopselection');
       });
@@ -129,7 +142,7 @@ function($scope, $uibModal, $log, fileTransferService, specMarshallService,
       });
 
       modalInstance.result.then(function() {
-        fileTransferService.TransferFiles($scope.files());
+        fileTransferService.ProcessFiles($scope.files());
         $state.go('consumer.printshopselection');
       });
     };
@@ -203,7 +216,7 @@ function($scope, $uibModal, $log, fileTransferService, specMarshallService,
       spec.push($scope.sides);
       spec.push($scope.colors);
       spec.push($scope.content);
-      spec.push($scope.cover);
+      spec.push($scope.cover+","+$scope.format);
       spec.push($scope.bindings);
       $uibModalInstance.close(spec);
     };

@@ -6,7 +6,8 @@ angular.module('ProxyPrint').factory('specMarshallService',[function () {
       var spec = new Object();
 
       spec.name = specification[0];
-      spec.paperSpecs = specification[1]+","+specification[2]+","+(specification[3]);
+      // PAPER,COLOR,A4,DUPLEX --> correct key order
+      spec.paperSpecs = "PAPER,"+(specification[3])+","+specification[1]+","+specification[2];
 
         if (specification[4]==null){
           spec.bindingSpecs = spec.coverSpecs = "";
@@ -18,8 +19,8 @@ angular.module('ProxyPrint').factory('specMarshallService',[function () {
             spec.coverSpecs = "";
           }
           else {
-            spec.coverSpecs = specification[5];
-            spec.bindingSpecs = specification[6]+","+specification[1];
+            spec.coverSpecs = "COVER,"+specification[5];
+            spec.bindingSpecs = "BINDING,"+specification[6]+","+specification[1];
           }
         }
         return spec;

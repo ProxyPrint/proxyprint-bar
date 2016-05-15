@@ -8,4 +8,8 @@ angular.module('ProxyPrint').controller('HistoryRequestsCtrl', ['$scope',
      { id: "4", consumer: "Ana Sofia", arrivalTimestamp: "11/7/2014 02:15", finishedTimestamp: "11/7/2014 12:08", employeeAttended: "Brandão Machado", cost: "3,43 €", liftedTimestamp: "11/7/2014 14:15"}
    ];
 
+   $scope.filterRequests = function(nome) {
+     return (nome.consumer.match($scope.requestSearch) || nome.employeeAttended.match($scope.requestSearch));
+   };
+
 }]);

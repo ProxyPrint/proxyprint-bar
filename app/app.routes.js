@@ -46,7 +46,7 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
   /*Consumer*/
   $stateProvider
   .state('notFound', {
-    url: '/404',
+    url: '/notfound',
     templateUrl: '/app/shared/views/404.html',
     data: {
       css: adminlteCSS
@@ -111,7 +111,10 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
     resolve: {
       notifications: ['notificationsService', function (notificationsService) {
         return notificationsService.getNotifications();
-      }]
+    }],
+    consumerPendingRequests: ['consumerPendingRequestsService', function (consumerPendingRequestsService) {
+      return consumerPendingRequestsService.getPendingRequests();
+    }]
     }
   })
   .state('consumer.settings' ,{
@@ -150,6 +153,16 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
     resolve: {
       printshopsList : ['printShopListService', function(printShopListService) {
         return printShopListService.getPrintShops();
+      }]
+    }
+  })
+  .state('consumer.budgetselection', {
+    url: '/budgets',
+    templateUrl: '/app/components/consumer/views/consumer-budget-selection.html',
+    controller: 'ConsumerBudgetSelectionCtrl',
+    resolve: {
+      budgets : ['budgetService', function(budgetService) {
+        return budgetService.getBudgets();
       }]
     }
   })
@@ -194,7 +207,13 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
   .state('employee.satisfied', {
     url: '/satisfied',
     templateUrl: '/app/components/printshop/employee/views/employee-requests-satisfied.html',
-    controller: 'SatisfiedRequestsCtrl'
+    controller: 'SatisfiedRequestsCtrl',
+    resolve: {
+      satisfiedPrintRequest: ['satisfiedPrintRequestsService',
+      function (satisfiedPrintRequestsService) {
+        return satisfiedPrintRequestsService.getSatisfiedRequests();
+      }]
+  }
   })
   .state('employee.history', {
     url: '/history',
