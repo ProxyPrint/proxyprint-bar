@@ -1,6 +1,6 @@
 angular.module('ProxyPrint').controller('ConsumerController', ['$scope','$cookieStore',
-'authenticationService', 'fileTransferService', '$state', 'notifications', 'backendURLService',
-function($scope, $cookieStore, authenticationService, fileTransferService, $state, notifications,backendURLService) {
+'authenticationService', 'fileTransferService', '$state', 'notifications', 'backendURLService', 'consumerPendingRequests', 'consumerPendingRequestsService', '$uibModal',
+function($scope, $cookieStore, authenticationService, fileTransferService, $state, notifications, backendURLService, consumerPendingRequests, consumerPendingRequestsService, $uibModal) {
 
   // Get consumer location
   if(navigator.geolocation){
@@ -54,27 +54,29 @@ function($scope, $cookieStore, authenticationService, fileTransferService, $stat
     $location.path('/');
   };
 
-  $scope.pendingRequests = [{
-    requestID: 1,
-    day: "15/03/2016",
-    hour: "22:33"
-  }, {
-    requestID: 2,
-    day: "15/03/2016",
-    hour: "12:33"
-  }, {
-    requestID: 3,
-    day: "17/03/2016",
-    hour: "14:22"
-  }, {
-    requestID: 4,
-    day: "18/03/2016",
-    hour: "12:22"
-  }, {
-    requestID: 5,
-    day: "19/03/2016",
-    hour: "19:32"
-  }];
+  $scope.pendingRequests = consumerPendingRequests.data.printrequests;
+
+  // $scope.pendingRequests = [{
+  //   requestID: 1,
+  //   day: "15/03/2016",
+  //   hour: "22:33"
+  // }, {
+  //   requestID: 2,
+  //   day: "15/03/2016",
+  //   hour: "12:33"
+  // }, {
+  //   requestID: 3,
+  //   day: "17/03/2016",
+  //   hour: "14:22"
+  // }, {
+  //   requestID: 4,
+  //   day: "18/03/2016",
+  //   hour: "12:22"
+  // }, {
+  //   requestID: 5,
+  //   day: "19/03/2016",
+  //   hour: "19:32"
+  // }];
 
   $scope.pdfFiles = [];
 
@@ -94,4 +96,77 @@ function($scope, $cookieStore, authenticationService, fileTransferService, $stat
     }
   };
 
+  $scope.openRejectModal = function(reply, id) {
+
+      var modalInstance = $uibModal.open({
+          animation: true,
+          templateUrl: 'app/components/consumer/views/cancel-modal.html',
+          controller: 'RequestCancelModalController',
+          size: 'md',
+          resolve: {
+              text: function() {
+                  return reply;
+              },
+              requestid: function() {
+                  return id;
+              }
+          }
+      });
+
+      modalInstance.result.then(function(requestid) {
+          consumerPendingRequestsService.rejectRequest(requestid, $scope.onCancelSuccessCallback, $scope.onCancelErroCallback);
+      });
+  }
+
+  $scope.onCancelSuccessCallback = function(data) {
+      $scope.openSuccessModal("O pedido foi cancelado com sucesso!");
+      $state.reload();
+  };
+
+  $scope.onCancelErroCallback = function(data) {
+      $scope.openSuccessModal("Ocorreu um erro a alterar o estado do pedido!");
+  };
+
+  $scope.openSuccessModal = function(reply) {
+
+      var modalInstance = $uibModal.open({
+          animation: true,
+          templateUrl: 'app/components/consumer/views/success-modal.html',
+          controller: 'SuccessModalController',
+          size: 'sm',
+          resolve: {
+              text: function() {
+                  return reply;
+              }
+          }
+      });
+  };
+
+}]);
+
+angular.module('ProxyPrint').controller('SuccessModalController', ['$scope', '$uibModalInstance', 'text', function($scope, $uibModalInstance, text){
+
+    $scope.text = text;
+
+    $scope.performAction = function () {
+        $uibModalInstance.close();
+    };
+
+    $scope.closeModal = function () {
+        $uibModalInstance.dismiss('cancel');
+    };
+}]);
+
+angular.module('ProxyPrint').controller('RequestCancelModalController', ['$scope', '$uibModalInstance', 'text', 'requestid', function($scope, $uibModalInstance, text, requestid){
+
+    $scope.text = text;
+    $scope.id = requestid;
+
+    $scope.performAction = function () {
+        $uibModalInstance.close($scope.id);
+    };
+
+    $scope.closeModal = function () {
+        $uibModalInstance.dismiss('cancel');
+    };
 }]);

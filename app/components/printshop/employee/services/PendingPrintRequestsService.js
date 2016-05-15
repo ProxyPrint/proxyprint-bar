@@ -16,18 +16,22 @@ function($http,backendURLService) {
         var url = backendURLService.getBaseURL()+'printshops/requests/'+id;
         return $http.post(url).success(function(data){
             if(data.success) {
-              successCallback(data);
+                successCallback(data);
             } else {
-              errorCallback(data);
+                errorCallback(data);
             }
         });
     };
 
-    service.rejectRequest = function(id) {
-        // var url = backendURLService.getBaseURL()+'printshops/requests/'+id;
-        // return $http.post(url).success(function(data){
-        //     return data;
-        // });
+    service.rejectRequest = function(id, motive , successCallback, errorCallback) {
+        var url = backendURLService.getBaseURL()+'printshops/requests/cancel/' + id;
+        return $http.post(url, motive).success(function(data){
+            if(data.success) {
+                successCallback(data);
+            } else {
+                errorCallback(data);
+            }
+        });
     };
 
     service.getRequest = function(id) {

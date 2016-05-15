@@ -40,7 +40,7 @@
                             <span class="corner"></span>
                             <span class="type pdf">pdf</span>
                         </div>
-                        <center>{{file.name}}</center>
+                        <center style="display:inline;">{{file.name}}</center>
                     </ul>
                 </div>
             </div>
@@ -61,8 +61,9 @@
                         <span class="corner"></span>
                         <span class="type pdf">pdf</span>
                     </div>
-                    <center>{{item.name}}</center>
-                    Especificação: {{spec.id}} Páginas: {{spec.pages}}
+                    <li style="display:inline;"> {{item.name}} <br /></li>
+                    <li style="display:inline;"> Especificação: {{spec.id}}<br /> </li>
+                    <li style="display:inline;"> Páginas: {{spec.pages}} </li>
                 </div>
             </div>
         </div>

@@ -38,14 +38,14 @@
                 <li class="list-group-item" ng-repeat="request in pendingRequests">
                     <div class="row">
                         <div class="col-sm-6">
-                            <strong> Pedido #{{request.requestID}} </strong>
-                            <br /> {{request.day}} {{request.hour}}
+                            <strong> Pedido #{{request.id}} </strong>
+                            <br /> {{request.arrivalTimestamp}}
                         </div>
                         <div class="col-sm-6">
 
                         </div>
                         <div class="col-sm-6">
-                            <button type="button" class="btn btn-default">Cancelar pedido</button>
+                            <button type="button" class="btn btn-default" ng-click="openRejectModal('Tem a certeza que quer cancelar o pedido?', request.id)">Cancelar pedido</button>
                         </div>
                     </div>
                 </li>

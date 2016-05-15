@@ -110,7 +110,10 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
     resolve: {
       notifications: ['notificationsService', function (notificationsService) {
         return notificationsService.getNotifications();
-      }]
+    }],
+    consumerPendingRequests: ['consumerPendingRequestsService', function (consumerPendingRequestsService) {
+      return consumerPendingRequestsService.getPendingRequests();
+    }]
     }
   })
   .state('consumer.settings' ,{
@@ -203,7 +206,13 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
   .state('employee.satisfied', {
     url: '/satisfied',
     templateUrl: '/app/components/printshop/employee/views/employee-requests-satisfied.html',
-    controller: 'SatisfiedRequestsCtrl'
+    controller: 'SatisfiedRequestsCtrl',
+    resolve: {
+      satisfiedPrintRequest: ['satisfiedPrintRequestsService',
+      function (satisfiedPrintRequestsService) {
+        return satisfiedPrintRequestsService.getSatisfiedRequests();
+      }]
+  }
   })
   .state('employee.history', {
     url: '/history',
