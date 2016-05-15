@@ -19,8 +19,8 @@ angular.module('ProxyPrint').factory('specMarshallService',[function () {
             spec.coverSpecs = "";
           }
           else {
-            spec.coverSpecs = "COVER,"+specification[5];
-            spec.bindingSpecs = "BINDING,"+specification[6]+","+specification[1];
+            spec.coverSpecs = "COVER,"+specification[5]+","+specification[2];
+            spec.bindingSpecs = "BINDING,"+specification[6];
           }
         }
         return spec;
@@ -31,7 +31,7 @@ angular.module('ProxyPrint').factory('specMarshallService',[function () {
       var spec = new Object();
 
       spec.name = specification.name;
-      spec.paperSpecs = specification.format+','+specification.sides+','+specification.colors;
+      spec.paperSpecs = "PAPER,"+specification.colors+','+specification.format+','+specification.sides;
 
 
       if (specification.content == null)
@@ -42,8 +42,8 @@ angular.module('ProxyPrint').factory('specMarshallService',[function () {
           spec.coverSpecs = "";
         }
         else {
-          spec.coverSpecs = specification.coverSpecs;
-          spec.bindingSpecs = specification.bindingSpecs+","+specification.format;
+          spec.coverSpecs = "COVER,"+specification.coverSpecs+","+specification.format;
+          spec.bindingSpecs = "BINDING,"+specification.bindingSpecs;
         }
 
       }
@@ -54,19 +54,20 @@ angular.module('ProxyPrint').factory('specMarshallService',[function () {
       var schema = new Object();
       schema.name = specification.name;
       var paperSpecs = specification.paperSpecs.split(',');
-      schema.format = paperSpecs[0];
-      schema.sides = paperSpecs[1];
-      schema.colors = paperSpecs[2];
+      schema.format = paperSpecs[2];
+      schema.sides = paperSpecs[3];
+      schema.colors = paperSpecs[1];
       if (specification.bindingSpecs!=''){
         var bindings = specification.bindingSpecs.split(',');
-        if (bindings=="STAPLING")
+        if (bindings[1]=="STAPLING")
           schema.content = 'stapled';
-        else schema.content = 'enc';
-        schema.bindingSpecs = bindings[0];
-      }
+        else
+          schema.content = 'enc';
+          schema.bindingSpecs = bindings[1];
+        }
       if (specification.coverSpecs!=''){
         var cover = specification.coverSpecs.split(',');
-        schema.coverSpecs = cover[0];
+        schema.coverSpecs = cover[1];
       }
       return schema;
     }
