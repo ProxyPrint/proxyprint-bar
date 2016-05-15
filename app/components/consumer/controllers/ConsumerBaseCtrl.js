@@ -1,6 +1,6 @@
 angular.module('ProxyPrint').controller('ConsumerController', ['$scope','$cookieStore',
-'authenticationService', 'fileTransferService', '$state', 'notifications', 'backendURLService', 'consumerPendingRequests', 'consumerPendingRequestsService', '$uibModal',
-function($scope, $cookieStore, authenticationService, fileTransferService, $state, notifications, backendURLService, consumerPendingRequests, consumerPendingRequestsService, $uibModal) {
+'authenticationService', 'fileTransferService', '$state', 'notifications', 'backendURLService', 'consumerPendingRequests', 'consumerPendingRequestsService', '$uibModal','notificationsService',
+function($scope, $cookieStore, authenticationService, fileTransferService, $state, notifications, backendURLService, consumerPendingRequests, consumerPendingRequestsService, $uibModal, 'notificationsService') {
 
   // Get consumer location
   if(navigator.geolocation){
@@ -17,19 +17,22 @@ function($scope, $cookieStore, authenticationService, fileTransferService, $stat
   $scope.consumer = $cookieStore.get('globals').currentUser;
   var audio = new Audio('assets/audio/notifications.mp3');
 
+
   var source = new EventSource(backendURLService.getBaseURL() + "/consumer/subscribe?username=" + $scope.consumer.username + "&password=" + $scope.consumer.password, {
     withCredentials: true
   });
 
+  console.log(notifications.data);
+
   $scope.notifications = notifications.data;
-  $scope.newNotifications = 0;
+  $scope.newNotifications = getNewNotificationsNumber($scope.notifications);
 
   var increaseNotifications = function(msg) {
     $scope.$apply(function() {
       var message = JSON.parse(msg.data);
       var d = new Date(message.timestamp);
       message.day = d.getDate() + '/' + d.getMonth() + '/' + d.getFullYear();
-      message.hour = d.getHours() + ':' + d.getMinutes();
+      message.hour = d.getHours() + ':' + ('0'+d.getMinutes()).slice(-2);
       message.read = false;
       $scope.notifications.unshift(message);
       $scope.newNotifications += 1;
@@ -38,10 +41,45 @@ function($scope, $cookieStore, authenticationService, fileTransferService, $stat
 
   };
 
+   function getNewNotificationsNumber (notifications) {
+    var i, total;
+    total = 0;
+    for (i=0;i<notifications.length;i++){
+      if (!notifications[i].read)
+        total ++;
+    }
+    return total;
+
+  };
+
   $scope.readNotification = function(index) {
+    notificationsService.readNotification($scope.notifications[index].id);
     $scope.notifications[index].read = true;
     $scope.newNotifications -= 1;
   };
+
+  $scope.removeNotification = function (index) {
+    if (!$scope.notifications[index].read)
+      $scope.newNotifications -= 1;
+
+    notificationsService.deleteNotification($scope.notifications[index].id);
+    $scope.notifications.splice(index,1);
+  }
+
+  $scope.removeAllNotifications = function () {
+    notificationsService.deleteAllNotifications($scope.consumer.username);
+    $scope.notifications = new Array();
+    $scope.newNotifications = 0;
+  }
+
+  $scope.markAllRead = function () {
+    var i;
+    notificationsService.readAllNotifications($scope.consumer.username);
+    for (i=0;i<$scope.notifications.length;i++){
+      $scope.notifications[i].read = true;
+    }
+    $scope.newNotifications = 0;
+  }
 
   source.addEventListener('message', increaseNotifications, false);
 

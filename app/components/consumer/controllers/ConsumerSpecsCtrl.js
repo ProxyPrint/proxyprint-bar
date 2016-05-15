@@ -167,6 +167,32 @@ function($scope, $uibModal, $log, fileTransferService, specMarshallService,
       });
     };
 
+    $scope.editSpecModal = function (index) {
+      var modalInstance = $uibModal.open({
+        animation: true,
+        templateUrl: 'app/components/consumer/views/edit-spec-modal.html',
+        controller: 'EditSpecificationController',
+        size: 'md',
+        resolve: {
+          schema: function () {
+            return $scope.specs[index];
+          },
+          id: function () {
+            return $scope.specs[index].id;
+          }
+        }
+      });
+
+
+      modalInstance.result.then(function(spec) {
+        var schema = specMarshallService.marshallEditedSpecification(spec);
+        printingSchemaService.editPrintingSchema(spec.id, schema,$cookieStore.get('consumerID'));
+        schema.fakeID = spec.fakeID;
+        schema.id = spec.id;
+        $scope.specs[spec.fakeID-1] = schema;
+      });
+    }
+
     $scope.removePrintingSchema = function (index) {
       printingSchemaService.deletePrintingSchema($scope.specs[index].id, $cookieStore.get('consumerID'));
       $scope.specs.splice(index,1);
@@ -174,6 +200,7 @@ function($scope, $uibModal, $log, fileTransferService, specMarshallService,
 
     $scope.addPrintingSchema = function (schema) {
       printingSchemaService.addPrintingSchema(schema, $cookieStore.get('consumerID'));
+      console.log(schema);
       $scope.specs.push(schema);
     };
 
@@ -225,4 +252,22 @@ function($scope, $uibModal, $log, fileTransferService, specMarshallService,
     $scope.closeModal = function () {
       $uibModalInstance.dismiss('cancel');
     };
+  }]);
+
+  angular.module('ProxyPrint').controller('EditSpecificationController',
+          ['$scope', '$uibModalInstance', 'schema','id', 'specMarshallService',
+          function ($scope, $uibModalInstance, schema, id, specMarshallService) {
+
+            $scope.schema = specMarshallService.unmarshallSpecification(schema);
+            $scope.schema.id = id;
+            $scope.schema.fakeID = schema.fakeID;
+
+            $scope.performAction = function () {
+              $uibModalInstance.close($scope.schema);
+            };
+
+            $scope.closeModal = function () {
+              $uibModalInstance.dismiss('cancel');
+            };
+
   }]);

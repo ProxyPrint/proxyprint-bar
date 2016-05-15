@@ -6,7 +6,7 @@ angular.module('ProxyPrint').factory('notificationsService', ['$http', 'backendU
         var d = new Date(message.timestamp);
         message.day = d.getDate() + '/' + d.getMonth() + '/' + d.getFullYear();
         message.hour = d.getHours() + ':' + d.getMinutes();
-        message.read = true;
+        message.read = message.readStatus;
         return message;
     }
 
@@ -20,6 +20,34 @@ angular.module('ProxyPrint').factory('notificationsService', ['$http', 'backendU
                 return notifications;
             });
     };
+
+    service.deleteNotification = function (notificationID) {
+      return $http.delete(backendURLService.getBaseURL()+'notifications/'+notificationID)
+        .success(function (data){
+          return data;
+        });
+    };
+
+    service.deleteAllNotifications = function (consumerName) {
+      return $http.delete(backendURLService.getBaseURL()+'consumer/'+consumerName+'/notifications')
+        .success( function (data) {
+          return data;
+        });
+    }
+
+    service.readNotification = function (notificationID) {
+      return $http.put(backendURLService.getBaseURL()+'notifications/'+notificationID)
+        .success (function (data) {
+          return data;
+        });
+    }
+
+    service.readAllNotifications = function (consumerName) {
+      return $http.put(backendURLService.getBaseURL()+'consumer/'+consumerName+'/notifications')
+        .success( function (data) {
+          return data;
+        });
+    }
 
 
     return service;

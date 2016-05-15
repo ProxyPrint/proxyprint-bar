@@ -27,6 +27,53 @@ angular.module('ProxyPrint').factory('specMarshallService',[function () {
 
     }
 
+    service.marshallEditedSpecification = function (specification) {
+      var spec = new Object();
+
+      spec.name = specification.name;
+      spec.paperSpecs = specification.format+','+specification.sides+','+specification.colors;
+
+
+      if (specification.content == null)
+        spec.bindingSpecs = spec.coverSpecs = "";
+      else {
+        if (specification.bindingSpecs == "STAPLING"){
+          spec.bindingSpecs = "STAPLING";
+          spec.coverSpecs = "";
+        }
+        else {
+          spec.coverSpecs = specification.coverSpecs;
+          spec.bindingSpecs = specification.bindingSpecs+","+specification.format;
+        }
+
+      }
+      return spec;
+    }
+
+    service.unmarshallSpecification = function (specification) {
+      var schema = new Object();
+      schema.name = specification.name;
+      var paperSpecs = specification.paperSpecs.split(',');
+      schema.format = paperSpecs[0];
+      schema.sides = paperSpecs[1];
+      schema.colors = paperSpecs[2];
+      if (specification.bindingSpecs!=''){
+        var bindings = specification.bindingSpecs.split(',');
+        if (bindings=="STAPLING")
+          schema.content = 'stapled';
+        else schema.content = 'enc';
+        schema.bindingSpecs = bindings[0];
+      }
+      if (specification.coverSpecs!=''){
+        var cover = specification.coverSpecs.split(',');
+        schema.coverSpecs = cover[0];
+      }
+      return schema;
+    }
+
+
+
+
 
 
     return service;

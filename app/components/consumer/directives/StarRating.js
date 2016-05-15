@@ -1,6 +1,6 @@
 
 
-angular.module('ProxyPrint').directive('starRating', function () {
+angular.module('ProxyPrint').directive('starRating', [function () {
     return {
         scope: {
             rating: '=',
@@ -63,4 +63,4 @@ angular.module('ProxyPrint').directive('starRating', function () {
 			};
         }
     };
-});
+}]);
