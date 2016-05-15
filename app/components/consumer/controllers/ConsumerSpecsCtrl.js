@@ -173,9 +173,9 @@ function($scope, $uibModal, $log, fileTransferService, specMarshallService,
 
       modalInstance.result.then(function(spec) {
         var schema = specMarshallService.marshallEditedSpecification(spec);
-        console.log(schema);
         printingSchemaService.editPrintingSchema(spec.id, schema,$cookieStore.get('consumerID'));
         schema.fakeID = spec.fakeID;
+        schema.id = spec.id;
         $scope.specs[spec.fakeID-1] = schema;
       });
     }
