@@ -1,6 +1,6 @@
 angular.module('ProxyPrint').controller('ConsumerController', ['$scope','$cookieStore',
 'authenticationService', 'fileTransferService', '$state', 'notifications', 'backendURLService', 'consumerPendingRequests', 'consumerPendingRequestsService', '$uibModal','notificationsService',
-function($scope, $cookieStore, authenticationService, fileTransferService, $state, notifications, backendURLService, consumerPendingRequests, consumerPendingRequestsService, $uibModal, 'notificationsService') {
+function($scope, $cookieStore, authenticationService, fileTransferService, $state, notifications, backendURLService, consumerPendingRequests, consumerPendingRequestsService, $uibModal, notificationsService) {
 
   // Get consumer location
   if(navigator.geolocation){
