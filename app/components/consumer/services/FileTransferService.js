@@ -1,4 +1,4 @@
-angular.module('ProxyPrint').factory('fileTransferService', ['Upload', '$timeout', 'backendURLService', '$cookieStore', function(Upload, $timeout, backendURLService, $cookieStore) {
+angular.module('ProxyPrint').factory('fileTransferService', ['Upload', '$timeout', 'backendURLService', '$cookieStore', '$state', function(Upload, $timeout, backendURLService, $cookieStore, $state) {
 
     var service = {};
     service.processedFiles = {};
@@ -11,8 +11,6 @@ angular.module('ProxyPrint').factory('fileTransferService', ['Upload', '$timeout
             var contents = event.target.result;
             PDFJS.getDocument(contents).then(function(doc) {
                 var numPages = doc.numPages;
-                console.log('# Document Loaded');
-                console.log('Number of Pages: ' + numPages);
                 callback({
                     "name": file.name,
                     "pages": numPages,
@@ -29,7 +27,7 @@ angular.module('ProxyPrint').factory('fileTransferService', ['Upload', '$timeout
         reader.readAsArrayBuffer(file);
     };
 
-    service.TransferFiles = function(files, callback) {
+    service.ProcessFiles = function(files, callback) {
         var filesToStore = [];
         var queue = async.queue(readPages, 1);
         for (var i = 0; i < files.length; i++) {
@@ -38,7 +36,6 @@ angular.module('ProxyPrint').factory('fileTransferService', ['Upload', '$timeout
             filesToStore.push(file.name);
             if (!file.$error) {
                 queue.push(files[i], function(processedFile) {
-                    console.log(processedFile);
                     service.processedFiles.files[processedFile.name] = {
                         specs: processedFile.specs,
                         pages: processedFile.pages
@@ -47,9 +44,7 @@ angular.module('ProxyPrint').factory('fileTransferService', ['Upload', '$timeout
             }
         }
         $cookieStore.put("uploadedFilesNames", filesToStore);
-        queue.drain = function() {
-            console.log(service.processedFiles);
-        };
+        queue.drain = function() {};
     };
 
     service.setFiles = function(files) {

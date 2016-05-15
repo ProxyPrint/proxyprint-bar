@@ -73,11 +73,11 @@ app.factory('printShopListService', ['Upload', '$timeout', '$http', 'backendURLS
     return printshops;
   };
 
-  service.getSelectedPrintShopsIDs = function() {
+  service.getSelectedPrintShops = function() {
     return $cookieStore.get('selectedPrintShops');
   };
 
-  service.setSelectedPrintShopsIDs = function(pshopids) {
+  service.setSelectedPrintShops = function(pshopids) {
     $cookieStore.put('selectedPrintShops', pshopids);
   };
 
