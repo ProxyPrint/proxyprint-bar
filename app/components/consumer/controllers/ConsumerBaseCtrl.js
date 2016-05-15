@@ -17,8 +17,6 @@ function($scope, $cookieStore, authenticationService, fileTransferService, $stat
   $scope.consumer = $cookieStore.get('globals').currentUser;
   var audio = new Audio('assets/audio/notifications.mp3');
 
-  console.log($scope.consumer);
-
   var source = new EventSource(backendURLService.getBaseURL() + "/consumer/subscribe?username=" + $scope.consumer.username + "&password=" + $scope.consumer.password, {
     withCredentials: true
   });
@@ -28,7 +26,6 @@ function($scope, $cookieStore, authenticationService, fileTransferService, $stat
 
   var increaseNotifications = function(msg) {
     $scope.$apply(function() {
-      console.log($scope.newNotifications);
       var message = JSON.parse(msg.data);
       var d = new Date(message.timestamp);
       message.day = d.getDate() + '/' + d.getMonth() + '/' + d.getFullYear();

@@ -9,8 +9,6 @@ angular.module('ProxyPrint')
     $scope.printshops.push(pshop);
   }
 
-  console.log($scope.printshops);
-
   $scope.selectedPrintShops = [];
   $scope.printShopsOptions = $scope.printshops;
   $scope.submitedFiles = $cookieStore.get("uploadedFilesNames");
@@ -58,44 +56,30 @@ angular.module('ProxyPrint')
   $scope.proceedRequest = function() {
     var choosenPShops = {};
     var choosenPShopsIDs = [];
-    console.log("SELECTED!");
-    console.log($scope.selectedPrintShops);
+
     for(var i=0; i < $scope.selectedPrintShops.length; i++) {
-      console.log("INDEX: "+i);
       $scope.pshopNames[$scope.selectedPrintShops[i].id] = $scope.selectedPrintShops[i].name;
       choosenPShops[$scope.selectedPrintShops[i].id] = $scope.selectedPrintShops[i];
       choosenPShopsIDs.push($scope.selectedPrintShops[i].id);
     }
-    console.log(choosenPShops);
-    printShopListService.setSelectedPrintShops(choosenPShops);
 
-    // REMOVE BELOW SHOULD GO TO ANOTHER CONTROLLER IN NEXT SPRINT
-    // alert("Fazer orçamentos para reprografias: "+printShopListService.getSelectedPrintShops());
+    printShopListService.setSelectedPrintShops(choosenPShops);
 
     var printRequest = fileTransferService.getProcessedFiles();
     if(printRequest!==null) {
       printRequest["printshops"] = choosenPShopsIDs;
-      $cookieStore.put("printRequest", printRequest);
-      // budgetService.getMeBudgetsForThis($scope.budgetSuccessCallback, $scope.budgetErrorCallback, printRequest);
-      $state.go("consumer.budgetselection");
+      budgetService.getMeBudgetsForThis($scope.budgetSuccessCallback, $scope.budgetErrorCallback, printRequest, fileTransferService.getFiles());
     }
   };
 
-  /*---------------------------- Budget Callbacks ------------------------------*/
-  $scope.budgetSuccessCallback = function(data) {
-    console.log($scope.pshopNames);
-    var budgets = data.budgets;
-    var res = "";
-    for(var pshopid in data.budgets) {
-      res = res.concat("Printshop: "+$scope.pshopNames[pshopid]+" custa "+data.budgets[pshopid].toFixed(2)+" €.\n");
-    }
-    alert(res);
+  $scope.budgetSuccessCallback = function() {
+    $state.go("consumer.budgetselection");
   };
 
   $scope.budgetErrorCallback = function(data) {
+    alert("Os orçamentos não puderam se efetuados. Por favor tente mais tarde.");
     console.log(data);
   };
-  /*----------------------------------------------------------------------------*/
 
   function remove(arr, item) {
     for (var i = arr.length; i--;) {

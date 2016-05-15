@@ -45,7 +45,7 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
   /*Consumer*/
   $stateProvider
   .state('notFound', {
-    url: '/404',
+    url: '/notfound',
     templateUrl: '/app/shared/views/404.html',
     data: {
       css: adminlteCSS
@@ -155,10 +155,10 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
   .state('consumer.budgetselection', {
     url: '/budgets',
     templateUrl: '/app/components/consumer/views/consumer-budget-selection.html',
-    controller: 'ConsumerBudgetCtrl',
+    controller: 'ConsumerBudgetSelectionCtrl',
     resolve: {
-      budgets : ['budgetService', '$cookieStore', function(budgetService, $cookieStore) {
-        return budgetService.getMeBudgetsForThis($cookieStore.get("printRequest"));
+      budgets : ['budgetService', function(budgetService) {
+        return budgetService.getBudgets();
       }]
     }
   })

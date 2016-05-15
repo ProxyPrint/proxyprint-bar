@@ -11,8 +11,6 @@ angular.module('ProxyPrint').factory('fileTransferService', ['Upload', '$timeout
             var contents = event.target.result;
             PDFJS.getDocument(contents).then(function(doc) {
                 var numPages = doc.numPages;
-                console.log('# Document Loaded');
-                console.log('Number of Pages: ' + numPages);
                 callback({
                     "name": file.name,
                     "pages": numPages,
@@ -38,7 +36,6 @@ angular.module('ProxyPrint').factory('fileTransferService', ['Upload', '$timeout
             filesToStore.push(file.name);
             if (!file.$error) {
                 queue.push(files[i], function(processedFile) {
-                    console.log(processedFile);
                     service.processedFiles.files[processedFile.name] = {
                         specs: processedFile.specs,
                         pages: processedFile.pages
@@ -47,30 +44,7 @@ angular.module('ProxyPrint').factory('fileTransferService', ['Upload', '$timeout
             }
         }
         $cookieStore.put("uploadedFilesNames", filesToStore);
-        queue.drain = function() {
-            console.log(service.processedFiles);
-            service.TransferFiles(service.files);
-        };
-    };
-
-    service.TransferFiles = function(files, callback) {
-        console.log(files);
-        Upload.upload({
-            url: backendURLService.getBaseURL() + 'consumer/upload',
-            data: {
-                files: files,
-                processedFiles: service.processedFiles,
-                printshop: "1"
-            }
-        }).then(function(resp) {
-            $timeout(function() {
-                console.log('Response: ' + JSON.stringify(resp.data));
-            });
-        }, null, function(evt) {
-            var progressPercentage = parseInt(100.0 *
-                evt.loaded / evt.total);
-            console.log(evt);
-        });
+        queue.drain = function() {};
     };
 
     service.setFiles = function(files) {

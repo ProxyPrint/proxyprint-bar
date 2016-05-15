@@ -19,7 +19,7 @@
 							<td>{{printshop.name}}</td>
 							<td>{{printshop.distance}} km</td>
 							<td>{{printshop.budget}}  <span ng-if="printshop.hasBudget==true">€</span></td>
-							<td><input type="radio" name="theChosenOne" ng-model="$parent.theChosenOne" value="printshop.id" ng-value="printshop.id"></td>
+							<td><input ng-if="printshop.hasBudget==true" type="radio" name="theChosenOne" ng-model="$parent.$parent.theChosenOne" value="printshop.id" ng-value="printshop.id"></td>
 						</tr>
 					</tbody>
 				</table>
