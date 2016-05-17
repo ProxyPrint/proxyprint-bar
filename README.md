@@ -1,6 +1,14 @@
-# proxyprint-bar
+# ProxyPrint
 
 
+![alt text](assets/img/logo/logo_blue_dark.png "Beautiful logo!")
+
+ProxyPrint is a platform where both printshops and regular consumer can use. In other words, one has access (within ProxyPrint) to all printshops registered there, which means one's not only able to make requests online (having to collect them phisically afterwards) but can also compare the cost of his printing request across all printshops.
+
+
+### ProxyPrint-bar
+
+This is the front-end's page - ProxyPrint-bar! It's written in Angular and communicates with ProxyPrint-kitchen - its back-end (Spring Boot). 
 
 
 #####Angular naming conventions
