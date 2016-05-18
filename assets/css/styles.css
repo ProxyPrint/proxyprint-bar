@@ -335,6 +335,11 @@ border-top: 1px solid #dddddd;
   margin-right: 20%;
 }
 
+hr.review {
+	margin-top: 3px;
+  margin-bottom:3px;
+}
+
 /**
 * For the correct positioning of the placeholder element, the dnd-list and
 * it's children must have position: relative

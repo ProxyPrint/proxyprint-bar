@@ -33,7 +33,32 @@
         </div>
     </div>
 
-    <div class="reviews-box">
 
+    <div class="reviews-box">
+      <div class="center">
+        <h2>Avaliações</h2>
+      </div>
+        <ul class="list-group">
+          <div class="list-group-item" ng-repeat="review in printshop.reviews">
+            <div class="row">
+              <div class="col-sm-4">
+                <strong>{{review.user}}</strong>:
+                <hr class="review"/>
+              </div>
+              <div class="col-sm-4">
+
+              </div>
+              <div class="col-sm-4">
+                <div class="right">
+
+                  {{review.score}}
+                </div>
+              </div>
+            </div>
+
+              {{review.content}}
+
+          </div>
+        </ul>
     </div>
 </div>
