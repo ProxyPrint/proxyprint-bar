@@ -1,12 +1,12 @@
 angular.module('ProxyPrint')
-   .controller('ConsumerPrintshopPageCtrl', ['$scope', function ($scope) {
+   .controller('ConsumerPrintshopPageCtrl', ['$scope','NgMap', function ($scope, NgMap) {
 
       $scope.printshop = {
         name: "Impressões Vasconcelos",
         address: "Rua Margarida Filipe Pinto Gomes, 35 Braga",
         rating: 4,
-        latitude: 54.2222,
-        longitude: 23.1123,
+        latitude: 41.55,
+        longitude: -8.4333,
         reviews: [
           {
           user: "Rogério",
@@ -25,5 +25,20 @@ angular.module('ProxyPrint')
           score: 5
           }
         ]};
+
+        var map = new google.maps.Map(document.getElementById('map-canvas'), {
+          zoom: 15,
+          center: new google.maps.LatLng($scope.printshop.latitude, $scope.printshop.longitude),
+          mapTypeId: google.maps.MapTypeId.TERRAIN,
+          minZoom: 2
+       });
+
+       marker = new google.maps.Marker({
+         position: new google.maps.LatLng($scope.printshop.latitude, $scope.printshop.longitude),
+         title: "Character",
+         map: map
+       });
+
+
 
 }]);
