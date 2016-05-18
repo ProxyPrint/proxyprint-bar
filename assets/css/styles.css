@@ -320,7 +320,7 @@ border-top: 1px solid #dddddd;
   padding: 10px;
   background: black;
   height: auto;
-  opacity: .45; /* Set the opacity for a slightly transparent Google Form */
+  opacity: .64; /* Set the opacity for a slightly transparent Google Form */
   color: white;
 }
 
@@ -341,8 +341,7 @@ hr.review {
 }
 
 .review-content {
-  .margin-left:5%;
-  .margin-right: 5%;
+  padding-left: 5%;
 }
 
 /*** Ratings ***/

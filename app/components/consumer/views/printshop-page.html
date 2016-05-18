@@ -3,12 +3,15 @@
     <left><strong>{{printshop.name}}</strong>
         <br />
         <small>{{printshop.address}}</small></left>
+    <div class="right">
+      <div star-rating rating-value="printshop.rating" max="5" read-only="true"></div>
+    </div>
 </div>
 <div class="map-canvas-offset">
 
 
     <div class="printshop-buttons">
-        <div class="button button-border button-rounded button-default">
+        <div class="button button-border button-rounded button-action">
             <i class="fa fa-euro"></i> Preçário
         </div>
         <div class="button button-border button-rounded button-primary">
@@ -34,15 +37,13 @@
                     <div class="col-sm-4">
                         <div class="right">
                             <div star-rating rating-value="review.score" max="5" read-only="true"></div>
+                        </div>
                     </div>
+                    <div class="review-content">
+                        {{review.content}}
+                    </div>
+
                 </div>
-                <div class="review-content">
-
-
-                {{review.content}}
-                </div>
-
-            </div>
         </ul>
+        </div>
     </div>
-</div>
