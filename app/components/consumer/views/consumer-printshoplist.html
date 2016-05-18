@@ -15,8 +15,8 @@
 <div class="container">
 	<div class="printshops">
 		<h2>Reprografias</h2>
-		<ul class="list-group">
-			<li class="list-group-item clearfix" ng-repeat="printshop in printshops | filter : psName" ng-click="loadPrintshop($index)">
+		<ul class="list-group" ng-repeat="printshop in printshops | filter : psName" >
+			<li class="list-group-item clearfix printshop-item" ng-click="loadPrintshop($index)">
 				<div class="left">
 					{{printshop.name}}
 					<br> {{printshop.address}}

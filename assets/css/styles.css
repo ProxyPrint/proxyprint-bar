@@ -284,6 +284,10 @@ border-top: 1px solid #dddddd;
     margin-left: 10%;
 }
 
+.printshop-item:hover {
+  border-color: #0088CC;
+}
+
 /**
 * For the correct positioning of the placeholder element, the dnd-list and
 * it's children must have position: relative

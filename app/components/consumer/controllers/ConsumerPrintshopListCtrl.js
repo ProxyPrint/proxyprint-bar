@@ -20,7 +20,7 @@ angular.module('ProxyPrint')
       ];
 
       $scope.loadPrintshop = function (index) {
-        $state.go('printshoppage', {printshopid: $scope.printshops[index].id});
+        $state.go('consumer.printshop', {printshopid: $scope.printshops[index].id});
       }
 
 }]);
