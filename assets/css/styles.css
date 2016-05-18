@@ -340,6 +340,38 @@ hr.review {
   margin-bottom:3px;
 }
 
+.review-content {
+  .margin-left:5%;
+  .margin-right: 5%;
+}
+
+/*** Ratings ***/
+.rating {
+    color: #a9a9a9;
+    margin: 0;
+    padding: 0;
+}
+ul.rating {
+    display: inline-block;
+}
+.rating li {
+    list-style-type: none;
+    display: inline-block;
+    padding: 1px;
+    text-align: center;
+    font-weight: bold;
+    cursor: pointer;
+    font-size:20px;
+}
+.rating .filled {
+    color: #ffcc00;
+}
+.clear{
+  margin-top:20px;
+}
+
+
+
 /**
 * For the correct positioning of the placeholder element, the dnd-list and
 * it's children must have position: relative

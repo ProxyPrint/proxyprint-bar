@@ -1,18 +1,3 @@
-<!--
-<div class ="printshop-map"
-<div class="printshop-details">
-
-  <ng-map center="{{printshop.latitude}},{{printshop.longitude}}" zoom="15">
-      <marker position="{{printshop.latitude}},{{printshop.longitude}}" title="{{printshop.name}}"></marker>
-    </ng-map>
-
-
-
-    </div>
-
-
-</div>-->
-
 <div id="map-canvas"></div>
 <div class="printshop-details">
     <left><strong>{{printshop.name}}</strong>
@@ -23,42 +8,41 @@
 
 
     <div class="printshop-buttons">
-         <div class="button button-border button-rounded button-default">
-           <i class="fa fa-euro"></i>
-            Preçário
+        <div class="button button-border button-rounded button-default">
+            <i class="fa fa-euro"></i> Preçário
         </div>
-         <div class="button button-border button-rounded button-primary">
-           <i class="fa fa-star"></i>
-            Avaliar a reprografia
+        <div class="button button-border button-rounded button-primary">
+            <i class="fa fa-star"></i> Avaliar a reprografia
         </div>
     </div>
 
 
     <div class="reviews-box">
-      <div class="center">
-        <h2>Avaliações</h2>
-      </div>
+        <div class="center">
+            <h2>Avaliações</h2>
+        </div>
         <ul class="list-group">
-          <div class="list-group-item" ng-repeat="review in printshop.reviews">
-            <div class="row">
-              <div class="col-sm-4">
-                <strong>{{review.user}}</strong>:
-                <hr class="review"/>
-              </div>
-              <div class="col-sm-4">
+            <div class="list-group-item" ng-repeat="review in printshop.reviews">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <strong>{{review.user}}</strong>:
+                        <hr class="review" />
+                    </div>
+                    <div class="col-sm-4">
 
-              </div>
-              <div class="col-sm-4">
-                <div class="right">
-
-                  {{review.score}}
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="right">
+                            <div star-rating rating-value="review.score" max="5" read-only="true"></div>
+                    </div>
                 </div>
-              </div>
+                <div class="review-content">
+
+
+                {{review.content}}
+                </div>
+
             </div>
-
-              {{review.content}}
-
-          </div>
         </ul>
     </div>
 </div>
