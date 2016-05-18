@@ -288,6 +288,11 @@ border-top: 1px solid #dddddd;
   border-color: #0088CC;
 }
 
+.printshop-map {
+  margin-left:10%;
+  margin-right:20%;
+}
+
 /**
 * For the correct positioning of the placeholder element, the dnd-list and
 * it's children must have position: relative
