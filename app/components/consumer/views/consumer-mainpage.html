@@ -1,55 +1,60 @@
 <div class="row">
-    <div class="col-sm-8">
+  <div class="col-sm-8">
 
 
-        <div class="dndbox">
-            <div ngf-drop="addFiles($files)" ngf-select="addFiles($files)" ng-model="files" class="drop-box" ngf-drag-over-class="'dragover'" ngf-multiple="true" ngf-allow-dir="true" accept="application/pdf" ngf-pattern="'application/pdf'">
-                <br />
-                <h4>Arraste ficheiros ou clique para fazer upload</h4>
-                <i class="fa fa-upload fa-4x"></i>
-                <div class="uploaded-files-box">
-                    Ficheiros selecionados:
-                    <div class="row" ng-repeat="file in pdfFiles" ng-if="$index % 3 == 0">
-                        <div class="col-sm-4">
-                            {{$index+1}}. {{file.name}}
-                        </div>
-                        <div class="col-sm-4">
-                            <div ng-if="pdfFiles[$index + 1]!= null">{{$index+2}}.  {{pdfFiles[$index+1].name}}</div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div ng-if="pdfFiles[$index + 2]!= null">{{$index+3}}.  {{pdfFiles[$index+2].name}}</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div class="dndbox">
+      <div ngf-drop="addFiles($files)" ngf-select="addFiles($files)" ng-model="files" class="drop-box" ngf-drag-over-class="'dragover'" ngf-multiple="true" ngf-allow-dir="true" accept="application/pdf" ngf-pattern="'application/pdf'">
         <br />
-        <div style="text-align:center">
-            <button ng-class="pdfFiles.length===0 ? 'btn btn-primary' : 'btn btn-primary hvr-buzz'" ng-click="uploadFiles()" ng-disabled="pdfFiles.length===0">Submeter pedido</button>
+        <h4>Arraste ficheiros ou clique para fazer upload</h4>
+        <i class="fa fa-upload fa-4x"></i>
+        <div class="uploaded-files-box">
+          Ficheiros selecionados:
+          <div class="row" ng-repeat="file in pdfFiles" ng-if="$index % 3 == 0">
+            <div class="col-sm-4">
+              {{$index+1}}. {{file.name}}
+            </div>
+            <div class="col-sm-4">
+              <div ng-if="pdfFiles[$index + 1]!= null">{{$index+2}}.  {{pdfFiles[$index+1].name}}</div>
+            </div>
+            <div class="col-sm-4">
+              <div ng-if="pdfFiles[$index + 2]!= null">{{$index+3}}.  {{pdfFiles[$index+2].name}}</div>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
-
-    <div class="col-sm-4">
-        <div class="center">
-            <h2> Pedidos pendentes </h2>
-        </div>
-        <div class="scrollableTable">
-            <ul class="list-group">
-                <li class="list-group-item" ng-repeat="request in pendingRequests">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <strong> Pedido #{{request.id}} </strong>
-                            <br /> {{request.arrivalTimestamp}}
-                        </div>
-                        <div class="col-sm-6">
-
-                        </div>
-                        <div class="col-sm-6">
-                            <button type="button" class="btn btn-default" ng-click="openRejectModal('Tem a certeza que quer cancelar o pedido?', request.id)">Cancelar pedido</button>
-                        </div>
-                    </div>
-                </li>
-            </ul>
-        </div>
+    <br />
+    <div style="text-align:center">
+      <button ng-class="pdfFiles.length===0 ? 'btn btn-primary' : 'btn btn-primary hvr-buzz'" ng-click="uploadFiles()" ng-disabled="pdfFiles.length===0">Submeter pedido</button>
     </div>
+  </div>
+
+  <div class="col-sm-4">
+    <div class="center">
+      <h2> Pedidos pendentes </h2>
+    </div>
+    <div class="scrollableTable">
+      <ul class="list-group">
+        <li class="list-group-item" ng-repeat="request in pendingRequests">
+          <div class="row">
+            <div class="col-sm-6">
+              <strong> Pedido #{{request.id}} </strong>
+              <br /> {{request.arrivalTimestamp}}
+            </div>
+            <div class="col-sm-6">
+            </div>
+            <div class="col-sm-6">
+              <button type="button" class="btn btn-default" ng-click="openRejectModal('Tem a certeza que quer cancelar o pedido?', request.id)">Cancelar pedido</button>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
 </div>
+<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" target="_blank">
+  <input type="hidden" name="cmd" value="_s-xclick">
+  <input type="hidden" name="hosted_button_id" value="CR5YELHNXNUK2">
+  <input type="image" src="https://www.sandbox.paypal.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+  <img alt="" border="0" src="https://www.sandbox.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
