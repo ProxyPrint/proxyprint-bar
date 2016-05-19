@@ -75,10 +75,14 @@ angular.module('ProxyPrint')
 
 
       angular.module('ProxyPrint').controller('DisplayPricetableCtrl',
-         ['$scope', '$uibModalInstance','pricetable',
-         function ($scope, $uibModalInstance, pricetable) {
+         ['$scope', '$uibModalInstance','pricetable', 'priceTableService',
+         function ($scope, $uibModalInstance, pricetable, priceTableService) {
 
         $scope.pricetable = pricetable.data;
+
+        $scope.getPresentationStringForCovers = function(key) {
+          return priceTableService.getPresentationStringForCovers(key);
+        };
 
         $scope.closeModal = function () {
           console.log($scope.pricetable);

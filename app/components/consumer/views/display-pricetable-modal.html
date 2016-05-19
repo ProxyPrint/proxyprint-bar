@@ -1,9 +1,116 @@
 <div class="modal-header">
+    <div class="center">
+        <h2>Preçário</h2>
+    </div>
 </div>
 <div class="modal-body" style="text-align:center">
-    <h4>Modal</h4>
+    <div class="row">
+        <div class="col-sm-12">
+            <table class="table table-bordered table-striped" role="grid">
+                <thead>
+                    <tr role="row">
+                        <th>Preto e Branco</th>
+                        <th colspan="2" style="text-align: center;">A4</th>
+                        <th colspan="2" style="text-align: center;">A3</th>
+                    </tr>
+                </thead>
+                <thead>
+                    <tr role="row">
+                        <th>Quantidade</th>
+                        <th style="text-align: center;">1 Lado</th>
+                        <th style="text-align: center;">2 Lados</th>
+                        <th style="text-align: center;">1 Lado</th>
+                        <th style="text-align: center;">2 Lados</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr role="row" class="odd" ng-repeat="item in pricetable['printcopy']['BW']">
+                        <td>{{item.infLim}}-{{item.supLim}}</td>
+                        <td style="text-align: center;">{{item.priceA4SIMPLEX}}<span ng-if="item.priceA4SIMPLEX!='-'"> €</span></td>
+                        <td style="text-align: center;">{{item.priceA4DUPLEX}}<span ng-if="item.priceA4DUPLEX!='-'"> €</span></td>
+                        <td style="text-align: center;">{{item.priceA3SIMPLEX}}<span ng-if="item.priceA3SIMPLEX!='-'"> €</span></td>
+                        <td style="text-align: center;">{{item.priceA3DUPLEX}}<span ng-if="item.priceA3DUPLEX!='-'"> €</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <table class="table table-bordered table-striped" role="grid">
+                <thead>
+                    <tr role="row">
+                        <th>Cores</th>
+                        <th colspan="2" style="text-align: center;">A4</th>
+                        <th colspan="2" style="text-align: center;">A3</th>
+                    </tr>
+                </thead>
+                <thead>
+                    <tr role="row">
+                        <th>Quantidade</th>
+                        <th style="text-align: center;">1 Lado</th>
+                        <th style="text-align: center;">2 Lados</th>
+                        <th style="text-align: center;">1 Lado</th>
+                        <th style="text-align: center;">2 Lados</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr role="row" class="odd" ng-repeat="item in pricetable['printcopy']['COLOR']">
+                        <td>{{item.infLim}}-{{item.supLim}}</td>
+                        <td style="text-align: center;">{{item.priceA4SIMPLEX}}<span ng-if="item.priceA4SIMPLEX!='-'"> €</span></td>
+                        <td style="text-align: center;">{{item.priceA4DUPLEX}}<span ng-if="item.priceA4DUPLEX!='-'"> €</span></td>
+                        <td style="text-align: center;">{{item.priceA3SIMPLEX}}<span ng-if="item.priceA3SIMPLEX!='-'"> €</span></td>
+                        <td style="text-align: center;">{{item.priceA3DUPLEX}}<span ng-if="item.priceA3DUPLEX!='-'"> €</span></td>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6"></div>
+        <div class="col-sm-6"></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <table class="table table-bordered table-striped" role="grid">
+                <thead>
+                    <th colspan="9">Argolas Espiral</th>
+                </thead>
+                <tbody>
+                    <tr role="row" ng-repeat="item in pricetable.rings['SPIRAL']">
+                        <td style="text-align: center;">{{item.infLim}}mm-{{item.supLim}}mm</td>
+                        <td style="text-align: center;">{{item.price}} €</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <table class="table table-bordered table-striped" role="grid">
+          <thead>
+            <tr role="row">
+              <th colspan="6">Capas para encadernar</th>
+            </tr>
+          </thead>
+          <thead>
+            <tr role="row">
+              <th style="width:15%;">Tipo</th>
+              <th style="text-align:center;width:10%;">A4</th>
+              <th style="text-align:center;width:10%;">A3</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr role="row" class="odd" ng-repeat="item in pricetable.covers">
+              <td >{{getPresentationStringForCovers(item.coverType)}}</td>
+              <td style="text-align: center;">{{item.priceA4}} <span ng-if="item.priceA4!='-'"> €</span></td>
+              <td style="text-align: center;">{{item.priceA3}} <span ng-if="item.priceA3!='-'"> €</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
 </div>
+<!-- ./table-rings-PLASTIC-->
 <div class="modal-footer" style="text-align:center">
-    <button class="btn btn-danger" type="button" ng-click="closeModal()">Fechar</button>
-</div>
+    <div class="button button-rounded button" ng-click="closeModal()">Fechar</div>
 </div>
