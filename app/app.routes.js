@@ -133,7 +133,13 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
   .state('consumer.printshoplist', {
     url: '/printshops',
     templateUrl: '/app/components/consumer/views/consumer-printshoplist.html',
-    controller: 'ConsumerPrintshopList'
+    controller: 'ConsumerPrintshopList',
+    resolve: {
+      printshops: ['printshopService',
+        function (printshopService) {
+          return printshopService.getAllPrintshops();
+        }]
+    }
   })
   .state('consumer.requestbudget', {
     url: '/requestbudget',
@@ -164,6 +170,17 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
       budgets : ['budgetService', function(budgetService) {
         return budgetService.getBudgets();
       }]
+    }
+  })
+  .state('consumer.printshop', {
+    url: '/printshops/:printshopid',
+    templateUrl: '/app/components/consumer/views/printshop-page.html',
+    controller: 'ConsumerPrintshopPageCtrl',
+    resolve: {
+      printshop : ['printshopService', '$stateParams',
+        function (printshopService, $stateParams) {
+          return printshopService.getPrintshop($stateParams.printshopid);
+        }]
     }
   })
 
