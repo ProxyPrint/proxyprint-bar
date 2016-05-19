@@ -17,5 +17,12 @@ angular.module('ProxyPrint').factory('printshopService',['$http', 'backendURLSer
         });
     }
 
+    service.getPrintshopPricetable = function (printshopID) {
+      return $http.get(backendURLService.getBaseURL()+'printshops/'+printshopID+'/pricetable')
+        .success (function (data) {
+          return data;
+        });
+    }
+
     return service;
 }]);
