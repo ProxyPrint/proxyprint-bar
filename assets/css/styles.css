@@ -311,6 +311,7 @@ border-top: 1px solid #dddddd;
     display: block;
     background-color: #33CC33;
     min-height: 42px;
+    border-radius: 7px;
 }
 
 .file-type-icon{
@@ -372,7 +373,21 @@ border-top: 1px solid #dddddd;
   content: '✖'; /* UTF-8 symbol */
   color: red;
 }
+
+
 /* Dialog */
+.buttondialog {
+  background: #ddd;
+  border: 1px solid #ccc;
+  border-radius: 7px;
+  position: relative;
+  height: 45px;
+  width: 100%;
+  margin: 1px;
+  overflow: hidden;
+  text-align: center;
+}
+
 .dialog {
   background: #ddd;
   border: 1px solid #ccc;
@@ -385,6 +400,7 @@ border-top: 1px solid #dddddd;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+  text-align: center;
 }
 
 .dialogdemoBasicUsage #popupContainer {

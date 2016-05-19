@@ -2,272 +2,284 @@ angular.module('ProxyPrint').controller('ConsumerSpecsController',
 ['$scope' , '$uibModal', '$log', 'fileTransferService', 'specMarshallService',
 'printingSchemas', 'printingSchemaService', '$cookieStore', '$state',
 function($scope, $uibModal, $log, fileTransferService, specMarshallService,
-  printingSchemas, printingSchemaService, $cookieStore, $state) {
+    printingSchemas, printingSchemaService, $cookieStore, $state) {
 
-    /** Page range logic */
-    $scope.lastItem = null;
-    $scope.lastFile = null;
-    $scope.specs = printingSchemas.data.pschemas;
+        /** Page range logic */
+        $scope.lastItem = null;
+        $scope.lastFile = null;
+        $scope.specs = printingSchemas.data.pschemas;
+        $scope.files = fileTransferService.getFiles;
+        $scope.all = [];
 
-    console.log($scope.specs);
+        $scope.addToAll = function(item, index) {
+            var files = $scope.files();
+            interval = "Completo";
+            init=end=0;
+            item.pages=interval;
+            item.from = init;
+            item.to = end;
 
-    $scope.addPageModal = function(file, item) {
-      $scope.lastItem = item;
-      $scope.lastFile = file;
-
-      var modalInstance = $uibModal.open({
-        animation: true,
-        templateUrl: 'app/components/consumer/views/pagerange-modal.html',
-        controller: 'PageRangeController',
-        size: 'md'
-      });
-
-      modalInstance.result.then(function (values) {
-        // $modal.close() will get into here.
-        var init = values[0];
-        var end = values[1];
-        var flag = values[2];
-        var interval;
-
-        if(flag == 'enc'){
-          interval = init + ' - ' + end;
-        }
-        else {
-          interval = "Completo";
-          init=end=0;
+            angular.forEach(files, function(file) {
+                file.specs.push(item);
+            });
+            return item;
         }
 
-        var files = $scope.files();
-        var i = files.indexOf($scope.lastFile);
-        var index = files[i].specs.indexOf($scope.lastItem);
-        if (index > -1) {
-          files[i].specs[index].pages = interval;
-          files[i].specs[index]['from'] = init;
-          files[i].specs[index]['to'] = end;
+        $scope.addPageModal = function(file, item) {
+            $scope.lastItem = item;
+            $scope.lastFile = file;
+
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'app/components/consumer/views/pagerange-modal.html',
+                controller: 'PageRangeController',
+                size: 'md'
+            });
+
+            modalInstance.result.then(function (values) {
+                // $modal.close() will get into here.
+                var init = values[0];
+                var end = values[1];
+                var flag = values[2];
+                var interval;
+
+                if(flag == 'enc'){
+                    interval = init + ' - ' + end;
+                }
+                else {
+                    interval = "Completo";
+                    init=end=0;
+                }
+
+                var files = $scope.files();
+                var i = files.indexOf($scope.lastFile);
+                var index = files[i].specs.indexOf($scope.lastItem);
+                if (index > -1) {
+                    files[i].specs[index].pages = interval;
+                    files[i].specs[index]['from'] = init;
+                    files[i].specs[index]['to'] = end;
+                }
+            }, function () {
+                // dismissed here.
+                $scope.remove($scope.lastFile, $scope.lastItem);
+            });
+            return item;
+        };
+
+        /** Remove file from queue */
+        $scope.remove = function (item, spec){
+            var files = $scope.files();
+            var i = files.indexOf(item);
+            var index = files[i].specs.indexOf(spec);
+            if (index > -1) {
+                files[i].specs.splice(index, 1);
+            }
+        };
+
+        $scope.request = function(){
+            /** Send Request */
+            fileTransferService.ProcessFiles($scope.files(), function(){
+                $scope.showRequest = false;
+                $state.go('consumer.requestprintshopsbudget');
+            });
+        };
+
+        $scope.queueNumber = function (){
+            var i = 0;
+            angular.forEach($scope.files(), function(file){
+                if(file.specs.length !== 0){
+                    i++;
+                }
+            });
+            return i;
+        };
+
+        /** Cancel request to add the file to queue */
+        $scope.cancel = function (){
+            $scope.remove($scope.lastFile, $scope.lastItem);
+            $scope.showModal = false;
+        };
+
+        /** Add file to queue */
+        $scope.submit = function(init, end, check){
+            var interval;
+            if(!check) {
+                interval = init + ' - ' + end;
+            }
+            else {
+                interval = "Completo";
+                init = 0;
+                end = 0;
+            }
+
+            var files = $scope.files();
+            var i = files.indexOf($scope.lastFile);
+            var index = files[i].specs.indexOf($scope.lastItem);
+            if (index > -1) {
+                files[i].specs[index].pages = interval;
+            }
+            $scope.showModal = false;
+        };
+
+        $scope.request = function(){
+            /** Send Request */
+            fileTransferService.ProcessFiles($scope.files(), function(){
+                $scope.showRequest = false;
+                $state.go('consumer.printshopselection');
+            });
+        };
+
+        $scope.queueNumber = function (){
+            var i = 0;
+            angular.forEach($scope.files(), function(file){
+                if(file.specs.length !== 0){
+                    i++;
+                }
+            });
+            return i;
+        };
+
+        $scope.addRequestModal = function() {
+
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'app/components/consumer/views/request-modal.html',
+                controller: 'SendRequestController',
+                size: 'md',
+                resolve: {
+                    files: function () {
+                        return $scope.files();
+                    }
+                }
+            });
+
+            modalInstance.result.then(function() {
+                fileTransferService.ProcessFiles($scope.files());
+                $state.go('consumer.printshopselection');
+            });
+        };
+
+        $scope.addSpecModal = function() {
+
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'app/components/consumer/views/spec-modal.html',
+                controller: 'AddSpecificationController',
+                size: 'md'
+            });
+
+            modalInstance.result.then(function(spec) {
+                var specification = specMarshallService.marshallSpecification(spec);
+                if ($scope.specs === null){
+                    specification.fakeID = 1;
+                    $scope.specs = [];
+                }
+                else specification.fakeID = $scope.specs.length+1;
+                $scope.addPrintingSchema(specification);
+            });
+        };
+
+        $scope.editSpecModal = function (index) {
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'app/components/consumer/views/edit-spec-modal.html',
+                controller: 'EditSpecificationController',
+                size: 'md',
+                resolve: {
+                    schema: function () {
+                        return $scope.specs[index];
+                    },
+                    id: function () {
+                        return $scope.specs[index].id;
+                    }
+                }
+            });
+
+
+            modalInstance.result.then(function(spec) {
+                var schema = specMarshallService.marshallEditedSpecification(spec);
+                printingSchemaService.editPrintingSchema(spec.id, schema,$cookieStore.get('consumerID'));
+                schema.fakeID = spec.fakeID;
+                schema.id = spec.id;
+                $scope.specs[spec.fakeID-1] = schema;
+            });
         }
-      }, function () {
-        // dismissed here.
-        $scope.remove($scope.lastFile, $scope.lastItem);
-      });
-      return item;
-    };
 
-    /** Remove file from queue */
-    $scope.remove = function (item, spec){
-      var files = $scope.files();
-      var i = files.indexOf(item);
-      var index = files[i].specs.indexOf(spec);
-      if (index > -1) {
-        files[i].specs.splice(index, 1);
-      }
-    };
+        $scope.removePrintingSchema = function (index) {
+            printingSchemaService.deletePrintingSchema($scope.specs[index].id, $cookieStore.get('consumerID'));
+            $scope.specs.splice(index,1);
+        };
 
-    $scope.request = function(){
-      /** Send Request */
-      fileTransferService.ProcessFiles($scope.files(), function(){
-        $scope.showRequest = false;
-        $state.go('consumer.requestprintshopsbudget');
-      });
-    };
+        $scope.addPrintingSchema = function (schema) {
+            printingSchemaService.addPrintingSchema(schema, $cookieStore.get('consumerID'));
+            console.log(schema);
+            $scope.specs.push(schema);
+        };
 
-    $scope.queueNumber = function (){
-      var i = 0;
-      angular.forEach($scope.files(), function(file){
-        if(file.specs.length !== 0){
-          i++;
-        }
-      });
-      return i;
-    };
+    }]);
 
-    /** Cancel request to add the file to queue */
-    $scope.cancel = function (){
-      $scope.remove($scope.lastFile, $scope.lastItem);
-      $scope.showModal = false;
-    };
+    angular.module('ProxyPrint').controller('AddSpecificationController', ['$scope', '$uibModalInstance',
+    function ($scope, $uibModalInstance) {
 
-    /** Add file to queue */
-    $scope.submit = function(init, end, check){
-      var interval;
-      if(!check) {
-        interval = init + ' - ' + end;
-      }
-      else {
-        interval = "Completo";
-        init = 0;
-        end = 0;
-      }
+        $scope.performAction = function () {
+            var spec = [];
+            spec.push($scope.name);
+            spec.push($scope.format);
+            spec.push($scope.sides);
+            spec.push($scope.colors);
+            spec.push($scope.content);
+            spec.push($scope.cover+","+$scope.format);
+            spec.push($scope.bindings);
+            $uibModalInstance.close(spec);
+        };
 
-      var files = $scope.files();
-      var i = files.indexOf($scope.lastFile);
-      var index = files[i].specs.indexOf($scope.lastItem);
-      if (index > -1) {
-        files[i].specs[index].pages = interval;
-      }
-      $scope.showModal = false;
-    };
+        $scope.closeModal = function () {
+            $uibModalInstance.dismiss('cancel');
+        };
+    }]);
 
-    $scope.request = function(){
-      /** Send Request */
-      fileTransferService.ProcessFiles($scope.files(), function(){
-        $scope.showRequest = false;
-        $state.go('consumer.printshopselection');
-      });
-    };
+    angular.module('ProxyPrint').controller('SendRequestController', ['$scope', '$uibModalInstance', 'files', function ($scope, $uibModalInstance, files) {
 
-    $scope.queueNumber = function (){
-      var i = 0;
-      angular.forEach($scope.files(), function(file){
-        if(file.specs.length !== 0){
-          i++;
-        }
-      });
-      return i;
-    };
+        $scope.files = files;
 
-    $scope.files = fileTransferService.getFiles;
+        $scope.performAction = function () {
+            $uibModalInstance.close();
+        };
 
-    $scope.addRequestModal = function() {
+        $scope.closeModal = function () {
+            $uibModalInstance.dismiss();
+        };
+    }]);
 
-      var modalInstance = $uibModal.open({
-        animation: true,
-        templateUrl: 'app/components/consumer/views/request-modal.html',
-        controller: 'SendRequestController',
-        size: 'md',
-        resolve: {
-          files: function () {
-            return $scope.files();
-          }
-        }
-      });
+    angular.module('ProxyPrint').controller('PageRangeController', ['$scope', '$uibModalInstance', function ($scope, $uibModalInstance) {
 
-      modalInstance.result.then(function() {
-        fileTransferService.ProcessFiles($scope.files());
-        $state.go('consumer.printshopselection');
-      });
-    };
+        $scope.performAction = function () {
+            var values = [];
+            values.push($scope.init);
+            values.push($scope.end);
+            values.push($scope.content);
+            $uibModalInstance.close(values);
+        };
 
-    $scope.addSpecModal = function() {
+        $scope.closeModal = function () {
+            $uibModalInstance.dismiss('cancel');
+        };
+    }]);
 
-      var modalInstance = $uibModal.open({
-        animation: true,
-        templateUrl: 'app/components/consumer/views/spec-modal.html',
-        controller: 'AddSpecificationController',
-        size: 'md'
-      });
+    angular.module('ProxyPrint').controller('EditSpecificationController',
+    ['$scope', '$uibModalInstance', 'schema','id', 'specMarshallService',
+    function ($scope, $uibModalInstance, schema, id, specMarshallService) {
 
-      modalInstance.result.then(function(spec) {
-        var specification = specMarshallService.marshallSpecification(spec);
-        if ($scope.specs === null){
-          specification.fakeID = 1;
-          $scope.specs = [];
-        }
-        else specification.fakeID = $scope.specs.length+1;
-        $scope.addPrintingSchema(specification);
-      });
-    };
+        $scope.schema = specMarshallService.unmarshallSpecification(schema);
+        $scope.schema.id = id;
+        $scope.schema.fakeID = schema.fakeID;
 
-    $scope.editSpecModal = function (index) {
-      var modalInstance = $uibModal.open({
-        animation: true,
-        templateUrl: 'app/components/consumer/views/edit-spec-modal.html',
-        controller: 'EditSpecificationController',
-        size: 'md',
-        resolve: {
-          schema: function () {
-            return $scope.specs[index];
-          },
-          id: function () {
-            return $scope.specs[index].id;
-          }
-        }
-      });
+        $scope.performAction = function () {
+            $uibModalInstance.close($scope.schema);
+        };
 
+        $scope.closeModal = function () {
+            $uibModalInstance.dismiss('cancel');
+        };
 
-      modalInstance.result.then(function(spec) {
-        var schema = specMarshallService.marshallEditedSpecification(spec);
-        printingSchemaService.editPrintingSchema(spec.id, schema,$cookieStore.get('consumerID'));
-        schema.fakeID = spec.fakeID;
-        schema.id = spec.id;
-        $scope.specs[spec.fakeID-1] = schema;
-      });
-    }
-
-    $scope.removePrintingSchema = function (index) {
-      printingSchemaService.deletePrintingSchema($scope.specs[index].id, $cookieStore.get('consumerID'));
-      $scope.specs.splice(index,1);
-    };
-
-    $scope.addPrintingSchema = function (schema) {
-      printingSchemaService.addPrintingSchema(schema, $cookieStore.get('consumerID'));
-      console.log(schema);
-      $scope.specs.push(schema);
-    };
-
-  }]);
-
-  angular.module('ProxyPrint').controller('AddSpecificationController', ['$scope', '$uibModalInstance',
-  function ($scope, $uibModalInstance) {
-
-    $scope.performAction = function () {
-      var spec = [];
-      spec.push($scope.name);
-      spec.push($scope.format);
-      spec.push($scope.sides);
-      spec.push($scope.colors);
-      spec.push($scope.content);
-      spec.push($scope.cover+","+$scope.format);
-      spec.push($scope.bindings);
-      $uibModalInstance.close(spec);
-    };
-
-    $scope.closeModal = function () {
-      $uibModalInstance.dismiss('cancel');
-    };
-  }]);
-
-  angular.module('ProxyPrint').controller('SendRequestController', ['$scope', '$uibModalInstance', 'files', function ($scope, $uibModalInstance, files) {
-
-    $scope.files = files;
-
-    $scope.performAction = function () {
-      $uibModalInstance.close();
-    };
-
-    $scope.closeModal = function () {
-      $uibModalInstance.dismiss();
-    };
-  }]);
-
-  angular.module('ProxyPrint').controller('PageRangeController', ['$scope', '$uibModalInstance', function ($scope, $uibModalInstance) {
-
-    $scope.performAction = function () {
-      var values = [];
-      values.push($scope.init);
-      values.push($scope.end);
-      values.push($scope.content);
-      $uibModalInstance.close(values);
-    };
-
-    $scope.closeModal = function () {
-      $uibModalInstance.dismiss('cancel');
-    };
-  }]);
-
-  angular.module('ProxyPrint').controller('EditSpecificationController',
-          ['$scope', '$uibModalInstance', 'schema','id', 'specMarshallService',
-          function ($scope, $uibModalInstance, schema, id, specMarshallService) {
-
-            $scope.schema = specMarshallService.unmarshallSpecification(schema);
-            $scope.schema.id = id;
-            $scope.schema.fakeID = schema.fakeID;
-
-            $scope.performAction = function () {
-              $uibModalInstance.close($scope.schema);
-            };
-
-            $scope.closeModal = function () {
-              $uibModalInstance.dismiss('cancel');
-            };
-
-  }]);
+    }]);
