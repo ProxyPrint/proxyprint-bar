@@ -1,12 +1,14 @@
 angular.module('ProxyPrint')
-   .controller('ConsumerPrintshopPageCtrl', ['$scope','NgMap', function ($scope, NgMap) {
+   .controller('ConsumerPrintshopPageCtrl', ['$scope','NgMap','printshop', function ($scope, NgMap,printshop) {
+
+     console.log(printshop);
 
       $scope.printshop = {
-        name: "Impressões Vasconcelos",
-        address: "Rua Margarida Filipe Pinto Gomes, 35 Braga",
-        rating: 4,
-        latitude: 41.55,
-        longitude: -8.4333,
+        name: printshop.data.name,
+        address: printshop.data.address,
+        rating: printshop.data.avgRating,
+        latitude: printshop.data.latitude,
+        longitude: printshop.data.longitude,
         reviews: [
           {
           user: "Rogério",
@@ -39,7 +41,7 @@ angular.module('ProxyPrint')
          map: map
        });
 
-  
+
 
 
 }]);

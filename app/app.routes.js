@@ -169,7 +169,13 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
   .state('consumer.printshop', {
     url: '/printshops/:printshopid',
     templateUrl: '/app/components/consumer/views/printshop-page.html',
-    controller: 'ConsumerPrintshopPageCtrl'
+    controller: 'ConsumerPrintshopPageCtrl',
+    resolve: {
+      printshop : ['printshopService', '$stateParams',
+        function (printshopService, $stateParams) {
+          return printshopService.getPrintshop($stateParams.printshopid);
+        }]
+    }
   })
 
   /*PrintShop*/
