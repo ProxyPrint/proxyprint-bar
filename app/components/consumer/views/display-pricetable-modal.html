@@ -85,32 +85,36 @@
         </div>
     </div>
     <div class="row">
-      <div class="col-sm-12">
-        <table class="table table-bordered table-striped" role="grid">
-          <thead>
-            <tr role="row">
-              <th colspan="6">Capas para encadernar</th>
-            </tr>
-          </thead>
-          <thead>
-            <tr role="row">
-              <th style="width:15%;">Tipo</th>
-              <th style="text-align:center;width:10%;">A4</th>
-              <th style="text-align:center;width:10%;">A3</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr role="row" class="odd" ng-repeat="item in pricetable.covers">
-              <td >{{getPresentationStringForCovers(item.coverType)}}</td>
-              <td style="text-align: center;">{{item.priceA4}} <span ng-if="item.priceA4!='-'"> €</span></td>
-              <td style="text-align: center;">{{item.priceA3}} <span ng-if="item.priceA3!='-'"> €</span></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+        <div class="col-sm-12">
+            <table class="table table-bordered table-striped" role="grid">
+                <thead>
+                    <tr role="row">
+                        <th colspan="6">Capas para encadernar</th>
+                    </tr>
+                </thead>
+                <thead>
+                    <tr role="row">
+                        <th style="width:15%;">Tipo</th>
+                        <th style="text-align:center;width:10%;">A4</th>
+                        <th style="text-align:center;width:10%;">A3</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr role="row" class="odd" ng-repeat="item in pricetable.covers">
+                        <td>{{getPresentationStringForCovers(item.coverType)}}</td>
+                        <td style="text-align: center;">{{item.priceA4}} <span ng-if="item.priceA4!='-'"> €</span></td>
+                        <td style="text-align: center;">{{item.priceA3}} <span ng-if="item.priceA3!='-'"> €</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="center">
+        <div ng-if="pricetable.stapling>0"><strong>Agrafar</strong>: {{pricetable.stapling}} €</div>
+        <div ng-if="pricetable.stapling==0"><strong>Agrafar</strong>: gratuito</div>
     </div>
 </div>
-<!-- ./table-rings-PLASTIC-->
+
 <div class="modal-footer" style="text-align:center">
     <div class="button button-rounded button" ng-click="closeModal()">Fechar</div>
 </div>
