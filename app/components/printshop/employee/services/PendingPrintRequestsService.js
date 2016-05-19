@@ -37,7 +37,7 @@ function($http,backendURLService) {
 
     service.rejectRequest = function(id, motive , successCallback, errorCallback) {
         var url = backendURLService.getBaseURL()+'printshops/requests/cancel/' + id;
-        return $http.post(url, motive).success(function(data){
+        return $http.delete(url, motive).success(function(data){
             if(data.success) {
                 successCallback(data);
             } else {

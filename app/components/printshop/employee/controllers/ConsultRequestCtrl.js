@@ -4,7 +4,7 @@ app.controller('ConsultRequestCtrl', ['$scope', 'pendingPrintRequest', '$uibModa
 function($scope, pendingPrintRequest, $uibModal, pendingPrintRequestsService, $state, $http, $window, backendURLService) {
 
     $scope.request = pendingPrintRequest.data.printrequest;
-    console.log($scope.request);
+
     $scope.$watch('$scope.request.status', function() {
         if ($scope.request.status == 'PENDING') {
             $scope.message = "Pedido pendente.";
