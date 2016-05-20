@@ -54,6 +54,25 @@ angular.module('ProxyPrint')
          });
        };
 
+       $scope.reviewPrintshop = function () {
+
+         var modalInstance = $uibModal.open({
+           animation: true,
+           templateUrl: 'app/components/consumer/views/review-printshop-modal.html',
+           controller: 'ReviewPrintshopCtrl',
+           size: 'md',
+           resolve: {
+             printshopID: function () {
+               return $scope.printshop.id;
+             }
+           }
+         });
+
+         modalInstance.result.then(function() {
+           $state.go('consumer.printshop');
+         });
+       };
+
 
 
 
@@ -61,7 +80,7 @@ angular.module('ProxyPrint')
 }]);
 
 
-      angular.module('ProxyPrint').controller('DisplayPricetableCtrl',
+angular.module('ProxyPrint').controller('DisplayPricetableCtrl',
          ['$scope', '$uibModalInstance','pricetable', 'priceTableService',
          function ($scope, $uibModalInstance, pricetable, priceTableService) {
 
@@ -72,7 +91,24 @@ angular.module('ProxyPrint')
         };
 
         $scope.closeModal = function () {
-          console.log($scope.pricetable);
           $uibModalInstance.dismiss('cancel');
         };
-      }]);
+}]);
+
+angular.module('ProxyPrint').controller('ReviewPrintshopCtrl',
+         ['$scope', '$uibModalInstance','printshopID',
+         function ($scope, $uibModalInstance, printshopID) {
+
+        $scope.score = 1;
+
+
+        $scope.reviewPrintshop = function() {
+          console.log($scope.content);
+          console.log($scope.score);
+          //return priceTableService.getPresentationStringForCovers(key);
+        };
+
+        $scope.closeModal = function () {
+          $uibModalInstance.dismiss('cancel');
+        };
+  }]);
