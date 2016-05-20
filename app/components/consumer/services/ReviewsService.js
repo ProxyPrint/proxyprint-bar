@@ -9,19 +9,8 @@ angular.module('ProxyPrint').factory('reviewsService',['$http', 'backendURLServi
       });
     };
 
-
-    service.getPrintshop = function (printshopID) {
-      return $http.get(backendURLService.getBaseURL()+'printshops/'+printshopID)
-        .success (function(data) {
-          return data;
-        });
-    }
-
-    service.getPrintshopPricetable = function (printshopID) {
-      return $http.get(backendURLService.getBaseURL()+'printshops/'+printshopID+'/pricetable')
-        .success (function (data) {
-          return data;
-        });
+    service.addReview = function (printshopID, review) {
+      return $http.post(backendURLService.getBaseURL()+'printshops/'+printshopID+'/reviews', review);
     }
 
     return service;

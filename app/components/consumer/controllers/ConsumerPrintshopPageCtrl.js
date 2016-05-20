@@ -1,7 +1,7 @@
 angular.module('ProxyPrint')
    .controller('ConsumerPrintshopPageCtrl',
-      ['$scope','NgMap','printshop', 'reviews', 'printshopService','$uibModal',
-      function ($scope, NgMap,printshop, reviews, printshopService, $uibModal) {
+      ['$scope','NgMap','printshop', 'reviews', 'printshopService','$uibModal', 'reviewsService', '$cookieStore', '$state',
+      function ($scope, NgMap,printshop, reviews, printshopService, $uibModal, reviewsService, $cookieStore, $state) {
 
 
 
@@ -60,15 +60,13 @@ angular.module('ProxyPrint')
            animation: true,
            templateUrl: 'app/components/consumer/views/review-printshop-modal.html',
            controller: 'ReviewPrintshopCtrl',
-           size: 'md',
-           resolve: {
-             printshopID: function () {
-               return $scope.printshop.id;
-             }
-           }
+           size: 'md'
          });
 
-         modalInstance.result.then(function() {
+         modalInstance.result.then(function(review) {
+           review.consumer = $cookieStore.get('consumerID');
+           console.log(review);
+           reviewsService.addReview($scope.printshop.id, review);
            $state.go('consumer.printshop');
          });
        };
@@ -96,16 +94,17 @@ angular.module('ProxyPrint').controller('DisplayPricetableCtrl',
 }]);
 
 angular.module('ProxyPrint').controller('ReviewPrintshopCtrl',
-         ['$scope', '$uibModalInstance','printshopID',
-         function ($scope, $uibModalInstance, printshopID) {
+   ['$scope', '$uibModalInstance',
+   function ($scope, $uibModalInstance) {
 
         $scope.score = 1;
 
 
         $scope.reviewPrintshop = function() {
-          console.log($scope.content);
-          console.log($scope.score);
-          //return priceTableService.getPresentationStringForCovers(key);
+          var review = new Object();
+          review.description = $scope.content;
+          review.rating = $scope.score;
+          $uibModalInstance.close(review);
         };
 
         $scope.closeModal = function () {
