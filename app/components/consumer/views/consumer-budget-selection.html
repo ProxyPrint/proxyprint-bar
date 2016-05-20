@@ -5,7 +5,7 @@
 		<!-- prinshops selection -->
 		<div class="col-md-8">
 			<div class="table-responsive" style="height: 250px;">
-				<table class="table">
+				<table class="table" ng-disabled="amount!==0.0">
 					<thead>
 						<tr>
 							<th style="width: 25%;">Reprografia</th>
@@ -37,12 +37,7 @@
 			</div>
 		</div>
 	</div>
-	<center><button type="button" class="btn btn-primary btn-md hvr-bob" ng-disabled="blockBudget" ng-click="finishPrintRequest()">Escolher orçamento</button></center>
-	<!-- paypal-button -->
-	<center>
-
-	</center>
-	<!-- ./paypal-button -->
+	<center><button type="button" class="btn btn-primary btn-md hvr-bob" ng-disabled="amount!==0.0" ng-click="finishPrintRequest()">Escolher orçamento</button></center>
 	<!-- ./submited files-->
 	<!-- flow navigation buttons -->
 	<div class="row" style="margin-top:4%;">
@@ -54,7 +49,24 @@
 		<div class="col-md-6">
 			<div class="right">
 				<div ng-hide="amount==0.0">
-					<form method="post" action="https://www.sandbox.paypal.com/cgi-bin/webscr" class="paypal-button" style="opacity: 1;" target="_blank"><div class="hide" id="errorBox"></div><input type="hidden" name="button" value="buynow"><input type="hidden" name="business" value="YBLQYKX3TKGYQ"><input type="hidden" name="item_name" value="Pedido"><input type="hidden" name="quantity" value="1"><input type="hidden" name="amount" ng-model="amount" value="{{amount}}"><input type="hidden" name="currency_code" value="EUR"><input type="hidden" name="shipping" value="0"><input type="hidden" name="tax" value="0"><input type="hidden" name="notify_url" value="http://localhost:9000/#/joao/printshops"><input type="hidden" name="env" value="www.sandbox"><input type="hidden" name="cmd" value="_xclick"><input type="hidden" name="bn" value="JavaScriptButton_buynow"><button type="submit" class="btn btn-primary"><i class="fa fa-paypal" aria-hidden="true"></i>  Pagar e terminar pedido  <i class="fa fa-arrow-right"></i></button></form>
+					<!-- paypal-button -->
+					<form method="post" action="https://www.sandbox.paypal.com/cgi-bin/webscr" class="paypal-button" style="opacity: 1;" target="_blank">
+						<div class="hide" id="errorBox"></div>
+						<input type="hidden" name="button" value="buynow">
+						<input type="hidden" name="business" value="T4F6X2XSAETNL">
+						<input type="hidden" name="item_name" value="Pedido de impressao ProxyPrint">
+						<input type="hidden" name="quantity" value="1">
+						<input type="hidden" name="amount" ng-model="amount" value="{{amount}}">
+						<input type="hidden" name="currency_code" value="EUR">
+						<input type="hidden" name="shipping" value="0">
+						<input type="hidden" name="tax" value="0">
+						<input type="hidden" name="notify_url" value="{{payPalCallbackUrl}}">
+						<input type="hidden" name="env" value="www.sandbox">
+						<input type="hidden" name="cmd" value="_xclick">
+						<input type="hidden" name="bn" value="JavaScriptButton_buynow">
+						<button ng-click="alert('ir para inicio...')" type="submit" class="btn btn-default"><i class="fa fa-paypal" aria-hidden="true"></i>  Pagar e terminar pedido  <i class="fa fa-arrow-right"></i></button>
+					</form>
+					<!-- ./paypal-button -->
 				</div>
 			</div>
 		</div>
