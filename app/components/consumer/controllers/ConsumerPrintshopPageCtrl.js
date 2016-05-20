@@ -1,8 +1,9 @@
 angular.module('ProxyPrint')
-   .controller('ConsumerPrintshopPageCtrl', ['$scope','NgMap','printshop', 'printshopService','$uibModal',
-      function ($scope, NgMap,printshop, printshopService, $uibModal) {
+   .controller('ConsumerPrintshopPageCtrl',
+      ['$scope','NgMap','printshop', 'reviews', 'printshopService','$uibModal',
+      function ($scope, NgMap,printshop, reviews, printshopService, $uibModal) {
 
-     console.log(printshop);
+
 
       $scope.printshop = {
         id: printshop.data.id,
@@ -11,24 +12,10 @@ angular.module('ProxyPrint')
         rating: printshop.data.avgRating,
         latitude: printshop.data.latitude,
         longitude: printshop.data.longitude,
-        reviews: [
-          {
-          user: "Rogério",
-          date: new Date(),
-          content: "Uma reprografia extremamente prestável!",
-          score: 3
-          },{
-          user: "Filipe",
-          date: new Date(),
-          content: "Que porcaria... nunca mais volto!",
-          score: 1
-          },{
-          user: "Mariana",
-          date: new Date(),
-          content: "A reprografia dos meus sonhos!",
-          score: 5
-          }
-        ]};
+        reviews: reviews.data
+      }
+
+      console.log($scope.printshop);
 
         /** Google Maps **/
 
