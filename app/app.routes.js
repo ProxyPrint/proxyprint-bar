@@ -27,6 +27,7 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
   ];
 
   var adminlteCSS = [
+    '/assets/css/styles-map.css',
     '/assets/adminlte/bootstrap/css/bootstrap.min.css',
     'https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css',
     'https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css',
@@ -250,6 +251,17 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
     },
     data: {
       css: adminlteCSS
+    }
+  })
+  .state('manager.mainpage', {
+    url: '/mainpage',
+    templateUrl: '/app/components/printshop/manager/views/manager-printshop-page.html',
+    controller: 'ManagerPrintshopPageCtrl',
+    resolve: {
+      printshop : ['managerPrintshopService',
+        function (managerPrintshopService) {
+          return managerPrintshopService.getPrintshop();
+        }]
     }
   })
   .state('manager.stats', {
