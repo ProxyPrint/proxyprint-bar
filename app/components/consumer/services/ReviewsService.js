@@ -10,7 +10,7 @@ angular.module('ProxyPrint').factory('reviewsService',['$http', 'backendURLServi
     };
 
     service.addReview = function (printshopID, review) {
-      return $http.post(backendURLService.getBaseURL()+'printshops/'+printshopID+'/reviews', review);
+      return $http.post(backendURLService.getBaseURL()+'printshops/'+printshopID+'/reviews', {rating: review.rating, review: review.description});
     }
 
     return service;

@@ -64,7 +64,6 @@ angular.module('ProxyPrint')
          });
 
          modalInstance.result.then(function(review) {
-           review.consumer = $cookieStore.get('consumerID');
            console.log(review);
            reviewsService.addReview($scope.printshop.id, review);
            $state.go('consumer.printshop');
