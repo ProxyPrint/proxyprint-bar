@@ -37,7 +37,7 @@ function($scope, $cookieStore, $state, budgets, printShopListService, fileTransf
 
       // Set amount for pay pal payment
       $scope.amount = parseFloat($scope.budgets[$scope.theChosenOne]).toFixed(2);
-      // Finish the PayPal callback URL
+      // Finish the PayPal callback URL appending the printRequestID
       $scope.payPalCallbackUrl += $scope.printRequestID;
 
       // Send request to server
@@ -55,6 +55,10 @@ function($scope, $cookieStore, $state, budgets, printShopListService, fileTransf
   $scope.submitRequestErrorCallback = function(data) {
     alert("Infelizmente não conseguimos registar o seu pedido. Por favor tente mais tarde");
     // $state.go("consumer.mainpage", {reload: true});
+  };
+
+  $scope.goBackToConsumerLandingPage = function() {
+    $state.go('consumer.mainpage');
   };
 
 }]);
