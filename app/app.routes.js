@@ -237,7 +237,13 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
   })
   .state('manager.stats', {
     url: '/stats',
-    templateUrl: '/app/components/printshop/manager/views/manager-stats.html'
+    templateUrl: '/app/components/printshop/manager/views/manager-stats.html',
+    controller: 'ManagerStatsCtrl',
+    resolve: {
+      stats: ['pshopStatsService', function(pshopStatsService) {
+        return pshopStatsService.getStats();
+      }]
+    }
   })
   .state('manager.pricetable', {
     url: '/pricetable',
