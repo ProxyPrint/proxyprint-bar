@@ -9,7 +9,7 @@ function($scope, $state, authenticationService, $cookieStore) {
   };
 
   // Navigation highlight
-  $scope.navigation = { stats: "active", pricetable: "", employees: "" };
+  $scope.navigation = { mainpage: "active", stats: "", pricetable: "", employees: "" };
   $scope.navigate = function(where) {
     for(var i in $scope.navigation){ $scope.navigation[i] = ""; }
     $scope.navigation[where] = "active";
