@@ -11,10 +11,10 @@
 
 
     <div class="printshop-buttons">
-        <div class="button button-border button-rounded button-action">
+        <div class="button button-border button-rounded button-action" ng-click="displayPricetable()">
             <i class="fa fa-euro"></i> Preçário
         </div>
-        <div class="button button-border button-rounded button-primary">
+        <div class="button button-border button-rounded button-primary" ng-click="reviewPrintshop()">
             <i class="fa fa-star"></i> Avaliar a reprografia
         </div>
     </div>
@@ -28,7 +28,7 @@
             <div class="list-group-item" ng-repeat="review in printshop.reviews">
                 <div class="row">
                     <div class="col-sm-4">
-                        <strong>{{review.user}}</strong>:
+                        <strong>{{review.username}}</strong>:
                         <hr class="review" />
                     </div>
                     <div class="col-sm-4">
@@ -36,11 +36,11 @@
                     </div>
                     <div class="col-sm-4">
                         <div class="right">
-                            <div star-rating rating-value="review.score" max="5" read-only="true"></div>
+                            <div star-rating rating-value="review.rating" max="5" read-only="true"></div>
                         </div>
                     </div>
                     <div class="review-content">
-                        {{review.content}}
+                        {{review.description}}
                     </div>
 
                 </div>

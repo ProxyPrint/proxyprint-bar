@@ -180,6 +180,10 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
       printshop : ['printshopService', '$stateParams',
         function (printshopService, $stateParams) {
           return printshopService.getPrintshop($stateParams.printshopid);
+        }],
+      reviews: ['reviewsService', '$stateParams',
+        function (reviewsService, $stateParams) {
+          return reviewsService.getPrintshopReviews($stateParams.printshopid);
         }]
     }
   })
