@@ -1,19 +1,17 @@
+<center>
+    <h1>{{printshop.name}}</h1>
+    <br /> {{printshop.address}}
+</center>
+<div class="right">
+  <div star-rating rating-value="printshop.rating" max="5" read-only="true"></div>
+</div>
 
 <div id="map-canvas"></div>
-
-<div class="printshop-details">
-    <left><strong>{{printshop.name}}</strong>
-        <br />
-        <small>{{printshop.address}}</small></left>
-    <div class="right">
-      <div star-rating rating-value="printshop.rating" max="5" read-only="true"></div>
-    </div>
-</div>
 
 <div class="map-canvas-offset">
     <div class="reviews-box">
         <div class="center">
-            <h2>Avaliações</h2>
+            <h2><center>Avaliações</center></h2>
         </div>
         <ul class="list-group">
             <div class="list-group-item" ng-repeat="review in printshop.reviews">

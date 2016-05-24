@@ -8,7 +8,7 @@
 }
 
 .printshop-map {
-  margin-left:10%;
+  margin-left:20%;
   margin-right:20%;
   position: relative;
 }
@@ -19,13 +19,12 @@
 }
 
 #map-canvas {
-  margin-left:20%;
-  margin-right:20%;
-  width: 65%;
+  margin-left:10%;
+  margin-right:10%;
+  width: 80%;
   height: 200px;
-  position: absolute;
+  position: relative;
   top: 15%;
-  left: 0;
   z-index: 0; /* Set z-index to 0 as it will be on a layer below the contact form */
 }
 
@@ -43,7 +42,7 @@
 }
 
 .map-canvas-offset {
-  margin-top:150px;
+  margin-top:80px;
   margin-left: 20%;
   margin-right: 20%;
 }
