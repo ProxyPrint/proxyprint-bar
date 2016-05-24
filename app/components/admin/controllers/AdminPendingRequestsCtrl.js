@@ -1,8 +1,8 @@
 var app = angular.module('ProxyPrint');
 
 // Pending requests table
-app.controller('AdminPendingRequestsCtrl', ['$rootScope', '$scope', '$state', '$http', 'pendingRequests', 'pendingRequestsService',
-function($rootScope, $scope, $state, $http, pendingRequests, pendingRequestsService) {
+app.controller('AdminPendingRequestsCtrl', ['$rootScope', '$scope', '$state', '$http', 'pendingRequests', 'pendingRequestsService', '$uibModal',
+function($rootScope, $scope, $state, $http, pendingRequests, pendingRequestsService, $uibModal) {
 
   $scope.pendingRequests = pendingRequests.data;
 
@@ -77,7 +77,7 @@ $scope.openRejectModal = function(reply) {
     animation: true,
     templateUrl: 'app/components/admin/views/admin-request-reject-modal.html',
     controller: 'RegisterRequestCancelModalController',
-    size: 'sm',
+    size: 'md',
     resolve: {
       index: function() {
         return $scope.index;
@@ -94,6 +94,8 @@ $scope.openRejectModal = function(reply) {
   });
 };
 
+}]);
+
 app.controller('RegisterRequestCancelModalController', ['$scope', '$uibModalInstance',
   function($scope, $uibModalInstance) {
 
@@ -106,5 +108,3 @@ app.controller('RegisterRequestCancelModalController', ['$scope', '$uibModalInst
     };
   }
 ]);
-
-}]);
