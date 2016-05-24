@@ -18,9 +18,10 @@ app.factory('pendingRequestsService', ['$http', 'backendURLService', function($h
     });
   };
 
-  service.rejectRequest = function(id) {
+  service.rejectRequest = function(id,motive) {
+    var params = { motive: motive };
     var url = "http://localhost:8080/request/reject/"+id;
-    return $http.post(url).success(function(data){
+    return $http.post(url,params).success(function(data){
       return data;
     });
   };
