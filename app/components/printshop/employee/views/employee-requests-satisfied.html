@@ -26,7 +26,7 @@
           <td>{{request.finishedTimestamp}}</td>
           <td>{{request.empAttended}}</td>
           <td>{{request.cost | number : 2}} €</td>
-          <td><button class="btn bg-purple" ng-click="liftRequest(request.id, 'Tem a certeza que quer efetuar o levantamento do pedido número ' + request.id + '?')"><i class="fa fa-rocket" style="margin-right: 0.2em;"></i>Levantar</button></td>
+          <td><button class="btn btn-flat bg-purple" ng-click="liftRequest(request.id, 'Tem a certeza que quer efetuar o levantamento do pedido número ' + request.id + '?')"><i class="fa fa-rocket" style="margin-right: 0.2em;"></i>Levantar</button></td>
         </tr>
       </tbody>
     </table>
