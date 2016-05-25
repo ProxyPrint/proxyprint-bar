@@ -247,7 +247,13 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
     .state('employee.history', {
         url: '/history',
         templateUrl: '/app/components/printshop/employee/views/employee-requests-history.html',
-        controller: 'HistoryRequestsCtrl'
+        controller: 'HistoryRequestsCtrl',
+        resolve: {
+            historyPrintRequests: ['historyPrintRequestsService',
+            function (historyPrintRequestsService) {
+                return historyPrintRequestsService.getHistoryRequests();
+            }]
+        }
     })
 
   /*Manager*/

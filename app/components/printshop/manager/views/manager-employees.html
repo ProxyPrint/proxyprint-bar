@@ -2,17 +2,15 @@
   <h1>Funcionários <small>Gestão dos funcionários</small></h1>
 </section>
 <!-- filter -->
-<div class="row">
-  <div class="col-md-8" style="float:right;">
+<div class="center" style="margin-left:30%">
     <div class="form-group has-feedback" style="margin-top: 2%;width:55%;">
       <input type="text" class="form-control" ng-model="employeeSearch" name="search" id="search" placeholder="Pesquise por funcionários...">
       <span class="glyphicon glyphicon-search form-control-feedback"></span>
     </div>
-  </div>
 </div>
 <!-- ./filter -->
 <!-- table -->
-<div class="box" style="width: 70%;">
+<div class="box" style="margin-left:15%; margin-right:20%; width: 70%;">
   <div class="box-body table-responsive no-padding">
     <table class="table table-striped">
       <tbody>
@@ -26,20 +24,20 @@
           <td><b>#{{employee.id}}</b></td>
           <td>{{employee.name}}</td>
           <td>{{employee.username}}</td>
-          <td><button ng-click="editEmployee($index)" class="btn bg-olive btn-flat btn-sm margin"><i class="fa fa-pencil" style="margin-right: 0.2em;"></i>  Editar</button><button ng-click="confirmDelete($index)" class="btn bg-red btn-flat btn-sm margin"><i class="fa fa-trash" style="margin-right: 0.2em;"></i>  Eliminar</button></td>
+          <td style="text-align:center;"><button ng-click="editEmployee($index)" class="btn bg-olive btn-flat btn-sm margin"><i class="fa fa-pencil" style="margin-right: 0.2em;"></i>  Editar</button><button ng-click="confirmDelete($index)" class="btn bg-red btn-flat btn-sm margin"><i class="fa fa-trash" style="margin-right: 0.2em;"></i>  Eliminar</button></td>
         </tr>
       </tbody>
     </table>
     <!-- ./table -->
     <button type="button" class="btn btn-flat btn-sm bg-blue" style="float: left; margin: 1%;" ng-click="newEmployee()"><i class="fa fa-fw fa-plus" style="padding-right: 2%;"></i>Adicionar empregado</button>
-    <div class="box-footer clearfix">
-      <ul class="pagination pagination-sm no-margin pull-right">
-        <li><a href="">«</a></li>
-        <li><a href="">1</a></li>
-        <li><a href="">2</a></li>
-        <li><a href="">3</a></li>
-        <li><a href="">»</a></li>
-      </ul>
+    <div ng-show="paginationOn" class="box-footer clearfix">
+        <ul class="pagination pagination-sm no-margin pull-right">
+            <li><a href="" ng-click="pagination.prevPage()">&laquo;</a></li>
+            <li ng-repeat="n in [] | range: pagination.numPages" ng-class="{active: n == pagination.page}">
+                <a href="" ng-click="pagination.toPageId(n)">{{n + 1}}</a>
+            </li>
+            <li><a href="" ng-click="pagination.nextPage()">&raquo;</a></li>
+        </ul>
     </div>
   </div>
 </div>
