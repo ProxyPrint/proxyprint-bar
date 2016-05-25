@@ -4,6 +4,7 @@ app.controller('ConsultRequestCtrl', ['$scope', 'pendingPrintRequest', '$uibModa
 function($scope, pendingPrintRequest, $uibModal, pendingPrintRequestsService, $state, $http, $window, backendURLService) {
 
     $scope.request = pendingPrintRequest.data.printrequest;
+
     $scope.isDataLoading = false;
 
     $scope.$watch('$scope.request.status', function() {
@@ -37,6 +38,7 @@ function($scope, pendingPrintRequest, $uibModal, pendingPrintRequestsService, $s
 
     $scope.onChangeStatusErroCallback = function(data) {
       $scope.isDataLoading = false;
+      $state.go('employee.pending');
       $scope.openSuccessModal("Ocorreu um erro a alterar o estado do pedido!");
     };
 

@@ -1,7 +1,7 @@
 var app = angular.module('ProxyPrint');
 
-app.factory('pendingPrintRequestsService', ['$http', 'backendURLService',
-function($http,backendURLService) {
+app.factory('pendingPrintRequestsService', ['$http', 'backendURLService', '$state',
+function($http,backendURLService, $state) {
     var service = {};
     service.currentRequest = {};
 
@@ -37,7 +37,8 @@ function($http,backendURLService) {
 
     service.rejectRequest = function(id, motive , successCallback, errorCallback) {
         var url = backendURLService.getBaseURL()+'printshops/requests/cancel/' + id;
-        return $http.delete(url, motive).success(function(data){
+        console.log(motive);
+        return $http.post(url, motive).success(function(data){
             if(data.success) {
                 successCallback(data);
             } else {
@@ -46,10 +47,15 @@ function($http,backendURLService) {
         });
     };
 
-    service.getRequest = function(id) {
+    service.getRequest = function(id, successCallback, errorCallback) {
         var url = backendURLService.getBaseURL()+'printshops/requests/'+id;
         return $http.get(url).success(function(data){
-            return data;
+            if(data.success) {
+                return data;
+            } else {
+                $state.go('employee.pending');
+                $state.reload();
+            }
         });
     };
 
