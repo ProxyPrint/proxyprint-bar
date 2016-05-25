@@ -3,20 +3,22 @@
   <table class="table table-striped">
     <thead>
       <tr>
-        <th>ID</th>
-        <th>Iniciado</th>
-        <th>Levantado</th>
+        <th>Id</th>
+        <th>Data do pedido</th>
+        <th>Data de levantamento</th>
+        <th>Status</th>
         <th>Reprografia</th>
         <th>Custo</th>
       </tr>
     </thead>
     <tbody>
       <tr ng-repeat = "request in requests">
-         <td>{{request.reqID}}</td>
-         <td>{{request.ts_beggining}}</td>
-         <td>{{request.ts_processed}}</td>
+         <td>{{request.printrequest.id}}</td>
+         <td>{{request.printrequest.arrivalTimestamp}}</td>
+         <td>{{request.printrequest.deliveredTimestamp}}</td>
+         <td>{{request.printrequest.status}}</td>
          <td>{{request.printshop}}</td>
-         <td>{{request.cost}}</td>
+         <td>{{request.printrequest.cost | number : 2}} €</td>
     </tbody>
   </table>
 </div>

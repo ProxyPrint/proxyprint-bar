@@ -12,7 +12,7 @@ function($http,backendURLService) {
 
     service.rejectRequest = function(id , successCallback, errorCallback) {
         var url = backendURLService.getBaseURL()+'consumer/requests/cancel/' + id;
-        return $http.post(url).success(function(data){
+        return $http.delete(url).success(function(data){
             if(data.success) {
                 successCallback(data);
             } else {
