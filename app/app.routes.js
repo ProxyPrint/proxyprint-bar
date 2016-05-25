@@ -250,7 +250,6 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
         controller: 'HistoryRequestsCtrl'
     })
 
-<<<<<<< HEAD
   /*Manager*/
   .state('manager', {
     abstract: true,
@@ -306,47 +305,6 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
       }]
     }
   })
-=======
-    /*Manager*/
-    .state('manager', {
-        abstract: true,
-        url: '/manager/:username',
-        views: {
-            '': {
-                templateUrl: '/app/components/printshop/manager/views/manager-base.html',
-                controller: 'ManagerBaseCtrl'
-            }
-        },
-        data: {
-            css: adminlteCSS
-        }
-    })
-    .state('manager.stats', {
-        url: '/stats',
-        templateUrl: '/app/components/printshop/manager/views/manager-stats.html'
-    })
-    .state('manager.pricetable', {
-        url: '/pricetable',
-        templateUrl: '/app/components/printshop/manager/views/pricetable/manager-pricetable.html',
-        controller: 'ManagerPriceTableCtrl',
-        resolve: {
-            priceTable: ['priceTableService', function(priceTableService) {
-                return priceTableService.getPriceTable();
-            }]
-        }
-    })
-    .state('manager.employees', {
-        url: '/employees',
-        templateUrl: '/app/components/printshop/manager/views/manager-employees.html',
-        controller: 'ManagerEmployeesCtrl',
-        resolve: {
-            employeesList: ['employeesService', function(employeesService) {
-                return employeesService.getEmployeesList();
-            }]
-        }
-    })
->>>>>>> a38deed58642282db9d0edbd7e8b701434f0a0ec
-
     /*Admin*/
     .state('admin', {
         abstract: true,
