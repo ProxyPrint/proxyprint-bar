@@ -217,10 +217,9 @@ border-top: 1px solid #dddddd;
 /******************************* Settings *****************************/
 
 .settings-container {
-    margin-top: 50px;
-    width: 50%;
-    margin-left: 10%;
+    margin-left: 15%;
     margin-right: 25%;
+    margin-top:7%;
 }
 
 /******************************** Print Shop List ***********************/
