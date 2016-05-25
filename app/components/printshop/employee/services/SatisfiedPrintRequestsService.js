@@ -10,8 +10,15 @@ function($http,backendURLService) {
         });
     };
 
-    service.getUpRequest = function() {
-
+    service.getUpRequest = function(id, successCallback, errorCallback) {
+        var url = backendURLService.getBaseURL()+'printshops/requests/'+id;
+        return $http.post(url).success(function(data){
+            if(data.success) {
+                successCallback(data, id);
+            } else {
+                errorCallback(data, id);
+            }
+        });
     };
 
     return service;
