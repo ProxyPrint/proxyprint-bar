@@ -278,6 +278,10 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
       printshop : ['managerPrintshopService',
         function (managerPrintshopService) {
           return managerPrintshopService.getPrintshop();
+      }],
+      reviews: ['managerPrintshopService', '$stateParams',
+        function (managerPrintshopService, $stateParams) {
+          return managerPrintshopService.getPrintshopReviews($stateParams.printshopid);
         }]
     }
   })
