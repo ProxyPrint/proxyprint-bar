@@ -12,7 +12,7 @@ function($scope, $cookieStore, $state, budgets, printShopListService, fileTransf
   /*---------------------------------------------------------------------------------*/
   /*---------------------------------------------------------------------------------*/
   // Use ngrok to create tunneling for testing with PayPal SandBox in local environment
-  $scope.payPalCallbackUrl = "http://f09259b4.ngrok.io/paypal/ipn/";
+  $scope.payPalCallbackUrl = "http://80133cec.ngrok.io/paypal/ipn/";
   // PRODUCTION
   // $scope.payPalCallbackUrl = backendURLService.getBaseURL();
   /*---------------------------------------------------------------------------------*/
