@@ -31,7 +31,8 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
     'https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css',
     'https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css',
     '/assets/adminlte/dist/css/AdminLTE.min.css',
-    '/assets/adminlte/dist/css/skins/skin-blue.min.css'
+    '/assets/adminlte/dist/css/skins/skin-blue.min.css',
+    'assets/css/spinner.css'
   ];
 
   var gradientSoligBgCSS = [
@@ -237,7 +238,13 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
   })
   .state('manager.stats', {
     url: '/stats',
-    templateUrl: '/app/components/printshop/manager/views/manager-stats.html'
+    templateUrl: '/app/components/printshop/manager/views/manager-stats.html',
+    controller: 'ManagerStatsCtrl',
+    resolve: {
+      stats: ['pshopStatsService', function(pshopStatsService) {
+        return pshopStatsService.getStats();
+      }]
+    }
   })
   .state('manager.pricetable', {
     url: '/pricetable',

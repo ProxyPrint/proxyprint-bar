@@ -5,6 +5,7 @@ app.controller('ConsultRequestCtrl', ['$scope', 'pendingPrintRequest', '$uibModa
 
     $scope.request = pendingPrintRequest.data.printrequest;
     console.log(pendingPrintRequest.data.printrequest);
+    $scope.isDataLoading = false;
 
     $scope.$watch('$scope.request.status', function() {
       if ($scope.request.status == 'PENDING') {
@@ -27,16 +28,18 @@ app.controller('ConsultRequestCtrl', ['$scope', 'pendingPrintRequest', '$uibModa
           var fileURL = URL.createObjectURL(file);
           $window.open(fileURL);
         });
-    }
+    };
 
     //$scope.openSuccessModal("Pedido passará agora para o estado: " + $scope.message);
 
     $scope.onCancelSuccessCallback = function(data) {
+      $scope.isDataLoading = false;
       $state.go('employee.pending');
       $scope.openSuccessModal("O pedido foi cancelado com sucesso!");
     };
 
     $scope.onChangeStatusErroCallback = function(data) {
+      $scope.isDataLoading = false;
       $scope.openSuccessModal("Ocorreu um erro a alterar o estado do pedido!");
     };
 
@@ -50,9 +53,10 @@ app.controller('ConsultRequestCtrl', ['$scope', 'pendingPrintRequest', '$uibModa
       });
 
       modalInstance.result.then(function(motive) {
+        $scope.isDataLoading = true;
         pendingPrintRequestsService.rejectRequest($scope.request.id, motive, $scope.onCancelSuccessCallback, $scope.onChangeStatusErroCallback);
       });
-    }
+    };
 
     $scope.openAcceptModal = function(reply) {
 
@@ -69,6 +73,7 @@ app.controller('ConsultRequestCtrl', ['$scope', 'pendingPrintRequest', '$uibModa
       });
 
       modalInstance.result.then(function() {
+        $scope.isDataLoading = true;
         pendingPrintRequestsService.acceptRequest($scope.request.id, $scope.onChangeStatusSuccessCallback, $scope.onChangeStatusErroCallback);
       });
     };
@@ -85,6 +90,7 @@ app.controller('ConsultRequestCtrl', ['$scope', 'pendingPrintRequest', '$uibModa
       } else if ($scope.request.status == 'FINISHED') {
         $scope.message = "Finalizado";
       }
+      $scope.isDataLoading = true;
       $scope.openSuccessModal("Pedido passará agora para o estado: " + $scope.message);
     };
 

@@ -1,8 +1,8 @@
 var app = angular.module('ProxyPrint');
 
 // Pending requests table
-app.controller('AdminPendingRequestsCtrl', ['$rootScope', '$scope', '$state', '$http', 'pendingRequests', 'pendingRequestsService',
-function($rootScope, $scope, $state, $http, pendingRequests, pendingRequestsService) {
+app.controller('AdminPendingRequestsCtrl', ['$rootScope', '$scope', '$state', '$http', 'pendingRequests', 'pendingRequestsService', '$uibModal',
+function($rootScope, $scope, $state, $http, pendingRequests, pendingRequestsService, $uibModal) {
 
   $scope.pendingRequests = pendingRequests.data;
 
@@ -75,9 +75,9 @@ $scope.openRejectModal = function(reply) {
 
   var modalInstance = $uibModal.open({
     animation: true,
-    templateUrl: 'app/components/admin/views/request-modal.html',
-    controller: 'RequestModalController',
-    size: 'sm',
+    templateUrl: 'app/components/admin/views/admin-request-reject-modal.html',
+    controller: 'RegisterRequestCancelModalController',
+    size: 'md',
     resolve: {
       index: function() {
         return $scope.index;
@@ -88,10 +88,23 @@ $scope.openRejectModal = function(reply) {
     }
   });
 
-  modalInstance.result.then(function(index) {
+  modalInstance.result.then(function(motive) {
     $scope.showReject = true;
-    pendingRequestsService.rejectRequest($scope.request.id);
+    pendingRequestsService.rejectRequest($scope.request.id, motive);
   });
 };
 
 }]);
+
+app.controller('RegisterRequestCancelModalController', ['$scope', '$uibModalInstance',
+  function($scope, $uibModalInstance) {
+
+    $scope.performAction = function() {
+      $uibModalInstance.close($scope.motive);
+    };
+
+    $scope.closeModal = function() {
+      $uibModalInstance.dismiss('cancel');
+    };
+  }
+]);
