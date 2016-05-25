@@ -342,7 +342,13 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
     .state('admin.printshops', {
         url: '/printshops',
         templateUrl: '/app/components/admin/views/admin-printshops.html',
-        controller: 'AdminPrintShopsCtrl'
+        controller: 'AdminPrintShopsCtrl',
+        resolve: {
+          printshops: ['printshopService',
+            function (printshopService) {
+              return printshopService.getAllPrintshops();
+            }]
+        }
     });
 
 }]);

@@ -6,7 +6,7 @@
 
 <!-- Main content -->
 <div class="box-body">
-  <input type="text" class="form-control input-sm" placeholder="Procure uma Reprografia...">
+  <input ng-model="searchInput" type="text" class="form-control input-sm" placeholder="Procure uma Reprografia...">
 </div>
 <!-- Your Page Content Here -->
 <div class="box">
@@ -16,19 +16,14 @@
         <tr>
           <th>ID</th>
           <th>Nome</th>
-          <th>Data de Admissão</th>
-          <th>Data de Registo</th>
-          <th>Coordenador</th>
-          <th>Acções</th>
+          <th>Morada</th>
+          <th>NIF</th>
         </tr>
-        <tr ng-repeat="pshop in printshops">
+        <tr ng-repeat="pshop in printshops | filter:filterPShops">
           <td><b>{{pshop.id}}</b></td>
           <td>{{pshop.name}}</td>
-          <td>{{pshop.admissionDate}}</td>
-          <td>{{pshop.registerDate}}</td>
-          <td>{{pshop.manager}}</td>
-          <td><a ng-click='consult()' class="btn btn-success"><i class="fa fa-search" style="margin-right: 0.2em;"></i>Consultar</a>
-          <a ng-click='delete()' class="btn btn-danger"><i class="fa fa-times" style="margin-right: 0.2em;"></i>Eliminar</a></td>
+          <td>{{pshop.address}}</td>
+          <td>{{pshop.nif}}</td>
         </tr>
         {{answer}}
       </tbody>
