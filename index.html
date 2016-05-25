@@ -41,6 +41,7 @@
   <script src="node_modules/ui-select/dist/select.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.1/angular-sanitize.min.js"></script>
   <script src="https://www.paypalobjects.com/js/external/api.js"></script>
+  <script src="assets/libs/ng-map.min.js"></script>
   <!-- App code -->
   <script src="app/app.modules.js"></script>
   <script src="app/app.routes.js"></script>
@@ -55,12 +56,16 @@
   <script src="app/components/consumer/controllers/ConsumerPrintshopListCtrl.js"></script>
   <script src="app/components/consumer/controllers/ConsumerSpecsCtrl.js"></script>
   <script src="app/components/consumer/controllers/ConsumerPrintShopsSelectionCtrl.js"></script>
-  <script src="app/components/consumer/directives/StarRating.js"></script>
+  <script src="app/components/consumer/directives/Rating.js"></script>
+  <script src="app/components/consumer/controllers/ConsumerPrintshopPageCtrl.js"></script>
+
   <script src="app/components/consumer/directives/DragNDropList.js"></script>
   <script src="app/components/consumer/services/SpecMarshallService.js"></script>
   <script src="app/components/consumer/services/FileTransferService.js"></script>
   <script src="app/components/consumer/services/PrintShopListService.js"></script>
   <script src="app/components/consumer/services/NotificationsService.js"></script>
+  <script src="app/components/consumer/services/PrintshopService.js"></script>
+  <script src="app/components/consumer/services/ReviewsService.js"></script>
   <script src="app/components/consumer/directives/Modal.js"></script>
   <script src="app/components/consumer/services/BudgetService.js"></script>
   <script src="app/components/consumer/services/ConsumerPendingRequestsService.js"></script>
@@ -81,6 +86,8 @@
   <script src="app/components/printshop/manager/services/EmployeesService.js"></script>
   <script src="app/components/printshop/manager/controllers/ManagerStatsCtrl.js"></script>
   <script src="app/components/printshop/manager/services/PShopStatsService.js"></script>
+  <script src="app/components/printshop/manager/services/ManagerPrintshopService.js"></script>
+  <script src="app/components/printshop/manager/controllers/ManagerPrintshopPageCtrl.js"></script>
   <!-- Admin -->
   <script src="app/components/admin/controllers/AdminBaseCtrl.js"></script>
   <script src="app/components/admin/controllers/AdminPendingRequestsCtrl.js"></script>
@@ -89,6 +96,7 @@
   <script src="app/components/consumer/services/PrintingSchemaService.js"></script>
   <!-- Shared -->
   <script src="app/shared/services/BackendURLService.js"></script>
+  <script src="app/shared/services/PaginationService.js"></script>
 
 </body>
 

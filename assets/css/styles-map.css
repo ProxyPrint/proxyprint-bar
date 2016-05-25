@@ -1,0 +1,82 @@
+.printshops {
+    width: 60%;
+    margin-left: 10%;
+}
+
+.printshop-item:hover {
+  border-color: #0088CC;
+}
+
+.printshop-map {
+  margin-left:20%;
+  margin-right:20%;
+  position: relative;
+}
+
+.printshop-details {
+   z-index: 10;
+   position: absolute;
+}
+
+#map-canvas {
+  margin-left:10%;
+  margin-right:10%;
+  width: 80%;
+  height: 200px;
+  position: relative;
+  top: 15%;
+  z-index: 0; /* Set z-index to 0 as it will be on a layer below the contact form */
+}
+
+.printshop-details {
+  position: relative;
+  z-index: 1; /* The z-index should be higher than Google Maps */
+  width: 50%;
+  margin-left:20%;
+  padding: 10px;
+  margin-top: 2%;
+  background: black;
+  height: auto;
+  opacity: .64; /* Set the opacity for a slightly transparent Google Form */
+  color: white;
+}
+
+.map-canvas-offset {
+  margin-top:80px;
+  margin-left: 20%;
+  margin-right: 20%;
+}
+
+hr.review {
+	margin-top: 3px;
+  margin-bottom:3px;
+}
+
+.review-content {
+  padding-left: 5%;
+}
+
+/*** Ratings ***/
+.rating {
+    color: #a9a9a9;
+    margin: 0;
+    padding: 0;
+}
+ul.rating {
+    display: inline-block;
+}
+.rating li {
+    list-style-type: none;
+    display: inline-block;
+    padding: 1px;
+    text-align: center;
+    font-weight: bold;
+    cursor: pointer;
+    font-size:20px;
+}
+.rating .filled {
+    color: #ffcc00;
+}
+.clear{
+  margin-top:20px;
+}
