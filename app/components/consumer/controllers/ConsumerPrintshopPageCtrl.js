@@ -1,7 +1,7 @@
 angular.module('ProxyPrint')
    .controller('ConsumerPrintshopPageCtrl',
-      ['$scope','NgMap','printshop', 'reviews', 'printshopService','$uibModal', 'reviewsService', '$cookieStore', '$state',
-      function ($scope, NgMap,printshop, reviews, printshopService, $uibModal, reviewsService, $cookieStore, $state) {
+      ['$scope', 'printshop', 'reviews', 'printshopService','$uibModal', 'reviewsService', '$cookieStore', '$state',
+      function ($scope,printshop, reviews, printshopService, $uibModal, reviewsService, $cookieStore, $state) {
 
 
 

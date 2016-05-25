@@ -1,5 +1,5 @@
 angular.module('ProxyPrint')
-   .controller('ManagerPrintshopPageCtrl', ['$scope','NgMap','printshop', function ($scope, NgMap,printshop) {
+   .controller('ManagerPrintshopPageCtrl', ['$scope','printshop', function ($scope,printshop) {
 
      console.log(printshop.data.printshop);
      $scope.data = printshop.data.printshop;
