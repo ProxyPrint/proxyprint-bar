@@ -25,7 +25,7 @@
     </div>
     <br />
     <div style="text-align:center">
-      <button ng-class="pdfFiles.length===0 ? 'btn btn-primary' : 'btn btn-primary hvr-buzz'" ng-click="uploadFiles()" ng-disabled="pdfFiles.length===0">Submeter pedido</button>
+      <button ng-class="pdfFiles.length===0 ? 'button button-rounded button-primary' : 'button button-rounded button-primary hvr-buzz'" ng-click="uploadFiles()" ng-disabled="pdfFiles.length===0">Submeter pedido</button>
     </div>
   </div>
 
@@ -39,12 +39,12 @@
           <div class="row">
             <div class="col-sm-6">
               <strong> Pedido #{{request.id}} </strong>
-              <br /> {{request.arrivalTimestamp}}
+              <br/> {{request.arrivalTimestamp}}
             </div>
             <div class="col-sm-6">
             </div>
             <div class="col-sm-6">
-              <button type="button" class="btn btn-default" ng-click="openRejectModal('Tem a certeza que quer cancelar o pedido?', request.id)">Cancelar pedido</button>
+              <button type="button" class="button button-rounded button" ng-click="openRejectModal('Tem a certeza que quer cancelar o pedido?', request.id)">Cancelar pedido</button>
             </div>
           </div>
         </li>
