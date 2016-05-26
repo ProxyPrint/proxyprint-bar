@@ -13,7 +13,7 @@
 <br>
 	<div class="printshops">
 		<h2>Reprografias</h2>
-		<div infinite-scroll='loadMore()' infinite-scroll-distance='0'>
+		<div infinite-scroll='loadMore()' infinite-scroll-distance='2'>
 		<ul class="list-group" ng-repeat="printshop in printshops | filter : psName | limitTo:limit as results" >
 			<li class="list-group-item clearfix printshop-item" ng-click="loadPrintshop(printshop.id)">
 				<div class="left">
@@ -24,6 +24,6 @@
 					<div star-rating rating="printshop.rating" read-only="true" max-rating="5"></div>
 				</div>
 			</li>
-		</div>
 		</ul>
+		</div>
 	</div>
