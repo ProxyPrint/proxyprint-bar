@@ -3,7 +3,13 @@ angular.module('ProxyPrint')
       ['$scope', 'printshop', 'reviews', 'printshopService','$uibModal', 'reviewsService', '$cookieStore', '$state',
       function ($scope,printshop, reviews, printshopService, $uibModal, reviewsService, $cookieStore, $state) {
 
+      $scope.limit = 5;
 
+      $scope.loadMore = function() {
+          var incremented = $scope.limit + 5;
+          $scope.limit = incremented > $scope.printshop.reviews.length ? $scope.printshop.reviews.length : incremented;
+
+        };
 
       $scope.printshop = {
         id: printshop.data.id,

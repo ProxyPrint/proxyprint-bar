@@ -14,7 +14,7 @@
 	<div class="printshops">
 		<h2>Reprografias</h2>
 		<div infinite-scroll='loadMore()' infinite-scroll-distance='2'>
-		<ul class="list-group" ng-repeat="printshop in printshops | filter : psName | limitTo:limit as results" >
+		<ul class="list-group" ng-repeat="printshop in printshops | filter : psName | limitTo:limit" >
 			<li class="list-group-item clearfix printshop-item" ng-click="loadPrintshop(printshop.id)">
 				<div class="left">
 					<strong>{{printshop.name}}</strong>
