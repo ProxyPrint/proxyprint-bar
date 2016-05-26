@@ -162,11 +162,25 @@ border-top: 1px solid #dddddd;
   overflow-y: scroll;
 }
 
+.notification-messages {
+  width:150px;
+  float: left;
+  word-break: normal;
+}
+
 .inline-buttons {
+  float: right;
   display:inline-block;
   vertical-align: middle;
 }
 
+.notification-date {
+  clear: both;
+  width: inherit;
+  height: auto;
+  position: static;
+  padding: 10px 2px 0px 0px;
+}
 
 /************************* Costumer Main Page******************************/
 
@@ -640,8 +654,4 @@ ul.rating {
 .seemore-button {
   text-align:center;
   margin-bottom: 3%;
-}
-
-.scrollable-container {
-  overflow:scroll;
 }

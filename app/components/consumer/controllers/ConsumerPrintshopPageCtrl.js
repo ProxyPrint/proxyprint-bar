@@ -21,7 +21,6 @@ angular.module('ProxyPrint')
         reviews: reviews.data
       }
 
-      console.log($scope.printshop);
 
         /** Google Maps **/
 
