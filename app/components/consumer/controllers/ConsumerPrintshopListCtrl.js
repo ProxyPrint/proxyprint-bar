@@ -5,7 +5,7 @@ angular.module('ProxyPrint')
       $scope.printshops = printshops.data;
       $scope.limit = 5;
       $scope.loadPrintshop = function (index) {
-        $state.go('consumer.printshop', {printshopid: $scope.printshops[index].id});
+        $state.go('consumer.printshop', {printshopid: index});
       }
 
       $scope.loadMore = function() {
