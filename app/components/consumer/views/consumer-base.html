@@ -1,4 +1,4 @@
-<div id="custom-bootstrap-menu" class="navbar navbar-default" role="navigation">
+<div id="custom-bootstrap-menu" class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="container-fluid">
         <div class="navbar-default">
             <div class="navbar-header">
@@ -77,8 +77,9 @@
             <div class="col-sm-9 col-md-10 main">
 
 
-
-                <div ui-view></div>
+                <div class="scrollable-container">
+                  <div ui-view></div>
+                </div>
 
             </div>
             <!--/row-->

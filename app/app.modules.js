@@ -1,4 +1,4 @@
-angular.module('ProxyPrint', ['Auth','ui.router','ngCookies', 'uiRouterStyles','ngFileUpload','angular-notification-icons', 'ui.bootstrap', 'rzModule', 'ngAnimate', 'ui.select', 'ngSanitize'])
+angular.module('ProxyPrint', ['Auth','ui.router','ngCookies', 'uiRouterStyles','ngFileUpload','angular-notification-icons', 'ui.bootstrap', 'rzModule', 'ngAnimate', 'ui.select', 'ngSanitize', 'infinite-scroll'])
    .run(['$rootScope', '$location', '$cookieStore', '$http',
 
     function ($rootScope, $location, $cookieStore, $http) {

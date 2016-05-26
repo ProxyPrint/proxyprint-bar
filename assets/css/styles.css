@@ -18,6 +18,7 @@ body {
 
 #content {
   margin: 0 0 100px; /* bottom = footer height */
+  margin-top: 5%;
 }
 
 
@@ -235,6 +236,8 @@ border-top: 1px solid #dddddd;
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
     border-radius: 25px;
     border: 1px solid #ccc;
+    width: 100%;
+    border-radius: 4px 25px 25px 4px;
 }
 .search-form .form-group input.form-control {
     padding-right: 20px;
@@ -631,4 +634,14 @@ ul.rating {
 
 .fa-white-icon:hover{
   color:#3A6DB0;
+}
+
+
+.seemore-button {
+  text-align:center;
+  margin-bottom: 3%;
+}
+
+.scrollable-container {
+  overflow:scroll;
 }
