@@ -22,7 +22,7 @@
   margin-left:10%;
   margin-right:10%;
   width: 80%;
-  height: 200px;
+  height: 300px;
   position: relative;
   top: 15%;
   z-index: 0; /* Set z-index to 0 as it will be on a layer below the contact form */

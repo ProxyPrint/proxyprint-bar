@@ -1,17 +1,19 @@
 <center>
     <h1>{{printshop.name}}</h1>
-    <br /> {{printshop.address}}
+    <br /> <br /> {{printshop.address}} <br />
 </center>
 <div class="right">
   <div star-rating rating-value="printshop.rating" max="5" read-only="true"></div>
 </div>
 
-<div id="map-canvas"></div>
+<div id="map-canvas" style="margin-top:2%;"></div>
 
 <div class="map-canvas-offset">
     <div class="reviews-box">
         <div class="center">
-            <h2>Avaliações</h2>
+            <center>
+                <h2>Avaliações</h2>
+            </center>
         </div>
         <ul class="list-group">
             <div class="list-group-item" ng-repeat="review in printshop.reviews">
