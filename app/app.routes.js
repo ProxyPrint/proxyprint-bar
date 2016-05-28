@@ -16,7 +16,8 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
         'http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic',
         'https://cdnjs.cloudflare.com/ajax/libs/ng-table/0.8.3/ng-table.min.css',
         '/node_modules/hover.css/css/hover-min.css',
-        '/assets/css/buttons.css'
+        '/assets/css/buttons.css',
+        '/node_modules/angular-ui-notification/dist/angular-ui-notification.min.css'
     ];
 
     var mainPrintShopCSS = [

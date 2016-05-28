@@ -1,7 +1,7 @@
 angular.module('ProxyPrint')
    .controller('ConsumerPrintshopPageCtrl',
-      ['$scope', 'printshop', 'reviews', 'printshopService','$uibModal', 'reviewsService', '$cookieStore', '$state',
-      function ($scope,printshop, reviews, printshopService, $uibModal, reviewsService, $cookieStore, $state) {
+      ['$scope', 'printshop', 'reviews', 'printshopService','$uibModal', 'reviewsService', '$cookieStore', '$state', 'toasterService',
+      function ($scope,printshop, reviews, printshopService, $uibModal, reviewsService, $cookieStore, $state, toasterService) {
 
       $scope.limit = 5;
 
@@ -20,6 +20,8 @@ angular.module('ProxyPrint')
         longitude: printshop.data.longitude,
         reviews: reviews.data
       }
+
+      console.log($cookieStore.get('globals').currentUser);
 
 
         /** Google Maps **/
@@ -69,11 +71,24 @@ angular.module('ProxyPrint')
          });
 
          modalInstance.result.then(function(review) {
-           console.log(review);
-           reviewsService.addReview($scope.printshop.id, review);
+           addReview(review);
            $state.go('consumer.printshop');
          });
        };
+
+
+       addReview = function (review) {
+         reviewsService.addReview($scope.printshop.id, review)
+          .success(function () {
+            review.username = $cookieStore.get('consumerName')
+            $scope.printshop.reviews.unshift(review);
+            toasterService.notifySuccess("A avaliação foi inserida!");
+
+          })
+          .error(function () {
+            toasterService.notifyWarning("Ocorreu um erro! A avalição não foi criada.");
+          })
+       }
 
 
 

@@ -1,4 +1,4 @@
-angular.module('ProxyPrint', ['Auth','ui.router','ngCookies', 'uiRouterStyles','ngFileUpload','angular-notification-icons', 'ui.bootstrap', 'rzModule', 'ngAnimate', 'ui.select', 'ngSanitize', 'infinite-scroll'])
+angular.module('ProxyPrint', ['Auth','ui.router','ngCookies', 'uiRouterStyles','ngFileUpload','angular-notification-icons', 'ui.bootstrap', 'rzModule', 'ngAnimate', 'ui.select', 'ngSanitize', 'infinite-scroll','ui-notification'])
    .run(['$rootScope', '$location', '$cookieStore', '$http',
 
     function ($rootScope, $location, $cookieStore, $http) {
@@ -14,6 +14,17 @@ angular.module('ProxyPrint', ['Auth','ui.router','ngCookies', 'uiRouterStyles','
                 $location.path('/');
             }
         });*/
+    }])
+    .config(['NotificationProvider', function(NotificationProvider) {
+      NotificationProvider.setOptions({
+        delay: 7000,
+        startTop: 60,
+        startRight: 20,
+        verticalSpacing: 20,
+        horizontalSpacing: 20,
+        positionX: 'right',
+        positionY: 'top'
+        });
     }]);
 
 
