@@ -33,7 +33,12 @@ function($scope, $uibModal, $log, fileTransferService, specMarshallService,
                 animation: true,
                 templateUrl: 'app/components/consumer/views/pagerange-modal.html',
                 controller: 'PageRangeController',
-                size: 'md'
+                size: 'md',
+                resolve: {
+                  file: function () {
+                    return $scope.lastFile;
+                  }
+                }
             });
 
             modalInstance.result.then(function (values) {
@@ -278,7 +283,11 @@ function($scope, $uibModal, $log, fileTransferService, specMarshallService,
         };
     }]);
 
-    angular.module('ProxyPrint').controller('PageRangeController', ['$scope', '$uibModalInstance', function ($scope, $uibModalInstance) {
+    angular.module('ProxyPrint').controller('PageRangeController', ['$scope', '$uibModalInstance', 'file',
+        function ($scope, $uibModalInstance, file) {
+
+        console.log(file);
+
 
         $scope.performAction = function () {
             var values = [];
