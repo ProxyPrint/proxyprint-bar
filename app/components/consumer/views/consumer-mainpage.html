@@ -33,7 +33,7 @@
     <div class="center">
       <h2> Pedidos pendentes </h2>
     </div>
-    <div class="scrollableTable">
+    <div ng-show="pendingRequests.length>0" class="scrollableTable">
       <ul class="list-group">
         <li class="list-group-item" ng-repeat="request in pendingRequests">
           <div class="row">
@@ -49,6 +49,11 @@
           </div>
         </li>
       </ul>
+    </div>
+    <div ng-show="pendingRequests.length==0" class="scrollableTable-alt">
+      <div class="scrollableTable-alt-text">
+        <h4>Não tem nenhum pedido pendente.</h4>
+      </div>
     </div>
   </div>
 </div>

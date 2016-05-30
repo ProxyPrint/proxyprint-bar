@@ -229,6 +229,21 @@ border-top: 1px solid #dddddd;
     overflow-y: scroll;
 }
 
+.scrollableTable-alt {
+  height: 300px;
+  width: 100%;
+  border-color: black;
+  background: #F8F8F8;
+  border: 2px solid #DDD;
+  color: #7f7f7f;
+}
+
+.scrollableTable-alt-text{
+  text-align: center;
+  margin-top: 40%;
+  word-break: normal;
+}
+
 /******************************* Settings *****************************/
 
 .settings-container {
