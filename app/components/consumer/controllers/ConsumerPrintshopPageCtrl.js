@@ -8,7 +8,6 @@ angular.module('ProxyPrint')
       $scope.loadMore = function() {
           var incremented = $scope.limit + 5;
           $scope.limit = incremented > $scope.printshop.reviews.length ? $scope.printshop.reviews.length : incremented;
-
         };
 
       $scope.printshop = {
@@ -20,10 +19,6 @@ angular.module('ProxyPrint')
         longitude: printshop.data.longitude,
         reviews: reviews.data
       }
-
-      console.log($cookieStore.get('globals').currentUser);
-
-
         /** Google Maps **/
 
         var map = new google.maps.Map(document.getElementById('map-canvas'), {
@@ -86,7 +81,7 @@ angular.module('ProxyPrint')
 
           })
           .error(function () {
-            toasterService.notifyWarning("Ocorreu um erro! A avalição não foi criada.");
+            toasterService.notifyError("Ocorreu um erro! A avalição não foi criada.");
           })
        }
 
