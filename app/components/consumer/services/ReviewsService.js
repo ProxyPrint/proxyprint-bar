@@ -5,7 +5,6 @@ angular.module('ProxyPrint').factory('reviewsService',['$http', 'backendURLServi
     service.getPrintshopReviews = function(printshopID) {
       return $http.get(backendURLService.getBaseURL()+'printshops/'+printshopID+'/reviews')
       .success(function(data){
-        console.log(data);
         return data;
       });
     };

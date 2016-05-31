@@ -1,4 +1,4 @@
-<div id="custom-bootstrap-menu" class="navbar navbar-default" role="navigation">
+<div id="custom-bootstrap-menu" class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="container-fluid">
         <div class="navbar-default">
             <div class="navbar-header">
@@ -21,7 +21,9 @@
                         </notification-icon>
                     </a>
                     <div id="notificationContainer">
-                        <div id="notificationTitle">Notifications</div>
+                        <div id="notificationTitle">
+                            <div class="center">Notificações</div>
+                        </div>
                         <div id="notificationsBody" class="notifications">
                         </div>
 
@@ -29,20 +31,18 @@
 
                             <ul class="list-group">
                                 <li class="list-group-item" ng-repeat="notification in notifications">
-                                    <div row>
-                                        <div class="left">
+                                        <div class="notification-messages">
                                             {{notification.message}}
                                         </div>
-                                        <div class="right">
-                                            <div class="inline-buttons">
-                                                <button ng-show="!notification.read" ng-click="readNotification($index)" class="button button-flat button-primary button-border button-circle button-small"><i class="fa fa-check"></i></button>
-                                                <button class="button button-inverse button-flat button-caution button-circle button-border button-small" ng-click="removeNotification($index)"><i class="fa fa-times"></i></button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <br />
-                                    <div class="xsmall-font">{{notification.day}}, {{notification.hour}}</div>
 
+
+                                        <div class="inline-buttons">
+                                            <button ng-show="!notification.read" ng-click="readNotification($index)" class="button button-flat button-primary button-border button-circle button-small"><i class="fa fa-check"></i></button>
+                                            <button class="button button-inverse button-flat button-caution button-circle button-border button-small" ng-click="removeNotification($index)"><i class="fa fa-times"></i></button>
+                                        </div>
+                                        <div class="notification-date">
+                                          <div class="xsmall-font">{{notification.day}}, {{notification.hour}}</div>
+                                        </div>
                                 </li>
                             </ul>
                         </div>
@@ -84,7 +84,7 @@
             <!--/row-->
         </div>
     </div>
-    </div>
+</div>
 <footer class="footer-distributed">
 
     <div class="footer-right">

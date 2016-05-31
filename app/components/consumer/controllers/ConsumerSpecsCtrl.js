@@ -1,8 +1,8 @@
 angular.module('ProxyPrint').controller('ConsumerSpecsController',
 ['$scope' , '$uibModal', '$log', 'fileTransferService', 'specMarshallService',
-'printingSchemas', 'printingSchemaService', '$cookieStore', '$state',
+'printingSchemas', 'printingSchemaService', '$cookieStore', '$state', 'toasterService',
 function($scope, $uibModal, $log, fileTransferService, specMarshallService,
-    printingSchemas, printingSchemaService, $cookieStore, $state) {
+    printingSchemas, printingSchemaService, $cookieStore, $state, toasterService) {
 
         /** Page range logic */
         $scope.lastItem = null;
@@ -33,7 +33,12 @@ function($scope, $uibModal, $log, fileTransferService, specMarshallService,
                 animation: true,
                 templateUrl: 'app/components/consumer/views/pagerange-modal.html',
                 controller: 'PageRangeController',
-                size: 'md'
+                size: 'md',
+                resolve: {
+                  file: function () {
+                    return $scope.lastFile;
+                  }
+                }
             });
 
             modalInstance.result.then(function (values) {
@@ -169,13 +174,7 @@ function($scope, $uibModal, $log, fileTransferService, specMarshallService,
             });
 
             modalInstance.result.then(function(spec) {
-                var specification = specMarshallService.marshallSpecification(spec);
-                if ($scope.specs === null){
-                    specification.fakeID = 1;
-                    $scope.specs = [];
-                }
-                else specification.fakeID = $scope.specs.length+1;
-                $scope.addPrintingSchema(specification);
+                addPrintingSchema(spec);
             });
         };
 
@@ -197,26 +196,59 @@ function($scope, $uibModal, $log, fileTransferService, specMarshallService,
 
 
             modalInstance.result.then(function(spec) {
-                var schema = specMarshallService.marshallEditedSpecification(spec);
-                printingSchemaService.editPrintingSchema(spec.id, schema,$cookieStore.get('consumerID'));
-                schema.fakeID = spec.fakeID;
-                schema.id = spec.id;
-                $scope.specs[spec.fakeID-1] = schema;
+              editPrintingSchema(spec);
+            });
+        }
+
+        /** C(R)UD PRINTING SCHEMA **/
+
+        addPrintingSchema = function (spec) {
+          var specification = specMarshallService.marshallSpecification(spec);
+          if ($scope.specs === null){
+              specification.fakeID = 1;
+              $scope.specs = [];
+          }
+          else specification.fakeID = $scope.specs.length+1;
+          printingSchemaService.addPrintingSchema(specification, $cookieStore.get('consumerID'))
+            .success(function () {
+              $scope.specs.push(specification);
+              toasterService.notifySuccess("A especificação foi inserida!");
+            }).error(function () {
+              toasterService.notifyError("Ocorreu um erro! A especificação não foi inserida.");
+            });
+        }
+
+        editPrintingSchema = function (spec) {
+          var schema = specMarshallService.marshallEditedSpecification(spec);
+          printingSchemaService.editPrintingSchema(spec.id, schema,$cookieStore.get('consumerID'))
+            .success(function () {
+              schema.fakeID = spec.fakeID;
+              schema.id = spec.id;
+              $scope.specs[spec.fakeID-1] = schema;
+              toasterService.notifySuccess("A especificação foi editada com sucesso!");
+            }).error(function () {
+              toasterService.notifyError("Ocorreu um erro! A especificação não foi editada.");
             });
         }
 
         $scope.removePrintingSchema = function (index) {
-            printingSchemaService.deletePrintingSchema($scope.specs[index].id, $cookieStore.get('consumerID'));
-            $scope.specs.splice(index,1);
-        };
+          printingSchemaService.deletePrintingSchema($scope.specs[index].id, $cookieStore.get('consumerID'))
+            .success(function (){
+              $scope.specs.splice(index,1);
+              toasterService.notifySuccess("A especificação foi removida!");
+            }).error(function () {
+              toasterService.notifyError("Ocorreu um erro! A especificação não foi removida.");
+            });
 
-        $scope.addPrintingSchema = function (schema) {
-            printingSchemaService.addPrintingSchema(schema, $cookieStore.get('consumerID'));
-            console.log(schema);
-            $scope.specs.push(schema);
-        };
+
+        }
+
+
 
     }]);
+
+
+
 
     angular.module('ProxyPrint').controller('AddSpecificationController', ['$scope', '$uibModalInstance',
     function ($scope, $uibModalInstance) {
@@ -251,7 +283,11 @@ function($scope, $uibModal, $log, fileTransferService, specMarshallService,
         };
     }]);
 
-    angular.module('ProxyPrint').controller('PageRangeController', ['$scope', '$uibModalInstance', function ($scope, $uibModalInstance) {
+    angular.module('ProxyPrint').controller('PageRangeController', ['$scope', '$uibModalInstance', 'file',
+        function ($scope, $uibModalInstance, file) {
+
+        console.log(file);
+
 
         $scope.performAction = function () {
             var values = [];

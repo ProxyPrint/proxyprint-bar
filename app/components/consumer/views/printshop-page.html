@@ -4,7 +4,7 @@
         <br />
         <small>{{printshop.address}}</small></left>
     <div class="right">
-      <div star-rating rating-value="printshop.rating" max="5" read-only="true"></div>
+        <div star-rating rating-value="printshop.rating" max="5" read-only="true"></div>
     </div>
 </div>
 <div class="map-canvas-offset">
@@ -24,26 +24,29 @@
         <div class="center">
             <h2>Avaliações</h2>
         </div>
-        <ul class="list-group">
-            <div class="list-group-item" ng-repeat="review in printshop.reviews">
-                <div class="row">
-                    <div class="col-sm-4">
-                        <strong>{{review.username}}</strong>:
-                        <hr class="review" />
-                    </div>
-                    <div class="col-sm-4">
 
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="right">
-                            <div star-rating rating-value="review.rating" max="5" read-only="true"></div>
+        <div infinite-scroll='loadMore()' infinite-scroll-distance='2'>
+            <ul class="list-group">
+                <div class="list-group-item" ng-repeat="review in printshop.reviews | limitTo: limit">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <strong>{{review.username}}</strong>
+                            <hr class="review" />
                         </div>
-                    </div>
-                    <div class="review-content">
-                        {{review.description}}
-                    </div>
+                        <div class="col-sm-4">
 
-                </div>
-        </ul>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="right">
+                                <div star-rating rating-value="review.rating" max="5" read-only="true"></div>
+                            </div>
+                        </div>
+                        <div class="review-content">
+                            {{review.description}}
+                        </div>
+
+                    </div>
+            </ul>
+            </div>
         </div>
     </div>

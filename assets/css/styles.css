@@ -18,6 +18,7 @@ body {
 
 #content {
   margin: 0 0 100px; /* bottom = footer height */
+  margin-top: 5%;
 }
 
 
@@ -161,11 +162,25 @@ border-top: 1px solid #dddddd;
   overflow-y: scroll;
 }
 
+.notification-messages {
+  width:150px;
+  float: left;
+  word-break: normal;
+}
+
 .inline-buttons {
+  float: right;
   display:inline-block;
   vertical-align: middle;
 }
 
+.notification-date {
+  clear: both;
+  width: inherit;
+  height: auto;
+  position: static;
+  padding: 10px 2px 0px 0px;
+}
 
 /************************* Costumer Main Page******************************/
 
@@ -214,13 +229,27 @@ border-top: 1px solid #dddddd;
     overflow-y: scroll;
 }
 
+.scrollableTable-alt {
+  height: 300px;
+  width: 100%;
+  border-color: black;
+  background: #F8F8F8;
+  border: 2px solid #DDD;
+  color: #7f7f7f;
+}
+
+.scrollableTable-alt-text{
+  text-align: center;
+  margin-top: 40%;
+  word-break: normal;
+}
+
 /******************************* Settings *****************************/
 
 .settings-container {
-    margin-top: 50px;
-    width: 50%;
-    margin-left: 10%;
+    margin-left: 15%;
     margin-right: 25%;
+    margin-top:7%;
 }
 
 /******************************** Print Shop List ***********************/
@@ -236,6 +265,8 @@ border-top: 1px solid #dddddd;
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
     border-radius: 25px;
     border: 1px solid #ccc;
+    width: 100%;
+    border-radius: 4px 25px 25px 4px;
 }
 .search-form .form-group input.form-control {
     padding-right: 20px;
@@ -305,7 +336,7 @@ border-top: 1px solid #dddddd;
   margin-left:10%;
   margin-right:20%;
   width: 70%;
-  height: 200px;
+  height: 300px;
   position:absolute;
   top: 0;
   left: 0;
@@ -330,7 +361,7 @@ border-top: 1px solid #dddddd;
 }
 
 .map-canvas-offset {
-  margin-top:150px;
+  margin-top:250px;
   margin-left: 10%;
   margin-right: 20%;
 }
@@ -632,4 +663,10 @@ ul.rating {
 
 .fa-white-icon:hover{
   color:#3A6DB0;
+}
+
+
+.seemore-button {
+  text-align:center;
+  margin-bottom: 3%;
 }

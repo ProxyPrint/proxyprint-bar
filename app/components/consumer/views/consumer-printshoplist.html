@@ -1,4 +1,4 @@
-<div class="container">
+
 	<div class="row">
 		<div class="col-md-4 col-md-offset-3">
 			<form action="" class="search-form">
@@ -10,21 +10,20 @@
 			</form>
 		</div>
 	</div>
-</div>
 <br>
-<div class="container">
 	<div class="printshops">
 		<h2>Reprografias</h2>
-		<ul class="list-group" ng-repeat="printshop in printshops | filter : psName" >
-			<li class="list-group-item clearfix printshop-item" ng-click="loadPrintshop($index)">
+		<div infinite-scroll='loadMore()' infinite-scroll-distance='2'>
+		<ul class="list-group" ng-repeat="printshop in printshops | filter : psName | limitTo:limit" >
+			<li class="list-group-item clearfix printshop-item" ng-click="loadPrintshop(printshop.id)">
 				<div class="left">
-					{{printshop.name}}
+					<strong>{{printshop.name}}</strong>
 					<br> {{printshop.address}}
 				</div>
 				<div class="right">
-					<!--<div star-rating rating="printshop.rating" read-only="true" max-rating="5"></div>-->
+					<div star-rating rating="printshop.rating" read-only="true" max-rating="5"></div>
 				</div>
 			</li>
 		</ul>
+		</div>
 	</div>
-</div>
