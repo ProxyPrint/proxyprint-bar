@@ -21,7 +21,7 @@
           <th>Coordenador</th>
           <th>Acções</th>
         </tr>
-        <tr ng-repeat="pshop in printshops">
+        <tr ng-repeat="pshop in printshops | startFrom: pagination.page * pagination.perPage | limitTo: pagination.perPage">
           <td><b>{{pshop.id}}</b></td>
           <td>{{pshop.name}}</td>
           <td>{{pshop.admissionDate}}</td>
@@ -33,14 +33,14 @@
         {{answer}}
       </tbody>
     </table>
-    <div class="box-footer clearfix">
-      <ul class="pagination pagination-sm no-margin pull-right">
-        <li><a href="">«</a></li>
-        <li><a href="">1</a></li>
-        <li><a href="">2</a></li>
-        <li><a href="">3</a></li>
-        <li><a href="">»</a></li>
-      </ul>
+    <div ng-show="paginationOn" class="box-footer clearfix">
+        <ul class="pagination pagination-sm no-margin pull-right">
+            <li><a href="" ng-click="pagination.prevPage()">&laquo;</a></li>
+            <li ng-repeat="n in [] | range: pagination.numPages" ng-class="{active: n == pagination.page}">
+                <a href="" ng-click="pagination.toPageId(n)">{{n + 1}}</a>
+            </li>
+            <li><a href="" ng-click="pagination.nextPage()">&raquo;</a></li>
+        </ul>
     </div>
   </div>
 </div>

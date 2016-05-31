@@ -1,7 +1,7 @@
 var app = angular.module('ProxyPrint');
 
 
-app.controller('AdminPrintShopsCtrl', ['$scope', function($scope) {
+app.controller('AdminPrintShopsCtrl', ['$scope', 'paginationService', function($scope, paginationService) {
 
    $scope.printshops = [
        {
@@ -33,5 +33,8 @@ app.controller('AdminPrintShopsCtrl', ['$scope', function($scope) {
        }
    ];
 
+   $scope.paginationOn = true;
+   $scope.pagination = paginationService.getNew(10);
+   $scope.pagination.numPages = Math.ceil($scope.printshops.length/$scope.pagination.perPage);
 
 }]);
