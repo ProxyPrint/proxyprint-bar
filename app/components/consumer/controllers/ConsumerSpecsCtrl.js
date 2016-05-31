@@ -210,7 +210,8 @@ function($scope, $uibModal, $log, fileTransferService, specMarshallService,
           }
           else specification.fakeID = $scope.specs.length+1;
           printingSchemaService.addPrintingSchema(specification, $cookieStore.get('consumerID'))
-            .success(function () {
+            .success(function (data) {
+              specification.id = data.id;
               $scope.specs.push(specification);
               toasterService.notifySuccess("A especificação foi inserida!");
             }).error(function () {
