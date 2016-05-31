@@ -249,7 +249,13 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
     .state('employee.history', {
         url: '/history',
         templateUrl: '/app/components/printshop/employee/views/employee-requests-history.html',
-        controller: 'HistoryRequestsCtrl'
+        controller: 'HistoryRequestsCtrl',
+        resolve: {
+            historyPrintRequests: ['historyPrintRequestsService',
+            function (historyPrintRequestsService) {
+                return historyPrintRequestsService.getHistoryRequests();
+            }]
+        }
     })
 
   /*Manager*/
@@ -274,6 +280,10 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
       printshop : ['managerPrintshopService',
         function (managerPrintshopService) {
           return managerPrintshopService.getPrintshop();
+      }],
+      reviews: ['managerPrintshopService', '$stateParams',
+        function (managerPrintshopService, $stateParams) {
+          return managerPrintshopService.getPrintshopReviews($stateParams.printshopid);
         }]
     }
   })

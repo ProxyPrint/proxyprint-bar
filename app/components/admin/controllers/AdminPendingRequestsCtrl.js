@@ -1,10 +1,14 @@
 var app = angular.module('ProxyPrint');
 
 // Pending requests table
-app.controller('AdminPendingRequestsCtrl', ['$rootScope', '$scope', '$state', '$http', 'pendingRequests', 'pendingRequestsService', '$uibModal',
-function($rootScope, $scope, $state, $http, pendingRequests, pendingRequestsService, $uibModal) {
+app.controller('AdminPendingRequestsCtrl', ['$rootScope', '$scope', '$state', '$http', 'pendingRequests', 'pendingRequestsService', '$uibModal', 'paginationService',
+function($rootScope, $scope, $state, $http, pendingRequests, pendingRequestsService, $uibModal, paginationService) {
 
   $scope.pendingRequests = pendingRequests.data;
+
+  $scope.paginationOn = true;
+  $scope.pagination = paginationService.getNew(10);
+  $scope.pagination.numPages = Math.ceil($scope.pendingRequests.length/$scope.pagination.perPage);
 
   $scope.lookAtRequest = function (index){
     pendingRequestsService.setCurrentRequest($scope.pendingRequests[index]);

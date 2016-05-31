@@ -20,24 +20,24 @@
           <th>Coordenador</th>
           <th>Ações</th>
         </tr>
-        <tr ng-repeat="request in pendingRequests | filter:request.pShopName">
+        <tr ng-repeat="request in pendingRequests | filter:request.pShopName | startFrom: pagination.page * pagination.perPage | limitTo: pagination.perPage">
           <td><b>#{{request.id}}</b></td>
           <td>{{request.pShopName}}</td>
           <td>{{request.pShopDateRequest}}</td>
           <td>{{request.managerName}}</td>
-          <td><a ng-click="lookAtRequest($index)" class="btn btn-success"><i class="fa fa-search" style="margin-right: 0.2em;"></i>Analisar</a>
+          <td><a ng-click="lookAtRequest($index)" class="btn btn-flat btn-success"><i class="fa fa-search" style="margin-right: 0.2em;"></i>Analisar</a>
           </td>
         </tr>
       </tbody>
     </table>
-    <div class="box-footer clearfix">
-      <ul class="pagination pagination-sm no-margin pull-right">
-        <li><a href="">«</a></li>
-        <li><a href="">1</a></li>
-        <li><a href="">2</a></li>
-        <li><a href="">3</a></li>
-        <li><a href="">»</a></li>
-      </ul>
+    <div ng-show="paginationOn" class="box-footer clearfix">
+        <ul class="pagination pagination-sm no-margin pull-right">
+            <li><a href="" ng-click="pagination.prevPage()">&laquo;</a></li>
+            <li ng-repeat="n in [] | range: pagination.numPages" ng-class="{active: n == pagination.page}">
+                <a href="" ng-click="pagination.toPageId(n)">{{n + 1}}</a>
+            </li>
+            <li><a href="" ng-click="pagination.nextPage()">&raquo;</a></li>
+        </ul>
     </div>
   </div>
 </div>

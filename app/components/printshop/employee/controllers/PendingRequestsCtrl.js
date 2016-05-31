@@ -7,9 +7,6 @@ function($scope, pendingPrintRequests, pendingPrintRequestsService, $state, pagi
     $scope.pagination = paginationService.getNew(10);
     $scope.pagination.numPages = Math.ceil($scope.pendingRequests.length/$scope.pagination.perPage);
 
-    console.log($scope.pagination.numPages);
-    console.log($scope.pagination);
-
     $scope.lookAtRequest = function (request){
         $state.go('employee.consult',{"requestid":request.id});
     };

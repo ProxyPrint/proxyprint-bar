@@ -1,8 +1,10 @@
-angular.module('ProxyPrint').controller('SatisfiedRequestsCtrl', ['$scope', 'satisfiedPrintRequest', '$uibModal', 'satisfiedPrintRequestsService', '$state', function($scope, satisfiedPrintRequest, $uibModal, satisfiedPrintRequestsService, $state) {
+angular.module('ProxyPrint').controller('SatisfiedRequestsCtrl', ['$scope', 'satisfiedPrintRequest', '$uibModal', 'satisfiedPrintRequestsService', '$state', 'paginationService', function($scope, satisfiedPrintRequest, $uibModal, satisfiedPrintRequestsService, $state, paginationService) {
 
     $scope.satisfiedRequests = satisfiedPrintRequest.data.satisfiedrequests;
 
-    $scope.paginationOn = false;
+    $scope.paginationOn = true;
+    $scope.pagination = paginationService.getNew(10);
+    $scope.pagination.numPages = Math.ceil($scope.satisfiedRequests.length/$scope.pagination.perPage);
 
     $scope.liftRequest = function(requestID, reply) {
         var modalInstance = $uibModal.open({

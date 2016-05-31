@@ -94,28 +94,6 @@ function($scope, $cookieStore, authenticationService, fileTransferService, $stat
 
   $scope.pendingRequests = consumerPendingRequests.data.printrequests;
 
-  // $scope.pendingRequests = [{
-  //   requestID: 1,
-  //   day: "15/03/2016",
-  //   hour: "22:33"
-  // }, {
-  //   requestID: 2,
-  //   day: "15/03/2016",
-  //   hour: "12:33"
-  // }, {
-  //   requestID: 3,
-  //   day: "17/03/2016",
-  //   hour: "14:22"
-  // }, {
-  //   requestID: 4,
-  //   day: "18/03/2016",
-  //   hour: "12:22"
-  // }, {
-  //   requestID: 5,
-  //   day: "19/03/2016",
-  //   hour: "19:32"
-  // }];
-
   $scope.pdfFiles = [];
 
 
@@ -163,6 +141,7 @@ function($scope, $cookieStore, authenticationService, fileTransferService, $stat
 
   $scope.onCancelErroCallback = function(data) {
       $scope.openSuccessModal("Ocorreu um erro a alterar o estado do pedido!");
+      $state.reload();
   };
 
   $scope.openSuccessModal = function(reply) {

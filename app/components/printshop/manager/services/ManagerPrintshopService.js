@@ -1,4 +1,4 @@
-angular.module('ProxyPrint').factory('managerPrintshopService',['$http', 'backendURLService', function ($http, backendURLService) {
+angular.module('ProxyPrint').factory('managerPrintshopService',['$http', 'backendURLService', '$cookieStore', function ($http, backendURLService, $cookieStore) {
 
     var service = {};
 
@@ -8,6 +8,13 @@ angular.module('ProxyPrint').factory('managerPrintshopService',['$http', 'backen
           return data;
         });
     }
+
+    service.getPrintshopReviews = function(printshopID) {
+      return $http.get(backendURLService.getBaseURL()+'printshops/'+$cookieStore.get("printShopID")+'/reviews')
+      .success(function(data){
+        return data;
+      });
+    };
 
     return service;
 }]);
