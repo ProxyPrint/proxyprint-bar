@@ -10,13 +10,6 @@ var externalURL="";
 var port = 8080;
 ngrok.once('connect', function (url) {
   externalURL=url+"/";
-
-  // Write external URL to file
-  var fs = require('fs');
-  fs.writeFile("/tmp/externalURL", externalURL, function(err) {
-    if(err) { return console.log(err); }
-  });
-
   var backendURL = process.env.BACKEND_URL || externalURL;
   var port = Number(process.env.PORT || 9000);
 
