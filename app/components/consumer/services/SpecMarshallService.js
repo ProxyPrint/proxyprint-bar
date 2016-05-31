@@ -1,4 +1,4 @@
-/*angular.module('ProxyPrint').factory('specMarshallService',[function () {
+angular.module('ProxyPrint').factory('specMarshallService',[function () {
 
     var service = {};
 
@@ -9,26 +9,27 @@
       // PAPER,COLOR,A4,DUPLEX --> correct key order
       spec.paperSpecs = "PAPER,"+(specification[3])+","+specification[1]+","+specification[2];
 
-        if (specification[4]==null){
-          spec.bindingSpecs = spec.coverSpecs = "";
-        }
+      if (specification[4]==null){
+        spec.bindingSpecs = spec.coverSpecs = "";
+      }
 
-        else {
-          if (specification[5]==null && specification[6]==null){
-            spec.bindingSpecs = "STAPLING";
-            spec.coverSpecs = "";
-          }
-          else {
-            spec.coverSpecs = "COVER,"+specification[5]+","+specification[2];
-            spec.bindingSpecs = "BINDING,"+specification[6];
-          }
+      else {
+        if (specification[5]==null && specification[6]==null){
+          spec.bindingSpecs = "STAPLING";
+          spec.coverSpecs = "";
         }
-        return spec;
+        else {
+          spec.coverSpecs = "COVER,"+specification[5];
+          spec.bindingSpecs = "BINDING,"+specification[6]+","+specification[1];
+        }
+      }
+      return spec;
 
     }
 
     service.marshallEditedSpecification = function (specification) {
       var spec = new Object();
+      console.log(specification);
 
       spec.name = specification.name;
       spec.paperSpecs = "PAPER,"+specification.colors+','+specification.format+','+specification.sides;
@@ -37,8 +38,8 @@
       if (specification.content == null)
         spec.bindingSpecs = spec.coverSpecs = "";
       else {
-        if (specification.bindingSpecs == "STAPLING"){
-          spec.bindingSpecs = "STAPLING";
+        if (specification.content == "stapled"){
+          spec.bindingSpecs = "BINDING,STAPLING";
           spec.coverSpecs = "";
         }
         else {
@@ -51,6 +52,7 @@
     }
 
     service.unmarshallSpecification = function (specification) {
+      console.log(specification);
       var schema = new Object();
       schema.name = specification.name;
       var paperSpecs = specification.paperSpecs.split(',');
@@ -78,8 +80,8 @@
 
 
     return service;
-}]);*/
-angular.module('ProxyPrint').factory('specMarshallService',[function () {
+}]);
+/*angular.module('ProxyPrint').factory('specMarshallService',[function () {
 
     var service = {};
 
@@ -111,4 +113,4 @@ angular.module('ProxyPrint').factory('specMarshallService',[function () {
 
 
     return service;
-}]);
+}]);*/
