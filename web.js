@@ -9,7 +9,7 @@ var ngrok = require('ngrok');
 var externalURL="";
 var port = 8080;
 ngrok.connect({
-	proto: 'http', // http|tcp|tls
+	proto: 'http',
 	addr: port
 }, function (err, url) {
   if(err) {
