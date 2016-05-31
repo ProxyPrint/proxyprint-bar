@@ -4,14 +4,14 @@ app.controller('ConsultRequestCtrl', ['$scope', 'pendingPrintRequest', '$uibModa
 function($scope, pendingPrintRequest, $uibModal, pendingPrintRequestsService, $state, $http, $window, backendURLService) {
 
     $scope.request = pendingPrintRequest.data.printrequest;
-    console.log(pendingPrintRequest.data.printrequest);
+
     $scope.isDataLoading = false;
 
     $scope.$watch('$scope.request.status', function() {
         if ($scope.request.status == 'PENDING') {
-            $scope.message = "Pedido pendente.";
+            $scope.message = "Pedido pendente";
         } else if ($scope.request.status == 'IN_PROGRESS') {
-            $scope.message = "A ser atendido.";
+            $scope.message = "A ser atendido";
         } else if ($scope.request.status == 'FINISHED') {
             $scope.message = "Finalizado";
         }
@@ -38,6 +38,7 @@ function($scope, pendingPrintRequest, $uibModal, pendingPrintRequestsService, $s
 
     $scope.onChangeStatusErroCallback = function(data) {
       $scope.isDataLoading = false;
+      $state.go('employee.pending');
       $scope.openSuccessModal("Ocorreu um erro a alterar o estado do pedido!");
     };
 

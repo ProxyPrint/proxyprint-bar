@@ -1,9 +1,13 @@
 var app = angular.module('ProxyPrint');
 
-app.controller('ManagerEmployeesCtrl', ['$scope', '$state', 'employeesList', 'employeesService', '$uibModal',
-function($scope, $state, employeesList, employeesService, $uibModal) {
+app.controller('ManagerEmployeesCtrl', ['$scope', '$state', 'employeesList', 'employeesService', '$uibModal', 'paginationService',
+function($scope, $state, employeesList, employeesService, $uibModal, paginationService) {
 
   $scope.employees = employeesList.data.employees;
+
+  $scope.paginationOn = true;
+  $scope.pagination = paginationService.getNew(10);
+  $scope.pagination.numPages = Math.ceil($scope.employees.length/$scope.pagination.perPage);
 
   $scope.filterEmployees = function(emp) {
     return (emp.name.match($scope.employeeSearch) || emp.username.match($scope.employeeSearch));
