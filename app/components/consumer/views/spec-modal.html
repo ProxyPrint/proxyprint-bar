@@ -2,7 +2,7 @@
 </div>
 <div class="modal-body" style="text-align:center">
     <div class="input-group" style="margin: 0 auto"><strong>Nome</strong>
-        <input type="text" class="form-control" ng-model="name" id="name">
+        <input type="text" class="form-control" ng-model="name" id="name" placeholder="Nome">
     </div>
     <div style="margin-left:25%; margin-right:25%">
         <hr />
@@ -12,6 +12,7 @@
             <div class="form-group">
                 <label for="spec-format">Formato</label>
                 <select required class="form-control" ng-model="format" id="spec-format">
+                    <option disabled value="">Seleccione o formato</option>
                     <option>A1</option>
                     <option>A2</option>
                     <option>A3</option>
@@ -23,6 +24,7 @@
             <div class="form-group">
                 <label for="spec-sides">Lados</label>
                 <select required class="form-control" ng-model="sides" id="spec-sides">
+                    <option disabled value="">Seleccione os lados</option>
                     <option value="SIMPLEX">Frente</option>
                     <option value="DUPLEX">Frente e verso</option>
                 </select>
@@ -32,6 +34,7 @@
             <div class="form-group">
                 <label for="spec-colors">Cores</label>
                 <select required class="form-control" ng-model="colors" id="spec-colors">
+                    <option disabled value="">Seleccione as cores</option>
                     <option value="BW">Preto e branco</option>
                     <option value="GREY_TONES">Tons de cinza</option>
                     <option value="COLOR">A cores</option>
@@ -57,6 +60,7 @@
                     <div class="form-group">
                         <label for="spec-cover">Capa</label>
                         <select required class="form-control" ng-model="cover" id="spec-cover">
+                            <option disabled value="">Seleccione a capa</option>
                             <option value="CRISTAL_ACETATE">Acetato em cristal</option>
                             <option value="PVC_TRANSPARENT">PVC transparente fosco</option>
                             <option value="PVC_OPAQUE">PVC opaco</option>
@@ -67,6 +71,7 @@
                     <div class="form-group">
                         <label for="spec-bindings">Tipo de argolas</label>
                         <select required class="form-control" ng-model="bindings" id="spec-bindings">
+                            <option disabled value="">Seleccione as argolas</option>
                             <option value="PLASTIC">Argolas de plástico</option>
                             <option value="SPIRAL">Argolas em espiral</option>
                             <option value="WIRE">Argolas de arame</option>
