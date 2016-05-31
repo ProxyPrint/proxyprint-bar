@@ -8,8 +8,16 @@ var app = express();
 var ngrok = require('ngrok');
 var externalURL="";
 var port = 8080;
-ngrok.once('connect', function (url) {
-  externalURL=url+"/";
+ngrok.connect({
+	proto: 'http', // http|tcp|tls
+	addr: port
+}, function (err, url) {
+  if(err) {
+    console.log(err);
+    return;
+  }
+  var tmp = url.split(":");
+  externalURL="http:"+tmp[1]+"/";
   var backendURL = process.env.BACKEND_URL || externalURL;
   var port = Number(process.env.PORT || 9000);
 

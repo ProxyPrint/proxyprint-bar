@@ -8,15 +8,7 @@ function($scope, $cookieStore, $state, budgets, printShopListService, fileTransf
   $scope.submitedFilesNames = Object.keys($scope.submitedFiles);
 
   $scope.amount = 0.0;
-
-  /*---------------------------------------------------------------------------------*/
-  /*---------------------------------------------------------------------------------*/
-  // Use ngrok to create tunneling for testing with PayPal SandBox in local environment
-  // $scope.payPalCallbackUrl = "http://80133cec.ngrok.io/paypal/ipn/";
-  // PRODUCTION
-  $scope.payPalCallbackUrl = backendURLService.getBaseURL();
-  /*---------------------------------------------------------------------------------*/
-  /*---------------------------------------------------------------------------------*/
+  $scope.payPalCallbackUrl = backendURLService.getBaseURL()+"paypal/ipn/";
 
   for(var pshopID in $scope.budgets) {
     if(!isNaN($scope.budgets[pshopID])) {
@@ -39,6 +31,7 @@ function($scope, $cookieStore, $state, budgets, printShopListService, fileTransf
       $scope.amount = parseFloat($scope.budgets[$scope.theChosenOne]).toFixed(2);
       // Finish the PayPal callback URL appending the printRequestID
       $scope.payPalCallbackUrl += $scope.printRequestID;
+      console.log($scope.payPalCallbackUrl);
 
       // Send request to server
       budgetService.submitPrintRequest($scope.submitRequestSuccessCallback, $scope.submitRequestErrorCallback, $scope.printRequestID, submitParams);
