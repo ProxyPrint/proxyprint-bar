@@ -26,6 +26,7 @@
     <br />
     <div style="text-align:center">
       <button ng-class="pdfFiles.length===0 ? 'button button-rounded button-primary' : 'button button-rounded button-primary hvr-buzz'" ng-click="uploadFiles()" ng-disabled="pdfFiles.length===0">Submeter pedido</button>
+      <button class="button button-rounded button-caution" ng-disabled="pdfFiles.length==0" ng-click="resetRequest()">Reiniciar pedido</button>
     </div>
   </div>
 

@@ -112,6 +112,10 @@ function($scope, $cookieStore, authenticationService, fileTransferService, $stat
     }
   };
 
+  $scope.resetRequest = function () {
+    $scope.pdfFiles = [];
+  }
+
   $scope.openRejectModal = function(reply, id) {
 
       var modalInstance = $uibModal.open({
