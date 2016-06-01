@@ -123,7 +123,13 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
   })
   .state('consumer.settings' ,{
     url: '/settings',
-    templateUrl: '/app/components/consumer/views/consumer-settings.html'
+    templateUrl: '/app/components/consumer/views/consumer-settings.html',
+    controller: 'ConsumerSettingsCtrl',
+    resolve: {
+      consumer: ['consumerService', function(consumerService) {
+        return consumerService.getConsumerInfo();
+      }]
+    }
   })
   .state('consumer.mainpage' ,{
     url: '/mainpage',
