@@ -161,10 +161,8 @@ function($scope, $uibModal, $log, fileTransferService, specMarshallService,
 
       modalInstance.result.then(function() {
         dataLoadingService.setDataLoading(true);
-        setTimeout(function(){
-          fileTransferService.ProcessFiles($scope.files());
-          $state.go('consumer.printshopselection');
-        }, 3000);
+        fileTransferService.ProcessFiles($scope.files());
+        $state.go('consumer.printshopselection');
       });
     };
 

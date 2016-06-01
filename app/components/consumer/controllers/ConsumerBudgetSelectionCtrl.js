@@ -9,7 +9,9 @@ function($scope, $cookieStore, $state, budgets, printShopListService, fileTransf
   $scope.submitedFilesNames = Object.keys($scope.submitedFiles);
 
   $scope.amount = 0.0;
-  $scope.payPalCallbackUrl = backendURLService.getTunnelURL()+"paypal/ipn/";
+  // $scope.payPalCallbackUrl = backendURLService.getTunnelURL()+"paypal/ipn/";
+  $scope.payPalCallbackUrl = budgets.externalURL+"paypal/ipn/";
+  console.log($scope.payPalCallbackUrl);
 
   for(var pshopID in $scope.budgets) {
     if(!isNaN($scope.budgets[pshopID])) {
