@@ -25,6 +25,7 @@ ngrok.connect({
 
   if (cluster.isMaster) {
     var cpuCount = require('os').cpus().length;
+    console.log('tunnelURL: %s', externalURL);
     console.log('running on %d cpus, backendURL: %s', cpuCount, backendURL);
     for (var i = 0; i < cpuCount; i += 1) {
       cluster.fork();
