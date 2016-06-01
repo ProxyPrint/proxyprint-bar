@@ -20,8 +20,8 @@ angular.module('ProxyPrint').controller('ConsumerSettingsCtrl', ['$scope', '$coo
       $scope.consumer.email=$scope.email;
       $scope.consumer.name=$scope.name;
       $scope.consumer.username=$scope.username;
-      $scope.consumer.password=$scope.password;
-      $scope.consumer.newPassword=$scope.password;
+      $scope.consumer.password=$scope.newPassword;
+      console.log($scope.consumer);
       consumerService.updateConsumer($scope.consumer).success(function(data) {
         if(data.success) {
           toasterService.notifySuccess("Os seus dados foram atualizados com sucesso");

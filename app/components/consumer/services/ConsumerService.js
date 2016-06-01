@@ -9,7 +9,7 @@ angular.module('ProxyPrint').factory('consumerService',['$http', 'backendURLServ
     };
 
     service.updateConsumer = function(consumer) {
-      return $http.put(backendURLService.getBaseURL()+'consumer/info/update').success(function(data){
+      return $http.put(backendURLService.getBaseURL()+'consumer/info/update', consumer).success(function(data){
         return data;
       });
     };
