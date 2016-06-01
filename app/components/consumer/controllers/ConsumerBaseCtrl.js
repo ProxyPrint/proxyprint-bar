@@ -1,7 +1,8 @@
 angular.module('ProxyPrint').controller('ConsumerController', ['$scope','$cookieStore',
-'authenticationService', 'fileTransferService', '$state', 'notifications', 'backendURLService', 'consumerPendingRequests', 'consumerPendingRequestsService', '$uibModal','notificationsService',
-function($scope, $cookieStore, authenticationService, fileTransferService, $state, notifications, backendURLService, consumerPendingRequests, consumerPendingRequestsService, $uibModal, notificationsService) {
+'authenticationService', 'fileTransferService', '$state', 'notifications', 'backendURLService', 'consumerPendingRequests', 'consumerPendingRequestsService', '$uibModal','notificationsService', 'dataLoadingService',
+function($scope, $cookieStore, authenticationService, fileTransferService, $state, notifications, backendURLService, consumerPendingRequests, consumerPendingRequestsService, $uibModal, notificationsService, dataLoadingService) {
   console.log(backendURLService.getBaseURL());
+  dataLoadingService.setDataLoading(false);
   // Get consumer location
   if(navigator.geolocation){
     navigator.geolocation.getCurrentPosition(function(position) {
@@ -106,6 +107,7 @@ function($scope, $cookieStore, authenticationService, fileTransferService, $stat
   };
 
   $scope.uploadFiles = function () {
+    dataLoadingService.setDataLoading(true);
     if ($scope.pdfFiles && $scope.pdfFiles.length) {
       fileTransferService.setFiles($scope.pdfFiles);
       $state.go('consumer.requestbudget');

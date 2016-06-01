@@ -1,7 +1,8 @@
 angular.module('ProxyPrint')
-.controller('ConsumerPrintShopsSelectionController', ['$scope', 'printShopListService', 'printshopsList', 'fileTransferService', '$cookieStore', 'budgetService', '$state', function($scope, printShopListService, printshopsList, fileTransferService, $cookieStore, budgetService, $state) {
+.controller('ConsumerPrintShopsSelectionController', ['$scope', 'printShopListService', 'printshopsList', 'fileTransferService', '$cookieStore', 'budgetService', '$state', 'dataLoadingService', function($scope, printShopListService, printshopsList, fileTransferService, $cookieStore, budgetService, $state, dataLoadingService) {
 
   $scope.printshops = [];
+  dataLoadingService.setDataLoading(false);
 
   for (var dist in printshopsList.data.printshops) {
     var pshop = printshopsList.data.printshops[dist];
