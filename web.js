@@ -51,7 +51,8 @@ ngrok.connect({
     });
 
     app.post("/paypal/ipn/:id", function(req, res) {
-      requestify.post(backendURL + "/paypal/ipn/:id", req.body).then(function(response) {
+      var reqID = req.params.id;
+      requestify.post(backendURL + "/paypal/ipn/" + reqID, req.body).then(function(response) {
         response.getBody();
         res.send(response.body);
       });
