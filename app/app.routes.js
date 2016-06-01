@@ -22,10 +22,11 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
     ];
 
     var mainPrintShopCSS = [
-        '/assets/css/bootstrap.min.css',
         '/assets/css/styles-pshop.css',
+        '/assets/css/bootstrap.min.css',
         '//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css',
-        'http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic'
+        'http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic',
+        '/assets/css/buttons.css'
     ];
 
   var adminlteCSS = [

@@ -33,7 +33,7 @@
   <div class="text-vertical-center">
     <h1>ProxyPrint</h1>
     <br>
-    <a href="#login" class="btn btn-light btn-lg">Comece já!</a>
+    <a href="#login" class="btn btn-dark btn-lg">Comece já!</a>
   </div>
 </header>
 
@@ -71,7 +71,6 @@
                 <strong>Fique disponível 24h por dia!</strong>
               </h4>
               <p>Os seus clientes poderão submeter pedidos 24h por dia!.</p>
-              <a href="#" class="btn btn-light">Saiba mais</a>
             </div>
           </div>
           <div class="col-md-3 col-sm-6">
@@ -84,7 +83,6 @@
                 <strong>Controle de perto os seus rendimentos!</strong>
               </h4>
               <p>A plataforma disponibiliza uma série de estatísticas sobre os lucros obtidos!</p>
-              <a href="#" class="btn btn-light">Saiba mais</a>
             </div>
           </div>
           <div class="col-md-3 col-sm-6">
@@ -97,7 +95,6 @@
                 <strong>Orçamentos e pagamentos automáticos!</strong>
               </h4>
               <p>Não se preocupe mais com trocos! Os pagamentos são feitos automaticamente no momento em que o seu cliente levanta o pedido na loja.</p>
-              <a href="#" class="btn btn-light">Saiba mais</a>
             </div>
           </div>
           <div class="col-md-3 col-sm-6">
@@ -110,7 +107,6 @@
                 <strong>Receba feedback dos seus clientes!</strong>
               </h4>
               <p>Saiba se os seus clientes estão satisfeitos com o serviço! Aproveite novas ideias e sugestões para melhorar o seu negócio!.</p>
-              <a href="#" class="btn btn-light">Saiba mais</a>
             </div>
           </div>
         </div>
@@ -130,25 +126,23 @@
     <div class="form-container">
       <div ng-show="error" class="alert alert-danger">{{error}}</div>
       <form name="form" ng-submit="login()" role="form">
-        <div class="form-group">
-          <label for="username">Username</label>
-          <input type="text" name="username" id="username" class="form-control" ng-model="username" required/>
-          <span ng-show="form.username.$dirty && form.username.$error.required" class="help-block">Username is required</span>
-        </div>
-        <div class="form-group">
-          <label for="password">Password</label>
-          <i class="fa fa-lock"></i>
-          <input type="password" name="password" id="password" class="form-control" ng-model="password" required/>
-          <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Password is required</span>
-        </div>
+          <div class="form-group">
+            <input type="text" name="username" placeholder="Username" id="username" class="form-control" ng-model="username" required/>
+            <span ng-show="form.username.$dirty && form.username.$error.required" class="help-block">Username is required</span>
+          </div>
+          <div class="form-group">
+            <input type="password" name="password" placeholder="Password" id="password" class="form-control" ng-model="password" required/>
+            <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Password is required</span>
+          </div>
         <div class="form-actions">
           <div class="login-button">
-            <button type="submit" ng-disabled="form.$invalid || dataLoading" class="btn btn-primary">Login</button>
+            <button type="submit" ng-disabled="form.$invalid || dataLoading" class="button button-plain button-border">Login</button>
             <img
             ng-if="dataLoading"
             src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="/>
             <br>
-            <small style="color: black;"> Ainda não está registado? <a ui-sref="psregister">Registe-se!</a></small>
+            <small> Ainda não se registou? <a ui-sref="psregister">Registe-se já!</a></small>
+
           </div>
         </div>
       </form>
