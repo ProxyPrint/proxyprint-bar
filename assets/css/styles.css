@@ -685,3 +685,7 @@ ul.rating {
     border-right: 6px solid transparent;
     border-top: 6px solid white;
 }
+
+.caret:hover {
+  border-color: #0088CC;
+}
