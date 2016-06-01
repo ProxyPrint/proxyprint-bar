@@ -2,13 +2,14 @@ angular.module('ProxyPrint').controller('ConsumerBudgetSelectionCtrl', ['$scope'
 function($scope, $cookieStore, $state, budgets, printShopListService, fileTransferService, budgetService, backendURLService) {
 
   $scope.budgets = budgets.budgets;
+  console.log($scope.budgets);
   $scope.printRequestID = budgets.printRequestID;
   $scope.selectedPrintShops = printShopListService.getSelectedPrintShops();
   $scope.submitedFiles = fileTransferService.getProcessedFiles().files;
   $scope.submitedFilesNames = Object.keys($scope.submitedFiles);
 
   $scope.amount = 0.0;
-  $scope.payPalCallbackUrl = backendURLService.getBaseURL()+"paypal/ipn/";
+  $scope.payPalCallbackUrl = budgets.externalURL+"paypal/ipn/";
 
   for(var pshopID in $scope.budgets) {
     if(!isNaN($scope.budgets[pshopID])) {
