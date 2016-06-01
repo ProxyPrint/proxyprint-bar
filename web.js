@@ -52,7 +52,11 @@ ngrok.connect({
 
     app.post("/paypal/ipn/:id", function(req, res) {
       var reqID = req.params.id;
-      requestify.post(backendURL + "/paypal/ipn/" + reqID, req.body).then(function(response) {
+      requestify.request(backendURL + "/paypal/ipn/" + reqID, {
+        method: "POST",
+        body: req.body,
+        dataType: "json"
+      }).then(function(response) {
         response.getBody();
         res.send(response.body);
       });
