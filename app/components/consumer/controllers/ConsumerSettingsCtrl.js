@@ -1,4 +1,4 @@
-angular.module('ProxyPrint').controller('ConsumerSettingsCtrl', ['$scope', '$cookieStore', 'consumer', 'toasterService', 'consumerService', function ($scope, $cookieStore, consumer, toasterService, consumerService) {
+angular.module('ProxyPrint').controller('ConsumerSettingsCtrl', ['$scope', '$cookieStore', 'consumer', 'toasterService', 'consumerService', 'authenticationService', function ($scope, $cookieStore, consumer, toasterService, consumerService, authenticationService) {
   $scope.consumer = consumer.data.consumer;
 
   console.log($scope.consumer);
@@ -24,6 +24,9 @@ angular.module('ProxyPrint').controller('ConsumerSettingsCtrl', ['$scope', '$coo
       console.log($scope.consumer);
       consumerService.updateConsumer($scope.consumer).success(function(data) {
         if(data.success) {
+          $cookieStore.put("consumerName", $scope.consumer.name);
+          authenticationService.ClearCredentials();
+          authenticationService.SetCredentials($scope.consumer.username, $scope.consumer.password);
           toasterService.notifySuccess("Os seus dados foram atualizados com sucesso");
         }
       });
