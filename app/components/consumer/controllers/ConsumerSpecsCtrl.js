@@ -1,8 +1,8 @@
 angular.module('ProxyPrint').controller('ConsumerSpecsController',
 ['$scope' , '$uibModal', '$log', 'fileTransferService', 'specMarshallService',
-'printingSchemas', 'printingSchemaService', '$cookieStore', '$state', 'toasterService', 'dataLoadingService',
+'printingSchemas', 'printingSchemaService', '$cookieStore', '$state', 'toasterService', 'usSpinnerService',
 function($scope, $uibModal, $log, fileTransferService, specMarshallService,
-  printingSchemas, printingSchemaService, $cookieStore, $state, toasterService, dataLoadingService) {
+  printingSchemas, printingSchemaService, $cookieStore, $state, toasterService, usSpinnerService) {
 
     /** Page range logic */
     $scope.lastItem = null;
@@ -10,7 +10,7 @@ function($scope, $uibModal, $log, fileTransferService, specMarshallService,
     $scope.specs = printingSchemas.data.pschemas;
     $scope.files = fileTransferService.getFiles;
     $scope.all = [];
-    dataLoadingService.setDataLoading(false);
+    usSpinnerService.stop('consumer-spinner');
 
     $scope.addToAll = function(item, index) {
       var files = $scope.files();
@@ -83,11 +83,13 @@ function($scope, $uibModal, $log, fileTransferService, specMarshallService,
     };
 
     $scope.request = function(){
-      /** Send Request */
-      fileTransferService.ProcessFiles($scope.files(), function(){
-        $scope.showRequest = false;
-        $state.go('consumer.requestprintshopsbudget');
-      });
+      usSpinnerService.spin('consumer-spinner');
+      setTimeout(function(){
+        fileTransferService.ProcessFiles($scope.files(), function(){
+          $scope.showRequest = false;
+          $state.go('consumer.requestprintshopsbudget');
+        });
+      }, 5000);
     };
 
     $scope.queueNumber = function (){
@@ -128,6 +130,7 @@ function($scope, $uibModal, $log, fileTransferService, specMarshallService,
     };
 
     $scope.request = function(){
+      usSpinnerService.spin('consumer-spinner');
       /** Send Request */
       fileTransferService.ProcessFiles($scope.files(), function(){
         $scope.showRequest = false;
@@ -160,7 +163,6 @@ function($scope, $uibModal, $log, fileTransferService, specMarshallService,
       });
 
       modalInstance.result.then(function() {
-        dataLoadingService.setDataLoading(true);
         fileTransferService.ProcessFiles($scope.files());
         $state.go('consumer.printshopselection');
       });

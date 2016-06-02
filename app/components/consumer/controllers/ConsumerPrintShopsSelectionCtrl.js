@@ -1,8 +1,7 @@
 angular.module('ProxyPrint')
-.controller('ConsumerPrintShopsSelectionController', ['$scope', 'printShopListService', 'printshopsList', 'fileTransferService', '$cookieStore', 'budgetService', '$state', 'dataLoadingService', function($scope, printShopListService, printshopsList, fileTransferService, $cookieStore, budgetService, $state, dataLoadingService) {
+.controller('ConsumerPrintShopsSelectionController', ['$scope', 'printShopListService', 'printshopsList', 'fileTransferService', '$cookieStore', 'budgetService', '$state', 'usSpinnerService', function($scope, printShopListService, printshopsList, fileTransferService, $cookieStore, budgetService, $state, usSpinnerService) {
 
   $scope.printshops = [];
-  dataLoadingService.setDataLoading(false);
 
   for (var dist in printshopsList.data.printshops) {
     var pshop = printshopsList.data.printshops[dist];
@@ -17,6 +16,7 @@ angular.module('ProxyPrint')
   $scope.maxSelectionAllowed = 5;
   $scope.showDistance = false;
   $scope.pshopNames = {};
+  usSpinnerService.stop('consumer-spinner');
 
   // Distance slider
   $scope.distanceSlider = {
