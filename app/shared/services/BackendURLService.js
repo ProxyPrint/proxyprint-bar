@@ -15,23 +15,12 @@ angular.module('ProxyPrint').factory('backendURLService', ['$http', '$cookieStor
         //cant establish connection with backend
     });
 
-    $http({
-        method: 'GET',
-        url: '/tunnel'
-    }).then(function successCallback(response) {
-        console.log(response.data);
-        url = response.data;
-        $cookieStore.put("tunnelURL", url);
-    }, function errorCallback(response) {
-        //cant establish connection with backend
-    });
-
     service.getBaseURL = function() {
         return $cookieStore.get("baseURL");
     };
 
-    service.getTunnelURL = function() {
-        return $cookieStore.get("tunnelURL");
+    service.getContextPath = function() {
+      return "ProxyPrint-kitchen-1.0-SNAPSHOT/";
     };
 
     return service;

@@ -10,7 +10,11 @@ function($scope, $cookieStore, $state, budgets, printShopListService, fileTransf
 
   $scope.amount = 0.0;
   // $scope.payPalCallbackUrl = backendURLService.getTunnelURL()+"paypal/ipn/";
-  $scope.payPalCallbackUrl = budgets.externalURL+"paypal/ipn/";
+  if(backendURLService.getBaseURL().match("localhost")) {
+    $scope.payPalCallbackUrl = budgets.externalURL+"paypal/ipn/";
+  } else {
+    $scope.payPalCallbackUrl = budgets.externalURL+backendURLService.getContextPath()+"paypal/ipn/";
+  }
   console.log($scope.payPalCallbackUrl);
 
   for(var pshopID in $scope.budgets) {
