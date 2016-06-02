@@ -20,7 +20,7 @@
     "pdfjs-dist": "^1.5.238",
     "requestify": "^0.1.17",
     "ui-select": "0.16.1",
-    "angular-spinner": "^2.3.2"
+    "angular-spinner": "^0.8.1"
   },
   "devDependencies": {
     "angular-mocks": "^1.4.8",
