@@ -204,7 +204,16 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
     resolve: {
       budgets : ['budgetService', function(budgetService) {
         return budgetService.getBudgets();
-      }]
+      }],
+      permission: ['$q','requestHelperService', function ($q, requestHelperService) {
+          var d = $q.defer();
+          if (requestHelperService.getSelectedPrintShopsStatus()) {
+            d.resolve();
+          } else {
+            d.reject('Canceled');
+          }
+          return d.promise;
+        }]
     }
   })
   .state('consumer.printshop', {
