@@ -163,6 +163,7 @@ function($scope, $uibModal, $log, fileTransferService, specMarshallService,
       });
 
       modalInstance.result.then(function() {
+        usSpinnerService.spin('consumer-spinner');
         fileTransferService.ProcessFiles($scope.files());
         $state.go('consumer.printshopselection');
       });

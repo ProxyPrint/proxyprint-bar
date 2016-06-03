@@ -19,7 +19,6 @@ function($scope, $cookieStore, authenticationService, fileTransferService, $stat
   console.log($scope.balance);
   var audio = new Audio('assets/audio/notifications.mp3');
 
-
   var source = new EventSource(backendURLService.getBaseURL() + "/consumer/subscribe?username=" + $scope.consumer.username + "&password=" + $scope.consumer.password, {
     withCredentials: true
   });
@@ -113,7 +112,7 @@ function($scope, $cookieStore, authenticationService, fileTransferService, $stat
         fileTransferService.setFiles($scope.pdfFiles);
         $state.go('consumer.requestbudget');
       }
-    }, 3000);
+    }, 4000);
   };
 
   $scope.openRejectModal = function(reply, id) {

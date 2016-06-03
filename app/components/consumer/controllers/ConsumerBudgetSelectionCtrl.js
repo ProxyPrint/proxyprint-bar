@@ -1,5 +1,5 @@
-angular.module('ProxyPrint').controller('ConsumerBudgetSelectionCtrl', ['$scope','$cookieStore', '$state', 'budgets', 'printShopListService', 'fileTransferService', 'budgetService', 'backendURLService', '$uibModal', 'usSpinnerService',
-function($scope, $cookieStore, $state, budgets, printShopListService, fileTransferService, budgetService, backendURLService, $uibModal, usSpinnerService) {
+angular.module('ProxyPrint').controller('ConsumerBudgetSelectionCtrl', ['$scope','$cookieStore', '$state', 'budgets', 'printShopListService', 'fileTransferService', 'backendURLService', '$uibModal', 'usSpinnerService',
+function($scope, $cookieStore, $state, budgets, printShopListService, fileTransferService, backendURLService, $uibModal, usSpinnerService) {
 
   $scope.budgets = budgets.budgets;
   console.log($scope.budgets);
@@ -10,7 +10,6 @@ function($scope, $cookieStore, $state, budgets, printShopListService, fileTransf
 
   $scope.amount = 0.0;
   $scope.selectedPrintShopName = "";
-  // $scope.payPalCallbackUrl = backendURLService.getTunnelURL()+"paypal/ipn/";
   if(backendURLService.getBaseURL().match("localhost")) {
     $scope.payPalCallbackUrl = budgets.externalURL+"paypal/ipn/";
   } else {
@@ -47,7 +46,7 @@ function($scope, $cookieStore, $state, budgets, printShopListService, fileTransf
   };
 
   $scope.pay = function() {
-    // ... pay
+    usSpinnerService.spin('consumer-spinner');
     $scope.openPaymentMethodSelectionModal("Escolha o método de pagamento", $scope.amount, $scope.payPalCallbackUrl, $scope.selectedPrintShopName, $scope.submitParams);
   };
 
@@ -75,22 +74,21 @@ function($scope, $cookieStore, $state, budgets, printShopListService, fileTransf
         }
       }
     });
-    modalInstance.result.then(function() {
-      //...
-    });
   };
 
 }]);
 
-app.controller('PaymentMethodSelectionCtrl', ['$scope', '$state', 'toasterService', '$uibModalInstance', 'text', 'amount', 'callbackURL', 'pshopName', 'submitParams', 'budgetService', function($scope, $state, toasterService, $uibModalInstance, text, amount, callbackURL, pshopName, submitParams, budgetService) {
+app.controller('PaymentMethodSelectionCtrl', ['$scope', '$state', 'toasterService', '$uibModalInstance', 'text', 'amount', 'callbackURL', 'pshopName', 'submitParams', 'budgetService', 'usSpinnerService', function($scope, $state, toasterService, $uibModalInstance, text, amount, callbackURL, pshopName, submitParams, budgetService, usSpinnerService) {
 
   $scope.text = text;
   $scope.amount = amount;
   $scope.payPalCallbackUrl = callbackURL;
   $scope.pshopName = pshopName;
   $scope.submitParams = submitParams;
+  usSpinnerService.stop('consumer-spinner');
 
   $scope.chooseProxyPrint = function () {
+    usSpinnerService.spin('consumer-spinner');
     $scope.submitParams.paymentMethod = "PROXYPRINT_PAYMENT";
     budgetService.submitPrintRequest($scope.submitParams.printRequestID, $scope.submitParams).success(function(data) {
       console.log(data);
@@ -101,16 +99,19 @@ app.controller('PaymentMethodSelectionCtrl', ['$scope', '$state', 'toasterServic
       }
       $state.go('consumer.mainpage');
       $uibModalInstance.dismiss('cancel');
+      usSpinnerService.stop('consumer-spinner');
     })
     .error(function(data) {
       console.log(data);
       toasterService.notifyError("Pedimos desculpa mas foi impossível de processar o seu pedido. Por favor tente mais tarde.");
       $state.go('consumer.mainpage');
       $uibModalInstance.dismiss('cancel');
+      usSpinnerService.stop('consumer-spinner');
     });
   };
 
   $scope.choosePayPal = function () {
+    usSpinnerService.spin('consumer-spinner');
     $scope.submitParams.paymentMethod = "PAYPAL_PAYMENT";
     budgetService.submitPrintRequest($scope.submitParams.printRequestID, $scope.submitParams).success(function(data) {
       if(data.success===true) {
@@ -120,11 +121,13 @@ app.controller('PaymentMethodSelectionCtrl', ['$scope', '$state', 'toasterServic
       }
       $state.go('consumer.mainpage');
       $uibModalInstance.dismiss('cancel');
+      usSpinnerService.stop('consumer-spinner');
     })
     .error(function(data) {
       toasterService.notifyError("Pedimos desculpa mas foi impossível de processar o seu pedido. Por favor tente mais tarde.");
       $state.go('consumer.mainpage');
       $uibModalInstance.dismiss('cancel');
+      usSpinnerService.stop('consumer-spinner');
     });
   };
 
