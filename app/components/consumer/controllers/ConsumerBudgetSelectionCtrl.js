@@ -9,6 +9,7 @@ function($scope, $cookieStore, $state, budgets, printShopListService, fileTransf
   $scope.submitedFilesNames = Object.keys($scope.submitedFiles);
 
   $scope.amount = 0.0;
+  $scope.selectedPrintShopName;
   // $scope.payPalCallbackUrl = backendURLService.getTunnelURL()+"paypal/ipn/";
   if(backendURLService.getBaseURL().match("localhost")) {
     $scope.payPalCallbackUrl = budgets.externalURL+"paypal/ipn/";
@@ -38,6 +39,7 @@ function($scope, $cookieStore, $state, budgets, printShopListService, fileTransf
       $scope.amount = parseFloat($scope.budgets[$scope.theChosenOne]).toFixed(2);
       // Finish the PayPal callback URL appending the printRequestID
       $scope.payPalCallbackUrl += $scope.printRequestID;
+      $scope.selectedPrintShopName = $scope.selectedPrintShops[$scope.theChosenOne].name;
       console.log($scope.payPalCallbackUrl);
 
       // Send request to server
@@ -64,15 +66,15 @@ function($scope, $cookieStore, $state, budgets, printShopListService, fileTransf
 
   $scope.pay = function() {
     // ... pay
-    $scope.openPaymentMethodSelectionModal("Escolha o método de pagamento", $scope.amount, $scope.payPalCallbackUrl);
+    $scope.openPaymentMethodSelectionModal("Escolha o método de pagamento", $scope.amount, $scope.payPalCallbackUrl, $scope.selectedPrintShopName);
   };
 
-  $scope.openPaymentMethodSelectionModal = function(text,amount,callbackURL) {
+  $scope.openPaymentMethodSelectionModal = function(text, amount, callbackURL, pshopName) {
     var modalInstance = $uibModal.open({
       animation: true,
       templateUrl: 'app/components/consumer/views/consumer-payment-method-selection.html',
       controller: 'PaymentMethodSelectionCtrl',
-      size: 'md',
+      size: 'sm',
       resolve: {
         text: function() {
           return text;
@@ -82,6 +84,9 @@ function($scope, $cookieStore, $state, budgets, printShopListService, fileTransf
         },
         callbackURL: function() {
           return callbackURL;
+        },
+        pshopName: function() {
+          return pshopName;
         }
       }
     });
@@ -92,7 +97,7 @@ function($scope, $cookieStore, $state, budgets, printShopListService, fileTransf
 
 }]);
 
-app.controller('PaymentMethodSelectionCtrl', ['$scope', '$uibModalInstance', 'text', 'amount', 'callbackURL', function($scope, $uibModalInstance, text, amount, callbackURL) {
+app.controller('PaymentMethodSelectionCtrl', ['$scope', '$uibModalInstance', 'text', 'amount', 'callbackURL', 'pshopName', function($scope, $uibModalInstance, text, amount, callbackURL) {
 
   $scope.text = text;
   $scope.amount = amount;

@@ -1,11 +1,15 @@
 <div class="modal-header">
-  {{text}}
+  <center>{{text}}</center>
+  <center><h1>Total</h1></center>
+  <center><h2>{{amount}} €</h2></center>
 </div>
 <div class="modal-body" style="text-align:center;">
   <div class="row">
     <div class="col col-md-3">
-      <button class="button button-rounded button-primary"><span><img width="16" height="14" src="assets/img/logo/logo_white.png"/></span>  Pagamento ProxyPrint</button>
+      <button class="button button-rounded button-primary hvr-bounce-in">ProxyPrint</button>
     </div>
+  </div>
+  <div class="row" style="margin-top:3%;">
     <div class="col col-md-3">
       <!-- paypal-button -->
       <form method="post" action="https://www.sandbox.paypal.com/cgi-bin/webscr" class="paypal-button" style="opacity: 1;" target="_blank">
@@ -22,7 +26,7 @@
         <input type="hidden" name="env" value="www.sandbox">
         <input type="hidden" name="cmd" value="_xclick">
         <input type="hidden" name="bn" value="JavaScriptButton_buynow">
-        <button type="submit" class="button button-rounded button-primary" ng-click="goBackToConsumerLandingPage()"><i class="fa fa-cc-paypal" aria-hidden="true"></i>  PayPal</button>
+        <button type="submit" class="button button-rounded button-primary hvr-bounce-in" ng-click="goBackToConsumerLandingPage()"><i class="fa fa-cc-paypal" aria-hidden="true"></i>  PayPal</button>
       </form>
       <!-- ./paypal-button -->
     </div>
