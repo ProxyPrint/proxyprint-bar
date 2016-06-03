@@ -1,6 +1,6 @@
 angular.module('ProxyPrint').controller('ConsumerController', ['$scope','$cookieStore',
-'authenticationService', 'fileTransferService', '$state', 'notifications', 'backendURLService', 'consumerPendingRequests', 'consumerPendingRequestsService', '$uibModal','notificationsService',
-function($scope, $cookieStore, authenticationService, fileTransferService, $state, notifications, backendURLService, consumerPendingRequests, consumerPendingRequestsService, $uibModal, notificationsService) {
+'authenticationService', 'fileTransferService', '$state', 'notifications', 'backendURLService', 'consumerPendingRequests', 'consumerPendingRequestsService', '$uibModal','notificationsService', 'requestHelperService',
+function($scope, $cookieStore, authenticationService, fileTransferService, $state, notifications, backendURLService, consumerPendingRequests, consumerPendingRequestsService, $uibModal, notificationsService, requestHelperService) {
 
   // Get consumer location
   if(navigator.geolocation){
@@ -15,6 +15,7 @@ function($scope, $cookieStore, authenticationService, fileTransferService, $stat
   }
 
   $scope.consumer = $cookieStore.get('globals').currentUser;
+  console.log($scope.consumer);
   var audio = new Audio('assets/audio/notifications.mp3');
 
 
@@ -108,6 +109,7 @@ function($scope, $cookieStore, authenticationService, fileTransferService, $stat
   $scope.uploadFiles = function () {
     if ($scope.pdfFiles && $scope.pdfFiles.length) {
       fileTransferService.setFiles($scope.pdfFiles);
+      requestHelperService.setSubmittedFilesStatus(true);
       $state.go('consumer.requestbudget');
     }
   };

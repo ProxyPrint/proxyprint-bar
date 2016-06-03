@@ -1,11 +1,12 @@
-angular.module('ProxyPrint').controller('ConsumerBudgetSelectionCtrl', ['$scope','$cookieStore', '$state', 'budgets', 'printShopListService', 'fileTransferService', 'budgetService', 'backendURLService',
-function($scope, $cookieStore, $state, budgets, printShopListService, fileTransferService, budgetService, backendURLService) {
+angular.module('ProxyPrint').controller('ConsumerBudgetSelectionCtrl', ['$scope','$cookieStore', '$state', 'budgets', 'printShopListService', 'fileTransferService', 'budgetService', 'backendURLService', 'permission',
+function($scope, $cookieStore, $state, budgets, printShopListService, fileTransferService, budgetService, backendURLService, permission) {
 
   $scope.budgets = budgets.budgets;
   $scope.printRequestID = budgets.printRequestID;
   $scope.selectedPrintShops = printShopListService.getSelectedPrintShops();
   $scope.submitedFiles = fileTransferService.getProcessedFiles().files;
   $scope.submitedFilesNames = Object.keys($scope.submitedFiles);
+  console.log(permission);
 
   $scope.amount = 0.0;
 
