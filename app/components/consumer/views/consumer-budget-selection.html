@@ -18,7 +18,7 @@
 					<tr ng-repeat="printshop in selectedPrintShops" class="animate-row">
 						<td>{{printshop.name}}</td>
 						<td>{{printshop.distance}} km</td>
-						<td>{{printshop.budget}} € <span ng-if="printshop.hasBudget==true">€</span></td>
+						<td>{{printshop.budget}} <span ng-if="printshop.hasBudget==true">€</span></td>
 						<td><input ng-if="printshop.hasBudget==true" type="radio" name="theChosenOne" ng-model="$parent.$parent.theChosenOne" value="printshop.id" ng-value="printshop.id"></td>
 					</tr>
 				</tbody>
