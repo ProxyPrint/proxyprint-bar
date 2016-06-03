@@ -15,6 +15,8 @@ function($scope, $cookieStore, authenticationService, fileTransferService, $stat
   }
 
   $scope.consumer = $cookieStore.get('globals').currentUser;
+  $scope.balance = $cookieStore.get('consumerBalance');
+  console.log($scope.balance);
   var audio = new Audio('assets/audio/notifications.mp3');
 
 

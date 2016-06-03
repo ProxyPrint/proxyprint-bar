@@ -7,6 +7,7 @@ function($scope, $rootScope, $location, authenticationService, $state, $cookieSt
     $scope.dataLoading = true;
     authenticationService.Login($scope.username, $scope.password, function(response) {
       if (response.success) {
+        console.log(response.user);
         // PrintShop - Manager
         if(response.user.roles[0] == "ROLE_MANAGER") {
           authenticationService.SetCredentials($scope.username, $scope.password);
@@ -22,6 +23,7 @@ function($scope, $rootScope, $location, authenticationService, $state, $cookieSt
         else if(response.user.roles[0] == "ROLE_USER") {
           $cookieStore.put("consumerID", response.user.id);
           $cookieStore.put("consumerName", response.user.name);
+          $cookieStore.put("consumerBalance", response.user.balance);
           authenticationService.SetCredentials($scope.username, $scope.password);
           $state.go('consumer.mainpage', {"consumerID":$scope.username});
         }
