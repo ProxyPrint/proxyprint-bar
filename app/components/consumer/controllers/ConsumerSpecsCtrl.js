@@ -1,8 +1,8 @@
 angular.module('ProxyPrint').controller('ConsumerSpecsController',
 ['$scope' , '$uibModal', '$log', 'fileTransferService', 'specMarshallService',
-'printingSchemas', 'printingSchemaService', '$cookieStore', '$state', 'toasterService',
+'printingSchemas', 'printingSchemaService', '$cookieStore', '$state', 'toasterService', 'requestHelperService',
 function($scope, $uibModal, $log, fileTransferService, specMarshallService,
-    printingSchemas, printingSchemaService, $cookieStore, $state, toasterService) {
+    printingSchemas, printingSchemaService, $cookieStore, $state, toasterService, requestHelperService) {
 
         /** Page range logic */
         $scope.lastItem = null;
@@ -130,6 +130,7 @@ function($scope, $uibModal, $log, fileTransferService, specMarshallService,
             /** Send Request */
             fileTransferService.ProcessFiles($scope.files(), function(){
                 $scope.showRequest = false;
+                requestHelperService.setSpecsStatus(true);
                 $state.go('consumer.printshopselection');
             });
         };
@@ -160,6 +161,7 @@ function($scope, $uibModal, $log, fileTransferService, specMarshallService,
 
             modalInstance.result.then(function() {
                 fileTransferService.ProcessFiles($scope.files());
+                requestHelperService.setSpecsStatus(true);
                 $state.go('consumer.printshopselection');
             });
         };
