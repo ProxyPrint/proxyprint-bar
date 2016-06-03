@@ -33,6 +33,10 @@ angular.module('ProxyPrint').factory('requestHelperService', function() {
       service.selectedPrintshops = boolean;
     }
 
+    service.resetRequest = function () {
+      service.sbumittedFiles = service.choseSpecs = service.selectedPrintshops = false;
+    }
+
 
 
     return service;
