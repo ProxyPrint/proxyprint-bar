@@ -87,7 +87,9 @@ app.controller('PaymentMethodSelectionCtrl', ['$scope', '$state', 'toasterServic
   $scope.submitParams = submitParams;
   usSpinnerService.stop('consumer-spinner');
 
-  $scope.chooseProxyPrint = function () {
+  
+
+  $scope.payViaProxyPrint = function () {
     usSpinnerService.spin('consumer-spinner');
     $scope.submitParams.paymentMethod = "PROXYPRINT_PAYMENT";
     budgetService.submitPrintRequest($scope.submitParams.printRequestID, $scope.submitParams).success(function(data) {
@@ -110,7 +112,7 @@ app.controller('PaymentMethodSelectionCtrl', ['$scope', '$state', 'toasterServic
     });
   };
 
-  $scope.choosePayPal = function () {
+  $scope.payViaPayPal = function () {
     usSpinnerService.spin('consumer-spinner');
     $scope.submitParams.paymentMethod = "PAYPAL_PAYMENT";
     budgetService.submitPrintRequest($scope.submitParams.printRequestID, $scope.submitParams).success(function(data) {
