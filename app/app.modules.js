@@ -1,4 +1,4 @@
-angular.module('ProxyPrint', ['Auth','ui.router','ngCookies', 'uiRouterStyles','ngFileUpload','angular-notification-icons', 'ui.bootstrap', 'rzModule', 'ngAnimate', 'ui.select', 'ngSanitize', 'infinite-scroll','ui-notification'])
+angular.module('ProxyPrint', ['Auth','ui.router','ngCookies', 'uiRouterStyles','ngFileUpload','angular-notification-icons', 'ui.bootstrap', 'rzModule', 'ngAnimate', 'ui.select', 'ngSanitize', 'infinite-scroll','ui-notification', 'angularSpinner'])
    .run(['$rootScope', '$location', '$cookieStore', '$http',
 
     function ($rootScope, $location, $cookieStore, $http) {
@@ -25,6 +25,9 @@ angular.module('ProxyPrint', ['Auth','ui.router','ngCookies', 'uiRouterStyles','
         positionX: 'right',
         positionY: 'top'
         });
+    }])
+    .config(['usSpinnerConfigProvider', function (usSpinnerConfigProvider) {
+      usSpinnerConfigProvider.setTheme('bigBlue', {color: '#3A6DB0', radius: 30});
     }]);
 
 

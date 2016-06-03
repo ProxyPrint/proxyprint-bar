@@ -1,32 +1,33 @@
 angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
-    $urlRouterProvider.when('', '/');
-    $urlRouterProvider.otherwise('/404');
-    var frontpageCSS = [
-        '/assets/css/frontpage.css',
-        '/assets/css/bootstrap.min.css',
-        '//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css',
-        'http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic',
-        '/assets/css/buttons.css'
-    ];
+  $urlRouterProvider.when('', '/');
+  $urlRouterProvider.otherwise('/404');
+  var frontpageCSS = [
+    '/assets/css/frontpage.css',
+    '/assets/css/bootstrap.min.css',
+    '//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css',
+    'http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic',
+    '/assets/css/buttons.css'
+  ];
 
-    var mainCSS = [
-        '/assets/css/styles.css',
-        '/assets/css/bootstrap.min.css',
-        '//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css',
-        '/assets/css/angular-notification-icons.css',
-        'http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic',
-        'https://cdnjs.cloudflare.com/ajax/libs/ng-table/0.8.3/ng-table.min.css',
-        '/node_modules/hover.css/css/hover-min.css',
-        '/assets/css/buttons.css',
-        '/node_modules/angular-ui-notification/dist/angular-ui-notification.min.css'
-    ];
+  var mainCSS = [
+    '/assets/css/styles.css',
+    '/assets/css/bootstrap.min.css',
+    '//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css',
+    '/assets/css/angular-notification-icons.css',
+    'http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic',
+    'https://cdnjs.cloudflare.com/ajax/libs/ng-table/0.8.3/ng-table.min.css',
+    '/node_modules/hover.css/css/hover-min.css',
+    '/assets/css/buttons.css',
+    '/node_modules/angular-ui-notification/dist/angular-ui-notification.min.css',
+    'assets/css/spinner.css'
+  ];
 
-    var mainPrintShopCSS = [
-        '/assets/css/bootstrap.min.css',
-        '/assets/css/styles-pshop.css',
-        '//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css',
-        'http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic'
-    ];
+  var mainPrintShopCSS = [
+    '/assets/css/bootstrap.min.css',
+    '/assets/css/styles-pshop.css',
+    '//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css',
+    'http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic'
+  ];
 
   var adminlteCSS = [
     '/assets/css/styles-map.css',
@@ -38,65 +39,65 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
     'assets/css/spinner.css'
   ];
 
-    var gradientSoligBgCSS = [
-        '/assets/adminlte/bootstrap/css/bootstrap.min.css',
-        'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css',
-        'https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css',
-        '/assets/adminlte/dist/css/AdminLTE.min.css',
-        '/assets/css/gradientpage.css',
-        '/node_modules/hover.css/css/hover-min.css'
-    ];
+  var gradientSoligBgCSS = [
+    '/assets/adminlte/bootstrap/css/bootstrap.min.css',
+    'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css',
+    'https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css',
+    '/assets/adminlte/dist/css/AdminLTE.min.css',
+    '/assets/css/gradientpage.css',
+    '/node_modules/hover.css/css/hover-min.css'
+  ];
 
-    /*Consumer*/
-    $stateProvider
-    .state('notFound', {
-        url: '/notfound',
-        templateUrl: '/app/shared/views/404.html',
-        data: {
-            css: adminlteCSS
-        }
-    })
-    .state('home', {
-        url: '/',
-        templateUrl: '/app/components/home/views/frontpage.html',
-        controller: 'LoginController',
-        data: {
-            css: frontpageCSS
-        }
-    })
-    .state('register' , {
-        url: '/register',
-        templateUrl: '/app/components/home/views/register.html',
-        controller: 'RegisterController',
-        data: {
-            css: gradientSoligBgCSS
-        }
-    })
-    /*Print Shop landing page*/
-    .state('printshop', {
-        url: '/printshop',
-        templateUrl: '/app/components/home/views/printshop.html',
-        controller: 'LoginController',
-        data: {
-            css: mainPrintShopCSS
-        }
-    })
-    .state('psregister', {
-        url: '/psregister',
-        templateUrl: '/app/components/home/views/printshop-register.html',
-        controller: 'PrintShopRegisterCtrl',
-        data: {
-            css: gradientSoligBgCSS
-        }
-    })
-    .state('adminlogin', {
-        url: '/adminlogin',
-        templateUrl: '/app/components/admin/views/admin-login.html',
-        controller: 'LoginController',
-        data: {
-            css: gradientSoligBgCSS
-        }
-    })
+  /*Consumer*/
+  $stateProvider
+  .state('notFound', {
+    url: '/notfound',
+    templateUrl: '/app/shared/views/404.html',
+    data: {
+      css: adminlteCSS
+    }
+  })
+  .state('home', {
+    url: '/',
+    templateUrl: '/app/components/home/views/frontpage.html',
+    controller: 'LoginController',
+    data: {
+      css: frontpageCSS
+    }
+  })
+  .state('register' , {
+    url: '/register',
+    templateUrl: '/app/components/home/views/register.html',
+    controller: 'RegisterController',
+    data: {
+      css: gradientSoligBgCSS
+    }
+  })
+  /*Print Shop landing page*/
+  .state('printshop', {
+    url: '/printshop',
+    templateUrl: '/app/components/home/views/printshop.html',
+    controller: 'LoginController',
+    data: {
+      css: mainPrintShopCSS
+    }
+  })
+  .state('psregister', {
+    url: '/psregister',
+    templateUrl: '/app/components/home/views/printshop-register.html',
+    controller: 'PrintShopRegisterCtrl',
+    data: {
+      css: gradientSoligBgCSS
+    }
+  })
+  .state('adminlogin', {
+    url: '/adminlogin',
+    templateUrl: '/app/components/admin/views/admin-login.html',
+    controller: 'LoginController',
+    data: {
+      css: gradientSoligBgCSS
+    }
+  })
 
 
   /*Consumer*/
@@ -115,15 +116,21 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
     resolve: {
       notifications: ['notificationsService', function (notificationsService) {
         return notificationsService.getNotifications();
-    }],
-    consumerPendingRequests: ['consumerPendingRequestsService', function (consumerPendingRequestsService) {
-      return consumerPendingRequestsService.getPendingRequests();
-    }]
+      }],
+      consumerPendingRequests: ['consumerPendingRequestsService', function (consumerPendingRequestsService) {
+        return consumerPendingRequestsService.getPendingRequests();
+      }]
     }
   })
   .state('consumer.settings' ,{
     url: '/settings',
-    templateUrl: '/app/components/consumer/views/consumer-settings.html'
+    templateUrl: '/app/components/consumer/views/consumer-settings.html',
+    controller: 'ConsumerSettingsCtrl',
+    resolve: {
+      consumer: ['consumerService', function(consumerService) {
+        return consumerService.getConsumerInfo();
+      }]
+    }
   })
   .state('consumer.mainpage' ,{
     url: '/mainpage',
@@ -134,10 +141,10 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
     templateUrl: '/app/components/consumer/views/consumer-history.html',
     controller: 'ConsumerHistoryController',
     resolve: {
-        consumerSatisfiedRequests : ['consumerSatisfiedRequestsService',
-        function(consumerSatisfiedRequestsService) {
-            return consumerSatisfiedRequestsService.getSatisfiedRequests();
-        }]
+      consumerSatisfiedRequests : ['consumerSatisfiedRequestsService',
+      function(consumerSatisfiedRequestsService) {
+        return consumerSatisfiedRequestsService.getSatisfiedRequests();
+      }]
     }
   })
   .state('consumer.printshoplist', {
@@ -146,14 +153,14 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
     controller: 'ConsumerPrintshopList',
     resolve: {
       printshops: ['printshopService',
-        function (printshopService) {
-          return printshopService.getAllPrintshops();
-        }]
+      function (printshopService) {
+        return printshopService.getAllPrintshops();
+      }]
     }
   })
   .state('consumer.requestbudget', {
     url: '/requestbudget',
-    templateUrl: '/app/components/consumer/views/consumer-requestBudget.html',
+    templateUrl: '/app/components/consumer/views/consumer-files-specs.html',
     controller: 'ConsumerSpecsController',
     resolve: {
       printingSchemas : ['printingSchemaService','$cookieStore',
@@ -188,75 +195,75 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
     controller: 'ConsumerPrintshopPageCtrl',
     resolve: {
       printshop : ['printshopService', '$stateParams',
-        function (printshopService, $stateParams) {
-          return printshopService.getPrintshop($stateParams.printshopid);
-        }],
+      function (printshopService, $stateParams) {
+        return printshopService.getPrintshop($stateParams.printshopid);
+      }],
       reviews: ['reviewsService', '$stateParams',
-        function (reviewsService, $stateParams) {
-          return reviewsService.getPrintshopReviews($stateParams.printshopid);
-        }]
+      function (reviewsService, $stateParams) {
+        return reviewsService.getPrintshopReviews($stateParams.printshopid);
+      }]
     }
   })
 
-    /*PrintShop*/
+  /*PrintShop*/
 
-    /*Employee*/
-    .state('employee', {
-        abstract: true,
-        url: '/employee/:username',
-        views: {
-            '': {
-                templateUrl: '/app/components/printshop/employee/views/employee-base.html',
-                controller: 'EmployeeBaseCtrl'
-            }
-        },
-        data: {
-            css: adminlteCSS
-        }
-    })
-    .state('employee.pending', {
-        url: '/pending',
-        templateUrl: '/app/components/printshop/employee/views/employee-requests-pending.html',
-        controller: 'PendingRequestsCtrl',
-        resolve: {
-            pendingPrintRequests: ['pendingPrintRequestsService', function(pendingPrintRequestsService) {
-                return pendingPrintRequestsService.getPendingRequests();
-            }]
-        }
-    })
-    .state('employee.consult', {
-        url: '/pending/:requestid',
-        templateUrl: '/app/components/printshop/employee/views/employee-request-consult.html',
-        controller: 'ConsultRequestCtrl',
-        resolve: {
-            pendingPrintRequest: ['pendingPrintRequestsService', '$stateParams',
-            function (pendingPrintRequestsService, $stateParams) {
-                return pendingPrintRequestsService.getRequest($stateParams.requestid);
-            }]
-        }
-    })
-    .state('employee.satisfied', {
-        url: '/satisfied',
-        templateUrl: '/app/components/printshop/employee/views/employee-requests-satisfied.html',
-        controller: 'SatisfiedRequestsCtrl',
-        resolve: {
-            satisfiedPrintRequest: ['satisfiedPrintRequestsService',
-            function (satisfiedPrintRequestsService) {
-                return satisfiedPrintRequestsService.getSatisfiedRequests();
-            }]
-        }
-    })
-    .state('employee.history', {
-        url: '/history',
-        templateUrl: '/app/components/printshop/employee/views/employee-requests-history.html',
-        controller: 'HistoryRequestsCtrl',
-        resolve: {
-            historyPrintRequests: ['historyPrintRequestsService',
-            function (historyPrintRequestsService) {
-                return historyPrintRequestsService.getHistoryRequests();
-            }]
-        }
-    })
+  /*Employee*/
+  .state('employee', {
+    abstract: true,
+    url: '/employee/:username',
+    views: {
+      '': {
+        templateUrl: '/app/components/printshop/employee/views/employee-base.html',
+        controller: 'EmployeeBaseCtrl'
+      }
+    },
+    data: {
+      css: adminlteCSS
+    }
+  })
+  .state('employee.pending', {
+    url: '/pending',
+    templateUrl: '/app/components/printshop/employee/views/employee-requests-pending.html',
+    controller: 'PendingRequestsCtrl',
+    resolve: {
+      pendingPrintRequests: ['pendingPrintRequestsService', function(pendingPrintRequestsService) {
+        return pendingPrintRequestsService.getPendingRequests();
+      }]
+    }
+  })
+  .state('employee.consult', {
+    url: '/pending/:requestid',
+    templateUrl: '/app/components/printshop/employee/views/employee-request-consult.html',
+    controller: 'ConsultRequestCtrl',
+    resolve: {
+      pendingPrintRequest: ['pendingPrintRequestsService', '$stateParams',
+      function (pendingPrintRequestsService, $stateParams) {
+        return pendingPrintRequestsService.getRequest($stateParams.requestid);
+      }]
+    }
+  })
+  .state('employee.satisfied', {
+    url: '/satisfied',
+    templateUrl: '/app/components/printshop/employee/views/employee-requests-satisfied.html',
+    controller: 'SatisfiedRequestsCtrl',
+    resolve: {
+      satisfiedPrintRequest: ['satisfiedPrintRequestsService',
+      function (satisfiedPrintRequestsService) {
+        return satisfiedPrintRequestsService.getSatisfiedRequests();
+      }]
+    }
+  })
+  .state('employee.history', {
+    url: '/history',
+    templateUrl: '/app/components/printshop/employee/views/employee-requests-history.html',
+    controller: 'HistoryRequestsCtrl',
+    resolve: {
+      historyPrintRequests: ['historyPrintRequestsService',
+      function (historyPrintRequestsService) {
+        return historyPrintRequestsService.getHistoryRequests();
+      }]
+    }
+  })
 
   /*Manager*/
   .state('manager', {
@@ -278,13 +285,13 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
     controller: 'ManagerPrintshopPageCtrl',
     resolve: {
       printshop : ['managerPrintshopService',
-        function (managerPrintshopService) {
-          return managerPrintshopService.getPrintshop();
+      function (managerPrintshopService) {
+        return managerPrintshopService.getPrintshop();
       }],
       reviews: ['managerPrintshopService', '$stateParams',
-        function (managerPrintshopService, $stateParams) {
-          return managerPrintshopService.getPrintshopReviews($stateParams.printshopid);
-        }]
+      function (managerPrintshopService, $stateParams) {
+        return managerPrintshopService.getPrintshopReviews($stateParams.printshopid);
+      }]
     }
   })
   .state('manager.stats', {
@@ -317,50 +324,50 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
       }]
     }
   })
-    /*Admin*/
-    .state('admin', {
-        abstract: true,
-        url: '/admin/:username',
-        views: {
-            '': {
-                templateUrl: '/app/components/admin/views/admin-base.html',
-                controller: 'AdminBaseCtrl'
-            }
-        },
-        data: {
-            css: adminlteCSS
-        }
-    })
-    .state('admin.requests', {
-        url: '/requests',
-        templateUrl: '/app/components/admin/views/admin-pending-requests.html',
-        controller: 'AdminPendingRequestsCtrl',
-        resolve: {
-            pendingRequests: ['pendingRequestsService', function(pendingRequestsService) {
-                return pendingRequestsService.getPendingRequests();
-            }]
-        }
-    })
-    .state('admin.request', {
-        url: '/requests/:requestid',
-        templateUrl: '/app/components/admin/views/admin-request.html',
-        controller: 'AdminPendingRequestDetailCtrl',
-        resolve: {
-            pendingRequest: ['pendingRequestsService', function (pendingRequestsService) {
-                return pendingRequestsService.getCurrentRequest();
-            }]
-        }
-    })
-    .state('admin.printshops', {
-        url: '/printshops',
-        templateUrl: '/app/components/admin/views/admin-printshops.html',
-        controller: 'AdminPrintShopsCtrl',
-        resolve: {
-          printshops: ['printshopService',
-            function (printshopService) {
-              return printshopService.getAllPrintshops();
-            }]
-        }
-    });
+  /*Admin*/
+  .state('admin', {
+    abstract: true,
+    url: '/admin/:username',
+    views: {
+      '': {
+        templateUrl: '/app/components/admin/views/admin-base.html',
+        controller: 'AdminBaseCtrl'
+      }
+    },
+    data: {
+      css: adminlteCSS
+    }
+  })
+  .state('admin.requests', {
+    url: '/requests',
+    templateUrl: '/app/components/admin/views/admin-pending-requests.html',
+    controller: 'AdminPendingRequestsCtrl',
+    resolve: {
+      pendingRequests: ['pendingRequestsService', function(pendingRequestsService) {
+        return pendingRequestsService.getPendingRequests();
+      }]
+    }
+  })
+  .state('admin.request', {
+    url: '/requests/:requestid',
+    templateUrl: '/app/components/admin/views/admin-request.html',
+    controller: 'AdminPendingRequestDetailCtrl',
+    resolve: {
+      pendingRequest: ['pendingRequestsService', function (pendingRequestsService) {
+        return pendingRequestsService.getCurrentRequest();
+      }]
+    }
+  })
+  .state('admin.printshops', {
+    url: '/printshops',
+    templateUrl: '/app/components/admin/views/admin-printshops.html',
+    controller: 'AdminPrintShopsCtrl',
+    resolve: {
+      printshops: ['printshopService',
+      function (printshopService) {
+        return printshopService.getAllPrintshops();
+      }]
+    }
+  });
 
 }]);

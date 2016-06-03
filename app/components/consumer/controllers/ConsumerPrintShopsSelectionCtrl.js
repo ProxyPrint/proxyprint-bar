@@ -1,11 +1,11 @@
 angular.module('ProxyPrint')
-.controller('ConsumerPrintShopsSelectionController', ['$scope', 'printShopListService', 'printshopsList', 'fileTransferService', '$cookieStore', 'budgetService', '$state', function($scope, printShopListService, printshopsList, fileTransferService, $cookieStore, budgetService, $state) {
+.controller('ConsumerPrintShopsSelectionController', ['$scope', 'printShopListService', 'printshopsList', 'fileTransferService', '$cookieStore', 'budgetService', '$state', 'usSpinnerService', function($scope, printShopListService, printshopsList, fileTransferService, $cookieStore, budgetService, $state, usSpinnerService) {
 
   $scope.printshops = [];
 
   for (var dist in printshopsList.data.printshops) {
     var pshop = printshopsList.data.printshops[dist];
-    pshop['distance'] = Math.round(dist * 100) / 100;
+    pshop.distance = Math.round(dist * 100) / 100;
     $scope.printshops.push(pshop);
   }
 
@@ -16,6 +16,7 @@ angular.module('ProxyPrint')
   $scope.maxSelectionAllowed = 5;
   $scope.showDistance = false;
   $scope.pshopNames = {};
+  usSpinnerService.stop('consumer-spinner');
 
   // Distance slider
   $scope.distanceSlider = {
@@ -67,7 +68,8 @@ angular.module('ProxyPrint')
 
     var printRequest = fileTransferService.getProcessedFiles();
     if(printRequest!==null) {
-      printRequest["printshops"] = choosenPShopsIDs;
+      usSpinnerService.spin('consumer-spinner');
+      printRequest.printshops = choosenPShopsIDs;
       budgetService.getMeBudgetsForThis($scope.budgetSuccessCallback, $scope.budgetErrorCallback, printRequest, fileTransferService.getFiles());
     }
   };
@@ -77,6 +79,7 @@ angular.module('ProxyPrint')
   };
 
   $scope.budgetErrorCallback = function(data) {
+    usSpinnerService.stop('consumer-spinner');
     alert("Os orçamentos não puderam se efetuados. Por favor tente mais tarde.");
     console.log(data);
   };
