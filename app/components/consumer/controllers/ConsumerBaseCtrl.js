@@ -51,8 +51,7 @@ function($scope, $cookieStore, authenticationService, fileTransferService, $stat
       total ++;
     }
     return total;
-
-  };
+  }
 
   $scope.readNotification = function(index) {
     notificationsService.readNotification($scope.notifications[index].id);
@@ -66,13 +65,13 @@ function($scope, $cookieStore, authenticationService, fileTransferService, $stat
 
     notificationsService.deleteNotification($scope.notifications[index].id);
     $scope.notifications.splice(index,1);
-  }
+  };
 
   $scope.removeAllNotifications = function () {
     notificationsService.deleteAllNotifications($scope.consumer.username);
-    $scope.notifications = new Array();
+    $scope.notifications = [];
     $scope.newNotifications = 0;
-  }
+  };
 
   $scope.markAllRead = function () {
     var i;
@@ -81,7 +80,7 @@ function($scope, $cookieStore, authenticationService, fileTransferService, $stat
       $scope.notifications[i].read = true;
     }
     $scope.newNotifications = 0;
-  }
+  };
 
   source.addEventListener('message', increaseNotifications, false);
 
@@ -109,10 +108,12 @@ function($scope, $cookieStore, authenticationService, fileTransferService, $stat
 
   $scope.uploadFiles = function () {
     usSpinnerService.spin('consumer-spinner');
-    if ($scope.pdfFiles && $scope.pdfFiles.length) {
-      fileTransferService.setFiles($scope.pdfFiles);
-      $state.go('consumer.requestbudget');
-    }
+    setTimeout(function(){ // JUST FOR SHOW THE SPINNER
+      if ($scope.pdfFiles && $scope.pdfFiles.length) {
+        fileTransferService.setFiles($scope.pdfFiles);
+        $state.go('consumer.requestbudget');
+      }
+    }, 3000);
   };
 
   $scope.openRejectModal = function(reply, id) {
@@ -135,7 +136,7 @@ function($scope, $cookieStore, authenticationService, fileTransferService, $stat
     modalInstance.result.then(function(requestid) {
       consumerPendingRequestsService.rejectRequest(requestid, $scope.onCancelSuccessCallback, $scope.onCancelErroCallback);
     });
-  }
+  };
 
   $scope.onCancelSuccessCallback = function(data) {
     $scope.openSuccessModal("O pedido foi cancelado com sucesso!");

@@ -1,5 +1,5 @@
-angular.module('ProxyPrint').controller('ConsumerBudgetSelectionCtrl', ['$scope','$cookieStore', '$state', 'budgets', 'printShopListService', 'fileTransferService', 'budgetService', 'backendURLService', '$uibModal',
-function($scope, $cookieStore, $state, budgets, printShopListService, fileTransferService, budgetService, backendURLService, $uibModal) {
+angular.module('ProxyPrint').controller('ConsumerBudgetSelectionCtrl', ['$scope','$cookieStore', '$state', 'budgets', 'printShopListService', 'fileTransferService', 'budgetService', 'backendURLService', '$uibModal', 'usSpinnerService',
+function($scope, $cookieStore, $state, budgets, printShopListService, fileTransferService, budgetService, backendURLService, $uibModal, usSpinnerService) {
 
   $scope.budgets = budgets.budgets;
   console.log($scope.budgets);
@@ -9,7 +9,7 @@ function($scope, $cookieStore, $state, budgets, printShopListService, fileTransf
   $scope.submitedFilesNames = Object.keys($scope.submitedFiles);
 
   $scope.amount = 0.0;
-  $scope.selectedPrintShopName;
+  $scope.selectedPrintShopName = "";
   // $scope.payPalCallbackUrl = backendURLService.getTunnelURL()+"paypal/ipn/";
   if(backendURLService.getBaseURL().match("localhost")) {
     $scope.payPalCallbackUrl = budgets.externalURL+"paypal/ipn/";
@@ -26,7 +26,7 @@ function($scope, $cookieStore, $state, budgets, printShopListService, fileTransf
       $scope.selectedPrintShops[pshopID].budget = $scope.budgets[pshopID];
     }
   }
-
+  usSpinnerService.stop('consumer-spinner');
   $scope.isSomePShopSelected = false;
 
   $scope.finishPrintRequest = function() {
@@ -41,25 +41,9 @@ function($scope, $cookieStore, $state, budgets, printShopListService, fileTransf
       console.log($scope.payPalCallbackUrl);
 
       $scope.submitParams = {printRequestID: $scope.printRequestID, printshopID: $scope.theChosenOne , budget: parseFloat($scope.budgets[$scope.theChosenOne]), paymentMethod: ""};
-
     } else {
       alert("Por favor escolha de entre uma das reprografias. Caso nenhuma satisfaça o pedido volte atrás e tente outras reprografias.");
     }
-  };
-
-  $scope.submitRequestSuccessCallback = function(data) {
-    alert("O seu pedido foi registado e aguarda pagamento. Após efetuar o pagamento, quando o pedido estiver pronto receberá uma notificação.");
-    // $state.go("consumer.mainpage", {reload: true});
-  };
-
-  $scope.submitRequestErrorCallback = function(data) {
-    alert("Infelizmente não conseguimos registar o seu pedido. Por favor tente mais tarde");
-    // $state.go("consumer.mainpage", {reload: true});
-  };
-
-  $scope.goBackToConsumerLandingPage = function() {
-    // Open modal for choosing payment method
-    $state.go('consumer.mainpage');
   };
 
   $scope.pay = function() {

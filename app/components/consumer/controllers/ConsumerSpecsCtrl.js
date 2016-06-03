@@ -62,8 +62,8 @@ function($scope, $uibModal, $log, fileTransferService, specMarshallService,
         var index = files[i].specs.indexOf($scope.lastItem);
         if (index > -1) {
           files[i].specs[index].pages = interval;
-          files[i].specs[index]['from'] = init;
-          files[i].specs[index]['to'] = end;
+          files[i].specs[index].from = init;
+          files[i].specs[index].to = end;
         }
       }, function () {
         // dismissed here.
@@ -130,10 +130,10 @@ function($scope, $uibModal, $log, fileTransferService, specMarshallService,
     };
 
     $scope.request = function(){
-      usSpinnerService.spin('consumer-spinner');
       /** Send Request */
       fileTransferService.ProcessFiles($scope.files(), function(){
         $scope.showRequest = false;
+        usSpinnerService.spin('consumer-spinner');
         $state.go('consumer.printshopselection');
       });
     };
@@ -202,7 +202,7 @@ function($scope, $uibModal, $log, fileTransferService, specMarshallService,
       modalInstance.result.then(function(spec) {
         editPrintingSchema(spec);
       });
-    }
+    };
 
     /** C(R)UD PRINTING SCHEMA **/
 
@@ -221,7 +221,7 @@ function($scope, $uibModal, $log, fileTransferService, specMarshallService,
       }).error(function () {
         toasterService.notifyError("Ocorreu um erro! A especificação não foi inserida.");
       });
-    }
+    };
 
     editPrintingSchema = function (spec) {
       var schema = specMarshallService.marshallEditedSpecification(spec);
@@ -234,7 +234,7 @@ function($scope, $uibModal, $log, fileTransferService, specMarshallService,
       }).error(function () {
         toasterService.notifyError("Ocorreu um erro! A especificação não foi editada.");
       });
-    }
+    };
 
     $scope.removePrintingSchema = function (index) {
       printingSchemaService.deletePrintingSchema($scope.specs[index].id, $cookieStore.get('consumerID'))
@@ -244,15 +244,9 @@ function($scope, $uibModal, $log, fileTransferService, specMarshallService,
       }).error(function () {
         toasterService.notifyError("Ocorreu um erro! A especificação não foi removida.");
       });
-
-
-    }
-
-
+    };
 
   }]);
-
-
 
 
   angular.module('ProxyPrint').controller('AddSpecificationController', ['$scope', '$uibModalInstance',
