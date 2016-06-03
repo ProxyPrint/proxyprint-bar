@@ -42,7 +42,6 @@ function($scope, $cookieStore, $state, budgets, printShopListService, fileTransf
 
       $scope.submitParams = {printRequestID: $scope.printRequestID, printshopID: $scope.theChosenOne , budget: parseFloat($scope.budgets[$scope.theChosenOne]), paymentMethod: ""};
 
-      $scope.pay();
     } else {
       alert("Por favor escolha de entre uma das reprografias. Caso nenhuma satisfaça o pedido volte atrás e tente outras reprografias.");
     }
