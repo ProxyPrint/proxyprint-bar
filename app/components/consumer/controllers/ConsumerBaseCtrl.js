@@ -1,6 +1,6 @@
 angular.module('ProxyPrint').controller('ConsumerController', ['$scope', '$rootScope', '$cookieStore',
-'authenticationService', 'fileTransferService', '$state', 'notifications', 'backendURLService', 'consumerPendingRequests', 'consumerPendingRequestsService', '$uibModal','notificationsService', 'usSpinnerService',
-function($scope, $rootScope, $cookieStore, authenticationService, fileTransferService, $state, notifications, backendURLService, consumerPendingRequests, consumerPendingRequestsService, $uibModal, notificationsService, usSpinnerService) {
+'authenticationService', 'fileTransferService', '$state', 'notifications', 'backendURLService', 'consumerPendingRequests', 'consumerPendingRequestsService', '$uibModal','notificationsService', 'usSpinnerService', 'requestHelperService',
+function($scope, $rootScope, $cookieStore, authenticationService, fileTransferService, $state, notifications, backendURLService, consumerPendingRequests, consumerPendingRequestsService, $uibModal, notificationsService, usSpinnerService, requestHelperService) {
   console.log(backendURLService.getBaseURL());
   // Get consumer location
   if(navigator.geolocation){
@@ -120,9 +120,14 @@ function($scope, $rootScope, $cookieStore, authenticationService, fileTransferSe
     usSpinnerService.spin('consumer-spinner');
     if ($scope.pdfFiles && $scope.pdfFiles.length) {
       fileTransferService.setFiles($scope.pdfFiles);
+      requestHelperService.setSubmittedFilesStatus(true);
       $state.go('consumer.requestbudget');
     }
   };
+
+  $scope.resetRequest = function () {
+    $scope.pdfFiles = [];
+  }
 
   $scope.openRejectModal = function(reply, id) {
 

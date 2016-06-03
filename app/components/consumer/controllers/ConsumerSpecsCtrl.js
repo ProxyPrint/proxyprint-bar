@@ -1,8 +1,8 @@
 angular.module('ProxyPrint').controller('ConsumerSpecsController',
 ['$scope' , '$uibModal', '$log', 'fileTransferService', 'specMarshallService',
-'printingSchemas', 'printingSchemaService', '$cookieStore', '$state', 'toasterService', 'usSpinnerService',
+'printingSchemas', 'printingSchemaService', '$cookieStore', '$state', 'toasterService', 'usSpinnerService', 'requestHelperService',
 function($scope, $uibModal, $log, fileTransferService, specMarshallService,
-  printingSchemas, printingSchemaService, $cookieStore, $state, toasterService, usSpinnerService) {
+  printingSchemas, printingSchemaService, $cookieStore, $state, toasterService, usSpinnerService, requestHelperService) {
 
     /** Page range logic */
     $scope.lastItem = null;

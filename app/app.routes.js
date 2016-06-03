@@ -166,7 +166,16 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
       printingSchemas : ['printingSchemaService','$cookieStore',
       function(printingSchemaService, $cookieStore) {
         return printingSchemaService.getPrintingSchemas($cookieStore.get('consumerID'));
-      }]
+      }],
+      permission: ['$q','requestHelperService', function ($q, requestHelperService) {
+          var d = $q.defer();
+          if (requestHelperService.getSubmittedFilesStatus()) {
+            d.resolve();
+          } else {
+            d.reject('Canceled');
+          }
+          return d.promise;
+        }]
     }
   })
   .state('consumer.printshopselection', {
@@ -176,7 +185,16 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
     resolve: {
       printshopsList : ['printShopListService', function(printShopListService) {
         return printShopListService.getPrintShops();
-      }]
+      }],
+      permission: ['$q','requestHelperService', function ($q, requestHelperService) {
+          var d = $q.defer();
+          if (requestHelperService.getSpecsStatus()) {
+            d.resolve();
+          } else {
+            d.reject('Canceled');
+          }
+          return d.promise;
+        }]
     }
   })
   .state('consumer.budgetselection', {
