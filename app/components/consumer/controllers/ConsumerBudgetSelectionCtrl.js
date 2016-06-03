@@ -90,25 +90,41 @@ function($scope, $cookieStore, $state, budgets, printShopListService, fileTransf
         }
       }
     });
-    modalInstance.result.then(function(index) {
+    modalInstance.result.then(function() {
       //...
     });
   };
 
 }]);
 
-app.controller('PaymentMethodSelectionCtrl', ['$scope', '$uibModalInstance', 'text', 'amount', 'callbackURL', 'pshopName', function($scope, $uibModalInstance, text, amount, callbackURL) {
+app.controller('PaymentMethodSelectionCtrl', ['$scope', '$state', 'toasterService', '$uibModalInstance', 'text', 'amount', 'callbackURL', 'pshopName', function($scope, $state, toasterService, $uibModalInstance, text, amount, callbackURL, pshopName) {
 
   $scope.text = text;
   $scope.amount = amount;
   $scope.payPalCallbackUrl = callbackURL;
+  $scope.pshopName = pshopName;
 
-  $scope.addNewEntry = function () {
-    //...
+  $scope.chooseProxyPrint = function () {
+    var success = true;
+    // Some service do payment
+    // Back to home
+    // Toast info - "Pedido submetido com sucesso. Iremos notificá-lo assim que tudo estiver pronto. Obrigado!"
+    if(success) {
+      toasterService.notifySuccess("Pedido submetido com sucesso. Iremos notificá-lo assim que tudo estiver pronto. Obrigado!");
+      $state.go('consumer.mainpage');
+      $uibModalInstance.dismiss('cancel');
+    }
   };
 
-  $scope.closeModal = function () {
-    //...
+  $scope.choosePayPal = function () {
+    // Back to Home
+    // Toast info "Assim que efetuar o pagamento no PayPal iremos registar o seu pedido. Obrigado!"
+    var success = true;
+    if(success) {
+      toasterService.notifySuccess("Assim que efetuar o pagamento no PayPal iremos registar o seu pedido. Obrigado!");
+      $state.go('consumer.mainpage');
+      $uibModalInstance.dismiss('cancel');
+    }
   };
 
 }]);
