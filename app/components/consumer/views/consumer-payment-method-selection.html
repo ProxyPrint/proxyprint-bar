@@ -6,7 +6,7 @@
 </div>
 <div class="modal-body" style="text-align:center;">
   <div class="row">
-    <center><button class="button button-rounded button-primary hvr-bounce-in" ng-click="chooseProxyPrint()">ProxyPrint</button></center>
+    <center><button ng-disabled="isMethodSelected" ng-class="isMethodSelected ? 'button button-rounded button-primary' : 'button button-rounded button-primary hvr-bounce-in'" ng-click="chooseProxyPrint()">ProxyPrint</button></center>
   </div>
   <div class="row" style="margin-top:3%;">
     <center>
@@ -25,7 +25,7 @@
         <input type="hidden" name="env" value="www.sandbox">
         <input type="hidden" name="cmd" value="_xclick">
         <input type="hidden" name="bn" value="JavaScriptButton_buynow">
-        <button type="submit" class="button button-rounded button-primary hvr-bounce-in" ng-click="choosePayPal()"><i class="fa fa-cc-paypal" aria-hidden="true"></i>  PayPal</button>
+        <button ng-disabled="isMethodSelected" type="submit" ng-class="isMethodSelected ? 'button button-rounded button-primary' : 'button button-rounded button-primary hvr-bounce-in'" ng-click="choosePayPal()"><i class="fa fa-cc-paypal" aria-hidden="true"></i>  PayPal</button>
       </form>
       <!-- ./paypal-button -->
     </center>
@@ -33,12 +33,13 @@
 </div>
 <div class="modal-footer" style="text-align:center; margin-top: 4%;">
   <center>{{text}}</center>
-  <div class="row" style="margin-top: 4%;">
+  <center style="margin-top: 2%;" ng-show="isMethodSelected"><h4>Confirmar pagamento via {{paymentMethodDisplayString}}?</h4></center>
+  <div class="row" style="margin-top: 2%;" ng-show="isMethodSelected">
     <div class="col col-sm-6">
       <button class="button button-rounded button-tiny button-action" ng-click="confirmPayment()"><i class="fa fa-check"/>  Confirmar</button>
     </div>
     <div class="col col-sm-6">
-      <button class="button button-rounded button-tiny button button-caution" ng-click="confirmPayment()"><i class="fa fa-times"/>  Cancelar</button>
+      <button class="button button-rounded button-tiny button button-caution" ng-click="cancel()"><i class="fa fa-times"/>  Voltar atrás</button>
     </div>
   </div>
 </div>

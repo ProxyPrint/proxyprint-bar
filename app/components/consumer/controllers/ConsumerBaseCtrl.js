@@ -118,12 +118,10 @@ function($scope, $rootScope, $cookieStore, authenticationService, fileTransferSe
 
   $scope.uploadFiles = function () {
     usSpinnerService.spin('consumer-spinner');
-    setTimeout(function(){ // JUST FOR SHOW THE SPINNER
-      if ($scope.pdfFiles && $scope.pdfFiles.length) {
-        fileTransferService.setFiles($scope.pdfFiles);
-        $state.go('consumer.requestbudget');
-      }
-    }, 4000);
+    if ($scope.pdfFiles && $scope.pdfFiles.length) {
+      fileTransferService.setFiles($scope.pdfFiles);
+      $state.go('consumer.requestbudget');
+    }
   };
 
   $scope.openRejectModal = function(reply, id) {
