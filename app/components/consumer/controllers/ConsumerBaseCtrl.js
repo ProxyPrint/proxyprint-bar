@@ -1,6 +1,6 @@
-angular.module('ProxyPrint').controller('ConsumerController', ['$scope','$cookieStore',
+angular.module('ProxyPrint').controller('ConsumerController', ['$scope', '$rootScope', '$cookieStore',
 'authenticationService', 'fileTransferService', '$state', 'notifications', 'backendURLService', 'consumerPendingRequests', 'consumerPendingRequestsService', '$uibModal','notificationsService', 'usSpinnerService',
-function($scope, $cookieStore, authenticationService, fileTransferService, $state, notifications, backendURLService, consumerPendingRequests, consumerPendingRequestsService, $uibModal, notificationsService, usSpinnerService) {
+function($scope, $rootScope, $cookieStore, authenticationService, fileTransferService, $state, notifications, backendURLService, consumerPendingRequests, consumerPendingRequestsService, $uibModal, notificationsService, usSpinnerService) {
   console.log(backendURLService.getBaseURL());
   // Get consumer location
   if(navigator.geolocation){
@@ -18,6 +18,17 @@ function($scope, $cookieStore, authenticationService, fileTransferService, $stat
   $scope.balance = $cookieStore.get('consumerBalance');
   console.log($scope.balance);
   var audio = new Audio('assets/audio/notifications.mp3');
+
+  // Spinner set up
+  $scope.spinneractive = false;
+
+  $rootScope.$on('us-spinner:spin', function(event, key) {
+    $scope.spinneractive = true;
+  });
+
+  $rootScope.$on('us-spinner:stop', function(event, key) {
+    $scope.spinneractive = false;
+  });
 
   var source = new EventSource(backendURLService.getBaseURL() + "/consumer/subscribe?username=" + $scope.consumer.username + "&password=" + $scope.consumer.password, {
     withCredentials: true

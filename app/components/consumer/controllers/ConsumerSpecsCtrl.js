@@ -82,16 +82,6 @@ function($scope, $uibModal, $log, fileTransferService, specMarshallService,
       }
     };
 
-    $scope.request = function(){
-      usSpinnerService.spin('consumer-spinner');
-      setTimeout(function(){
-        fileTransferService.ProcessFiles($scope.files(), function(){
-          $scope.showRequest = false;
-          $state.go('consumer.requestprintshopsbudget');
-        });
-      }, 5000);
-    };
-
     $scope.queueNumber = function (){
       var i = 0;
       angular.forEach($scope.files(), function(file){
@@ -129,15 +119,6 @@ function($scope, $uibModal, $log, fileTransferService, specMarshallService,
       $scope.showModal = false;
     };
 
-    $scope.request = function(){
-      /** Send Request */
-      fileTransferService.ProcessFiles($scope.files(), function(){
-        $scope.showRequest = false;
-        usSpinnerService.spin('consumer-spinner');
-        $state.go('consumer.printshopselection');
-      });
-    };
-
     $scope.queueNumber = function (){
       var i = 0;
       angular.forEach($scope.files(), function(file){
@@ -161,11 +142,9 @@ function($scope, $uibModal, $log, fileTransferService, specMarshallService,
           }
         }
       });
-
       modalInstance.result.then(function() {
         usSpinnerService.spin('consumer-spinner');
         fileTransferService.ProcessFiles($scope.files());
-        $state.go('consumer.printshopselection');
       });
     };
 
