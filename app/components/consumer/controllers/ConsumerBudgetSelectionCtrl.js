@@ -33,8 +33,6 @@ function($scope, $cookieStore, $state, budgets, printShopListService, fileTransf
     console.log($scope.printRequestID);
     console.log($scope.theChosenOne);
     if($scope.theChosenOne!==null && $scope.theChosenOne > 0) {
-      var submitParams = {printshopID: $scope.theChosenOne , budget: parseFloat($scope.budgets[$scope.theChosenOne])};
-
       // Set amount for pay pal payment
       $scope.amount = parseFloat($scope.budgets[$scope.theChosenOne]).toFixed(2);
       // Finish the PayPal callback URL appending the printRequestID
@@ -42,8 +40,9 @@ function($scope, $cookieStore, $state, budgets, printShopListService, fileTransf
       $scope.selectedPrintShopName = $scope.selectedPrintShops[$scope.theChosenOne].name;
       console.log($scope.payPalCallbackUrl);
 
-      // Send request to server
-      budgetService.submitPrintRequest($scope.submitRequestSuccessCallback, $scope.submitRequestErrorCallback, $scope.printRequestID, submitParams);
+      $scope.submitParams = {printRequestID: $scope.printRequestID, printshopID: $scope.theChosenOne , budget: parseFloat($scope.budgets[$scope.theChosenOne]), paymentMethod: ""};
+
+      $scope.pay();
     } else {
       alert("Por favor escolha de entre uma das reprografias. Caso nenhuma satisfaça o pedido volte atrás e tente outras reprografias.");
     }
@@ -66,10 +65,10 @@ function($scope, $cookieStore, $state, budgets, printShopListService, fileTransf
 
   $scope.pay = function() {
     // ... pay
-    $scope.openPaymentMethodSelectionModal("Escolha o método de pagamento", $scope.amount, $scope.payPalCallbackUrl, $scope.selectedPrintShopName);
+    $scope.openPaymentMethodSelectionModal("Escolha o método de pagamento", $scope.amount, $scope.payPalCallbackUrl, $scope.selectedPrintShopName, $scope.submitParams);
   };
 
-  $scope.openPaymentMethodSelectionModal = function(text, amount, callbackURL, pshopName) {
+  $scope.openPaymentMethodSelectionModal = function(text, amount, callbackURL, pshopName, submitParams) {
     var modalInstance = $uibModal.open({
       animation: true,
       templateUrl: 'app/components/consumer/views/consumer-payment-method-selection.html',
@@ -87,6 +86,9 @@ function($scope, $cookieStore, $state, budgets, printShopListService, fileTransf
         },
         pshopName: function() {
           return pshopName;
+        },
+        submitParams: function() {
+          return submitParams;
         }
       }
     });
@@ -97,14 +99,23 @@ function($scope, $cookieStore, $state, budgets, printShopListService, fileTransf
 
 }]);
 
-app.controller('PaymentMethodSelectionCtrl', ['$scope', '$state', 'toasterService', '$uibModalInstance', 'text', 'amount', 'callbackURL', 'pshopName', function($scope, $state, toasterService, $uibModalInstance, text, amount, callbackURL, pshopName) {
+app.controller('PaymentMethodSelectionCtrl', ['$scope', '$state', 'toasterService', '$uibModalInstance', 'text', 'amount', 'callbackURL', 'pshopName', 'submitParams', 'budgetService', function($scope, $state, toasterService, $uibModalInstance, text, amount, callbackURL, pshopName, submitParams, budgetService) {
 
   $scope.text = text;
   $scope.amount = amount;
   $scope.payPalCallbackUrl = callbackURL;
   $scope.pshopName = pshopName;
+  $scope.submitParams = submitParams;
 
   $scope.chooseProxyPrint = function () {
+    // Send request to server
+    budgetService.submitPrintRequest($scope.submitParams.printRequestID, submitParams).success(function(data) {
+      console.log(data);
+    })
+    .error(function(data) {
+      console.log(data);
+    });
+
     var success = true;
     // Some service do payment
     // Back to home

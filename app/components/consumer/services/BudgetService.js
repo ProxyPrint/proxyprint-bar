@@ -23,12 +23,9 @@ app.factory('budgetService', ['$http', 'backendURLService', '$cookieStore', 'pri
     });
   };
 
-  service.submitPrintRequest = function(successCallback, errorCallback, printRequestID, params) {
+  service.submitPrintRequest = function(printRequestID, params) {
     var url = backendURLService.getBaseURL()+"consumer/printrequest/"+printRequestID+"/submit";
-    return $http.post(url,params).success(function(response) {
-      if(response.success) successCallback(response);
-      else errorCallback(response);
-    });
+    return $http.post(url,params);
   };
 
   service.getBudgets = function() {
