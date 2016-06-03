@@ -25,6 +25,8 @@ app.factory('budgetService', ['$http', 'backendURLService', '$cookieStore', 'pri
 
   service.submitPrintRequest = function(printRequestID, params) {
     var url = backendURLService.getBaseURL()+"consumer/printrequest/"+printRequestID+"/submit";
+    console.log(url);
+    console.log(params);
     return $http.post(url,params);
   };
 

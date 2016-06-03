@@ -108,26 +108,27 @@ app.controller('PaymentMethodSelectionCtrl', ['$scope', '$state', 'toasterServic
   $scope.submitParams = submitParams;
 
   $scope.chooseProxyPrint = function () {
-    // Send request to server
-    budgetService.submitPrintRequest($scope.submitParams.printRequestID, submitParams).success(function(data) {
+    $scope.submitParams.paymentMethod = "PROXYPRINT_PAYMENT";
+    budgetService.submitPrintRequest($scope.submitParams.printRequestID, $scope.submitParams).success(function(data) {
       console.log(data);
+      if(data.success==true) {
+        toasterService.notifySuccess("Pedido submetido com sucesso. Iremos notificá-lo assim que tudo estiver pronto. Obrigado!");
+      } else {
+        toasterService.notifyWarning("Infelizmente não possuí saldo suficiente para pagar o pedido.");
+      }
+      $state.go('consumer.mainpage');
+      $uibModalInstance.dismiss('cancel');
     })
     .error(function(data) {
       console.log(data);
-    });
-
-    var success = true;
-    // Some service do payment
-    // Back to home
-    // Toast info - "Pedido submetido com sucesso. Iremos notificá-lo assim que tudo estiver pronto. Obrigado!"
-    if(success) {
-      toasterService.notifySuccess("Pedido submetido com sucesso. Iremos notificá-lo assim que tudo estiver pronto. Obrigado!");
+      toasterService.notifyError("Pedimos desculpa mas foi impossível de processar o seu pedido. Por favor tente mais tarde.");
       $state.go('consumer.mainpage');
       $uibModalInstance.dismiss('cancel');
-    }
+    });
   };
 
   $scope.choosePayPal = function () {
+    $scope.submitParams.paymentMethod = "PAYPAL_PAYMENT";
     // Back to Home
     // Toast info "Assim que efetuar o pagamento no PayPal iremos registar o seu pedido. Obrigado!"
     var success = true;
