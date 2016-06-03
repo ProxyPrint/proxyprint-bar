@@ -86,12 +86,35 @@ app.controller('PaymentMethodSelectionCtrl', ['$scope', '$state', 'toasterServic
   $scope.pshopName = pshopName;
   $scope.submitParams = submitParams;
   usSpinnerService.stop('consumer-spinner');
+  $scope.isMethodSelected = false;
+  $scope.paymentMethodDisplayString = "";
 
-  
+  $scope.chooseProxyPrint = function() {
+    $scope.submitParams.paymentMethod = "PROXYPRINT_PAYMENT";
+    $scope.paymentMethodDisplayString = "ProxyPrint";
+    $scope.isMethodSelected = true;
+  };
+
+  $scope.choosePayPal = function() {
+    $scope.submitParams.paymentMethod = "PAYPAL_PAYMENT";
+    $scope.paymentMethodDisplayString = "serviço externo PayPal";
+    $scope.isMethodSelected = true;
+  };
+
+  $scope.cancel = function() {
+    $uibModalInstance.dismiss('cancel');
+  };
+
+  $scope.confirmPayment = function() {
+    if($scope.submitParams.paymentMethod==="PROXYPRINT_PAYMENT") {
+      $scope.payViaProxyPrint();
+    } else {
+      $scope.payViaProxyPrint();
+    }
+  };
 
   $scope.payViaProxyPrint = function () {
     usSpinnerService.spin('consumer-spinner');
-    $scope.submitParams.paymentMethod = "PROXYPRINT_PAYMENT";
     budgetService.submitPrintRequest($scope.submitParams.printRequestID, $scope.submitParams).success(function(data) {
       console.log(data);
       if(data.success===true) {
@@ -114,7 +137,6 @@ app.controller('PaymentMethodSelectionCtrl', ['$scope', '$state', 'toasterServic
 
   $scope.payViaPayPal = function () {
     usSpinnerService.spin('consumer-spinner');
-    $scope.submitParams.paymentMethod = "PAYPAL_PAYMENT";
     budgetService.submitPrintRequest($scope.submitParams.printRequestID, $scope.submitParams).success(function(data) {
       if(data.success===true) {
         toasterService.notifySuccess("Assim que efetuar o pagamento no PayPal iremos registar o seu pedido. Obrigado!");
