@@ -30,6 +30,7 @@ function($scope, $rootScope, $location, authenticationService, $state, $cookieSt
         // Admin
         else if(response.user.roles[0] == "ROLE_ADMIN") {
           authenticationService.SetCredentials($scope.username, $scope.password);
+          $cookieStore.put("platformBalance", response.user.balance);
           $state.go('admin.requests', {"username": $scope.username});
           return;
         }

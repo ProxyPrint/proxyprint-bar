@@ -2,6 +2,7 @@ angular.module('ProxyPrint').controller('AdminBaseCtrl', ['$scope', '$cookieStor
       function($scope, $cookieStore, authenticationService, $state) {
 
    $scope.admin = $cookieStore.get('globals').currentUser;
+   $scope.balance = $cookieStore.get('platformBalance');
 
    $scope.logout = function(){
       authenticationService.ClearCredentials();
