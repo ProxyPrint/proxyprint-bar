@@ -317,6 +317,8 @@ body {
 
 .printshop-item:hover {
   border-color: #0088CC;
+  cursor: pointer;
+  cursor: hand;
 }
 
 .printshop-map {

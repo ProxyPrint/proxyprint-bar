@@ -1,4 +1,6 @@
-angular.module('ProxyPrint').factory('fileTransferService', ['Upload', '$timeout', 'backendURLService', '$cookieStore', '$state', function(Upload, $timeout, backendURLService, $cookieStore, $state) {
+angular.module('ProxyPrint').factory('fileTransferService',
+['Upload', '$timeout', 'backendURLService', '$cookieStore', '$state', 'requestHelperService',
+    function(Upload, $timeout, backendURLService, $cookieStore, $state, requestHelperService) {
 
     var service = {};
     service.processedFiles = {};
@@ -46,6 +48,7 @@ angular.module('ProxyPrint').factory('fileTransferService', ['Upload', '$timeout
         $cookieStore.put("uploadedFilesNames", filesToStore);
         queue.drain = function() {
           console.log("All files are now loaded!");
+          requestHelperService.setSpecsStatus(true);
           $state.go('consumer.printshopselection');
         };
     };

@@ -1,5 +1,5 @@
-angular.module('ProxyPrint').controller('ConsumerBudgetSelectionCtrl', ['$scope','$cookieStore', '$state', 'budgets', 'printShopListService', 'fileTransferService', 'backendURLService', '$uibModal', 'usSpinnerService',
-function($scope, $cookieStore, $state, budgets, printShopListService, fileTransferService, backendURLService, $uibModal, usSpinnerService) {
+angular.module('ProxyPrint').controller('ConsumerBudgetSelectionCtrl', ['$scope','$cookieStore', '$state', 'budgets', 'printShopListService', 'fileTransferService', 'budgetService', 'backendURLService', 'usSpinnerService', '$uibModal',
+function($scope, $cookieStore, $state, budgets, printShopListService, fileTransferService, budgetService, backendURLService, usSpinnerService, $uibModal) {
 
   $scope.budgets = budgets.budgets;
   console.log($scope.budgets);
