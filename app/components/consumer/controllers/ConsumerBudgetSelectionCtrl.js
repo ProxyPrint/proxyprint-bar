@@ -111,7 +111,7 @@ app.controller('PaymentMethodSelectionCtrl', ['$scope', '$state', 'toasterServic
     $scope.submitParams.paymentMethod = "PROXYPRINT_PAYMENT";
     budgetService.submitPrintRequest($scope.submitParams.printRequestID, $scope.submitParams).success(function(data) {
       console.log(data);
-      if(data.success==true) {
+      if(data.success===true) {
         toasterService.notifySuccess("Pedido submetido com sucesso. Iremos notificá-lo assim que tudo estiver pronto. Obrigado!");
       } else {
         toasterService.notifyWarning("Infelizmente não possuí saldo suficiente para pagar o pedido.");
@@ -129,14 +129,20 @@ app.controller('PaymentMethodSelectionCtrl', ['$scope', '$state', 'toasterServic
 
   $scope.choosePayPal = function () {
     $scope.submitParams.paymentMethod = "PAYPAL_PAYMENT";
-    // Back to Home
-    // Toast info "Assim que efetuar o pagamento no PayPal iremos registar o seu pedido. Obrigado!"
-    var success = true;
-    if(success) {
-      toasterService.notifySuccess("Assim que efetuar o pagamento no PayPal iremos registar o seu pedido. Obrigado!");
+    budgetService.submitPrintRequest($scope.submitParams.printRequestID, $scope.submitParams).success(function(data) {
+      if(data.success===true) {
+        toasterService.notifySuccess("Assim que efetuar o pagamento no PayPal iremos registar o seu pedido. Obrigado!");
+      } else {
+        toasterService.notifyWarning("Infelizmente não conseguimos processar o seu pedido.");
+      }
       $state.go('consumer.mainpage');
       $uibModalInstance.dismiss('cancel');
-    }
+    })
+    .error(function(data) {
+      toasterService.notifyError("Pedimos desculpa mas foi impossível de processar o seu pedido. Por favor tente mais tarde.");
+      $state.go('consumer.mainpage');
+      $uibModalInstance.dismiss('cancel');
+    });
   };
 
 }]);
