@@ -122,14 +122,14 @@ app.controller('PaymentMethodSelectionCtrl', ['$scope', '$state', 'toasterServic
       } else {
         toasterService.notifyWarning("Infelizmente não possuí saldo suficiente para pagar o pedido.");
       }
-      $state.go('consumer.mainpage');
+      $state.go('consumer.mainpage', {}, { reload: true });
       $uibModalInstance.dismiss('cancel');
       usSpinnerService.stop('consumer-spinner');
     })
     .error(function(data) {
       console.log(data);
       toasterService.notifyError("Pedimos desculpa mas foi impossível de processar o seu pedido. Por favor tente mais tarde.");
-      $state.go('consumer.mainpage');
+      $state.go('consumer.mainpage', {}, { reload: true });
       $uibModalInstance.dismiss('cancel');
       usSpinnerService.stop('consumer-spinner');
     });
@@ -143,13 +143,13 @@ app.controller('PaymentMethodSelectionCtrl', ['$scope', '$state', 'toasterServic
       } else {
         toasterService.notifyWarning("Infelizmente não conseguimos processar o seu pedido.");
       }
-      $state.go('consumer.mainpage');
+      $state.go('consumer.mainpage', {}, { reload: true });
       $uibModalInstance.dismiss('cancel');
       usSpinnerService.stop('consumer-spinner');
     })
     .error(function(data) {
       toasterService.notifyError("Pedimos desculpa mas foi impossível de processar o seu pedido. Por favor tente mais tarde.");
-      $state.go('consumer.mainpage');
+      $state.go('consumer.mainpage', {}, { reload: true });
       $uibModalInstance.dismiss('cancel');
       usSpinnerService.stop('consumer-spinner');
     });
