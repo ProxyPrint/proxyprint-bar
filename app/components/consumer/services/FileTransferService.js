@@ -29,6 +29,10 @@ angular.module('ProxyPrint').factory('fileTransferService',
         reader.readAsArrayBuffer(file);
     };
 
+    service.countPages = function (file, callback) {
+      return pages = readPages(file, callback);
+    }
+
     service.ProcessFiles = function(files, callback) {
         var filesToStore = [];
         var queue = async.queue(readPages, 1);
