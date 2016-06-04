@@ -269,7 +269,7 @@ function($scope, $uibModal, $log, fileTransferService, specMarshallService,
   angular.module('ProxyPrint').controller('PageRangeController', ['$scope', '$uibModalInstance', 'pages',
   function ($scope, $uibModalInstance, pages) {
 
-    console.log(pages);
+    $scope.pageLimit = pages;
 
     $scope.performAction = function () {
       var values = [];
