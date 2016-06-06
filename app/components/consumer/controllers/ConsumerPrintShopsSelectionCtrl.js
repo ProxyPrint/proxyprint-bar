@@ -1,5 +1,7 @@
 angular.module('ProxyPrint')
-.controller('ConsumerPrintShopsSelectionController', ['$scope', 'printShopListService', 'printshopsList', 'fileTransferService', '$cookieStore', 'budgetService', '$state', 'usSpinnerService', function($scope, printShopListService, printshopsList, fileTransferService, $cookieStore, budgetService, $state, usSpinnerService) {
+.controller('ConsumerPrintShopsSelectionController',
+  ['$scope', 'printShopListService', 'printshopsList', 'fileTransferService', '$cookieStore', 'budgetService', '$state', 'usSpinnerService', 'requestHelperService',
+  function($scope, printShopListService, printshopsList, fileTransferService, $cookieStore, budgetService, $state, usSpinnerService, requestHelperService) {
 
   $scope.printshops = [];
 
@@ -75,6 +77,7 @@ angular.module('ProxyPrint')
   };
 
   $scope.budgetSuccessCallback = function() {
+    requestHelperService.setSelectedPrintShopsStatus(true);
     $state.go("consumer.budgetselection");
   };
 

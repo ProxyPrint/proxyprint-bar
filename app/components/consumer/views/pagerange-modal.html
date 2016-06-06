@@ -13,8 +13,8 @@
     </div>
 
     <div class="form-group center" ng-show="content == 'enc'">
-        De: <input type="number" name="init" ng-model="init" min="0" required style="margin-right:1%;">
-        Até: <input type="number" name="end" ng-model="end" min="0" required>
+        De: <input type="number" name="init" ng-model="init" min="0" max="{{pageLimit}}" required style="margin-right:1%;">
+        Até: <input type="number" name="end" ng-model="end" min="0" max="{{pageLimit}}" required>
     </div>
 </div>
 

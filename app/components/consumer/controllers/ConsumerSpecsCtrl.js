@@ -36,9 +36,13 @@ function($scope, $uibModal, $log, fileTransferService, specMarshallService,
         controller: 'PageRangeController',
         size: 'md',
         resolve: {
-          file: function () {
-            return $scope.lastFile;
-          }
+          pages: ['$q', function ($q) {
+            var deferred = $q.defer();
+            fileTransferService.countPages($scope.lastFile, function (processedFiles) {
+              deferred.resolve(processedFiles.pages);
+            });
+            return deferred.promise;
+          }]
         }
       });
 
@@ -262,11 +266,10 @@ function($scope, $uibModal, $log, fileTransferService, specMarshallService,
     };
   }]);
 
-  angular.module('ProxyPrint').controller('PageRangeController', ['$scope', '$uibModalInstance', 'file',
-  function ($scope, $uibModalInstance, file) {
+  angular.module('ProxyPrint').controller('PageRangeController', ['$scope', '$uibModalInstance', 'pages',
+  function ($scope, $uibModalInstance, pages) {
 
-    console.log(file);
-
+    $scope.pageLimit = pages;
 
     $scope.performAction = function () {
       var values = [];

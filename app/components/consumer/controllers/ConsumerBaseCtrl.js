@@ -14,6 +14,7 @@ function($scope, $rootScope, $cookieStore, authenticationService, fileTransferSe
     $cookieStore.put('coords', coords);
   }
 
+  $scope.pdfFiles = [];
   $scope.consumer = $cookieStore.get('globals').currentUser;
   $scope.balance = $cookieStore.get('consumerBalance');
   console.log($scope.balance);
@@ -34,7 +35,6 @@ function($scope, $rootScope, $cookieStore, authenticationService, fileTransferSe
     withCredentials: true
   });
 
-  console.log(notifications.data);
 
   $scope.notifications = notifications.data;
   $scope.newNotifications = getNewNotificationsNumber($scope.notifications);
@@ -105,7 +105,7 @@ function($scope, $rootScope, $cookieStore, authenticationService, fileTransferSe
 
   $scope.pendingRequests = consumerPendingRequests.data.printrequests;
 
-  $scope.pdfFiles = [];
+
 
 
   $scope.addFiles = function (files) {
