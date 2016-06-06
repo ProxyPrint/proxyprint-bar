@@ -1,4 +1,4 @@
-describe('consumer tests', function() {
+describe('consumer mainpage tests', function() {
 
   var base_url = 'http://localhost:9000';
   var user_url = base_url + '/#/joao';

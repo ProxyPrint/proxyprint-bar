@@ -17,7 +17,5 @@ describe('homepage tests', function() {
         expect(browser.getCurrentUrl()).toEqual(base_url+'/#/joao/mainpage')
     });
 
-
-
   });
 });
