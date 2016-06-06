@@ -7,14 +7,14 @@ describe('homepage tests', function() {
   })
 
   it('mainpage should have a title', function() {
-    expect(browser.getTitle()).toContain('ProxyPrint');
+    expect(browser.getTitle()).toEqual('ProxyPrint');
   });
 
   it('login validation test', function () {
     element(by.model('username')).sendKeys("joao");
     element(by.model('password')).sendKeys("1234");
     element(by.id('loginButton')).click().then(function() {
-        expect(browser.getCurrentUrl()).toContain(base_url+'/#/joao/mainpage')
+        expect(browser.getCurrentUrl()).toEqual(base_url+'/#/joao/mainpage')
     });
 
 
