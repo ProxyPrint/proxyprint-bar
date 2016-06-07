@@ -46,7 +46,7 @@
 
         <!-- Sidebar Menu -->
         <ul class="sidebar-menu">
-          <li class="header">Opções</li>
+          <li class="header"><i style="margin-right:6%;" class="fa fa-database" aria-hidden="true"></i>  {{balance.integerPart}}.{{balance.fractionalPart}} €</li>
           <!-- Optionally, you can add icons to the links -->
           <li ng-class="navigation['requests']"><a ui-sref=".requests" ng-click="navigate('requests')"><i class="fa fa-hourglass-half"></i> <span>Reprografias Pendentes</span></a></li>
           <li ng-class="navigation['printshops']"><a ui-sref=".printshops" ng-click="navigate('printshops')"><i class="fa fa-history"></i> <span>Consultar Reprografias </span></a></li>

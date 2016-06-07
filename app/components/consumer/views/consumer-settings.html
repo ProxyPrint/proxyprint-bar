@@ -1,22 +1,30 @@
 <div class="settings-container">
-  <div class="center" style="margin-bottom:5%">
+  <div class="center">
     <h1>Definições</h1>
   </div>
-    <form role="form">
-        <div class="form-group">
-            <input type="email" placeholder="E-mail" class="form-control" id="email">
-        </div>
-        <div class="form-group">
-            <input type="password" placeholder="Nome" class="form-control" id="pwd">
-        </div>
-        <div class="form-group">
-            <input type="password" placeholder="Password" class="form-control" id="pwd">
-        </div>
-        <div class="form-group">
-            <input type="password" placeholder="Password" class="form-control" id="pwd">
-        </div>
-        <div class="center">
-           <button type="submit" class="button button-rounded button-primary">Guardar</button>
-        </div>
-    </form>
+  <form role="form">
+    <div class="form-group">
+      <label>Email</label>
+      <input type="email" ng-model="email" class="form-control" id="email">
+    </div>
+    <div class="form-group">
+      <label>Nome</label>
+      <input type="text" ng-model="name" class="form-control" id="name">
+    </div>
+    <div class="form-group">
+      <label>Username</label>
+      <input type="text" ng-model="username" class="form-control" id="username">
+    </div>
+    <div class="form-group">
+      <label>Password</label>
+      <input type="password" ng-model="password" class="form-control" id="pwd">
+    </div>
+    <div class="form-group">
+      <label>Confimar Password</label>
+      <input type="password" ng-model="newPassword" class="form-control" id="pwdnew">
+    </div>
+    <div class="center">
+      <button type="submit" class="button button-rounded button-primary" ng-click="updateConsumer()" ng-disabled="consumerHasChanged()">Guardar</button>
+    </div>
+  </form>
 </div>
