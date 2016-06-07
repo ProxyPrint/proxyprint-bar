@@ -21,21 +21,6 @@ describe('consumer printshop list tests', function() {
       });
     });
 
-    it('Adding a review should increase the amount of reviews', function () {
-      element(by.repeater('printshop in printshops').row(0)).click();
-      browser.executeScript('window.scrollTo(0,100000);').then(function () {
-        element.all(by.repeater('review in printshop.reviews | limitTo: limit')).count().then(function (count){
-          $('.fa-star').click();
-          element(by.model('content')).sendKeys("Mau serviço!");
-          $('.modal-footer').$('.button-primary').click().then(function () {
-            browser.executeScript('window.scrollTo(0,100000);').then(function () {
-              expect(element.all(by.repeater('review in printshop.reviews')).count()).toEqual(count+1);
-            });
-          });
-        });
-      });
-
-    });
 
 
 
