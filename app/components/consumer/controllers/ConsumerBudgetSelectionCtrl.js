@@ -78,7 +78,7 @@ function($scope, $cookieStore, $state, budgets, printShopListService, fileTransf
 
 }]);
 
-app.controller('PaymentMethodSelectionCtrl', ['$scope', '$state', 'toasterService', '$uibModalInstance', 'text', 'amount', 'callbackURL', 'pshopName', 'submitParams', 'budgetService', 'usSpinnerService', function($scope, $state, toasterService, $uibModalInstance, text, amount, callbackURL, pshopName, submitParams, budgetService, usSpinnerService) {
+app.controller('PaymentMethodSelectionCtrl', ['$scope', '$state', 'toasterService', '$uibModalInstance', 'text', 'amount', 'callbackURL', 'pshopName', 'submitParams', 'budgetService', 'usSpinnerService', '$cookieStore', function($scope, $state, toasterService, $uibModalInstance, text, amount, callbackURL, pshopName, submitParams, budgetService, usSpinnerService, $cookieStore) {
 
   $scope.text = text;
   $scope.amount = amount;
@@ -118,6 +118,9 @@ app.controller('PaymentMethodSelectionCtrl', ['$scope', '$state', 'toasterServic
     budgetService.submitPrintRequest($scope.submitParams.printRequestID, $scope.submitParams).success(function(data) {
       console.log(data);
       if(data.success===true) {
+        var newAmount = subtractMoney($cookieStore.get("consumerBalance"), $scope.amount);
+        $cookieStore.put("consumerBalance", newAmount);
+        console.log(newAmount);
         toasterService.notifySuccess("Pedido submetido com sucesso. Iremos notificá-lo assim que tudo estiver pronto. Obrigado!");
       } else {
         toasterService.notifyWarning("Infelizmente não possuí saldo suficiente para pagar o pedido.");
@@ -154,5 +157,24 @@ app.controller('PaymentMethodSelectionCtrl', ['$scope', '$state', 'toasterServic
       usSpinnerService.stop('consumer-spinner');
     });
   };
+
+  function subtractMoney(balance,amount) {
+    amountParts = amount.split(".");
+    ip = parseInt(amountParts[0]);
+    fp = parseInt(amountParts[1]);
+    balance.integerPart -= ip;
+    tmp = balance.fractionalPart - fp;
+
+    if(tmp <= 0) {
+        while(tmp <= 0) {
+            balance.integerPart--;
+            balance.fractionalPart = tmp + 100;
+            tmp += 100;
+        }
+    } else {
+        balance.fractionalPart = tmp;
+    }
+    return balance;
+}
 
 }]);
