@@ -5,6 +5,7 @@
   "dependencies": {
     "angular": "^1.5.0",
     "angular-animate": "1.5.0",
+    "angular-spinner": "^0.8.1",
     "angular-ui-notification": "0.2.0",
     "angular-ui-router": "^0.2.18",
     "angularjs-slider": "^2.13.0",
@@ -16,11 +17,11 @@
     "express-minify": "^0.2.0",
     "express-redirect": "^1.2.2",
     "hover.css": "^2.0.2",
+    "loadbalance": "^0.2.7",
     "ng-file-upload": "^12.0.4",
     "pdfjs-dist": "^1.5.238",
     "requestify": "^0.1.17",
-    "ui-select": "0.16.1",
-    "angular-spinner": "^0.8.1"
+    "ui-select": "0.16.1"
   },
   "devDependencies": {
     "angular-mocks": "^1.4.8",
