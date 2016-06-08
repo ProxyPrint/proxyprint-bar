@@ -231,6 +231,20 @@ function($scope, $uibModal, $log, fileTransferService, specMarshallService,
             });
         };
 
+
+        $scope.helpSpecModal = function() {
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'app/components/consumer/views/help-modal.html',
+                controller: 'HelpController',
+                size: 'lg',
+                resolve: {
+                    files: function () {
+                        return $scope.files();
+                    }
+                }
+            });
+        };
     }]);
 
 
@@ -286,9 +300,18 @@ function($scope, $uibModal, $log, fileTransferService, specMarshallService,
         };
     }]);
 
-    angular.module('ProxyPrint').controller('EditSpecificationController',
-    ['$scope', '$uibModalInstance', 'schema','id', 'specMarshallService',
-    function ($scope, $uibModalInstance, schema, id, specMarshallService) {
+    angular.module('ProxyPrint').controller('HelpController', ['$scope', '$uibModalInstance', function ($scope, $uibModalInstance) {
+
+        $scope.performAction = function () {
+            $uibModalInstance.close();
+        };
+
+        $scope.closeModal = function () {
+            $uibModalInstance.dismiss();
+        };
+    }]);
+
+    angular.module('ProxyPrint').controller('EditSpecificationController', ['$scope', '$uibModalInstance', 'schema','id', 'specMarshallService', function ($scope, $uibModalInstance, schema, id, specMarshallService) {
 
         $scope.schema = specMarshallService.unmarshallSpecification(schema);
         $scope.schema.id = id;
