@@ -17,7 +17,8 @@ angular.module('ProxyPrint').controller('ConsumerBudgetSelectionCtrl', ['$scope'
       if (backendURLService.getBaseURL().match("localhost")) {
         $scope.payPalCallbackUrl = budgets.externalURL + "paypal/ipn/";
       } else {
-        $scope.payPalCallbackUrl = budgets.externalURL + backendURLService.getContextPath() + "paypal/ipn/";
+        // $scope.payPalCallbackUrl = budgets.externalURL + backendURLService.getContextPath() + "paypal/ipn/";
+        $scope.payPalCallbackUrl = budgets.externalURL + "paypal/ipn/";
       }
     } else {
       $scope.payPalCallbackUrl = backendURLService.getBaseURL() + "paypal/ipn/";
@@ -93,14 +94,15 @@ angular.module('ProxyPrint').controller('ConsumerBudgetSelectionCtrl', ['$scope'
 
 app.controller('PaymentMethodSelectionCtrl', ['$scope', '$state', 'toasterService', '$uibModalInstance', 'text', 'amount', 'callbackURL', 'pshopName', 'submitParams', 'budgetService', 'usSpinnerService', '$cookieStore', function($scope, $state, toasterService, $uibModalInstance, text, amount, callbackURL, pshopName, submitParams, budgetService, usSpinnerService, $cookieStore) {
 
+  console.log("callbackURL: "+callbackURL);
   $scope.text = text;
   $scope.amount = amount;
   $scope.payPalCallbackUrl = callbackURL;
   $scope.pshopName = pshopName;
   $scope.submitParams = submitParams;
-  usSpinnerService.stop('consumer-spinner');
   $scope.isMethodSelected = false;
   $scope.paymentMethodDisplayString = "";
+  usSpinnerService.stop('consumer-spinner');
 
   $scope.chooseProxyPrint = function() {
     $scope.submitParams.paymentMethod = "PROXYPRINT_PAYMENT";
@@ -177,6 +179,14 @@ app.controller('PaymentMethodSelectionCtrl', ['$scope', '$state', 'toasterServic
         $uibModalInstance.dismiss('cancel');
         usSpinnerService.stop('consumer-spinner');
       });
+  };
+
+  $scope.showPayPalConfirmButton = function() {
+    return $scope.submitParams.paymentMethod === "PAYPAL_PAYMENT";
+  };
+
+  $scope.showProxyPrintConfirmButton = function() {
+    return $scope.submitParams.paymentMethod === "PROXYPRINT_PAYMENT";
   };
 
   function subtractMoney(balance, amount) {

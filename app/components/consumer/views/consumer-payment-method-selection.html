@@ -10,8 +10,18 @@
   </div>
   <div class="row" style="margin-top:3%;">
     <center>
+      <button ng-disabled="isMethodSelected" type="submit" ng-class="isMethodSelected ? 'button button-rounded button-primary' : 'button button-rounded button-primary hvr-bounce-in'" ng-click="choosePayPal()"><i class="fa fa-cc-paypal" aria-hidden="true"></i>  PayPal</button>
+    </center>
+  </div>
+</div>
+<div class="modal-footer" style="text-align:center; margin-top: 4%;">
+  <center>{{text}}</center>
+  <center ng-show="isMethodSelected" style="margin-top: 2%;"><h4>Confirmar pagamento via {{paymentMethodDisplayString}}?</h4></center>
+  <div class="row" style="margin-top: 2%;" ng-show="isMethodSelected">
+    <div class="col col-sm-6">
+      <button ng-show="showProxyPrintConfirmButton()" class="button button-rounded button-small button-action" ng-click="confirmPayment()">Confirmar</button>
       <!-- paypal-button -->
-      <form method="post" action="https://www.sandbox.paypal.com/cgi-bin/webscr" class="paypal-button" style="opacity: 1;" target="_blank">
+      <form ng-show="showPayPalConfirmButton()" method="post" action="https://www.sandbox.paypal.com/cgi-bin/webscr" class="paypal-button" style="opacity: 1;" target="_blank">
         <div class="hide" id="errorBox"></div>
         <input type="hidden" name="button" value="buynow">
         <input type="hidden" name="business" value="T4F6X2XSAETNL">
@@ -25,18 +35,9 @@
         <input type="hidden" name="env" value="www.sandbox">
         <input type="hidden" name="cmd" value="_xclick">
         <input type="hidden" name="bn" value="JavaScriptButton_buynow">
-        <button ng-disabled="isMethodSelected" type="submit" ng-class="isMethodSelected ? 'button button-rounded button-primary' : 'button button-rounded button-primary hvr-bounce-in'" ng-click="choosePayPal()"><i class="fa fa-cc-paypal" aria-hidden="true"></i>  PayPal</button>
+        <button class="button button-rounded button-small button-action" ng-click="confirmPayment()">Confirmar</button>
       </form>
       <!-- ./paypal-button -->
-    </center>
-  </div>
-</div>
-<div class="modal-footer" style="text-align:center; margin-top: 4%;">
-  <center>{{text}}</center>
-  <center style="margin-top: 2%;" ng-show="isMethodSelected"><h4>Confirmar pagamento via {{paymentMethodDisplayString}}?</h4></center>
-  <div class="row" style="margin-top: 2%;" ng-show="isMethodSelected">
-    <div class="col col-sm-6">
-      <button class="button button-rounded button-small button-action" ng-click="confirmPayment()">Confirmar</button>
     </div>
     <div class="col col-sm-6">
       <button class="button button-rounded button-small button button-caution" ng-click="cancel()">Voltar</button>
