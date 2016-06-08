@@ -1,12 +1,19 @@
 <div class="col-sm-9 col-md-10 main">
     <div ui-view>
 
+        <div class="alert alert-info" id="alert">
+            <a class="close" onclick="$('#alert').hide();">&times;</a>
+            <h4><strong>Informação importante!</strong></h4>
+            Para poder avançar tem de definir a especificação desejada para imprimir o/os documento/s. A especificação é definida se a arrastar para cima do documento desejado. Se não tiver nenhuma especificação, crie uma!<br>
+            Na fila de impressão encontram-se os documentos que serão impressos no seu pedido, a respetiva especificação e o intervalo de páginas que deseja.
+        </div>
+
         <div class="panel panel-default left" style="min-width: 45%; max-width: 45%; min-height: 240px;">
             <div class="panel-heading">
                 <div class="panel-title">
                     <b>Especificações</b>
                     <div class="pull-right">
-                        <a href="" title="Precisa de ajuda?" ng-click="helpSpecModal()">
+                        <a href="" title="Precisa de ajuda?" ng-click="helpSpecModal()" onclick="$('#alert').show();">
                             <i class="fa fa-question-circle" aria-hidden="true"></i>
                         </a>
                     </div>
