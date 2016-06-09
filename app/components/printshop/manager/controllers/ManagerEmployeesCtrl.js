@@ -1,7 +1,7 @@
 var app = angular.module('ProxyPrint');
 
-app.controller('ManagerEmployeesCtrl', ['$scope', '$state', 'employeesList', 'employeesService', '$uibModal', 'paginationService', 'toasterService',
-function($scope, $state, employeesList, employeesService, $uibModal, paginationService, toasterService) {
+app.controller('ManagerEmployeesCtrl', ['$scope', '$state', 'employeesList', 'employeesService', '$uibModal', 'paginationService',
+function($scope, $state, employeesList, employeesService, $uibModal, paginationService) {
 
   $scope.employees = employeesList.data.employees;
 
@@ -20,7 +20,7 @@ function($scope, $state, employeesList, employeesService, $uibModal, paginationS
     if(!$scope.employees) {
       $scope.employees = [];
     }
-    $scope.openNewEmployeeModal("Novo registo de funcionário(a).");
+    $scope.openNewEmployeeModal("Novo registo de funcionário(a)");
   };
 
   $scope.openNewEmployeeModal = function(reply) {
@@ -44,14 +44,14 @@ function($scope, $state, employeesList, employeesService, $uibModal, paginationS
     var newEmployee = employeesService.getCurrentEmployee();
     newEmployee.id = data.id;
     $scope.employees.push(newEmployee);
-    toasterService.notifySuccess("Novo(a) funcionário(a) adicionado com sucesso!");
+    $scope.messageModal("Novo(a) funcionário(a) adicionado com sucesso!");
   };
 
   $scope.newEmployeeErrorCallback = function(data) {
     if(data.message) {
-      toasterService.notifyError("Impossível adicionar empregado. Motivo: "+data.message+". Por favor tente mais tarde.");
+      $scope.messageModal("Impossível adicionar empregado. Motivo: "+data.message+". Por favor tente mais tarde.");
     } else {
-      toasterService.notifyError("Impossível adicionar empregado. Por favor tente mais tarde.");
+      $scope.messageModal("Impossível adicionar empregado. Por favor tente mais tarde.");
     }
   };
 
@@ -59,7 +59,7 @@ function($scope, $state, employeesList, employeesService, $uibModal, paginationS
   $scope.editEmployee = function(index) {
     employeesService.setCurrentIndex(index);
     employeesService.setCurrentEmployee($scope.employees[index]);
-    $scope.openEditEmployeeModal("Edição de registo de funcionário(a).");
+    $scope.openEditEmployeeModal("Edição de registo de funcionário(a)");
   };
 
   $scope.openEditEmployeeModal = function(reply) {
@@ -82,14 +82,14 @@ function($scope, $state, employeesList, employeesService, $uibModal, paginationS
   $scope.editEmployeeSuccessCallback = function(data) {
     var editedEmployee = employeesService.getCurrentEmployee();
     $scope.employees[employeesService.getCurrentIndex()] = editedEmployee;
-    toasterService.notifySuccess("Funcionário(a) editado(a) com sucesso.");
+    $scope.messageModal("Funcionário(a) editado(a) com sucesso");
   };
 
   $scope.editEmployeeErrorCallback = function(data) {
     if(data.message) {
-      toasterService.notifyError("Impossível editar empregado. Motivo: "+data.message+". Por favor tente mais tarde.");
+      $scope.messageModal("Impossível editar empregado. Motivo: "+data.message+". Por favor tente mais tarde.");
     } else {
-      toasterService.notifyError("Impossível editar empregado. Por favor tente mais tarde.");
+      $scope.messageModal("Impossível editar empregado. Por favor tente mais tarde.");
     }
   };
 
@@ -123,11 +123,26 @@ function($scope, $state, employeesList, employeesService, $uibModal, paginationS
   $scope.deleteSuccessCallback = function(data) {
     index = employeesService.getCurrentIndex();
     $scope.employees.splice(index,1);
-    toasterService.notifySuccess("Empregado removido com sucesso.");
+    $scope.messageModal("Empregado removido com sucesso");
   };
 
   $scope.deleteErrorCallback = function(data) {
-    toasterService.notifyError("Foi impossível remover o empregado. Por favor tente mais tarde");
+    $scope.messageModal("Foi impossível remover o empregado. Por favor tente mais tarde");
+  };
+
+  // General purpose message
+  $scope.messageModal = function(message) {
+    var modalInstance = $uibModal.open({
+      animation: true,
+      templateUrl: 'app/components/printshop/manager/views/pricetable/modals/message-modal.html',
+      controller: 'MessageModal',
+      size: 'sm',
+      resolve: {
+        text: function() {
+          return message;
+        }
+      }
+    });
   };
 
 }]);
@@ -189,4 +204,12 @@ app.controller('ConfirmDeleteModalCtrl', ['$scope', '$uibModalInstance', 'index'
     $uibModalInstance.dismiss('cancel');
   };
 
+}]);
+
+// General purpose modal message
+app.controller('MessageModal', ['$scope', '$uibModalInstance', 'text', function($scope, $uibModalInstance, text) {
+  $scope.text = text;
+  $scope.closeModal = function () {
+    $uibModalInstance.dismiss('cancel');
+  };
 }]);

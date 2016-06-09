@@ -1,16 +1,6 @@
-<div class="modal-header">
-  {{text}}
-</div>
 <div class="modal-body" style="text-align:center;">
-  <div class="row">
-    <div class="col col-md-3">
-      <button class="button button-rounded button-primary"><i style="color:white;" class="fa fa-cc-paypal" aria-hidden="true"></i>  PayPal</button>
-    </div>
-    <div class="col col-md-3">
-      <button class="button button-rounded button-primary"><span><img src="assets/img/logo/logo_white.png"/></span>  Pagamento ProxyPrint</button>
-    </div>
-  </div>
+  <h4>{{text}}</h4>
 </div>
 <div class="modal-footer" style="text-align:center; margin-top: 4%;">
-    <small>@ProxyPrint</small>
+  <button class="btn btn-primary btn-flat" ng-click="closeModal()">Ok</button>
 </div>
