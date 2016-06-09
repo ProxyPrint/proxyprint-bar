@@ -15,41 +15,36 @@ function($scope, $cookieStore, $state, budgets, printShopListService, fileTransf
 
   $scope.amount = 0.0;
   $scope.selectedPrintShopName = "";
-  //caldas muda esta cena para o teu gosto
-  //basicamente se o externalURL tiver vazio quer dizer que nao ha tunel e
-  //deve se aceder direto
   if (budgets.externalURL) {
-    if (backendURLService.getBaseURL().match("localhost")) {
-      $scope.payPalCallbackUrl = budgets.externalURL + "paypal/ipn/";
-    } else {
-      // $scope.payPalCallbackUrl = budgets.externalURL + backendURLService.getContextPath() + "paypal/ipn/";
-      $scope.payPalCallbackUrl = budgets.externalURL + "paypal/ipn/";
-    }
+    // Tunnel URL
+    $scope.payPalCallbackUrl = budgets.externalURL + "paypal/ipn/";
   } else {
+    // Direct URL
     $scope.payPalCallbackUrl = backendURLService.getBaseURL() + "paypal/ipn/";
   }
   console.log($scope.payPalCallbackUrl);
 
-  var noBudgetsFlag = true;
-  var budgetsCounter = 0;
+  $scope.noBudgetsFlag = true;
+  $scope.budgetsCounter = 0;
   for (var pshopID in $scope.budgets) {
     if (!isNaN($scope.budgets[pshopID])) {
       $scope.selectedPrintShops[pshopID].hasBudget = true;
       $scope.selectedPrintShops[pshopID].budget = parseFloat($scope.budgets[pshopID]).toFixed(2);
-      budgetsCounter++;
-      noBudgetsFlag = false;
+      $scope.budgetsCounter++;
+      $scope.noBudgetsFlag = false;
     } else {
       $scope.selectedPrintShops[pshopID].budget = $scope.budgets[pshopID];
     }
   }
   usSpinnerService.stop('consumer-spinner');
-  $scope.isSomePShopSelected = false;
+  console.log("$scope.noBudgetsFlag: "+$scope.noBudgetsFlag);
+  console.log("Number of budgets: "+$scope.budgetsCounter);
 
-  if(noBudgetsFlag) {
+  if($scope.noBudgetsFlag) {
     // None of the printshops gave a budget
     toasterService.notifyWarning("Infelizmente nenhuma das reprografias selectionadas consegue atender o seu pedido. Por favor volte atrás e tente selecionar outras reprografias.");
   } else {
-    toasterService.notifyInfo("Fantástico! "+budgetsCounter+" reprografia(s) pode(m) atender o seu pedido! Agora só tem de escolher uma delas.");
+    toasterService.notifyInfo("Fantástico! "+$scope.budgetsCounter+" reprografia(s) pode(m) atender o seu pedido! Agora só tem de escolher uma delas.");
   }
 
   $scope.finishPrintRequest = function() {
@@ -70,7 +65,7 @@ function($scope, $cookieStore, $state, budgets, printShopListService, fileTransf
         paymentMethod: ""
       };
     } else {
-      toasterService.notifyWarning("Por favor escolha de entre uma das reprografias.");
+      toasterService.notifyWarning("Por favor uma escolha de entre as reprografias.");
     }
   };
 
