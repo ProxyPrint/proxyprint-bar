@@ -30,8 +30,12 @@
 		<h4>Ficheiro Submetidos</h4>
 		<div class="scrollableTable">
 			<ul class="list-group">
-				<li class="list-group-item clearfix" ng-repeat="file in submitedFilesNames" style="overflow-x:hidden;">
-					<strong>{{file}}</strong>
+				<li class="list-group-item clearfix" ng-repeat="file in submitedFiles" style="overflow-x:hidden;">
+					<strong>{{file.name}}</strong>
+					<div ng-repeat="spec in file.specs">
+						<small>{{spec.name}}</small><br/>
+						<small>(páginas: {{spec.pages}})</small>
+					</div>
 				</li>
 			</ul>
 		</div>

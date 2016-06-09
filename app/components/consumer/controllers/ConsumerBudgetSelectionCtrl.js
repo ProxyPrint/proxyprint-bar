@@ -5,8 +5,15 @@ angular.module('ProxyPrint').controller('ConsumerBudgetSelectionCtrl', ['$scope'
     console.log($scope.budgets);
     $scope.printRequestID = budgets.printRequestID;
     $scope.selectedPrintShops = printShopListService.getSelectedPrintShops();
-    $scope.submitedFiles = fileTransferService.getProcessedFiles().files;
-    $scope.submitedFilesNames = Object.keys($scope.submitedFiles);
+    var tmpFiles = fileTransferService.getProcessedFiles().files;
+    $scope.submitedFiles = [];
+    for(var fileName in tmpFiles) {
+      var file = tmpFiles[fileName];
+      file.name = fileName;
+      $scope.submitedFiles.push(file);
+    }
+    console.log($scope.submitedFiles);
+    // $scope.submitedFilesNames = Object.keys($scope.submitedFiles);
 
     $scope.amount = 0.0;
     $scope.selectedPrintShopName = "";
