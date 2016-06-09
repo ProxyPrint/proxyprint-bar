@@ -1,7 +1,7 @@
 angular.module('ProxyPrint')
 .controller('ConsumerPrintShopsSelectionController',
-  ['$scope', 'printShopListService', 'printshopsList', 'fileTransferService', '$cookieStore', 'budgetService', '$state', 'usSpinnerService', 'requestHelperService',
-  function($scope, printShopListService, printshopsList, fileTransferService, $cookieStore, budgetService, $state, usSpinnerService, requestHelperService) {
+  ['$scope', 'printShopListService', 'printshopsList', 'fileTransferService', '$cookieStore', 'budgetService', '$state', 'usSpinnerService', 'requestHelperService', 'toasterService',
+  function($scope, printShopListService, printshopsList, fileTransferService, $cookieStore, budgetService, $state, usSpinnerService, requestHelperService, toasterService) {
 
   $scope.printshops = [];
 
@@ -91,7 +91,7 @@ angular.module('ProxyPrint')
 
   $scope.budgetErrorCallback = function(data) {
     usSpinnerService.stop('consumer-spinner');
-    alert("Os orçamentos não puderam se efetuados. Por favor tente mais tarde.");
+    toasterService.notifyWarning("Os orçamentos não puderam se efetuados. Por favor tente mais tarde.");
     console.log(data);
   };
 

@@ -703,3 +703,9 @@ ul.rating {
   position: fixed;
   content: " ";
 }
+
+#rcornersdiv {
+    border-radius: 12px;
+    border: 1px solid #DDDDDD;
+    padding: 10px;
+}

@@ -1,7 +1,7 @@
 var app = angular.module('ProxyPrint');
 
-app.controller('ManagerEmployeesCtrl', ['$scope', '$state', 'employeesList', 'employeesService', '$uibModal', 'paginationService',
-function($scope, $state, employeesList, employeesService, $uibModal, paginationService) {
+app.controller('ManagerEmployeesCtrl', ['$scope', '$state', 'employeesList', 'employeesService', '$uibModal', 'paginationService', 'toasterService',
+function($scope, $state, employeesList, employeesService, $uibModal, paginationService, toasterService) {
 
   $scope.employees = employeesList.data.employees;
 
@@ -42,16 +42,16 @@ function($scope, $state, employeesList, employeesService, $uibModal, paginationS
 
   $scope.newEmployeeSuccessCallback = function(data) {
     var newEmployee = employeesService.getCurrentEmployee();
-    newEmployee['id'] = data.id;
+    newEmployee.id = data.id;
     $scope.employees.push(newEmployee);
-    alert("Novo(a) funcionário(a) adicionado com sucesso!");
+    toasterService.notifySuccess("Novo(a) funcionário(a) adicionado com sucesso!");
   };
 
   $scope.newEmployeeErrorCallback = function(data) {
     if(data.message) {
-      alert("Impossível adicionar empregado. Motivo: "+data.message+". Por favor tente mais tarde.");
+      toasterService.notifyError("Impossível adicionar empregado. Motivo: "+data.message+". Por favor tente mais tarde.");
     } else {
-      alert("Impossível adicionar empregado. Por favor tente mais tarde.");
+      toasterService.notifyError("Impossível adicionar empregado. Por favor tente mais tarde.");
     }
   };
 
@@ -82,14 +82,14 @@ function($scope, $state, employeesList, employeesService, $uibModal, paginationS
   $scope.editEmployeeSuccessCallback = function(data) {
     var editedEmployee = employeesService.getCurrentEmployee();
     $scope.employees[employeesService.getCurrentIndex()] = editedEmployee;
-    alert("Funcionário(a) editado(a) com sucesso.");
+    toasterService.notifySuccess("Funcionário(a) editado(a) com sucesso.");
   };
 
   $scope.editEmployeeErrorCallback = function(data) {
     if(data.message) {
-      alert("Impossível editar empregado. Motivo: "+data.message+". Por favor tente mais tarde.");
+      toasterService.notifyError("Impossível editar empregado. Motivo: "+data.message+". Por favor tente mais tarde.");
     } else {
-      alert("Impossível editar empregado. Por favor tente mais tarde.");
+      toasterService.notifyError("Impossível editar empregado. Por favor tente mais tarde.");
     }
   };
 
@@ -123,11 +123,11 @@ function($scope, $state, employeesList, employeesService, $uibModal, paginationS
   $scope.deleteSuccessCallback = function(data) {
     index = employeesService.getCurrentIndex();
     $scope.employees.splice(index,1);
-    alert("Empregado removido com sucesso.");
+    toasterService.notifySuccess("Empregado removido com sucesso.");
   };
 
   $scope.deleteErrorCallback = function(data) {
-    alert("Foi impossível remover o empregado. Por favor tente mais tarde");
+    toasterService.notifyError("Foi impossível remover o empregado. Por favor tente mais tarde");
   };
 
 }]);

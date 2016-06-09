@@ -49,7 +49,7 @@ function($scope, $cookieStore, $state, budgets, printShopListService, fileTransf
     // None of the printshops gave a budget
     toasterService.notifyWarning("Infelizmente nenhuma das reprografias selectionadas consegue atender o seu pedido. Por favor volte atrás e tente selecionar outras reprografias.");
   } else {
-    toasterService.notifyInfo("Fantástico! "+budgetsCounter+" reprografia(s) podem atender o seu pedido! Agora só tem de escolher uma delas.");
+    toasterService.notifyInfo("Fantástico! "+budgetsCounter+" reprografia(s) pode(m) atender o seu pedido! Agora só tem de escolher uma delas.");
   }
 
   $scope.finishPrintRequest = function() {
@@ -70,7 +70,7 @@ function($scope, $cookieStore, $state, budgets, printShopListService, fileTransf
         paymentMethod: ""
       };
     } else {
-      alert("Por favor escolha de entre uma das reprografias. Caso nenhuma satisfaça o pedido volte atrás e tente outras reprografias.");
+      toasterService.notifyWarning("Por favor escolha de entre uma das reprografias.");
     }
   };
 

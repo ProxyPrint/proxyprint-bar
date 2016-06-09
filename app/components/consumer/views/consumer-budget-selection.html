@@ -4,7 +4,7 @@
 <div class="row" style="margin-top:2%;">
 	<!-- prinshops selection -->
 	<div class="col-md-8">
-		<div class="table-responsive" style="height: 250px;">
+		<div id="rcornersdiv" class="table-responsive" style="height: 250px;">
 			<table class="table" ng-disabled="amount!==0.0">
 				<thead>
 					<tr>
@@ -24,6 +24,7 @@
 				</tbody>
 			</table>
 		</div>
+		<center><button ng-hide="noBudgetsFlag" type="button" class="button button-rounded button-primary hvr-bob" style="margin-top:2%;" ng-disabled="amount!==0.0" ng-click="finishPrintRequest()">Escolher orçamento</button></center>
 	</div>
 	<!-- submited files -->
 	<div class="col-md-3">
@@ -40,20 +41,19 @@
 			</ul>
 		</div>
 	</div>
-</div>
-<center><button type="button" class="button button-rounded button-primary hvr-bob" ng-disabled="amount!==0.0" ng-click="finishPrintRequest()">Escolher orçamento</button></center>
-<!-- ./submited files-->
-<!-- flow navigation buttons -->
-<div class="row" style="margin-top:4%;">
-	<div class="col-md-6">
-		<div class="left">
-			<button ui-sref="consumer.printshopselection" type="button" class="button button-rounded button"><i class="fa fa-arrow-left"></i> Anterior</button>
+	<!-- ./submited files-->
+	<!-- flow navigation buttons -->
+	<div class="row" style="margin-top:4%;">
+		<div class="col-md-6">
+			<div class="left">
+				<button ui-sref="consumer.printshopselection" type="button" class="button button-rounded button"><i class="fa fa-arrow-left"></i> Anterior</button>
+			</div>
 		</div>
-	</div>
-	<div class="col-md-6">
-		<div class="right">
-			<div ng-hide="amount==0.0">
-				<button type="submit" class="button button-rounded button" ng-click="pay()">Efetuar pagamento  <i class="fa fa-arrow-right"></i></button>
+		<div class="col-md-6">
+			<div class="right">
+				<div ng-hide="amount==0.0">
+					<button type="submit" class="button button-rounded button" ng-click="pay()">Efetuar pagamento  <i class="fa fa-arrow-right"></i></button>
+				</div>
 			</div>
 		</div>
 	</div>
