@@ -58,7 +58,11 @@
 				<ul class="list-group">
 					<!-- attention much text on <li> not being fully displayed -->
 					<li class="list-group-item clearfix" ng-repeat="file in submitedFiles" style="overflow-x:hidden;">
-						<strong>{{file}}</strong>
+						<strong>{{file.name}}</strong>
+						<div ng-repeat="spec in file.specs">
+							<small>{{spec.name}}</small><br/>
+							<small>(páginas: {{spec.pages}})</small>
+						</div>
 					</li>
 				</ul>
 			</div>

@@ -13,7 +13,15 @@ angular.module('ProxyPrint')
 
   $scope.selectedPrintShops = [];
   $scope.printShopsOptions = $scope.printshops;
-  $scope.submitedFiles = $cookieStore.get("uploadedFilesNames");
+
+  var tmpFiles = fileTransferService.getProcessedFiles().files;
+  $scope.submitedFiles = [];
+  for(var fileName in tmpFiles) {
+    var file = tmpFiles[fileName];
+    file.name = fileName;
+    $scope.submitedFiles.push(file);
+  }
+
   $scope.totalSelectedPrintShops = 0;
   $scope.maxSelectionAllowed = 5;
   $scope.showDistance = false;

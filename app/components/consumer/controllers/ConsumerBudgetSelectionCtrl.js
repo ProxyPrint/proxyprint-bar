@@ -2,9 +2,9 @@ angular.module('ProxyPrint').controller('ConsumerBudgetSelectionCtrl', ['$scope'
   function($scope, $cookieStore, $state, budgets, printShopListService, fileTransferService, budgetService, backendURLService, usSpinnerService, $uibModal) {
 
     $scope.budgets = budgets.budgets;
-    console.log($scope.budgets);
     $scope.printRequestID = budgets.printRequestID;
     $scope.selectedPrintShops = printShopListService.getSelectedPrintShops();
+
     var tmpFiles = fileTransferService.getProcessedFiles().files;
     $scope.submitedFiles = [];
     for(var fileName in tmpFiles) {
@@ -12,8 +12,6 @@ angular.module('ProxyPrint').controller('ConsumerBudgetSelectionCtrl', ['$scope'
       file.name = fileName;
       $scope.submitedFiles.push(file);
     }
-    console.log($scope.submitedFiles);
-    // $scope.submitedFilesNames = Object.keys($scope.submitedFiles);
 
     $scope.amount = 0.0;
     $scope.selectedPrintShopName = "";
