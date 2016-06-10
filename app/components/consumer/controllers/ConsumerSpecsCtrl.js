@@ -192,6 +192,7 @@ function($scope, $uibModal, $log, fileTransferService, specMarshallService,
 
     addPrintingSchema = function (spec) {
       var specification = specMarshallService.marshallSpecification(spec);
+      console.log(specification);
       if ($scope.specs === null){
         specification.fakeID = 1;
         $scope.specs = [];
@@ -243,7 +244,9 @@ function($scope, $uibModal, $log, fileTransferService, specMarshallService,
       spec.push($scope.sides);
       spec.push($scope.colors);
       spec.push($scope.content);
-      spec.push($scope.cover+","+$scope.format);
+      if($scope.cover) {
+        spec.push($scope.cover+","+$scope.format);
+      }
       spec.push($scope.bindings);
       $uibModalInstance.close(spec);
     };
