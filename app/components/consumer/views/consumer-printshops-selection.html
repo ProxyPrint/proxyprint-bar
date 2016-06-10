@@ -16,7 +16,7 @@
 					<tr ng-repeat="printshop in selectedPrintShops" class="animate-row">
 						<td>{{printshop.name}}</td>
 						<td>{{printshop.address}}</td>
-						<td>{{printshop.distance}} km</td>
+						<td><span ng-if="isGeoLocationActive">{{printshop.distance}} km</span><span ng-if="!isGeoLocationActive"> - </span></td>
 						<td><a href="" ng-click="removePrintShop($index)" style="color:red;"><i class="fa fa-times"></i></a></td>
 					</tr>
 				</tbody>
@@ -28,7 +28,7 @@
 		</div>
 		<hr/>
 		<!-- checbox -->
-		<label>
+		<label ng-show="isGeoLocationActive">
 			<input type="checkbox" id="distance" name="distance" ng-model="showDistance" ng-disabled="totalSelectedPrintShops==maxSelectionAllowed"/>
 			Filtrar por distância
 		</label>

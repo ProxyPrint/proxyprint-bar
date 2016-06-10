@@ -54,7 +54,13 @@ angular.module('ProxyPrint')
   };
 
   $scope.formatPrinShopForOption = function(pshop) {
-    if(pshop) return pshop.name + '  (' + pshop.distance + 'km)';
+    if(pshop) {
+      if($scope.isGeoLocationActive) {
+        return pshop.name + '  (' + pshop.distance + 'km)';
+      } else {
+        return pshop.name;
+      }
+    }
   };
 
   $scope.removePrintShop = function(index) {
