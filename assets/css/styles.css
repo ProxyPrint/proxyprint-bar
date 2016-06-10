@@ -710,12 +710,11 @@ ul.rating {
 }
 .progressbar li {
   list-style-type: none;
-  width: 18%;
+  width: 25%;
   float: left;
-  font-size: 10px;
+  font-size: 12px;
   position: relative;
   text-align: center;
-  text-transform: uppercase;
   color: #7d7d7d;
 }
 .progressbar li:before {
@@ -745,12 +744,11 @@ ul.rating {
   content: none;
 }
 .progressbar li.active {
-  color: blue;
-  font-size: 12px;
+  color: #08638F;
 }
 .progressbar li.active:before {
-  border-color: #0088CC;
+  border-color: #08638F;
 }
 .progressbar li.active + li:after {
-  background-color: #0088CC;
+  background-color: #08638F;
 }
