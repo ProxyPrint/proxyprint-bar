@@ -249,7 +249,6 @@ body {
 .settings-container {
   margin-left: 15%;
   margin-right: 25%;
-  margin-top:7%;
 }
 
 /******************************** Print Shop List ***********************/
@@ -702,4 +701,10 @@ ul.rating {
   width: 100%;
   position: fixed;
   content: " ";
+}
+
+#rcornersdiv {
+    border-radius: 12px;
+    border: 1px solid #DDDDDD;
+    padding: 10px;
 }

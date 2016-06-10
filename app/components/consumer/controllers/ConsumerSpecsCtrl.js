@@ -7,7 +7,7 @@ function($scope, $uibModal, $log, fileTransferService, specMarshallService,
     /** Page range logic */
     $scope.lastItem = null;
     $scope.lastFile = null;
-    $scope.specs = printingSchemas.data.pschemas;
+    $scope.specs = printingSchemas.data.pschemas.filter(function(ps){ return !ps.deleted;});
     $scope.files = fileTransferService.getFiles;
     $scope.all = [];
     usSpinnerService.stop('consumer-spinner');
@@ -192,6 +192,7 @@ function($scope, $uibModal, $log, fileTransferService, specMarshallService,
 
     addPrintingSchema = function (spec) {
       var specification = specMarshallService.marshallSpecification(spec);
+      console.log(specification);
       if ($scope.specs === null){
         specification.fakeID = 1;
         $scope.specs = [];
@@ -243,7 +244,9 @@ function($scope, $uibModal, $log, fileTransferService, specMarshallService,
       spec.push($scope.sides);
       spec.push($scope.colors);
       spec.push($scope.content);
-      spec.push($scope.cover+","+$scope.format);
+      if($scope.cover) {
+        spec.push($scope.cover+","+$scope.format);
+      }
       spec.push($scope.bindings);
       $uibModalInstance.close(spec);
     };

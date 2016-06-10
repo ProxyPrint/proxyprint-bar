@@ -3,21 +3,24 @@ angular.module('ProxyPrint').controller('ConsumerController', ['$scope', '$rootS
 function($scope, $rootScope, $cookieStore, authenticationService, fileTransferService, $state, notifications, backendURLService, consumerPendingRequests, consumerPendingRequestsService, $uibModal, notificationsService, usSpinnerService, requestHelperService) {
   console.log(backendURLService.getBaseURL());
   // Get consumer location
+  var coords = null;
+  $scope.isGeoLocationActive = false;
   if(navigator.geolocation){
     navigator.geolocation.getCurrentPosition(function(position) {
-      var coords = {latitude: position.coords.latitude, longitude: position.coords.longitude};
+      coords = {latitude: position.coords.latitude, longitude: position.coords.longitude};
       $cookieStore.put('coords', coords);
+      $scope.isGeoLocationActive = true;
     });
-  } else {
+  }
+  if(coords===null) {
     // Default coords University of Minho
-    var coords = {latitude:41.560501, longitude:-8.397250};
+    coords = {latitude:41.560501, longitude:-8.397250};
     $cookieStore.put('coords', coords);
   }
 
   $scope.pdfFiles = [];
   $scope.consumer = $cookieStore.get('globals').currentUser;
   $scope.balance = $cookieStore.get('consumerBalance');
-  console.log($scope.balance);
   var audio = new Audio('assets/audio/notifications.mp3');
 
   // Spinner set up

@@ -19,9 +19,5 @@ angular.module('ProxyPrint').factory('backendURLService', ['$http', '$cookieStor
         return $cookieStore.get("baseURL");
     };
 
-    service.getContextPath = function() {
-      return "ProxyPrint-kitchen-1.0-SNAPSHOT/";
-    };
-
     return service;
 }]);
