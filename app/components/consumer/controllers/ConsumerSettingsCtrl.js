@@ -1,4 +1,4 @@
-angular.module('ProxyPrint').controller('ConsumerSettingsCtrl', ['$scope', '$cookieStore', 'consumer', 'toasterService', 'consumerService', 'authenticationService', 'backendURLService', function ($scope, $cookieStore, consumer, toasterService, consumerService, authenticationService, backendURLService) {
+angular.module('ProxyPrint').controller('ConsumerSettingsCtrl', ['$scope', '$cookieStore', 'consumer', 'toasterService', 'consumerService', 'authenticationService', 'backendURLService', '$uibModal', function ($scope, $cookieStore, consumer, toasterService, consumerService, authenticationService, backendURLService, $uibModal) {
   $scope.consumer = consumer.data.consumer;
 
   console.log($scope.consumer);
@@ -9,12 +9,12 @@ angular.module('ProxyPrint').controller('ConsumerSettingsCtrl', ['$scope', '$coo
   $scope.password=$scope.consumer.password;
   $scope.newPassword=$scope.consumer.password;
 
-  $scope.callbackURL = backendURLService.getBaseURL;
+  $scope.callbackURL = backendURLService.getBaseURL();
   if($cookieStore.get("externalURL")) {
     $scope.callbackURL = $cookieStore.get("externalURL");
   }
   $scope.callbackURL += "paypal/ipn/consumer/"+$scope.consumer.id;
-  // console.log();
+  console.log($scope.callbackURL);
 
   $scope.consumerHasChanged = function() {
     return ($scope.email===$scope.consumer.email && $scope.name===$scope.consumer.name && $scope.username===$scope.consumer.username && $scope.password===$scope.consumer.password && $scope.password===$scope.newPassword);
@@ -61,17 +61,17 @@ angular.module('ProxyPrint').controller('ConsumerSettingsCtrl', ['$scope', '$coo
   $scope.amount = 1;
   $scope.loadUpMoney = function() {
     if($scope.amount) {
-      $scope.openPaymentMethodSelectionModal("Tem a certeza que pretende confirmar o carregamento via PayPal?", $scope.amount);
+      $scope.openPaymentMethodSelectionModal("Tem a certeza que pretende confirmar o carregamento via PayPal?", $scope.amount, $scope.callbackURL);
     } else {
       toasterService.notifyWarning("Por favor introduza uma quantia válida.");
     }
   };
 
-  $scope.openPaymentMethodSelectionModal = function(text, amount, callbackURL, pshopName, submitParams) {
+  $scope.openPaymentMethodSelectionModal = function(text, amount, callbackURL) {
     var modalInstance = $uibModal.open({
       animation: true,
-      templateUrl: 'app/components/consumer/views/consumer-payment-method-selection.html',
-      controller: 'PaymentMethodSelectionCtrl',
+      templateUrl: 'app/components/consumer/views/consumer-confirm-load-money-modal.html',
+      controller: 'PayPalLoadUpConfirmationCtrl',
       size: 'sm',
       resolve: {
         text: function() {
@@ -82,12 +82,6 @@ angular.module('ProxyPrint').controller('ConsumerSettingsCtrl', ['$scope', '$coo
         },
         callbackURL: function() {
           return callbackURL;
-        },
-        pshopName: function() {
-          return pshopName;
-        },
-        submitParams: function() {
-          return submitParams;
         }
       }
     });
@@ -109,6 +103,7 @@ app.controller('PayPalLoadUpConfirmationCtrl', ['$scope', '$state', 'toasterServ
 
   $scope.confirmPayment = function() {
     toasterService.notifySuccess("Assim que efetuar o pagamento no PayPal iremos atualizar o seu saldo. Obrigado!");
+    $uibModalInstance.dismiss('cancel');
     $state.go('consumer.mainpage', {}, {
       reload: true
     });
