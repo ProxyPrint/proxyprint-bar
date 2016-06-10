@@ -51,4 +51,13 @@ angular.module('ProxyPrint').controller('ConsumerSettingsCtrl', ['$scope', '$coo
     }
   };
 
+  $scope.amount = 1;
+  $scope.loadUpMoney = function() {
+    if($scope.amount) {
+      toasterService.notifySuccess("Amount OK! ("+$scope.amount+")");
+    } else {
+      toasterService.notifyWarning("Por favor introduza uma quantia válida.");
+    }
+  };
+
 }]);
