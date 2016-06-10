@@ -16,20 +16,18 @@
                 <tr>
                     <th>ID Pedido</th>
                     <th>Cliente</th>
-                    <th>Data de Entrada</th>
                     <th>Data de Atendimento</th>
                     <th>Atendido Por</th>
                     <th>Preço</th>
-                    <th>Data de Levantamento</th>
+                    <th>Ações</th>
                 </tr>
                 <tr ng-repeat="request in historyRequests | filter:filterRequests | startFrom: pagination.page * pagination.perPage | limitTo: pagination.perPage">
                     <td><b>#{{request.id}}</b></td>
                     <td>{{request.consumer.name}}</td>
-                    <td>{{request.arrivalTimestamp}}</td>
                     <td>{{request.finishedTimestamp}}</td>
                     <td>{{request.empAttended}}</td>
                     <td>{{request.cost | number : 2}} €</td>
-                    <td>{{request.deliveredTimestamp}}</td>
+                    <td><button class="btn btn-primary btn-flat" type="button" ng-click="lookAtRequest(request)"><i class="fa fa-level-up" style="margin-right: 0.2em;"></i>Consultar</button></td>
                 </tr>
             </tbody>
         </table>
