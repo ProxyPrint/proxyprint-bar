@@ -7,7 +7,7 @@ function($scope, $uibModal, $log, fileTransferService, specMarshallService,
     /** Page range logic */
     $scope.lastItem = null;
     $scope.lastFile = null;
-    $scope.specs = printingSchemas.data.pschemas;
+    $scope.specs = printingSchemas.data.pschemas.filter(function(ps){ return !ps.deleted;});
     $scope.files = fileTransferService.getFiles;
     $scope.all = [];
     usSpinnerService.stop('consumer-spinner');
