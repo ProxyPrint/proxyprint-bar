@@ -10,24 +10,22 @@ describe('employee mainpage tests', function() {
     element(by.id('loginButton')).click();
   });
 
-    it('Pending requests page should be working', function() {
+    it('Employee pages should be working', function() {
+      //Pending requests page
       $('.fa-hourglass-half').click().then( function () {
         expect(browser.getCurrentUrl()).toEqual(user_url+'/pending');
       });
-    });
-
-    it('Satisfied requests page should be working', function() {
+      //Satisfied requests page
       $('.fa-check').click().then( function () {
         expect(browser.getCurrentUrl()).toEqual(user_url+'/satisfied');
       });
-    });
-
-    it('History requests page should be working', function() {
+      //History of the requests page
       $('.fa-history').click().then(function () {
         expect(browser.getCurrentUrl()).toEqual(user_url+'/history');
       })
     });
 
+    it('A ')
 
 
 
