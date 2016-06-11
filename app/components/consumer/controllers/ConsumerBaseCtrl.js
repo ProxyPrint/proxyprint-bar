@@ -21,6 +21,7 @@ function($scope, $rootScope, $cookieStore, authenticationService, fileTransferSe
   $scope.pdfFiles = [];
   $scope.consumer = $cookieStore.get('globals').currentUser;
   $scope.balance = $cookieStore.get('consumerBalance');
+
   var audio = new Audio('assets/audio/notifications.mp3');
   var coin = new Audio('assets/audio/coin.mp3');
 
@@ -39,7 +40,6 @@ function($scope, $rootScope, $cookieStore, authenticationService, fileTransferSe
     withCredentials: true
   });
 
-
   $scope.notifications = notifications.data;
   $scope.newNotifications = getNewNotificationsNumber($scope.notifications);
 
@@ -56,7 +56,10 @@ function($scope, $rootScope, $cookieStore, authenticationService, fileTransferSe
       audio.play();
       if(message.message.match(/O seu carregamento de [0-9]+(\.[0-9]{1,2})? € via PayPal foi confirmado. Obrigado!/)) {
           coin.play();
-          // UPDATE CONSUMER BALANCE
+          consumerService.getConsumerBalance().success(function(data) {
+            $cookieStore.put("consumerBalance", data.balance);
+            $state.reload();
+          });
       }
     });
 
