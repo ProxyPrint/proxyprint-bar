@@ -1,7 +1,9 @@
 describe('employee mainpage tests', function() {
 
+  var q = require('q');
   var base_url = 'http://localhost:9000';
   var user_url = base_url + '/#/employee/mafalda';
+  var pendingRequestId = 12;
 
   beforeEach(function () {
     browser.get(base_url);
@@ -9,6 +11,7 @@ describe('employee mainpage tests', function() {
     element(by.model('password')).sendKeys("1234");
     element(by.id('loginButton')).click();
   });
+
 
     it('Employee pages should be working', function() {
       //Pending requests page
@@ -25,7 +28,8 @@ describe('employee mainpage tests', function() {
       })
     });
 
-    it('A ')
+
+
 
 
 

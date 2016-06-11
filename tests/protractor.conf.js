@@ -8,6 +8,11 @@ exports.config = {
     'browserName': 'chrome'
   },
 
+  plugins: [{
+    package: 'protractor-console',
+    logLevels: ['severe']
+  }],
+
   // Spec patterns are relative to the configuration file location passed
   // to protractor (in this example conf.js).
   // They may include glob patterns.
@@ -17,4 +22,5 @@ exports.config = {
   jasmineNodeOpts: {
     showColors: true, // Use colors in the command line report.
   }
+
 };
