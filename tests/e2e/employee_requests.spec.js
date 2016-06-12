@@ -3,7 +3,6 @@ describe('pending requests tests', function() {
   var base_url = 'http://localhost:9000';
   var user_url = base_url + '/#/employee/mafalda';
   var pendingRequestId = "6";
-  var beingProcessedId = "3";
 
   beforeEach(function () {
     browser.get(base_url);
@@ -29,6 +28,19 @@ describe('pending requests tests', function() {
         expect($('.btn-success').isDisplayed()).toBe(false);
         //browser.get(user_url+'/pending/'+beingProcessedId);
       });
+    });
+  });
+
+  it('Completing a request should decrease the satisfied request list length by 1', function () {
+    browser.get(user_url+'/satisfied');
+    requests = element.all(by.repeater('request in satisfiedRequests'));
+    var initialValue = requests.count();
+    requests.get(0).element(by.css('.bg-purple')).click();
+    $('.btn-primary').click().then(function () {
+      $('.btn-primary').click();
+    });
+    element.all(by.repeater('request in satisfiedRequests')).count().then(function (recentValue) {
+      expect(initialValue).toBe(recentValue+1);
     });
   });
 

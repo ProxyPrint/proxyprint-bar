@@ -2,6 +2,8 @@ describe('consumer mainpage tests', function() {
 
   var base_url = 'http://localhost:9000';
   var user_url = base_url + '/#/joao';
+  var path = require('path');
+  var doc_path = '../pdf_sample.pdf';
 
   beforeEach(function () {
     browser.get(base_url);
@@ -25,8 +27,6 @@ describe('consumer mainpage tests', function() {
         expect(browser.getCurrentUrl()).toEqual(user_url+'/settings')
       });
     });
-
-
 
 
 
