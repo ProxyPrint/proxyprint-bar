@@ -33,7 +33,6 @@ if (cluster.isMaster) {
 
 } else {
   app.use(compression());
-  app.use(minify());
   redirect(app);
 
   app.use(express.static(__dirname + '/'));
