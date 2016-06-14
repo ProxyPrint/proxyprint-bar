@@ -243,3 +243,20 @@ footer {
 .login-button{
    text-align:center;
 }
+
+
+/** Nav-bar buttons **/
+
+@media(min-width: 880px) {
+  .navbar-buttons {
+    margin-top: 8px;
+    margin-left: 70%;
+    position: absolute;
+  }
+}
+
+@media(max-width: 879px) {
+  .navbar-buttons {
+    visibility: hidden;
+  }
+}

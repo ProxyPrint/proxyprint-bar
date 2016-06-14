@@ -2,7 +2,7 @@ describe('pending requests tests', function() {
 
   var base_url = 'http://localhost:9000';
   var user_url = base_url + '/#/employee/mafalda';
-  var pendingRequestId = "6";
+  var pendingRequestId = "8";
 
   beforeEach(function () {
     browser.get(base_url);
@@ -12,7 +12,7 @@ describe('pending requests tests', function() {
   });
 
   it('Complete flow of a request being taken care of by employee (Pending -> being processed -> Finalized)', function () {
-    var index = 1;
+    var index = 2;
     requests = element.all(by.repeater('request in pendingRequests'));
     requests.get(index).element(by.css('.btn-primary ')).click();
     expect(browser.getCurrentUrl()).toBe(user_url+'/pending/'+pendingRequestId);
@@ -24,7 +24,7 @@ describe('pending requests tests', function() {
     $('.btn-success').click();
     $('[ng-click="performAction()"]').click().then(function () {
       $('[ng-click="performAction()"]').click().then(function () {
-        //expect(element(by.binding('message'))).toBe('Finalizado');
+        expect(element(by.binding('message'))).toBe('Finalizado');
         expect($('.btn-success').isDisplayed()).toBe(false);
         //browser.get(user_url+'/pending/'+beingProcessedId);
       });
