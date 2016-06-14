@@ -51,6 +51,7 @@ function($scope, $uibModal, $log, fileTransferService, specMarshallService,
         size: 'md',
         resolve: {
           pages: ['$q', function ($q) {
+            usSpinnerService.spin('consumer-spinner');
             var deferred = $q.defer();
             fileTransferService.countPages($scope.lastFile, function (processedFiles) {
               deferred.resolve(processedFiles.pages);
@@ -283,10 +284,11 @@ function($scope, $uibModal, $log, fileTransferService, specMarshallService,
     };
   }]);
 
-  angular.module('ProxyPrint').controller('PageRangeController', ['$scope', '$uibModalInstance', 'pages',
-  function ($scope, $uibModalInstance, pages) {
+  angular.module('ProxyPrint').controller('PageRangeController', ['$scope', '$uibModalInstance', 'pages', 'usSpinnerService',
+  function ($scope, $uibModalInstance, pages, usSpinnerService) {
 
     $scope.pageLimit = pages;
+    usSpinnerService.stop('consumer-spinner');
 
     $scope.performAction = function () {
       var values = [];
