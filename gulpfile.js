@@ -11,7 +11,6 @@ for (i in javascript) {
   var aux = javascript[i].trim();
   if (aux != "") {
     javascript[i] = aux;
-    console.log(aux);
   }
 }
 var stylesheets = ['src/css/**/*.css'];

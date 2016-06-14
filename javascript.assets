@@ -12,7 +12,6 @@ node_modules/ng-file-upload/dist/ng-file-upload.min.js
 node_modules/ng-file-upload/dist/ng-file-upload-shim.min.js
 node_modules/angularjs-slider/dist/rzslider.min.js
 node_modules/angular-animate/angular-animate.min.js
-node_modules/pdfjs-dist/build/pdf.js
 node_modules/async/dist/async.js
 node_modules/ui-select/dist/select.min.js
 assets/js/angular-sanitize.js
