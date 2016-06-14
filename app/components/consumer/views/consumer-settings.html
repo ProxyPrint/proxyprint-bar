@@ -37,4 +37,21 @@
       <button type="submit" class="button button-rounded button-primary" ng-click="updateConsumer()" ng-disabled="consumerHasChanged()" style="margin-bottom:4%;">Guardar</button>
     </div>
   </form>
+  <hr/>
+  <h2>Carregamentos</h2>
+  <h4><small>Carregue o seu saldo ProxyPrint via PayPal</small></h4>
+  <h5><small>(Quantia mínima de 1€)</small></h5>
+  <div style="margin-bottom:4%;">
+    <div class="row">
+      <div class="col col-md-4">
+        <div class="input-group">
+          <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-paypal" aria-hidden="true"></i></span>
+          <input type="number" class="form-control" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.01" min="1" placeholder="1.00 €" aria-describedby="sizing-addon2" ng-model="amount">
+        </div>
+      </div>
+      <div class="col col-md-2">
+        <center><button ng-click="loadUpMoney()" class="button button-rounded button-tiny button-primary" style="margin-top:4%;">Carregar</button></center>
+      </div>
+    </div>
+  </div>
 </div>

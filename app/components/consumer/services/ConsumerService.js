@@ -14,5 +14,11 @@ angular.module('ProxyPrint').factory('consumerService',['$http', 'backendURLServ
       });
     };
 
+    service.getConsumerBalance = function() {
+      return $http.get(backendURLService.getBaseURL()+'consumer/balance').success(function(data){
+        return data;
+      });
+    };
+
     return service;
 }]);

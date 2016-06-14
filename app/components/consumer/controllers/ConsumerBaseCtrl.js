@@ -1,6 +1,6 @@
 angular.module('ProxyPrint').controller('ConsumerController', ['$scope', '$rootScope', '$cookieStore',
-'authenticationService', 'fileTransferService', '$state', 'notifications', 'backendURLService', 'consumerPendingRequests', 'consumerPendingRequestsService', '$uibModal','notificationsService', 'usSpinnerService', 'requestHelperService',
-function($scope, $rootScope, $cookieStore, authenticationService, fileTransferService, $state, notifications, backendURLService, consumerPendingRequests, consumerPendingRequestsService, $uibModal, notificationsService, usSpinnerService, requestHelperService) {
+'authenticationService', 'fileTransferService', '$state', 'notifications', 'backendURLService', 'consumerPendingRequests', 'consumerPendingRequestsService', '$uibModal','notificationsService', 'usSpinnerService', 'requestHelperService', 'consumerService',
+function($scope, $rootScope, $cookieStore, authenticationService, fileTransferService, $state, notifications, backendURLService, consumerPendingRequests, consumerPendingRequestsService, $uibModal, notificationsService, usSpinnerService, requestHelperService, consumerService) {
   console.log(backendURLService.getBaseURL());
   // Get consumer location
   var coords = null;
@@ -21,7 +21,9 @@ function($scope, $rootScope, $cookieStore, authenticationService, fileTransferSe
   $scope.pdfFiles = [];
   $scope.consumer = $cookieStore.get('globals').currentUser;
   $scope.balance = $cookieStore.get('consumerBalance');
+
   var audio = new Audio('assets/audio/notifications.mp3');
+  var coin = new Audio('assets/audio/coin.mp3');
 
   // Spinner set up
   $scope.spinneractive = false;
@@ -38,7 +40,6 @@ function($scope, $rootScope, $cookieStore, authenticationService, fileTransferSe
     withCredentials: true
   });
 
-
   $scope.notifications = notifications.data;
   $scope.newNotifications = getNewNotificationsNumber($scope.notifications);
 
@@ -51,7 +52,15 @@ function($scope, $rootScope, $cookieStore, authenticationService, fileTransferSe
       message.read = false;
       $scope.notifications.unshift(message);
       $scope.newNotifications += 1;
+      console.log(message);
       audio.play();
+      if(message.message.match(/O seu carregamento de [0-9]+(\.[0-9]{1,2})? € via PayPal foi confirmado. Obrigado!/)) {
+          coin.play();
+          consumerService.getConsumerBalance().success(function(data) {
+            $cookieStore.put("consumerBalance", data.balance);
+            $state.reload();
+          });
+      }
     });
 
   };
@@ -107,8 +116,6 @@ function($scope, $rootScope, $cookieStore, authenticationService, fileTransferSe
   };
 
   $scope.pendingRequests = consumerPendingRequests.data.printrequests;
-
-
 
 
   $scope.addFiles = function (files) {

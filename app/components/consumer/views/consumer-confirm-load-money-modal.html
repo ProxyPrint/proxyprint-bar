@@ -1,0 +1,37 @@
+<div class="modal-header">
+  <center><h3><strong>ProxyPrint</strong></h3></center>
+  <hr/>
+  <center><h1>Quantia</h1></center>
+  <center><h2>{{amount}} €</h2></center>
+</div>
+<div class="modal-body" style="text-align:center;">
+  <center>{{text}}</center>
+  <div class="row" style="margin-top: 4%;">
+    <div class="col col-sm-6">
+      <!-- paypal-button -->
+      <form method="post" action="https://www.sandbox.paypal.com/cgi-bin/webscr" class="paypal-button" style="opacity: 1;" target="_blank">
+        <div class="hide" id="errorBox"></div>
+        <input type="hidden" name="button" value="buynow">
+        <input type="hidden" name="business" value="T4F6X2XSAETNL">
+        <input type="hidden" name="item_name" value="Pedido de impressao ProxyPrint">
+        <input type="hidden" name="quantity" value="1">
+        <input type="hidden" name="amount" ng-model="amount" value="{{amount}}">
+        <input type="hidden" name="currency_code" value="EUR">
+        <input type="hidden" name="shipping" value="0">
+        <input type="hidden" name="tax" value="0">
+        <input type="hidden" name="notify_url" value="{{payPalCallbackUrl}}">
+        <input type="hidden" name="env" value="www.sandbox">
+        <input type="hidden" name="cmd" value="_xclick">
+        <input type="hidden" name="bn" value="JavaScriptButton_buynow">
+        <button class="button button-rounded button-small button-action" ng-click="confirmPayment()">Confirmar</button>
+      </form>
+      <!-- ./paypal-button -->
+    </div>
+    <div class="col col-sm-6">
+      <button class="button button-rounded button-small button button-caution" ng-click="cancel()">Cancelar</button>
+    </div>
+  </div>
+</div>
+<div class="modal-footer" style="text-align:center; margin-top: 4%;">
+  <center><small>Carregamento ProxyPrint via PayPal</small></center>
+</div>
