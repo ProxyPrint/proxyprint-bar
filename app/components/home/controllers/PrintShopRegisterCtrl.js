@@ -1,5 +1,5 @@
-angular.module('Auth').controller('PrintShopRegisterCtrl', ['$scope', '$rootScope', '$http', '$location', 'authenticationService', '$state', '$cookieStore', 'backendURLService',
-  function($scope, $rootScope, $http, $location, authenticationService, $state, $cookieStore, backendURLService) {
+angular.module('Auth').controller('PrintShopRegisterCtrl', ['$scope', '$rootScope', '$http', '$location', 'authenticationService', '$state', '$cookieStore', 'backendURLService', 'toasterService',
+  function($scope, $rootScope, $http, $location, authenticationService, $state, $cookieStore, backendURLService, toasterService) {
     // reset login status
     authenticationService.ClearCredentials();
 
@@ -13,13 +13,13 @@ angular.module('Auth').controller('PrintShopRegisterCtrl', ['$scope', '$rootScop
         "pShopAddress": $scope.pShopAddress,
         "pShopNIF": $scope.pShopNIF,
         "pShopName": $scope.pShopName
-      }
+      };
 
       getLatitudeLongitude($scope.pShopAddress, function(result) {
         data.pShopLatitude = result.geometry.location.lat();
         data.pShopLongitude = result.geometry.location.lng();
         $http.post(backendURLService.getBaseURL()+"request/register", data).success(function(response) {
-          alert("Pedido registado! Será notificado via email em breve!");
+          toasterService.notifySuccess("Pedido registado! Será notificado via email em breve. Obrigado!");
           $location.path('/printshop');
         });
       });

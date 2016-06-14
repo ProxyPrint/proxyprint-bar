@@ -5,7 +5,7 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
     '/assets/css/frontpage.css',
     '/assets/css/bootstrap.min.css',
     '//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css',
-    'http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic',
+    'https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic',
     '/assets/css/buttons.css'
   ];
 
@@ -14,19 +14,19 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
     '/assets/css/bootstrap.min.css',
     '//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css',
     '/assets/css/angular-notification-icons.css',
-    'http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic',
+    'https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic',
     'https://cdnjs.cloudflare.com/ajax/libs/ng-table/0.8.3/ng-table.min.css',
     '/node_modules/hover.css/css/hover-min.css',
     '/assets/css/buttons.css',
     '/node_modules/angular-ui-notification/dist/angular-ui-notification.min.css',
-    'assets/css/spinner.css'
+    '/assets/css/spinner.css'
   ];
 
     var mainPrintShopCSS = [
         '/assets/css/styles-pshop.css',
         '/assets/css/bootstrap.min.css',
         '//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css',
-        'http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic',
+        'https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic',
         '/assets/css/buttons.css'
     ];
 
@@ -37,7 +37,7 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
     'https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css',
     '/assets/adminlte/dist/css/AdminLTE.min.css',
     '/assets/adminlte/dist/css/skins/skin-blue.min.css',
-    'assets/css/spinner.css'
+    '/assets/css/spinner.css'
   ];
 
   var gradientSoligBgCSS = [

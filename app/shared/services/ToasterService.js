@@ -16,6 +16,6 @@ angular.module('ProxyPrint').factory('toasterService',['Notification', function 
       notifyWarning: function(msg){
           Notification.warning(msg);
       }
-  }
+  };
 
 }]);

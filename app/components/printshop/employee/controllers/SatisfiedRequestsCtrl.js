@@ -36,7 +36,9 @@ angular.module('ProxyPrint').controller('SatisfiedRequestsCtrl', ['$scope', 'sat
 
   $scope.onChangeStatusSuccessCallback = function(data, requestID) {
     $scope.isDataLoading = false;
-    $state.reload();
+    // Jump to requests history
+    $state.go('employee.history');
+    $scope.navigate('history');
     $scope.openSuccessModal("Pedido número " + requestID + " levantado com sucesso!", requestID);
   };
 

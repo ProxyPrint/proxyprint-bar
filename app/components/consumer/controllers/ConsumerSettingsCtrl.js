@@ -33,4 +33,22 @@ angular.module('ProxyPrint').controller('ConsumerSettingsCtrl', ['$scope', '$coo
     }
   };
 
+  $scope.passwordType = "password";
+  $scope.newPasswordType = "password";
+  $scope.changePasswordType = function(arg) {
+    if(arg===0) {
+      if($scope.passwordType==="password") {
+        $scope.passwordType = "text";
+      } else {
+        $scope.passwordType = "password";
+      }
+    } else {
+      if($scope.newPasswordType==="password") {
+        $scope.newPasswordType = "text";
+      } else {
+        $scope.newPasswordType = "password";
+      }
+    }
+  };
+
 }]);
