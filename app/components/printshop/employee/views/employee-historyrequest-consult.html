@@ -1,0 +1,48 @@
+<div class="loader" ng-show="isDataLoading"></div>
+
+<div ng-hide="isDataLoading">
+    <div class="box-header">
+        <h1><center> Pedido #{{request.id}} </center></h1>
+
+        <div class="list-group-item clearfix">
+            <div class="left">
+                <b> Cliente:</b> {{request.consumer.name}}
+            </div>
+            <div class="left">
+                <b> Email:</b> {{request.consumer.email}}
+            </div>
+            <br>
+            <div class="left">
+                <b>Data de realização do pedido:</b> {{request.arrivalTimestamp}}
+            </div>
+            <div class="left">
+                <b>Data de Atendimento:</b> {{request.finishedTimestamp}}
+                <div class="pull-right"> <b>Atendido por:</b> {{request.empAttended}} </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="box">
+        <div class="box-body table-responsive no-padding">
+            <table class="table table-striped">
+                <tbody>
+                    <tr>
+                        <th>Ficheiro</th>
+                        <th>Especificação</th>
+                    </tr>
+                    <tr ng-repeat="file in files">
+                        <td><b>{{file.name}}</b></td>
+                        <td ng-repeat="spec in file.specs">{{spec.specsToString}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="box-footer clearfix">
+            <div style="margin-left: 72%;"><b>Total:</b> {{request.cost | number : 2}} €</div>
+        </div>
+    </div>
+
+    <b class="left" style="margin-left: 5%;"> {{message}} </b>
+    <b class="pull-right" style="margin-right: 5%;"> Data de Levantamento: {{request.deliveredTimestamp}} </b>
+
+</div>

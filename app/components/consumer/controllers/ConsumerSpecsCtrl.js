@@ -12,6 +12,20 @@ function($scope, $uibModal, $log, fileTransferService, specMarshallService,
     $scope.all = [];
     usSpinnerService.stop('consumer-spinner');
 
+    $scope.helpSpecModal = function() {
+        var modalInstance = $uibModal.open({
+            animation: true,
+            templateUrl: 'app/components/consumer/views/help-modal.html',
+            controller: 'HelpController',
+            size: 'lg',
+            resolve: {
+                files: function () {
+                    return $scope.files();
+                }
+            }
+        });
+    };
+
     $scope.addToAll = function(item, index) {
       var files = $scope.files();
       interval = "Completo";

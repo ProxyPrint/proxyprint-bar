@@ -292,6 +292,17 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
       }]
     }
   })
+  .state('employee.historyconsult', {
+    url: '/history/:requestid',
+    templateUrl: '/app/components/printshop/employee/views/employee-historyrequest-consult.html',
+    controller: 'ConsultHistoryRequestCtrl',
+    resolve: {
+      historyPrintRequest: ['pendingPrintRequestsService', '$stateParams',
+      function (pendingPrintRequestsService, $stateParams) {
+        return pendingPrintRequestsService.getRequest($stateParams.requestid);
+      }]
+    }
+  })
 
   /*Manager*/
   .state('manager', {
