@@ -1,8 +1,8 @@
 <div class="settings-container">
-  <div class="center">
-    <h1>Definições</h1>
-  </div>
-  <form role="form">
+  <h1>Definições</h1>
+  <h4><small>Alterar ou consultar definições pessoais</small></h4>
+  <form name="form" role="form">
+    <div ng-show="error" class="alert alert-danger">{{error}}</div>
     <div class="form-group">
       <label>Email</label>
       <input type="email" ng-model="email" class="form-control" id="email">
@@ -17,14 +17,24 @@
     </div>
     <div class="form-group">
       <label>Password</label>
-      <input type="password" ng-model="password" class="form-control" id="pwd">
+      <div class="input-group">
+        <input type="{{passwordType}}" ng-model="password" class="form-control" id="pwd">
+        <span class="input-group-addon">
+          <a href="" ng-click="changePasswordType(0)"><i ng-class="passwordType==='password' ? 'fa fa-eye' : 'fa fa-eye-slash'" aria-hidden="true"></i></a>
+        </span>
+      </div>
     </div>
     <div class="form-group">
       <label>Confimar Password</label>
-      <input type="password" ng-model="newPassword" class="form-control" id="pwdnew">
+      <div class="input-group">
+        <input type="{{newPasswordType}}" ng-model="newPassword" class="form-control" id="pwdnew">
+        <span class="input-group-addon">
+          <a href="" ng-click="changePasswordType(1)"><i ng-class="newPasswordType==='password' ? 'fa fa-eye' : 'fa fa-eye-slash'" aria-hidden="true"></i></a>
+        </span>
+      </div>
     </div>
     <div class="center">
-      <button type="submit" class="button button-rounded button-primary" ng-click="updateConsumer()" ng-disabled="consumerHasChanged()">Guardar</button>
+      <button type="submit" class="button button-rounded button-primary" ng-click="updateConsumer()" ng-disabled="consumerHasChanged()" style="margin-bottom:4%;">Guardar</button>
     </div>
   </form>
 </div>

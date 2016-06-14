@@ -1,7 +1,7 @@
 angular.module('ProxyPrint')
 .controller('ConsumerPrintShopsSelectionController',
-  ['$scope', 'printShopListService', 'printshopsList', 'fileTransferService', '$cookieStore', 'budgetService', '$state', 'usSpinnerService', 'requestHelperService',
-  function($scope, printShopListService, printshopsList, fileTransferService, $cookieStore, budgetService, $state, usSpinnerService, requestHelperService) {
+  ['$scope', 'printShopListService', 'printshopsList', 'fileTransferService', '$cookieStore', 'budgetService', '$state', 'usSpinnerService', 'requestHelperService', 'toasterService',
+  function($scope, printShopListService, printshopsList, fileTransferService, $cookieStore, budgetService, $state, usSpinnerService, requestHelperService, toasterService) {
 
   $scope.printshops = [];
 
@@ -13,7 +13,15 @@ angular.module('ProxyPrint')
 
   $scope.selectedPrintShops = [];
   $scope.printShopsOptions = $scope.printshops;
-  $scope.submitedFiles = $cookieStore.get("uploadedFilesNames");
+
+  var tmpFiles = fileTransferService.getProcessedFiles().files;
+  $scope.submitedFiles = [];
+  for(var fileName in tmpFiles) {
+    var file = tmpFiles[fileName];
+    file.name = fileName;
+    $scope.submitedFiles.push(file);
+  }
+
   $scope.totalSelectedPrintShops = 0;
   $scope.maxSelectionAllowed = 5;
   $scope.showDistance = false;
@@ -46,7 +54,13 @@ angular.module('ProxyPrint')
   };
 
   $scope.formatPrinShopForOption = function(pshop) {
-    if(pshop) return pshop.name + '  (' + pshop.distance + 'km)';
+    if(pshop) {
+      if($scope.isGeoLocationActive) {
+        return pshop.name + '  (' + pshop.distance + 'km)';
+      } else {
+        return pshop.name;
+      }
+    }
   };
 
   $scope.removePrintShop = function(index) {
@@ -83,7 +97,7 @@ angular.module('ProxyPrint')
 
   $scope.budgetErrorCallback = function(data) {
     usSpinnerService.stop('consumer-spinner');
-    alert("Os orçamentos não puderam se efetuados. Por favor tente mais tarde.");
+    toasterService.notifyWarning("Os orçamentos não puderam se efetuados. Por favor tente mais tarde.");
     console.log(data);
   };
 

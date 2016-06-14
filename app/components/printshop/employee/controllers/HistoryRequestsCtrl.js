@@ -1,5 +1,5 @@
-angular.module('ProxyPrint').controller('HistoryRequestsCtrl', ['$scope', 'historyPrintRequests', 'historyPrintRequestsService', 'paginationService',
-      function($scope, historyPrintRequests, historyPrintRequestsService,paginationService) {
+angular.module('ProxyPrint').controller('HistoryRequestsCtrl', ['$scope', 'historyPrintRequests', 'historyPrintRequestsService', 'paginationService', '$state',
+      function($scope, historyPrintRequests, historyPrintRequestsService,paginationService, $state) {
 
    $scope.historyRequests = historyPrintRequests.data.historyrequests;;
    console.log($scope.historyRequests);
@@ -9,6 +9,10 @@ angular.module('ProxyPrint').controller('HistoryRequestsCtrl', ['$scope', 'histo
 
    $scope.filterRequests = function(client) {
        return (client.consumer.name.match($scope.requestSearch));
+   };
+
+   $scope.lookAtRequest = function (request){
+       $state.go('employee.historyconsult',{"requestid":request.id});
    };
 
 }]);
