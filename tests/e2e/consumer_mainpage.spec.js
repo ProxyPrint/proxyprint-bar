@@ -2,6 +2,8 @@ describe('consumer mainpage tests', function() {
 
   var base_url = 'http://localhost:9000';
   var user_url = base_url + '/#/joao';
+  var path = require('path');
+  var doc_path = '../pdf_sample.pdf';
 
   beforeEach(function () {
     browser.get(base_url);
@@ -10,26 +12,21 @@ describe('consumer mainpage tests', function() {
     element(by.id('loginButton')).click();
   });
 
-    it('Printshop list page should be working', function() {
+    it('Consumer mainpage URLs should be working', function() {
+      //Printshop list page
       $('.fa-book').click().then( function () {
         expect(browser.getCurrentUrl()).toEqual(user_url+'/printshops');
       });
-    });
-
-    it('Request history page should be working', function() {
+      //History of requests page
       $('.fa-history').click().then( function () {
         expect(browser.getCurrentUrl()).toEqual(user_url+'/history');
       });
-    });
-
-    it('Settings page should be working', function() {
+      //Settings page
       $('.caret').click();
       $('.fa-cog').click().then(function () {
         expect(browser.getCurrentUrl()).toEqual(user_url+'/settings')
-      })
+      });
     });
-
-
 
 
 

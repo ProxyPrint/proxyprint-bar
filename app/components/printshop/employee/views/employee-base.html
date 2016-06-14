@@ -49,9 +49,9 @@
         <ul class="sidebar-menu">
           <li class="header">Opções</li>
           <!-- ng-class="navigation['stats']"><a ui-sref=".stats" ng-click="navigate('stats')"> -->
-          <li ng-class="navigation['pending']"><a ui-sref=".pending" ng-click="navigate('pending')"><i class="fa fa-hourglass-half"></i> <span>Pedidos Pendentes</span></a></li>
-          <li ng-class="navigation['satisfied']"><a ui-sref=".satisfied" ng-click="navigate('satisfied')"><i class="fa fa-check"></i> <span>Pedidos Satisfeitos</span></a></li>
-          <li ng-class="navigation['history']"><a ui-sref=".history" ng-click="navigate('history')"><i class="fa fa-history"></i> <span>Histórico de Pedidos</span></a></li>
+          <li ng-class="navigation['pending']"><a ui-sref=".pending" id="preqs" ng-click="navigate('pending')"><i class="fa fa-hourglass-half"></i> <span>Pedidos Pendentes</span></a></li>
+          <li ng-class="navigation['satisfied']"><a ui-sref=".satisfied" id="sreqs" ng-click="navigate('satisfied')"><i class="fa fa-check"></i> <span>Pedidos Satisfeitos</span></a></li>
+          <li ng-class="navigation['history']"><a ui-sref=".history" id="hreqs" ng-click="navigate('history')"><i class="fa fa-history"></i> <span>Histórico de Pedidos</span></a></li>
         </ul><!-- /.sidebar-menu -->
       </section>
       <!-- /.sidebar -->
