@@ -1,104 +1,113 @@
+<!-- Progress bar -->
+<div style="text-align:center;margin-top:-1%;">
+  <ul class="progressbar" style="width:100%;">
+    <li class="active" style="font-size:10px;"><i class="fa fa-pencil" aria-hidden="true"></i>  Especificação</li>
+    <li style="font-size:8px;">€  Orçamentos</li>
+    <li style="font-size:8px;"><i class="fa fa-print" aria-hidden="true"></i>  Confimar &#38; Pagar</li>
+  </ul>
+</div>
+<!-- ./Progress bar -->
 <div class="col-sm-9 col-md-10 main">
-    <div ui-view>
+  <div ui-view>
 
-        <div class="alert alert-info" id="alert">
-            <a class="close" onclick="$('#alert').hide();">&times;</a>
-            <h4><strong>Informação importante!</strong></h4>
-            Para poder avançar tem de definir a especificação desejada para imprimir o/os documento/s. A especificação é definida se a arrastar para cima do documento desejado. Se não tiver nenhuma especificação, crie uma!<br>
-            Na fila de impressão encontram-se os documentos que serão impressos no seu pedido, a respetiva especificação e o intervalo de páginas que deseja.
-        </div>
-
-        <div class="panel panel-default left" style="min-width: 45%; max-width: 45%; min-height: 240px;">
-            <div class="panel-heading">
-                <div class="panel-title">
-                    <b>Especificações</b>
-                    <div class="pull-right">
-                        <a href="" title="Precisa de ajuda?" ng-click="helpSpecModal()" onclick="$('#alert').show();">
-                            <i class="fa fa-question-circle" aria-hidden="true"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="panel-body" style="max-height: 300px; overflow-y: scroll">
-                <li ng-repeat="item in specs" dnd-draggable="item" dnd-effect-allowed="copy" dnd-selected="models.selected = item" ng-class="{'selected': models.selected === item}" class="list-group-item clearfix">
-                    {{item.fakeID}}: {{item.name}}
-                    <div class="right">
-                        <div class="row">
-                            <div class="col-sm-4"></div>
-                            <div class="col-sm-4">
-                                <a ng-click="editSpecModal($index)">
-                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                </a>
-                            </div>
-                            <div class="col-sm-4">
-                                <a ng-click="removePrintingSchema($index)">
-                                    <i class="fa fa-times" aria-hidden="true" style="color:red"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-            </div>
-
-            <div class="panel-footer">
-                <button type="button button-rounded button" class="list-group-item clearfix" ng-click="addSpecModal()"><i class="fa fa-plus"></i> Nova Especificação</button>
-            </div>
-        </div>
-        <div class="panel panel-default right" style="min-width: 45%; max-width: 45%; min-height: 240px;">
-            <div class="panel-heading">
-                <h2 class="panel-title"> <b>Ficheiros Selecionados </b></h2>
-            </div>
-
-            <div class="simpleDemo">
-                <div class="panel-body" style="max-height: 300px; overflow-y: scroll;">
-                    <ul class="dialog" ng-repeat="file in files()" dnd-list="file.specs" dnd-drop="addPageModal(file, item, index)">
-                        <div class="file-type-icon">
-                            <span class="corner"></span>
-                            <span class="type pdf">pdf</span>
-                        </div>
-                        <center style="display:inline; text-align: center;">{{file.name}}</center>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="panel-footer">
-                <div class="simpleDemo">
-                    <ul type="button" class="buttondialog" dnd-list="[]" dnd-drop="addToAll(item, index)">
-                        <center style="text-align: center; font: normal 14px sans-serif; margin-top: 12px">Aplicar a todos!</center>
-                    </ul>
-                </div>
-            </div>
-        </div>
+    <div class="alert alert-info" id="alert">
+      <a class="close" onclick="$('#alert').hide();">&times;</a>
+      <h4><strong>Informação importante!</strong></h4>
+      Para poder avançar tem de definir a especificação desejada para imprimir o/os documento/s. A especificação é definida se a arrastar para cima do documento desejado. Se não tiver nenhuma especificação, crie uma!<br>
+      Na fila de impressão encontram-se os documentos que serão impressos no seu pedido, a respetiva especificação e o intervalo de páginas que deseja.
     </div>
+
+    <div class="panel panel-default left" style="min-width: 45%; max-width: 45%; min-height: 240px;">
+      <div class="panel-heading">
+        <div class="panel-title">
+          <b>Especificações</b>
+          <div class="pull-right">
+            <a href="" title="Precisa de ajuda?" ng-click="helpSpecModal()" onclick="$('#alert').show();">
+              <i class="fa fa-question-circle" aria-hidden="true"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="panel-body" style="max-height: 300px; overflow-y: scroll">
+        <li ng-repeat="item in specs" dnd-draggable="item" dnd-effect-allowed="copy" dnd-selected="models.selected = item" ng-class="{'selected': models.selected === item}" class="list-group-item clearfix">
+          {{item.fakeID}}: {{item.name}}
+          <div class="right">
+            <div class="row">
+              <div class="col-sm-4"></div>
+              <div class="col-sm-4">
+                <a ng-click="editSpecModal($index)">
+                  <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                </a>
+              </div>
+              <div class="col-sm-4">
+                <a ng-click="removePrintingSchema($index)">
+                  <i class="fa fa-times" aria-hidden="true" style="color:red"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </li>
+      </div>
+
+      <div class="panel-footer">
+        <button type="button button-rounded button" class="list-group-item clearfix" ng-click="addSpecModal()"><i class="fa fa-plus"></i> Nova Especificação</button>
+      </div>
+    </div>
+    <div class="panel panel-default right" style="min-width: 45%; max-width: 45%; min-height: 240px;">
+      <div class="panel-heading">
+        <h2 class="panel-title"> <b>Ficheiros Selecionados </b></h2>
+      </div>
+
+      <div class="simpleDemo">
+        <div class="panel-body" style="max-height: 300px; overflow-y: scroll;">
+          <ul class="dialog" ng-repeat="file in files()" dnd-list="file.specs" dnd-drop="addPageModal(file, item, index)">
+            <div class="file-type-icon">
+              <span class="corner"></span>
+              <span class="type pdf">pdf</span>
+            </div>
+            <center style="display:inline; text-align: center;">{{file.name}}</center>
+          </ul>
+        </div>
+      </div>
+
+      <div class="panel-footer">
+        <div class="simpleDemo">
+          <ul type="button" class="buttondialog" dnd-list="[]" dnd-drop="addToAll(item, index)">
+            <center style="text-align: center; font: normal 14px sans-serif; margin-top: 12px">Aplicar a todos!</center>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div class="col-sm-9 col-md-10 main">
-    <div class="panel panel-default left" style="min-width: 100%;">
-        <div class="panel-heading">
-            <h2 class="panel-title"> <b>Fila de Impressão </b></h2>
-        </div>
-        <div class="panel-body" style="min-height: 150px; max-height: 260px; overflow-y: scroll;">
-            <div ng-repeat="item in files()">
-                <div class="dialog" ng-repeat="spec in item.specs">
-                    <a ng-click="remove(item, spec)" class="close-thik"></a>
-                    <div class="file-type-icon">
-                        <span class="corner"></span>
-                        <span class="type pdf">pdf</span>
-                    </div>
-                    <li style="display:inline;"> {{item.name}} <br /></li>
-                    <li style="display:inline;"> Especificação: {{spec.fakeID}}<br /> </li>
-                    <li style="display:inline;"> Páginas: {{spec.pages}} </li>
-                </div>
-            </div>
-        </div>
+  <div class="panel panel-default left" style="min-width: 100%;">
+    <div class="panel-heading">
+      <h2 class="panel-title"> <b>Fila de Impressão </b></h2>
     </div>
+    <div class="panel-body" style="min-height: 150px; max-height: 260px; overflow-y: scroll;">
+      <div ng-repeat="item in files()">
+        <div class="dialog" ng-repeat="spec in item.specs">
+          <a ng-click="remove(item, spec)" class="close-thik"></a>
+          <div class="file-type-icon">
+            <span class="corner"></span>
+            <span class="type pdf">pdf</span>
+          </div>
+          <li style="display:inline;"> {{item.name}} <br /></li>
+          <li style="display:inline;"> Especificação: {{spec.fakeID}}<br /> </li>
+          <li style="display:inline;"> Páginas: {{spec.pages}} </li>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div class="col-sm-9 col-md-10 main">
-    <div class="left">
-        <button ui-sref="consumer.mainpage" style="margin:20px 0;" type="button" class="button button-rounded button"><i class="fa fa-arrow-left"></i> Anterior</button>
-    </div>
-    <div class="right">
-        <button style="margin:20px 0;" type="button" class="button button-rounded button" ng-click="addRequestModal()" ng-disabled="queueNumber()==0" >Seguinte <i class="fa fa-arrow-right"></i></button>
-    </div>
+  <div class="left">
+    <button ui-sref="consumer.mainpage" style="margin:20px 0;" type="button" class="button button-rounded button"><i class="fa fa-arrow-left"></i> Anterior</button>
+  </div>
+  <div class="right">
+    <button style="margin:20px 0;" type="button" class="button button-rounded button" ng-click="addRequestModal()" ng-disabled="queueNumber()==0" >Seguinte <i class="fa fa-arrow-right"></i></button>
+  </div>
 </div>

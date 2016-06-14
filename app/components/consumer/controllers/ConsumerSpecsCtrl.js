@@ -13,17 +13,17 @@ function($scope, $uibModal, $log, fileTransferService, specMarshallService,
     usSpinnerService.stop('consumer-spinner');
 
     $scope.helpSpecModal = function() {
-        var modalInstance = $uibModal.open({
-            animation: true,
-            templateUrl: 'app/components/consumer/views/help-modal.html',
-            controller: 'HelpController',
-            size: 'lg',
-            resolve: {
-                files: function () {
-                    return $scope.files();
-                }
-            }
-        });
+      var modalInstance = $uibModal.open({
+        animation: true,
+        templateUrl: 'app/components/consumer/views/help-modal.html',
+        controller: 'HelpController',
+        size: 'lg',
+        resolve: {
+          files: function () {
+            return $scope.files();
+          }
+        }
+      });
     };
 
     $scope.addToAll = function(item, index) {
@@ -317,4 +317,15 @@ function($scope, $uibModal, $log, fileTransferService, specMarshallService,
       $uibModalInstance.dismiss('cancel');
     };
 
+  }]);
+
+  angular.module('ProxyPrint').controller('HelpController', ['$scope', '$uibModalInstance', function ($scope, $uibModalInstance) {
+
+    $scope.performAction = function () {
+      $uibModalInstance.close();
+    };
+
+    $scope.closeModal = function () {
+      $uibModalInstance.dismiss();
+    };
   }]);
