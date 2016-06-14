@@ -2,7 +2,7 @@ describe('pending requests tests', function() {
 
   var base_url = 'http://localhost:9000';
   var user_url = base_url + '/#/employee/mafalda';
-  var pendingRequestId = "8";
+  var pendingRequestId = "13";
 
   beforeEach(function () {
     browser.get(base_url);
@@ -24,15 +24,14 @@ describe('pending requests tests', function() {
     $('.btn-success').click();
     $('[ng-click="performAction()"]').click().then(function () {
       $('[ng-click="performAction()"]').click().then(function () {
-        expect(element(by.binding('message'))).toBe('Finalizado');
         expect($('.btn-success').isDisplayed()).toBe(false);
-        //browser.get(user_url+'/pending/'+beingProcessedId);
       });
     });
   });
 
   it('Completing a request should decrease the satisfied request list length by 1', function () {
-    browser.get(user_url+'/satisfied');
+    //browser.get(user_url+'/satisfied');
+    $('.fa-check').click();
     requests = element.all(by.repeater('request in satisfiedRequests'));
     var initialValue = requests.count();
     requests.get(0).element(by.css('.bg-purple')).click();
