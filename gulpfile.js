@@ -3,7 +3,6 @@ var gulp = require('gulp');
 var concat = require('gulp-concat');
 var cleanCSS = require('gulp-clean-css');
 var uglify = require('gulp-uglify');
-var sass = require('gulp-sass');
 var sourcemaps = require('gulp-sourcemaps');
 
 //aux function to convert a file to an array of strings

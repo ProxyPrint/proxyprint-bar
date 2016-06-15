@@ -25,18 +25,17 @@
   },
   "devDependencies": {
     "angular-mocks": "^1.4.8",
+    "gulp": "^3.9.1",
+    "gulp-clean-css": "^2.0.9",
+    "gulp-concat": "^2.6.0",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-uglify": "^1.5.3",
     "http-server": "^0.6.1",
     "karma": "^0.13.22",
     "karma-chrome-launcher": "1.0.1 ",
     "karma-jasmine": "1.0.2",
     "protractor": "^2.2.0",
-    "protractor-console": "2.0.1",
-    "gulp": "^3.9.1",
-    "gulp-clean-css": "^2.0.9",
-    "gulp-concat": "^2.6.0",
-    "gulp-sass": "^2.3.1",
-    "gulp-sourcemaps": "^1.6.0",
-    "gulp-uglify": "^1.5.3"
+    "protractor-console": "2.0.1"
   },
   "scripts": {
     "prestart": "npm install",
