@@ -6,15 +6,25 @@ var uglify = require('gulp-uglify');
 var sass = require('gulp-sass');
 var sourcemaps = require('gulp-sourcemaps');
 
-var javascript = fs.readFileSync('javascript.assets').toString().split("\n");
-for (i in javascript) {
-  var aux = javascript[i].trim();
-  if (aux != "") {
-    javascript[i] = aux;
+//aux function to convert a file to an array of strings
+function fileToArray(file){
+  var array = fs.readFileSync(file).toString().split("\n");
+  for (i in array) {
+    var aux = array[i].trim();
+    if (aux != ""){
+      array[i] = aux;
+    }
   }
+  return array;
 }
-var stylesheets = ['src/css/**/*.css'];
 
+//get our list of javascript assets from javascript.assets
+var javascript = fileToArray('javascript.assets');
+
+//get our list of css assets from css.assets
+var stylesheets =  fileToArray('css.assets');
+
+//build css by concatenating all assets into one file and cleaning it (app.css)
 gulp.task('build-css', function() {
   return gulp.src(stylesheets)
     .pipe(concat('app.css'))
@@ -22,6 +32,7 @@ gulp.task('build-css', function() {
     .pipe(gulp.dest('public/assets/stylesheets'));
 });
 
+//build javascript by concatenating and minificating all assets into one file (app.js)
 gulp.task('build-js', function() {
   return gulp.src(javascript)
     .pipe(sourcemaps.init())
