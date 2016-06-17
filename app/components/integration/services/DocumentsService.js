@@ -4,6 +4,7 @@ app.factory('documentsService', ['$http', 'backendURLService', 'fileTransferServ
 function($http, backendURLService, fileTransferService) {
     var service = {};
 
+    // Vai buscar o documento pelo ID
     service.getDocuments = function(documentID) {
         $http.get(backendURLService.getBaseURL() + "printdocument/" + documentID).success(function(data){
             console.log(data);

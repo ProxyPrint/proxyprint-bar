@@ -426,7 +426,7 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
     })
     .state('printdocumentsRegister' , {
         url: '/printdocumentsRegister',
-        templateUrl: '/app/components/integration/views/register.html',
+        templateUrl: '/app/components/home/views/register.html',
         controller: 'IntegrationRegisterController',
         data: {
             css: gradientSoligBgCSS

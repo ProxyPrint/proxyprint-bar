@@ -18,6 +18,9 @@ function($scope, $rootScope, $location, authenticationService, $state, $cookieSt
             $cookieStore.put("externalURL", response.externalURL);
           }
           authenticationService.SetCredentials($scope.username, $scope.password);
+
+
+          // TEM DE IR PARA A PARTE DE ESCOLHER A REPROGRAFIA
           $state.go('consumer.mainpage', {"consumerID":$scope.username});
         }
       }
