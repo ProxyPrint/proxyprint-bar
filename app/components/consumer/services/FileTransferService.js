@@ -62,7 +62,16 @@ angular.module('ProxyPrint').factory('fileTransferService',
             file.specs = [];
         });
 
+        // for (i=0;i<files.length;i++)
+        //     service.files.push(files[i]);
+
         service.files = files;
+    };
+
+    service.setOldFiles = function(files) {
+        service.files = [];
+        for (i=0;i<files.length;i++)
+            service.files.push(files[i]);
     };
 
     service.getFiles = function() {

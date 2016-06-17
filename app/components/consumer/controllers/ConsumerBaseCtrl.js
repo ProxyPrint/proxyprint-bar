@@ -21,7 +21,6 @@ function($scope, $rootScope, $cookieStore, authenticationService, fileTransferSe
   $scope.pdfFiles = [];
   $scope.consumer = $cookieStore.get('globals').currentUser;
   $scope.balance = $cookieStore.get('consumerBalance');
-
   var audio = new Audio('assets/audio/notifications.mp3');
   var coin = new Audio('assets/audio/coin.mp3');
 
@@ -133,6 +132,7 @@ function($scope, $rootScope, $cookieStore, authenticationService, fileTransferSe
       requestHelperService.setSubmittedFilesStatus(true);
       $state.go('consumer.requestbudget');
     }
+    console.log(fileTransferService.getFiles());
   };
 
   $scope.resetRequest = function () {
