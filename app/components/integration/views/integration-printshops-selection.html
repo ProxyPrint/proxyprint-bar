@@ -64,11 +64,10 @@
 		<div class="scrollableTable">
 			<ul class="list-group">
 				<!-- attention much text on <li> not being fully displayed -->
-				<li class="list-group-item clearfix" ng-repeat="file in submitedFiles" style="overflow-x:hidden;">
+				<li class="list-group-item clearfix" ng-repeat="file in files" style="overflow-x:hidden;">
 					<strong>{{file.name}}</strong>
 					<div ng-repeat="spec in file.specs">
-						<small>{{spec.name}}</small><br/>
-						<small>(páginas: {{spec.pages}})</small>
+						<small>{{spec.printingSchema.name}}</small><br/>
 					</div>
 				</li>
 			</ul>
@@ -77,6 +76,8 @@
 </div>
 <!-- flow navigation buttons -->
 <div class="row" style="margin-top:4%; margin-bottom:2%;">
+	<div class="col-md-8">
+	</div>
 	<div class="col-md-3">
 		<div class="right">
 			<button type="button" class="button button-rounded button" ng-disabled="totalSelectedPrintShops < 1" ng-click="proceedRequest()">Seguinte <i class="fa fa-arrow-right"></i></button>

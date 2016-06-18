@@ -243,8 +243,6 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
         }
     })
 
-    /*PrintShop*/
-
     /*Employee*/
     .state('employee', {
         abstract: true,
