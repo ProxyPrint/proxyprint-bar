@@ -1,7 +1,9 @@
-angular.module('Auth').controller('IntegrationLoginController', ['$scope', '$rootScope', '$location', 'authenticationService', '$state', '$cookieStore',
-function($scope, $rootScope, $location, authenticationService, $state, $cookieStore) {
+angular.module('Auth').controller('IntegrationLoginController', ['$scope', '$rootScope', '$location', 'authenticationService', '$state', '$cookieStore', 'documents', 'documentsService',
+function($scope, $rootScope, $location, authenticationService, $state, $cookieStore, documents, documentsService) {
   // reset login status
   authenticationService.ClearCredentials();
+
+  $scope.files = documents.data.documents;
 
   $scope.login = function() {
     $scope.dataLoading = true;
@@ -19,9 +21,10 @@ function($scope, $rootScope, $location, authenticationService, $state, $cookieSt
           }
           authenticationService.SetCredentials($scope.username, $scope.password);
 
-
-          // TEM DE IR PARA A PARTE DE ESCOLHER A REPROGRAFIA
-          $state.go('consumer.mainpage', {"consumerID":$scope.username});
+          $state.go('consumer.iprintshopselection');
+        } else {
+          $scope.error = "Dados de login inválidos!";
+          $scope.dataLoading = false;
         }
       }
       else {

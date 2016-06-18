@@ -232,6 +232,16 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
             }]
         }
     })
+    .state('consumer.iprintshopselection', {
+        url: '/printrecipe/pshopselection',
+        templateUrl: '/app/components/integration/views/integration-printshops-selection.html',
+        controller: 'IntegrationPrintShopsSelectionController',
+        resolve: {
+            printshopsList : ['printShopListService', function(printShopListService) {
+                return printShopListService.getPrintShops();
+            }]
+        }
+    })
 
     /*PrintShop*/
 
@@ -410,9 +420,9 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
     })
 
     /* Integration */
-    .state('printdocuments' , {
+    .state('printrecipe' , {
         //abstract: true,
-        url: '/printdocuments', //falta meter o id
+        url: '/printrecipe', //falta meter o id
         templateUrl: '/app/components/integration/views/login.html',
         controller: 'IntegrationLoginController',
         data: {
@@ -424,8 +434,8 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
             }]
         }
     })
-    .state('printdocumentsRegister' , {
-        url: '/printdocumentsRegister',
+    .state('printrecipeRegister' , {
+        url: '/printrecipeRegister',
         templateUrl: '/app/components/home/views/register.html',
         controller: 'IntegrationRegisterController',
         data: {

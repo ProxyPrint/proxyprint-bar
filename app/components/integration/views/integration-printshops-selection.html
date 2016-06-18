@@ -1,0 +1,85 @@
+<!-- Progress bar -->
+<div style="text-align:center;">
+	<ul class="progressbar" style="width:100%;">
+		<li style="font-size:8px;color:green;"><i class="fa fa-check" aria-hidden="true"></i>  Especificação</li>
+		<li class="active" style="font-size:10px;">€  Orçamentos</li>
+		<li style="font-size:8px;"><i class="fa fa-print" aria-hidden="true"></i>  Confimar &#38; Pagar</li>
+	</ul>
+</div>
+<!-- ./Progress bar -->
+<div class="row" style="margin-top:1%;">
+	<!-- prinshops selection -->
+	<div class="col-md-8">
+		<div class="table-responsive" style="height: 250px;">
+			<table class="table">
+				<thead>
+					<tr>
+						<th style="width: 25%;">Reprografia</th>
+						<th style="width: 45%;">Morada</th>
+						<th style="width: 20%;">Distância</th>
+						<th style="width: 5%"></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="printshop in selectedPrintShops" class="animate-row">
+						<td>{{printshop.name}}</td>
+						<td>{{printshop.address}}</td>
+						<td><span ng-if="isGeoLocationActive">{{printshop.distance}} km</span><span ng-if="!isGeoLocationActive"> - </span></td>
+						<td><a href="" ng-click="removePrintShop($index)" style="color:red;"><i class="fa fa-times"></i></a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<!-- printshops counter -->
+		<div style="float: right;">
+			<strong>{{totalSelectedPrintShops}} de 5</strong>
+		</div>
+		<hr/>
+		<!-- checbox -->
+		<label ng-show="isGeoLocationActive">
+			<input type="checkbox" id="distance" name="distance" ng-model="showDistance" ng-disabled="totalSelectedPrintShops==maxSelectionAllowed"/>
+			Filtrar por distância
+		</label>
+		<!-- slider -->
+		<div class="animate-show-slider" ng-show="showDistance">
+			<rzslider rz-slider-model="distanceSlider.value"
+			rz-slider-high="distanceSlider.maxValue"
+			rz-slider-options="distanceSlider.options" style="margin-top: 2%;" ng-disabled="totalSelectedPrintShops==maxSelectionAllowed"></rzslider>
+		</div>
+		<!-- selection -->
+		<div style="margin-top: 1%;">
+			<ui-select ng-model="selected.value" on-select="addPrintShop($item)" ng-disabled="totalSelectedPrintShops==maxSelectionAllowed">
+				<ui-select-match placeholder="Selecione ou procure uma reprografia" on-select="addPrintShop()">
+					<span ng-bind="formatPrinShopForOption($select.selected)"></span>
+				</ui-select-match>
+				<ui-select-choices repeat="printshop in (printShopsOptions | filter: $select.search) track by printshop.id" on-select="addPrintShop()">
+					<span ng-bind="formatPrinShopForOption(printshop)"></span>
+				</ui-select-choices>
+			</ui-select>
+		</div>
+	</div>
+	<!-- list of submited files -->
+	<div class="col-md-3">
+		<h4>Ficheiro Submetidos</h4>
+		<div class="scrollableTable">
+			<ul class="list-group">
+				<!-- attention much text on <li> not being fully displayed -->
+				<li class="list-group-item clearfix" ng-repeat="file in submitedFiles" style="overflow-x:hidden;">
+					<strong>{{file.name}}</strong>
+					<div ng-repeat="spec in file.specs">
+						<small>{{spec.name}}</small><br/>
+						<small>(páginas: {{spec.pages}})</small>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+<!-- flow navigation buttons -->
+<div class="row" style="margin-top:4%; margin-bottom:2%;">
+	<div class="col-md-3">
+		<div class="right">
+			<button type="button" class="button button-rounded button" ng-disabled="totalSelectedPrintShops < 1" ng-click="proceedRequest()">Seguinte <i class="fa fa-arrow-right"></i></button>
+		</div>
+	</div>
+</div>

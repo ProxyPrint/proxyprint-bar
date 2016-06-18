@@ -7,13 +7,10 @@
   <div class="form-container">
     <div class="row">
       <div class="col-md-6">
-        <h4 class="text">Ficheiros que irá imprimir.</h4>
-
-
-        <!-- Apresentar aqui os ficheiros -->
-
-
-
+        <h4 class="text">Ficheiros que irá imprimir :</h4>
+            <ul class="text" ng-repeat="file in files">
+                <li>{{file}}</li>
+            </ul>
       </div>
       <div class="col-md-6">
         <div ng-show="error" class="alert alert-danger">{{error}}</div>

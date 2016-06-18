@@ -6,9 +6,7 @@ function($http, backendURLService, fileTransferService) {
 
     // Vai buscar o documento pelo ID
     service.getDocuments = function(documentID) {
-        $http.get(backendURLService.getBaseURL() + "printdocument/" + documentID).success(function(data){
-            console.log(data);
-            fileTransferService.setOldFiles(data.documents);
+        return $http.get(backendURLService.getBaseURL() + "printdocument/" + documentID).success(function(data){
             return data;
         });
     };
