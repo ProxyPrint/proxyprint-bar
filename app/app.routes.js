@@ -242,6 +242,25 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
             }]
         }
     })
+    .state('consumer.ibudgetselection', {
+            url: '/printrecipe/budgets',
+            templateUrl: '/app/components/consumer/views/consumer-budget-selection.html',
+            controller: 'ConsumerBudgetSelectionCtrl',
+            resolve: {
+                budgets : ['integrationBudgetService', function(integrationBudgetService) {
+                    return integrationBudgetService.getBudgets();
+                }],
+                permission: ['$q','requestHelperService', function ($q, requestHelperService) {
+                    var d = $q.defer();
+                    if (requestHelperService.getSelectedPrintShopsStatus()) {
+                        d.resolve();
+                    } else {
+                        d.reject('Canceled');
+                    }
+                    return d.promise;
+                }]
+            }
+        })
 
     /*Employee*/
     .state('employee', {
@@ -428,7 +447,7 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
         },
         resolve: {
             documents: ['documentsService', function (documentsService) {
-                return documentsService.getDocuments(20);
+                return documentsService.getDocuments(25);
             }]
         }
     })

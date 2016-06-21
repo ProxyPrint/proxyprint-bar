@@ -8,35 +8,16 @@ app.factory('integrationBudgetService', ['$http', 'backendURLService', '$cookieS
         return $http.post(backendURLService.getBaseURL()+'consumer/'+consumerID+'/printingschemas', schema);
     }
 
-
     /* É aqui tenho de mandar a lista de reprografias selecionadas. Nao estou a conseguir */
 
-    service.getMeBudgetsForThis = function(successCallback, errorCallback, choosenPShopsIDs, id) {
-        var data = $.param({
-            printshops: choosenPShopsIDs,
+    service.getMeBudgetsForThis = function(successCallback, errorCallback, printshops, id) {
+        $http.post(backendURLService.getBaseURL() + 'printrecipe/' + id + '/budget', printshops).success(function (resp) {
+            // Persist budgets information
+            $cookieStore.put("budgets", resp);
+            successCallback();
+        }, function (resp) {
+            errorCallback(resp);
         });
-        $http({
-            method: 'POST',
-            url: backendURLService.getBaseURL() + 'printrecipe/' + id + '/budget',
-            data: data
-        }).success(function(resp) {
-            if(resp.success) {
-                console.log(resp);
-                // Persist budgets information
-                $cookieStore.put("budgets", resp.data);
-                successCallback();
-            } else {
-                console.log('Response: ' + resp);
-                errorCallback(resp.data);
-            }
-        });
-    };
-
-    service.submitPrintRequest = function(printRequestID, params) {
-        var url = backendURLService.getBaseURL()+"consumer/printrequest/"+printRequestID+"/submit";
-        console.log(url);
-        console.log(params);
-        return $http.post(url,params);
     };
 
     service.getBudgets = function() {

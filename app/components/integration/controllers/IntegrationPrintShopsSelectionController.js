@@ -77,18 +77,17 @@ function($scope, printShopListService, printshopsList, documentsService, $cookie
         printShopListService.setSelectedPrintShops(choosenPShops);
 
         usSpinnerService.spin('consumer-spinner');
-        integrationBudgetService.getMeBudgetsForThis($scope.budgetSuccessCallback, $scope.budgetErrorCallback, choosenPShopsIDs, 20);
+        integrationBudgetService.getMeBudgetsForThis($scope.budgetSuccessCallback, $scope.budgetErrorCallback, choosenPShopsIDs, 25);
     };
 
     $scope.budgetSuccessCallback = function() {
         requestHelperService.setSelectedPrintShopsStatus(true);
-        $state.go("consumer.budgetselection");
+        $state.go("consumer.ibudgetselection");
     };
 
     $scope.budgetErrorCallback = function(data) {
         usSpinnerService.stop('consumer-spinner');
         toasterService.notifyWarning("Os orçamentos não puderam se efetuados. Por favor tente mais tarde.");
-        console.log(data);
     };
 
     function remove(arr, item) {
