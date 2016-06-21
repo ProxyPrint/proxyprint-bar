@@ -1,5 +1,5 @@
-angular.module('Auth').controller('IntegrationLoginController', ['$scope', '$rootScope', '$location', 'authenticationService', '$state', '$cookieStore', 'documents', 'documentsService',
-function($scope, $rootScope, $location, authenticationService, $state, $cookieStore, documents, documentsService) {
+angular.module('Auth').controller('IntegrationLoginController', ['$scope', '$rootScope', '$location', 'authenticationService', '$state', '$cookieStore', 'documents', 'documentsService', 'idrequest',
+function($scope, $rootScope, $location, authenticationService, $state, $cookieStore, documents, documentsService, idrequest) {
     // reset login status
     authenticationService.ClearCredentials();
 
@@ -9,11 +9,11 @@ function($scope, $rootScope, $location, authenticationService, $state, $cookieSt
         $scope.dataLoading = true;
         authenticationService.Login($scope.username, $scope.password, function(response) {
             if (response.success) {
-                // Consumer
                 if(response.user.roles[0] == "ROLE_USER") {
                     $cookieStore.put("consumerID", response.user.id);
                     $cookieStore.put("consumerName", response.user.name);
                     $cookieStore.put("consumerBalance", response.user.balance);
+                    $cookieStore.put("requestid", idrequest);
                     if(response.externalURL) {
                         $cookieStore.put("externalURL", response.externalURL);
                     }

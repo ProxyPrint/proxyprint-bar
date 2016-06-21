@@ -4,6 +4,9 @@ angular.module('ProxyPrint')
 function($scope, printShopListService, printshopsList, documentsService, $cookieStore, integrationBudgetService, $state, usSpinnerService, requestHelperService, toasterService) {
 
     $scope.printshops = [];
+    $scope.requestid = $cookieStore.get("requestid");
+
+    console.log($scope.requestid);
 
     for (var dist in printshopsList.data.printshops) {
         var pshop = printshopsList.data.printshops[dist];
@@ -77,7 +80,7 @@ function($scope, printShopListService, printshopsList, documentsService, $cookie
         printShopListService.setSelectedPrintShops(choosenPShops);
 
         usSpinnerService.spin('consumer-spinner');
-        integrationBudgetService.getMeBudgetsForThis($scope.budgetSuccessCallback, $scope.budgetErrorCallback, choosenPShopsIDs, 25);
+        integrationBudgetService.getMeBudgetsForThis($scope.budgetSuccessCallback, $scope.budgetErrorCallback, choosenPShopsIDs, $scope.requestid);
     };
 
     $scope.budgetSuccessCallback = function() {

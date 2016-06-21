@@ -438,16 +438,18 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
 
     /* Integration */
     .state('printrecipe' , {
-        //abstract: true,
-        url: '/printrecipe', //falta meter o id
+        url: '/printrecipe/:requestid',
         templateUrl: '/app/components/integration/views/login.html',
         controller: 'IntegrationLoginController',
         data: {
             css: gradientSoligBgCSS
         },
         resolve: {
-            documents: ['documentsService', function (documentsService) {
-                return documentsService.getDocuments(25);
+            documents: ['documentsService', '$stateParams', function (documentsService, $stateParams) {
+                return documentsService.getDocuments($stateParams.requestid);
+            }],
+            idrequest: [ '$stateParams', function ($stateParams) {
+                return $stateParams.requestid;
             }]
         }
     })
