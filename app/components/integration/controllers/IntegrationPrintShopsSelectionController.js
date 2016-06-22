@@ -6,8 +6,6 @@ function($scope, printShopListService, printshopsList, documentsService, $cookie
     $scope.printshops = [];
     $scope.requestid = $cookieStore.get("requestid");
 
-    console.log($scope.requestid);
-
     for (var dist in printshopsList.data.printshops) {
         var pshop = printshopsList.data.printshops[dist];
         pshop.distance = Math.round(dist * 100) / 100;

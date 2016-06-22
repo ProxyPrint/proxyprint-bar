@@ -1,5 +1,5 @@
-angular.module('Auth').controller('IntegrationLoginController', ['$scope', '$rootScope', '$location', 'authenticationService', '$state', '$cookieStore', 'documents', 'documentsService', 'idrequest',
-function($scope, $rootScope, $location, authenticationService, $state, $cookieStore, documents, documentsService, idrequest) {
+angular.module('Auth').controller('IntegrationLoginController', ['$scope', '$rootScope', '$location', 'authenticationService', '$state', '$cookieStore', 'documents', 'documentsService', 'idrequest', 'requestHelperService',
+function($scope, $rootScope, $location, authenticationService, $state, $cookieStore, documents, documentsService, idrequest, requestHelperService) {
     // reset login status
     authenticationService.ClearCredentials();
 
@@ -19,7 +19,9 @@ function($scope, $rootScope, $location, authenticationService, $state, $cookieSt
                     }
                     authenticationService.SetCredentials($scope.username, $scope.password);
 
-                    $state.go('consumer.iprintshopselection');
+                    requestHelperService.setSpecsStatus(true);
+
+                    $state.go('consumer.iprintshopselection', {"consumerID":$scope.username});
                 } else {
                     $scope.error = "Dados de login inválidos!";
                     $scope.dataLoading = false;

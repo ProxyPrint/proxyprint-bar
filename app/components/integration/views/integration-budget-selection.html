@@ -1,0 +1,66 @@
+<!-- Progress bar -->
+<div style="text-align:center;">
+	<ul class="progressbar" style="width:100%;">
+		<li style="font-size:8px;color:green;"><i class="fa fa-check" aria-hidden="true"></i>  Especificação</li>
+		<li style="font-size:8px;color:green;"><i class="fa fa-check" aria-hidden="true"></i>  Orçamentos</li>
+		<li class="active" style="font-size:10px;"><i class="fa fa-print" aria-hidden="true"></i>  Confimar &#38; Pagar</li>
+	</ul>
+</div>
+<!-- ./Progress bar -->
+<div class="row">
+	<!-- prinshops selection -->
+	<div class="col-md-8">
+		<div id="rcornersdiv" class="table-responsive" style="height: 250px;margin-top:2%;">
+			<table class="table" ng-disabled="amount!==0.0">
+				<thead>
+					<tr>
+						<th style="width: 25%;">Reprografia</th>
+						<th style="width: 15%;">Distância</th>
+						<th style="width: 50%">Preço</th>
+						<th style="width: 10%"></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="printshop in selectedPrintShops" class="animate-row">
+						<td>{{printshop.name}}</td>
+						<td><span ng-if="isGeoLocationActive">{{printshop.distance}} km</span><span ng-if="!isGeoLocationActive"> - </span></td>
+						<td>{{printshop.budget}} <span ng-if="printshop.hasBudget==true">€</span></td>
+						<td><input ng-if="printshop.hasBudget==true" type="radio" name="theChosenOne" ng-model="$parent.$parent.theChosenOne" value="printshop.id" ng-value="printshop.id"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<center><button type="button" ng-hide="noBudgetsFlag" class="button button-rounded button-primary hvr-bob" style="margin-top:2%;" ng-disabled="amount!==0.0" ng-click="finishPrintRequest()">Escolher orçamento</button></center>
+	</div>
+	<!-- submited files -->
+	<div class="col-md-3">
+		<h4>Ficheiro Submetidos</h4>
+		<div class="scrollableTable">
+			<ul class="list-group">
+				<li class="list-group-item clearfix" ng-repeat="file in submitedFiles" style="overflow-x:hidden;">
+					<strong>{{file.name}}</strong>
+					<div ng-repeat="spec in file.specs">
+						<small>{{spec.name}}</small><br/>
+						<small>(páginas: {{spec.pages}})</small>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<!-- ./submited files-->
+	<!-- flow navigation buttons -->
+	<div class="row" style="margin-top:4%;margin-bottom:2%;">
+		<div class="col-md-6" style="margin-top:2%;">
+			<div class="left">
+				<button ui-sref="consumer.iprintshopselection" type="button" class="button button-rounded button"><i class="fa fa-arrow-left"></i> Anterior</button>
+			</div>
+		</div>
+		<div class="col-md-5" style="margin-top:2%;">
+			<div class="right">
+				<div ng-hide="amount==0.0">
+					<button type="submit" class="button button-rounded button" ng-click="pay()">Efetuar pagamento  <i class="fa fa-arrow-right"></i></button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

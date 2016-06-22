@@ -233,18 +233,27 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
         }
     })
     .state('consumer.iprintshopselection', {
-        url: '/printrecipe/pshopselection',
+        url: '/printdocument/pshopselection',
         templateUrl: '/app/components/integration/views/integration-printshops-selection.html',
         controller: 'IntegrationPrintShopsSelectionController',
         resolve: {
             printshopsList : ['printShopListService', function(printShopListService) {
                 return printShopListService.getPrintShops();
+            }],
+            permission: ['$q','requestHelperService', function ($q, requestHelperService) {
+                var d = $q.defer();
+                if (requestHelperService.getSpecsStatus()) {
+                    d.resolve();
+                } else {
+                    d.reject('Canceled');
+                }
+                return d.promise;
             }]
         }
     })
     .state('consumer.ibudgetselection', {
-            url: '/printrecipe/budgets',
-            templateUrl: '/app/components/consumer/views/consumer-budget-selection.html',
+            url: '/printdocument/budgets',
+            templateUrl: '/app/components/integration/views/integration-budget-selection.html',
             controller: 'ConsumerBudgetSelectionCtrl',
             resolve: {
                 budgets : ['integrationBudgetService', function(integrationBudgetService) {
@@ -437,8 +446,8 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
     })
 
     /* Integration */
-    .state('printrecipe' , {
-        url: '/printrecipe/:requestid',
+    .state('printdocument' , {
+        url: '/printdocument/:requestid',
         templateUrl: '/app/components/integration/views/login.html',
         controller: 'IntegrationLoginController',
         data: {
@@ -453,8 +462,8 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
             }]
         }
     })
-    .state('printrecipeRegister' , {
-        url: '/printrecipeRegister',
+    .state('printdocumentRegister' , {
+        url: '/printdocumentRegister',
         templateUrl: '/app/components/home/views/register.html',
         controller: 'IntegrationRegisterController',
         data: {

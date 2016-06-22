@@ -1,6 +1,6 @@
 angular.module('Auth').controller('IntegrationRegisterController',
-    ['$scope', '$rootScope', '$location', 'authenticationService','$state', '$cookieStore',
-    function ($scope, $rootScope, $location, authenticationService, $state, $cookieStore) {
+    ['$scope', '$rootScope', '$location', 'authenticationService','$state', '$cookieStore', 'requestHelperService',
+    function ($scope, $rootScope, $location, authenticationService, $state, $cookieStore, requestHelperService) {
         // reset login status
         authenticationService.ClearCredentials();
 
@@ -9,7 +9,10 @@ angular.module('Auth').controller('IntegrationRegisterController',
             authenticationService.Register($scope.name, $scope.email, $scope.username, $scope.password, function (response) {
                 if (response.success) {
                     authenticationService.SetCredentials($scope.username, $scope.password);
-                    $state.go('consumer.iprintshopselection');
+
+                    requestHelperService.setSpecsStatus(true);
+
+                    $state.go('consumer.iprintshopselection', {"consumerID":$scope.username});
                 } else {
                     $scope.error = response.message;
                     $scope.dataLoading = false;

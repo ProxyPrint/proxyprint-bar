@@ -11,7 +11,7 @@ app.factory('integrationBudgetService', ['$http', 'backendURLService', '$cookieS
     /* É aqui tenho de mandar a lista de reprografias selecionadas. Nao estou a conseguir */
 
     service.getMeBudgetsForThis = function(successCallback, errorCallback, printshops, id) {
-        $http.post(backendURLService.getBaseURL() + 'printrecipe/' + id + '/budget', printshops).success(function (resp) {
+        $http.post(backendURLService.getBaseURL() + 'printdocument/' + id + '/budget', printshops).success(function (resp) {
             // Persist budgets information
             $cookieStore.put("budgets", resp);
             successCallback();
