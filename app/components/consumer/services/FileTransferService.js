@@ -61,7 +61,6 @@ angular.module('ProxyPrint').factory('fileTransferService',
         angular.forEach(files, function(file) {
             file.specs = [];
         });
-
         service.files = files;
     };
 

@@ -1,0 +1,39 @@
+<div class="container container-margintop">
+  <center><a ui-sref="home" class="hvr-pulse"><img src="/assets/img/logo/logo_blue_dark.png" width="120" height="120"/></a></center>
+  <center><h3 class="title">Efetue o login para imprimir os documentos!</h3></center>
+</div>
+<center><div style="width: 70%;"><hr class="gradient"></div></center>
+<div class="container" style="margin-top:2%; width: 50%;">
+  <div class="form-container">
+    <div class="row">
+      <div class="col-md-6">
+        <h4 class="text">Ficheiros que irá imprimir :</h4>
+            <ul class="text" ng-repeat="file in files">
+                <li>{{file.name}}</li>
+            </ul>
+      </div>
+      <div class="col-md-6">
+        <div ng-show="error" class="alert alert-danger">{{error}}</div>
+        <form name="form" ng-submit="login()" role="form">
+          <div class="form-group input-group-lg">
+            <input name="username" type="text" class="form-control" ng-model="username" placeholder="Username" required/>
+            <span ng-show="form.username.$dirty && form.username.$error.required" class="help-block">Username is required</span>
+          </div>
+          <div class="form-group input-group-lg">
+            <input name="password" type="password" class="form-control" ng-model="password" placeholder="Password" required/>
+            <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Password is required</span>
+          </div>
+          <hr class="gradient">
+          <div class="form-actions">
+            <button type="submit" ng-disabled="form.$invalid || dataLoading" class="btn btn-primary btn-lg" style="width: 100%;">Login</button>
+            <center><img
+            ng-if="dataLoading"
+            src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="/></center>
+            <br>
+          </div>
+          <small class="text"> Ainda não possui conta? <a ui-sref="printdocumentsRegister">Registe-se já!</a></small>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
