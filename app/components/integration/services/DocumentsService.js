@@ -1,7 +1,7 @@
 var app = angular.module('ProxyPrint');
 
-app.factory('documentsService', ['$http', 'backendURLService', 'fileTransferService',
-function($http, backendURLService, fileTransferService) {
+app.factory('documentsService', ['$http', 'backendURLService',
+function($http, backendURLService) {
     var service = {};
 
     // Vai buscar o documento pelo ID
