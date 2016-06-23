@@ -12,6 +12,21 @@ angular.module('Auth').controller('IntegrationRegisterController',
 
                     requestHelperService.setSpecsStatus(true);
 
+                    var coords = null;
+                    $scope.isGeoLocationActive = false;
+                    if(navigator.geolocation){
+                      navigator.geolocation.getCurrentPosition(function(position) {
+                        coords = {latitude: position.coords.latitude, longitude: position.coords.longitude};
+                        $cookieStore.put('coords', coords);
+                        $scope.isGeoLocationActive = true;
+                      });
+                    }
+                    if(coords===null) {
+                      // Default coords University of Minho
+                      coords = {latitude:41.560501, longitude:-8.397250};
+                      $cookieStore.put('coords', coords);
+                    }
+
                     $state.go('consumer.iprintshopselection', {"consumerID":$scope.username});
                 } else {
                     $scope.error = response.message;

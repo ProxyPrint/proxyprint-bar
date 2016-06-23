@@ -238,9 +238,11 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
         controller: 'IntegrationPrintShopsSelectionController',
         resolve: {
             printshopsList : ['printShopListService', function(printShopListService) {
+                console.log("Sucess9");
                 return printShopListService.getPrintShops();
             }],
             permission: ['$q','requestHelperService', function ($q, requestHelperService) {
+                console.log("Sucess10");
                 var d = $q.defer();
                 if (requestHelperService.getSpecsStatus()) {
                     d.resolve();
@@ -448,7 +450,7 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
     /* Integration */
     .state('printdocument' , {
         url: '/printdocument/:requestid',
-        templateUrl: '/app/components/integration/views/login.html',
+        templateUrl: '/app/components/integration/views/integration-login.html',
         controller: 'IntegrationLoginController',
         data: {
             css: gradientSoligBgCSS
@@ -462,8 +464,8 @@ angular.module("ProxyPrint").config(['$stateProvider', '$urlRouterProvider', fun
             }]
         }
     })
-    .state('printdocumentRegister' , {
-        url: '/printdocumentRegister',
+    .state('iregister' , {
+        url: '/iregister',
         templateUrl: '/app/components/home/views/register.html',
         controller: 'IntegrationRegisterController',
         data: {
