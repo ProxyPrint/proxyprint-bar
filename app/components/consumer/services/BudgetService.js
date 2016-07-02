@@ -13,20 +13,20 @@ app.factory('budgetService', ['$http', 'backendURLService', '$cookieStore', 'pri
                 files: files
             }
         }).then(function (resp) {
-            console.log(resp);
+            // console.log(resp);
             // Persist budgets information
             $cookieStore.put("budgets", resp.data);
             successCallback();
         }, function (resp) {
-            console.log('Response: ' + JSON.stringify(resp.data));
+            // console.log('Response: ' + JSON.stringify(resp.data));
             errorCallback(resp.data);
         });
     };
 
     service.submitPrintRequest = function(printRequestID, params) {
         var url = backendURLService.getBaseURL()+"consumer/printrequest/"+printRequestID+"/submit";
-        console.log(url);
-        console.log(params);
+        // console.log(url);
+        // console.log(params);
         return $http.post(url,params);
     };
 

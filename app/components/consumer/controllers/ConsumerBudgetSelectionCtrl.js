@@ -6,25 +6,25 @@ function($scope, $cookieStore, $state, budgets, printShopListService, fileTransf
     $scope.selectedPrintShops = printShopListService.getSelectedPrintShops();
 
     var tmpFiles = fileTransferService.getProcessedFiles().files;
-    if (Object.keys(tmpFiles).length == 0){
-
+    if (Object.keys(tmpFiles).length === 0) {
         tmpFiles = documentsService.getProcessedFiles();
-        console.log(tmpFiles);
+        // console.log(tmpFiles);
         $scope.submitedFiles = [];
         for(var fileName in tmpFiles) {
             var file = tmpFiles[fileName];
             for(var indice in file.specs) {
                 var spec = file.specs[indice];
                 spec.name = spec.printingSchema.name;
-                spec.pages = "Completo"
+                spec.pages = "Completo";
             }
             $scope.submitedFiles.push(file);
         }
-        console.log($scope.submitedFiles);
-    }else {
+        // console.log($scope.submitedFiles);
+    }
+    else {
         $scope.submitedFiles = [];
         for(var fileName in tmpFiles) {
-            var file = tmpFiles[fileName];
+            var file = tmpFiles.fileName;
             file.name = fileName;
             $scope.submitedFiles.push(file);
         }
@@ -39,7 +39,7 @@ function($scope, $cookieStore, $state, budgets, printShopListService, fileTransf
         // Direct URL
         $scope.payPalCallbackUrl = backendURLService.getBaseURL() + "paypal/ipn/";
     }
-    console.log($scope.payPalCallbackUrl);
+    // console.log($scope.payPalCallbackUrl);
 
     $scope.noBudgetsFlag = true;
     $scope.budgetsCounter = 0;
@@ -54,8 +54,6 @@ function($scope, $cookieStore, $state, budgets, printShopListService, fileTransf
         }
     }
     usSpinnerService.stop('consumer-spinner');
-    console.log("$scope.noBudgetsFlag: "+$scope.noBudgetsFlag);
-    console.log("Number of budgets: "+$scope.budgetsCounter);
 
     if($scope.noBudgetsFlag) {
         // None of the printshops gave a budget
@@ -65,15 +63,13 @@ function($scope, $cookieStore, $state, budgets, printShopListService, fileTransf
     }
 
     $scope.finishPrintRequest = function() {
-        console.log($scope.printRequestID);
-        console.log($scope.theChosenOne);
         if ($scope.theChosenOne !== null && $scope.theChosenOne > 0) {
             // Set amount for pay pal payment
             $scope.amount = parseFloat($scope.budgets[$scope.theChosenOne]).toFixed(2);
             // Finish the PayPal callback URL appending the printRequestID
             $scope.payPalCallbackUrl += $scope.printRequestID;
             $scope.selectedPrintShopName = $scope.selectedPrintShops[$scope.theChosenOne].name;
-            console.log($scope.payPalCallbackUrl);
+            // console.log($scope.payPalCallbackUrl);
 
             $scope.submitParams = {
                 printRequestID: $scope.printRequestID,
@@ -122,7 +118,7 @@ function($scope, $cookieStore, $state, budgets, printShopListService, fileTransf
 
 app.controller('PaymentMethodSelectionCtrl', ['$scope', '$state', 'toasterService', '$uibModalInstance', 'text', 'amount', 'callbackURL', 'pshopName', 'submitParams', 'budgetService', 'usSpinnerService', '$cookieStore', function($scope, $state, toasterService, $uibModalInstance, text, amount, callbackURL, pshopName, submitParams, budgetService, usSpinnerService, $cookieStore) {
 
-    console.log("callbackURL: "+callbackURL);
+    // console.log("callbackURL: "+callbackURL);
     $scope.text = text;
     $scope.amount = amount;
     $scope.payPalCallbackUrl = callbackURL;
@@ -150,20 +146,22 @@ app.controller('PaymentMethodSelectionCtrl', ['$scope', '$state', 'toasterServic
 
     $scope.confirmPayment = function() {
         if ($scope.submitParams.paymentMethod === "PROXYPRINT_PAYMENT") {
+            console.log("Choose ProxyPrint!");
             $scope.payViaProxyPrint();
         } else {
-            $scope.payViaProxyPrint();
+            $scope.payViaPayPal();
+            console.log("Choose PayPal!");
         }
     };
 
     $scope.payViaProxyPrint = function() {
         usSpinnerService.spin('consumer-spinner');
         budgetService.submitPrintRequest($scope.submitParams.printRequestID, $scope.submitParams).success(function(data) {
-            console.log(data);
+            // console.log(data);
             if (data.success === true) {
                 var newAmount = subtractMoney($cookieStore.get("consumerBalance"), $scope.amount);
                 $cookieStore.put("consumerBalance", newAmount);
-                console.log(newAmount);
+                // console.log(newAmount);
                 toasterService.notifySuccess("Pedido submetido com sucesso. Iremos notificá-lo assim que tudo estiver pronto. Obrigado!");
             } else {
                 toasterService.notifyWarning("Infelizmente não possuí saldo suficiente para pagar o pedido.");
@@ -175,7 +173,7 @@ app.controller('PaymentMethodSelectionCtrl', ['$scope', '$state', 'toasterServic
             usSpinnerService.stop('consumer-spinner');
         })
         .error(function(data) {
-            console.log(data);
+            // console.log(data);
             toasterService.notifyError("Pedimos desculpa mas foi impossível de processar o seu pedido. Por favor tente mais tarde.");
             $state.go('consumer.mainpage', {}, {
                 reload: true

@@ -1,7 +1,7 @@
 angular.module('Auth').controller('IntegrationLoginController', ['$scope', '$rootScope', '$location', 'authenticationService', '$state', '$cookieStore', 'documents', 'documentsService', 'idrequest', 'requestHelperService',
 function($scope, $rootScope, $location, authenticationService, $state, $cookieStore, documents, documentsService, idrequest, requestHelperService) {
     // reset login status
-    //console.log("Sucess1");
+    //// console.log("Sucess1");
     authenticationService.ClearCredentials();
 
     $scope.files = documents.data.documents;

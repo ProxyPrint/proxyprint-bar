@@ -1,8 +1,8 @@
 angular.module('ProxyPrint')
 .controller('ManagerPrintshopPageCtrl', ['$scope','printshop', 'reviews', '$cookieStore', function ($scope, printshop, reviews, $cookieStore) {
 
-    console.log(printshop.data.printshop);
-    console.log(reviews.data);
+    // console.log(printshop.data.printshop);
+    // console.log(reviews.data);
     $cookieStore.put("pshopBalance", printshop.data.printshop.balance);
 
     $scope.data = printshop.data.printshop;

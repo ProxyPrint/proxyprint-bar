@@ -1,7 +1,7 @@
 angular.module('ProxyPrint').controller('ConsumerSettingsCtrl', ['$scope', '$cookieStore', 'consumer', 'toasterService', 'consumerService', 'authenticationService', 'backendURLService', '$uibModal', function ($scope, $cookieStore, consumer, toasterService, consumerService, authenticationService, backendURLService, $uibModal) {
   $scope.consumer = consumer.data.consumer;
 
-  console.log($scope.consumer);
+  // console.log($scope.consumer);
 
   $scope.email=$scope.consumer.email;
   $scope.name=$scope.consumer.name;
@@ -14,7 +14,7 @@ angular.module('ProxyPrint').controller('ConsumerSettingsCtrl', ['$scope', '$coo
     $scope.callbackURL = $cookieStore.get("externalURL");
   }
   $scope.callbackURL += "paypal/ipn/consumer/"+$scope.consumer.id;
-  console.log($scope.callbackURL);
+  // console.log($scope.callbackURL);
 
   $scope.consumerHasChanged = function() {
     return ($scope.email===$scope.consumer.email && $scope.name===$scope.consumer.name && $scope.username===$scope.consumer.username && $scope.password===$scope.consumer.password && $scope.password===$scope.newPassword);
@@ -28,7 +28,7 @@ angular.module('ProxyPrint').controller('ConsumerSettingsCtrl', ['$scope', '$coo
       $scope.consumer.name=$scope.name;
       $scope.consumer.username=$scope.username;
       $scope.consumer.password=$scope.newPassword;
-      console.log($scope.consumer);
+      // console.log($scope.consumer);
       consumerService.updateConsumer($scope.consumer).success(function(data) {
         if(data.success) {
           $cookieStore.put("consumerName", $scope.consumer.name);
@@ -92,7 +92,7 @@ angular.module('ProxyPrint').controller('ConsumerSettingsCtrl', ['$scope', '$coo
 /*Controller for payment confirmation modal*/
 app.controller('PayPalLoadUpConfirmationCtrl', ['$scope', '$state', 'toasterService', '$uibModalInstance', 'text', 'amount', 'callbackURL', '$cookieStore', function($scope, $state, toasterService, $uibModalInstance, text, amount, callbackURL, $cookieStore) {
 
-  console.log("callbackURL: "+callbackURL);
+  // console.log("callbackURL: "+callbackURL);
   $scope.text = text;
   $scope.amount = amount;
   $scope.payPalCallbackUrl = callbackURL;

@@ -2,7 +2,7 @@ angular.module('ProxyPrint').controller('HistoryRequestsCtrl', ['$scope', 'histo
       function($scope, historyPrintRequests, historyPrintRequestsService,paginationService, $state) {
 
    $scope.historyRequests = historyPrintRequests.data.historyrequests;;
-   console.log($scope.historyRequests);
+   // console.log($scope.historyRequests);
    $scope.paginationOn = true;
    $scope.pagination = paginationService.getNew(10);
    $scope.pagination.numPages = Math.ceil($scope.historyRequests.length/$scope.pagination.perPage);

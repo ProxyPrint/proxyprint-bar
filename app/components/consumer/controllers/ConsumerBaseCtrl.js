@@ -1,7 +1,7 @@
 angular.module('ProxyPrint').controller('ConsumerController', ['$scope', '$rootScope', '$cookieStore',
 'authenticationService', 'fileTransferService', '$state', 'notifications', 'backendURLService', 'consumerPendingRequests', 'consumerPendingRequestsService', '$uibModal','notificationsService', 'usSpinnerService', 'requestHelperService', 'consumerService',
 function($scope, $rootScope, $cookieStore, authenticationService, fileTransferService, $state, notifications, backendURLService, consumerPendingRequests, consumerPendingRequestsService, $uibModal, notificationsService, usSpinnerService, requestHelperService, consumerService) {
-  console.log(backendURLService.getBaseURL());
+  // console.log(backendURLService.getBaseURL());
   // Get consumer location
   var coords = null;
   $scope.isGeoLocationActive = false;
@@ -51,7 +51,7 @@ function($scope, $rootScope, $cookieStore, authenticationService, fileTransferSe
       message.read = false;
       $scope.notifications.unshift(message);
       $scope.newNotifications += 1;
-      console.log(message);
+      // console.log(message);
       audio.play();
       if(message.message.match(/O seu carregamento de [0-9]+(\.[0-9]{1,2})? € via PayPal foi confirmado. Obrigado!/)) {
           coin.play();
@@ -132,7 +132,7 @@ function($scope, $rootScope, $cookieStore, authenticationService, fileTransferSe
       requestHelperService.setSubmittedFilesStatus(true);
       $state.go('consumer.requestbudget');
     }
-    console.log(fileTransferService.getFiles());
+    // console.log(fileTransferService.getFiles());
   };
 
   $scope.resetRequest = function () {

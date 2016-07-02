@@ -98,7 +98,7 @@ angular.module('ProxyPrint')
   $scope.budgetErrorCallback = function(data) {
     usSpinnerService.stop('consumer-spinner');
     toasterService.notifyWarning("Os orçamentos não puderam se efetuados. Por favor tente mais tarde.");
-    console.log(data);
+    // console.log(data);
   };
 
   function remove(arr, item) {
