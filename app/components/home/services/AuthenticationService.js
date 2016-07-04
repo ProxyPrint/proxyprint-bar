@@ -18,7 +18,7 @@ function(Base64, $http, $cookieStore, $rootScope, $timeout, backendURLService) {
             }
         })
         .success(function(response) {
-            console.log("Sucess5");
+            // console.log("Sucess5");
 
             callback(response);
         });
@@ -112,7 +112,7 @@ function(Base64, $http, $cookieStore, $rootScope, $timeout, backendURLService) {
         $rootScope.globals = {};
         $cookieStore.remove('globals');
         $http.defaults.headers.common.Authorization = 'Basic ';
-        console.log("Sucess2");
+        // console.log("Sucess2");
     };
 
 
@@ -169,7 +169,7 @@ function(Base64, $http, $cookieStore, $rootScope, $timeout, backendURLService) {
             // remove all characters that are not A-Z, a-z, 0-9, +, /, or =
             var base64test = /[^A-Za-z0-9\+\/\=]/g;
             if (base64test.exec(input)) {
-                console.log("There were invalid base64 characters in the input text.\n" +
+                // console.log("There were invalid base64 characters in the input text.\n" +
                 "Valid base64 characters are A-Z, a-z, 0-9, '+', '/',and '='\n" +
                 "Expect errors in decoding.");
             }

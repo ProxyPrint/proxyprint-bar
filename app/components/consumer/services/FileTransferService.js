@@ -51,7 +51,7 @@ angular.module('ProxyPrint').factory('fileTransferService',
         }
         $cookieStore.put("uploadedFilesNames", filesToStore);
         queue.drain = function() {
-          console.log("All files are now loaded!");
+          // console.log("All files are now loaded!");
           requestHelperService.setSpecsStatus(true);
           $state.go('consumer.printshopselection');
         };

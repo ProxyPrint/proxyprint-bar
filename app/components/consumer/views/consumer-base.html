@@ -20,8 +20,10 @@
           <a href="">{{consumer.username}}</a>
         </li>
         <li>
-          <a href="" data-toggle="tooltip" title="O seu saldo ProxyPrint" class="tooltiptext tooltip-bottom">
-            <i style="color:yellow;" class="fa fa-database" aria-hidden="true"></i>  {{balance.integerPart}}.{{balance.fractionalPart}}  €
+          <a ui-sref=".settings" data-toggle="tooltip" title="O seu saldo ProxyPrint" class="tooltiptext tooltip-bottom">
+            <i style="color:yellow;" class="hvr-bounce-in fa fa-database" aria-hidden="true"></i>
+            <span ng-if="balance.integerPart!==0 && balance.fractionalPart!==0">{{balance.integerPart}}.{{balance.fractionalPart}}  €</span>
+            <span ng-if="balance.integerPart===0 && balance.fractionalPart===0">0 €</span>
           </a>
         </li>
         <li id="notification_li">

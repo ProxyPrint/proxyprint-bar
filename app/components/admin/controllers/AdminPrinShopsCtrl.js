@@ -2,7 +2,7 @@ var app = angular.module('ProxyPrint');
 
 app.controller('AdminPrintShopsCtrl', ['$scope', 'printshops','paginationService',
   function($scope,printshops, paginationService) {
-  console.log(printshops.data);
+  // console.log(printshops.data);
    $scope.printshops = printshops.data;
 
    $scope.filterPShops = function(pshop) {

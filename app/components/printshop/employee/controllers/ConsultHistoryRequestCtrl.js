@@ -4,7 +4,7 @@ app.controller('ConsultHistoryRequestCtrl', ['$scope', 'historyPrintRequest', '$
 function($scope, historyPrintRequest, $uibModal, pendingPrintRequestsService, $state, $http, $window, backendURLService) {
 
     $scope.request = historyPrintRequest.data.printrequest;
-    console.log($scope.request);
+    // console.log($scope.request);
 
     $scope.isDataLoading = false;
 

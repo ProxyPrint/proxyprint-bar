@@ -39,7 +39,7 @@ app.controller('AdminPendingRequestDetailCtrl', ['$scope', '$state', '$http', 'p
   $scope.showSuccess = false;
 
   $scope.accept = function() {
-    console.log("Send accept to server...");
+    // console.log("Send accept to server...");
 
     var data = pendingRequestsService.acceptRequest($scope.request.id)
     .then( function(data) {

@@ -207,7 +207,7 @@ function($scope, $uibModal, $log, fileTransferService, specMarshallService,
 
     addPrintingSchema = function (spec) {
       var specification = specMarshallService.marshallSpecification(spec);
-      console.log(specification);
+      // console.log(specification);
       if ($scope.specs === null){
         specification.fakeID = 1;
         $scope.specs = [];

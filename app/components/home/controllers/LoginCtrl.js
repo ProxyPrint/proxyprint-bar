@@ -7,7 +7,7 @@ function($scope, $rootScope, $location, authenticationService, $state, $cookieSt
     $scope.dataLoading = true;
     authenticationService.Login($scope.username, $scope.password, function(response) {
       if (response.success) {
-        console.log(response.user);
+        // console.log(response.user);
         // PrintShop - Manager
         if(response.user.roles[0] == "ROLE_MANAGER") {
           authenticationService.SetCredentials($scope.username, $scope.password);
@@ -28,6 +28,7 @@ function($scope, $rootScope, $location, authenticationService, $state, $cookieSt
           $cookieStore.put("consumerBalance", response.user.balance);
           if(response.externalURL) {
             $cookieStore.put("externalURL", response.externalURL);
+            console.log("Tunnel URL: "+response.externalURL);
           }
           authenticationService.SetCredentials($scope.username, $scope.password);
           $state.go('consumer.mainpage', {"consumerID":$scope.username});

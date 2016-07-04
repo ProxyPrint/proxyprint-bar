@@ -473,7 +473,7 @@ app.controller('NewCoverEntryCtrl', ['$scope', '$uibModalInstance', 'text', 'pri
 
   $scope.addNewEntry = function (coverType) {
     var newEntry = { coverType: $scope.selectedCoverType, priceA4: $scope.priceA4, priceA3: $scope.priceA3 };
-    console.log(newEntry);
+    // console.log(newEntry);
     priceTableService.addNewCoverRow(newEntry);
     $uibModalInstance.close();
   };
